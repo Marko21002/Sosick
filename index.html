@@ -2,26 +2,16 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Da Vinci Method — Как снимать кино про альтушек</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="description" content="Научись находить идеальных партнёров через Леонардо Дайвинчик. Онлайн-курс по знакомствам с гарантией результата.">
+    <title>LoveCode — Искусство онлайн-знакомств</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #111111;
-            --bg-card: #141414;
-            --text-primary: #f5f5f5;
-            --text-secondary: #888888;
-            --text-muted: #555555;
-            --accent-cyan: #00d4ff;
-            --accent-cyan-glow: rgba(0, 212, 255, 0.4);
-            --accent-amber: #ff9f1c;
-            --border-subtle: #222222;
-            --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -33,38 +23,45 @@
         }
 
         body {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0f;
+            color: white;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
-        /* Grain Overlay */
-        body::before {
-            content: '';
+        /* Background Effects */
+        .bg-glow {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--grain);
-            opacity: 0.03;
+            inset: 0;
             pointer-events: none;
-            z-index: 1000;
+            overflow: hidden;
+            z-index: 0;
         }
 
-        /* Custom Cursor */
-        .cursor-glow {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--accent-cyan);
+        .bg-glow::before,
+        .bg-glow::after {
+            content: '';
+            position: absolute;
             border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s, opacity 0.3s;
-            opacity: 0;
+            filter: blur(100px);
+        }
+
+        .bg-glow::before {
+            top: 10%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(147, 51, 234, 0.15);
+        }
+
+        .bg-glow::after {
+            bottom: 20%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(236, 72, 153, 0.1);
         }
 
         /* Navigation */
@@ -73,742 +70,909 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 1.5rem 4rem;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-content {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 12px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);
         }
 
         .logo {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            letter-spacing: 0.3em;
-            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #c084fc, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .logo span {
-            color: var(--accent-cyan);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent-cyan);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-cyan);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            padding: 0 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-tag {
-            font-size: 0.7rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--accent-cyan);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .hero-tag::before {
-            content: '';
-            width: 60px;
-            height: 1px;
-            background: var(--accent-cyan);
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-        }
-
-        .hero h1 em {
-            font-style: italic;
-            color: var(--accent-cyan);
-            text-shadow: 0 0 40px var(--accent-cyan-glow);
-        }
-
-        .hero-description {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            max-width: 480px;
-            margin-bottom: 3rem;
-            line-height: 1.8;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .btn-primary {
-            background: var(--accent-cyan);
-            color: var(--bg-primary);
-            padding: 1.2rem 3rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
+        .nav-btn {
+            font-size: 13px;
+            background: #9333ea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
             border: none;
+            font-weight: 600;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
-        .btn-primary::before {
+        .nav-btn:hover {
+            background: #a855f7;
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            padding: 48px 16px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* Hero */
+        .hero {
+            padding-top: 100px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(147, 51, 234, 0.2);
+            border: 1px solid rgba(147, 51, 234, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #e9d5ff;
+            margin-bottom: 24px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #c084fc, #f472b6, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            color: #9ca3af;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .hero-desc span {
+            color: #c084fc;
+            font-weight: 600;
+        }
+
+        /* CTA Button */
+        .cta-wrapper {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .cta-wrapper::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+            inset: -2px;
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            border-radius: 18px;
+            opacity: 0.5;
+            filter: blur(8px);
         }
 
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 0 40px var(--accent-cyan-glow);
-            transform: translateY(-2px);
-        }
-
-        .price-tag {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 0.1em;
-        }
-
-        .price-tag strong {
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            display: block;
-            margin-top: 0.3rem;
-        }
-
-        .hero-visual {
+        .cta-btn {
             position: relative;
-            height: 100%;
-            min-height: 600px;
+            width: 100%;
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            color: white;
+            border: none;
+            padding: 18px 24px;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .film-frame {
-            width: 85%;
-            height: 70%;
-            border: 1px solid var(--border-subtle);
-            position: relative;
-            background: var(--bg-secondary);
-            overflow: hidden;
+        .cta-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(147, 51, 234, 0.4);
         }
 
-        .film-frame::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 1px solid var(--border-subtle);
-            pointer-events: none;
+        .social-proof {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 13px;
+            color: #6b7280;
         }
 
-        .film-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%) contrast(1.2);
-            opacity: 0.7;
+        .social-proof span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .film-frame::after {
-            content: 'REC';
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            font-size: 0.7rem;
-            letter-spacing: 0.3em;
-            color: #ff3333;
-            animation: blink 1s infinite;
+        .icon-check {
+            color: #4ade80;
         }
 
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+        .icon-star {
+            color: #fbbf24;
         }
 
-        .aspect-lines {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: rgba(255,255,255,0.1);
+        /* Section Titles */
+        h2 {
+            font-size: 26px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 32px;
         }
 
-        .aspect-lines::before,
-        .aspect-lines::after {
-            content: '';
-            position: absolute;
-            left: 33.33%;
-            width: 1px;
-            height: 100vh;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .aspect-lines::after {
-            left: 66.66%;
-        }
-
-        /* Diagonal decorative element */
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 20%;
-            right: 0;
-            width: 40%;
-            height: 60%;
-            background: linear-gradient(135deg, transparent 40%, rgba(0, 212, 255, 0.03) 40%, rgba(0, 212, 255, 0.03) 42%, transparent 42%);
-            pointer-events: none;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 8rem 4rem;
-            background: var(--bg-secondary);
-            position: relative;
-        }
-
-        .section-header {
-            margin-bottom: 4rem;
-        }
-
-        .section-tag {
-            font-size: 0.7rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--accent-amber);
-            margin-bottom: 1rem;
-        }
-
-        .features h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 400;
-            max-width: 600px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            padding: 2.5rem;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 0;
-            background: var(--accent-cyan);
-            transition: height 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-5px);
-        }
-
-        .feature-card:hover::before {
-            height: 100%;
-        }
-
-        .feature-number {
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.2em;
-        }
-
-        .feature-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-
-        .feature-card p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* Curriculum Section */
-        .curriculum {
-            padding: 8rem 4rem;
-            position: relative;
-        }
-
-        .curriculum h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 400;
-            margin-bottom: 4rem;
-        }
-
-        .curriculum-grid {
+        /* Cards Grid */
+        .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1px;
-            background: var(--border-subtle);
+            gap: 12px;
         }
 
-        .curriculum-item {
-            background: var(--bg-primary);
-            padding: 2.5rem;
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 16px;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(147, 51, 234, 0.3);
+        }
+
+        .card-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .card p {
+            font-size: 12px;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        /* Features List */
+        .features {
+            background: linear-gradient(to bottom, rgba(147, 51, 234, 0.1), transparent);
+        }
+
+        .feature-item {
             display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-            transition: background 0.3s;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
         }
 
-        .curriculum-item:hover {
-            background: var(--bg-card);
+        .feature-item:hover {
+            border-color: rgba(147, 51, 234, 0.3);
         }
 
-        .curriculum-icon {
-            font-size: 1.5rem;
-            color: var(--accent-cyan);
-            min-width: 40px;
+        .feature-num {
+            font-size: 24px;
+            font-weight: 900;
+            color: #9333ea;
+            line-height: 1;
         }
 
-        .curriculum-content h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 400;
+        .feature-content h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
 
-        .curriculum-content p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
+        .feature-content p {
+            font-size: 13px;
+            color: #9ca3af;
         }
 
-        /* Testimonial */
-        .testimonial {
-            padding: 8rem 4rem;
-            background: var(--bg-secondary);
+        /* Tariffs */
+        .tariff-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .tariff-card.popular {
+            background: linear-gradient(to bottom, rgba(147, 51, 234, 0.2), rgba(147, 51, 234, 0.05));
+            border: 2px solid #9333ea;
             position: relative;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tariff-card.vip {
+            background: linear-gradient(to bottom, rgba(234, 179, 8, 0.1), rgba(234, 179, 8, 0.02));
+            border-color: rgba(234, 179, 8, 0.3);
+        }
+
+        .tariff-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tariff-name {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .tariff-price {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .tariff-card.popular .tariff-price {
+            color: white;
+        }
+
+        .tariff-card.vip .tariff-price {
+            color: #fbbf24;
+        }
+
+        .tariff-card:not(.popular):not(.vip) .tariff-price {
+            color: #c084fc;
+        }
+
+        .tariff-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .tariff-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            color: #d1d5db;
+            margin-bottom: 12px;
+        }
+
+        .tariff-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .tariff-card:not(.popular):not(.vip) .tariff-btn {
+            background: transparent;
+            border: 1px solid #9333ea;
+            color: #c084fc;
+        }
+
+        .tariff-card:not(.popular):not(.vip) .tariff-btn:hover {
+            background: rgba(147, 51, 234, 0.1);
+        }
+
+        .tariff-card.popular .tariff-btn {
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            color: white;
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+        }
+
+        .tariff-card.popular .tariff-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(147, 51, 234, 0.5);
+        }
+
+        .tariff-card.vip .tariff-btn {
+            background: transparent;
+            border: 1px solid #fbbf24;
+            color: #fbbf24;
+        }
+
+        .tariff-card.vip .tariff-btn:hover {
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        .vip-icon {
+            color: #fbbf24;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            margin-bottom: 12px;
             overflow: hidden;
         }
 
-        .testimonial::before {
-            content: '"';
-            font-family: 'Playfair Display', serif;
-            font-size: 30rem;
-            position: absolute;
-            top: -5rem;
-            left: 2rem;
-            color: rgba(255,255,255,0.02);
-            line-height: 1;
-            pointer-events: none;
+        .faq-question {
+            width: 100%;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
         }
 
-        .testimonial-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
+        .faq-question span {
+            padding-right: 16px;
         }
 
-        .testimonial blockquote {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-            font-style: italic;
-            line-height: 1.5;
-            margin-bottom: 2rem;
+        .faq-icon {
+            width: 20px;
+            height: 20px;
+            color: #6b7280;
+            transition: transform 0.2s, color 0.2s;
+            flex-shrink: 0;
         }
 
-        .testimonial-author {
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
+        .faq-item.active .faq-icon {
+            color: #c084fc;
+            transform: rotate(180deg);
         }
 
-        .testimonial-author strong {
+        .faq-answer {
+            padding: 0 16px 16px;
+            font-size: 13px;
+            color: #9ca3af;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
             display: block;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-style: normal;
-            text-transform: none;
-            letter-spacing: 0;
-            margin-bottom: 0.3rem;
         }
 
-        /* CTA Section */
-        .cta-section {
-            padding: 8rem 4rem;
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(to top, rgba(147, 51, 234, 0.2), transparent);
             text-align: center;
-            position: relative;
         }
 
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--accent-cyan-glow) 0%, transparent 70%);
-            opacity: 0.3;
-            pointer-events: none;
+        .final-cta h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
         }
 
-        .cta-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 400;
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-section p {
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto 3rem;
-            font-size: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-large {
-            padding: 1.5rem 4rem;
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
+        .final-cta p {
+            color: #9ca3af;
+            margin-bottom: 24px;
         }
 
         /* Footer */
         footer {
-            padding: 4rem;
-            border-top: 1px solid var(--border-subtle);
+            padding: 32px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .social-links {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
+            justify-content: center;
+            color: white;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.2s;
         }
 
-        .footer-links a:hover {
-            color: var(--accent-cyan);
+        .social-link:hover {
+            background: #9333ea;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero {
-                grid-template-columns: 1fr;
-                padding-top: 8rem;
-            }
-
-            .hero-visual {
-                display: none;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .curriculum-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav {
-                padding: 1rem 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
+        .social-link svg {
+            width: 20px;
+            height: 20px;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        footer p {
+            font-size: 12px;
+            color: #6b7280;
         }
 
-        .hero-content > * {
-            animation: fadeInUp 0.8s ease-out forwards;
-            opacity: 0;
+        /* Selection */
+        ::selection {
+            background: rgba(147, 51, 234, 0.3);
         }
 
-        .hero-content > *:nth-child(1) { animation-delay: 0.2s; }
-        .hero-content > *:nth-child(2) { animation-delay: 0.4s; }
-        .hero-content > *:nth-child(3) { animation-delay: 0.6s; }
-        .hero-content > *:nth-child(4) { animation-delay: 0.8s; }
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #7c3aed;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
-    <div class="cursor-glow"></div>
-
+    <div class="bg-glow"></div>
+    
     <nav>
-        <div class="logo">DA VINCI<span>.</span></div>
-        <ul class="nav-links">
-            <li><a href="#program">Программа</a></li>
-            <li><a href="#reviews">Отзывы</a></li>
-            <li><a href="#faq">FAQ</a></li>
-        </ul>
+        <div class="nav-content">
+            <span class="logo">LoveCode</span>
+            <button class="nav-btn" onclick="scrollToSection('tariffs')">Начать</button>
+        </div>
     </nav>
 
-    <section class="hero">
-        <div class="aspect-lines"></div>
-        <div class="hero-content">
-            <div class="hero-tag">Онлайн-курс</div>
-            <h1>
-                Как снимать<br>
-                <em>альтушек</em><br>
-                как в кино
-            </h1>
-            <p class="hero-description">
-                Методика создания визуального контента с кинематографическим качеством. 
-                Постановка света, композиция, работа с моделями в альтернативной эстетике.
-            </p>
-            <div class="cta-group">
-                <button class="btn-primary">Получить доступ</button>
-                <div class="price-tag">
-                    СТОИМОСТЬ КУРСА
-                    <strong>49 000 ₽</strong>
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    Бот уже работает
                 </div>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="film-frame">
-                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80" alt="Cinematic scene">
-            </div>
-        </div>
-    </section>
+                
+                <h1>
+                    <span class="gradient-text">Онлайн-знакомства</span><br>
+                    как искусство
+                </h1>
+                
+                <p class="hero-desc">
+                    Научись находить идеальных партнёров через Telegram-бот 
+                    <span>Леонардо Дайвинчик</span>
+                </p>
 
-    <section class="features" id="program">
-        <div class="section-header">
-            <div class="section-tag">Что внутри</div>
-            <h2>Три модуля, которые превратят твои съёмки в кино</h2>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-number">MOD.01</div>
-                <h3>Свет как у Деакинса</h3>
-                <p>Работа с доступным оборудованием для создания голливудского качества. Три точечные схемы, работа с тенями, создание атмосферы.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-number">MOD.02</div>
-                <h3>Постановка кадра</h3>
-                <p>Композиция, цветовые палитры, кинематографические приёмы. Как снимать портреты, которые не стыдно повесить в галерее.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-number">MOD.03</div>
-                <h3>Работа с моделью</h3>
-                <p>Направление, позирование, создание комфортной атмосферы. Как получить естественность и характер в кадре.</p>
-            </div>
-        </div>
-    </section>
+                <div class="cta-wrapper">
+                    <button class="cta-btn" onclick="scrollToSection('tariffs')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        Записаться на курс
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
 
-    <section class="curriculum">
-        <h2>Программа курса</h2>
-        <div class="curriculum-grid">
-            <div class="curriculum-item">
-                <div class="curriculum-icon">◈</div>
-                <div class="curriculum-content">
-                    <h4>Основы кинематографического света</h4>
-                    <p>Качество, направление, цветовая температура. Три основных источника и их комбинации.</p>
+                <div class="social-proof">
+                    <span>
+                        <svg class="icon-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        1200+ выпускников
+                    </span>
+                    <span>
+                        <svg class="icon-star" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        4.9/5
+                    </span>
                 </div>
             </div>
-            <div class="curriculum-item">
-                <div class="curriculum-icon">◈</div>
-                <div class="curriculum-content">
-                    <h4>Альтернативная эстетика</h4>
-                    <p>Анализ референсов, подземная культура, панк и готика в визуальном языке.</p>
-                </div>
-            </div>
-            <div class="curriculum-item">
-                <div class="curriculum-icon">◈</div>
-                <div class="curriculum-content">
-                    <h4>Композиция и цвет</h4>
-                    <p>Правило третей, золотое сечение, цветовые гармонии, работа с контрастом.</p>
-                </div>
-            </div>
-            <div class="curriculum-item">
-                <div class="curriculum-icon">◈</div>
-                <div class="curriculum-content">
-                    <h4>Практическая съёмка</h4>
-                    <p>Live-сессии с моделями, разбор ошибок, обратная связь на твои работы.</p>
-                </div>
-            </div>
-            <div class="curriculum-item">
-                <div class="curriculum-icon">◈</div>
-                <div class="curriculum-content">
-                    <h4>Обработка и цветокор</h4>
-                    <p>Создание LUT, работа в Lightroom и Davinci Resolve, кинематографичный финиш.</p>
-                </div>
-            </div>
-            <div class="curriculum-item">
-                <div class="curriculum-icon">◈</div>
-                <div class="curriculum-content">
-                    <h4>Монетизация навыка</h4>
-                    <p>Поиск клиентов, портфолио, ценообразование, работа с агентствами.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="testimonial" id="reviews">
-        <div class="testimonial-content">
-            <blockquote>
-                После курса мои съёмки стали выглядеть как кадры из фильмов А24. 
-                Клиенты теперь сами находят меня по рекомендациям.
-            </blockquote>
-            <div class="testimonial-author">
-                <strong>Артём К.</strong>
-                Портретный фотограф, Москва
+        <!-- For Whom -->
+        <section>
+            <div class="container">
+                <h2>Кому подойдёт курс?</h2>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-icon">😔</div>
+                        <h3>Устал от одиночества</h3>
+                        <p>Хочешь найти пару, но не знаешь как</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">💔</div>
+                        <h3>Неудачи в отношениях</h3>
+                        <p>Предыдущие попытки не сработали</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🎯</div>
+                        <h3>Хочешь научиться</h3>
+                        <p>Системно подходить к знакомствам</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🚀</div>
+                        <h3>Готов к изменениям</h3>
+                        <p>Открыт новому опыту и практикам</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="cta-section">
-        <h2>Начни снимать по-настоящему</h2>
-        <p>Доступ к материалам навсегда + закрытый чат выпускников + разбор твоих работ</p>
-        <button class="btn-primary btn-large">Купить курс — 49 000 ₽</button>
-    </section>
+        <!-- Features -->
+        <section class="features">
+            <div class="container">
+                <h2>Ты научишься</h2>
+                
+                <div class="feature-item">
+                    <span class="feature-num">01</span>
+                    <div class="feature-content">
+                        <h3>Создавать идеальный профиль</h3>
+                        <p>Фото, описание, психология первого впечатления</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <span class="feature-num">02</span>
+                    <div class="feature-content">
+                        <h3>Писать первые сообщения</h3>
+                        <p>Что написать, чтобы получить ответ 90% времени</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <span class="feature-num">03</span>
+                    <div class="feature-content">
+                        <h3>Вести переписку</h3>
+                        <p>От приветствия до свидания: вся цепочка</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <span class="feature-num">04</span>
+                    <div class="feature-content">
+                        <h3>Фильтровать людей</h3>
+                        <p>Как быстро понять, что человек тебе подходит</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <span class="feature-num">05</span>
+                    <div class="feature-content">
+                        <h3>Переводить в офлайн</h3>
+                        <p>Как назначить и провести идеальное свидание</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tariffs -->
+        <section id="tariffs">
+            <div class="container">
+                <h2>Выбери свой пакет</h2>
+                
+                <!-- Basic -->
+                <div class="tariff-card">
+                    <h3 class="tariff-name">Самостоятельный</h3>
+                    <div class="tariff-price">4 990 ₽</div>
+                    
+                    <ul class="tariff-list">
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            8 видеоуроков с методикой
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Чек-листы и шаблоны сообщений
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Доступ к материалам 3 месяца
+                        </li>
+                    </ul>
+                    
+                    <button class="tariff-btn">Выбрать</button>
+                </div>
+
+                <!-- Popular -->
+                <div class="tariff-card popular">
+                    <div class="popular-badge">ПОПУЛЯРНОЕ</div>
+                    
+                    <h3 class="tariff-name">С обратной связью</h3>
+                    <div class="tariff-price">9 990 ₽</div>
+                    
+                    <ul class="tariff-list">
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Всё из базового пакета
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            2 личные консультации
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Анализ твоего профиля
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Помощь с переписками
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Доступ навсегда
+                        </li>
+                    </ul>
+                    
+                    <button class="tariff-btn">Выбрать</button>
+                </div>
+
+                <!-- VIP -->
+                <div class="tariff-card vip">
+                    <div class="tariff-header">
+                        <svg class="vip-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 4l2 16h16l2-16H2zM12 4v16M2 8h20"></path>
+                        </svg>
+                        <h3 class="tariff-name">VIP сопровождение</h3>
+                    </div>
+                    
+                    <div class="tariff-price">24 990 ₽</div>
+                    
+                    <ul class="tariff-list">
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Всё из предыдущего пакета
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            5 персональных сессий
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Подбор фото под ключ
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Поддержка 24/7 на месяц
+                        </li>
+                        <li>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Гарантия результата
+                        </li>
+                    </ul>
+                    
+                    <button class="tariff-btn">Выбрать VIP</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section>
+            <div class="container">
+                <h2>Частые вопросы</h2>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Как проходит обучение?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        Все материалы в Telegram-боте. Уроки в видеоформате + практические задания. Обратная связь в чате.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Сколько длится курс?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        Базовый курс — 2 недели интенсива. Можно проходить в своём темпе.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Подойдёт ли мне, если я стеснительный?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        Да! Мы даём пошаговые скрипты и техники именно для таких случаев.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Можно ли оформить рассрочку?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        Да, доступна рассрочка через Тинькофф или Сбер на 3 месяца без переплат.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Что если не понравится?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        Вернём деньги в течение 7 дней, если курс не оправдал ожиданий.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="container">
+                <h2>Готов найти свою любовь?</h2>
+                <p>Начни свой путь к счастливым отношениям уже сегодня</p>
+                
+                <div class="cta-wrapper">
+                    <button class="cta-btn" onclick="scrollToSection('tariffs')">
+                        Выбрать тариф
+                    </button>
+                </div>
+                
+                <p style="font-size: 13px; color: #6b7280;">
+                    Остались вопросы? 
+                    <a href="#" style="color: #c084fc; text-decoration: none;">Напиши нам</a>
+                </p>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <div>© 2025 Da Vinci Method</div>
-        <div class="footer-links">
-            <a href="#">Telegram</a>
-            <a href="#">Instagram</a>
-            <a href="#">Политика конфиденциальности</a>
+        <div class="social-links">
+            <a href="#" class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            
+            <a href="#" class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+            </a>
         </div>
+        
+        <p>© 2025 LoveCode. Все права защищены.</p>
     </footer>
 
     <script>
-        // Custom cursor glow
-        const cursor = document.querySelector('.cursor-glow');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 10 + 'px';
-            cursor.style.top = e.clientY - 10 + 'px';
-            cursor.style.opacity = '1';
-        });
+        function scrollToSection(id) {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
 
-        document.addEventListener('mouseleave', () => {
-            cursor.style.opacity = '0';
-        });
-
-        // Smooth reveal on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('active');
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.feature-card, .curriculum-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s, transform 0.6s';
-            observer.observe(el);
-        });
+            
+            // Open clicked if wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
     </script>
 </body>
 </html>

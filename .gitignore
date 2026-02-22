@@ -1,8 +1,8 @@
 # OpenClaw system files
 .agents/
 .openclaw/
-skills/
-skills-lock.json
+.pi/
+agents/
 AGENTS.md
 BOOTSTRAP.md
 HEARTBEAT.md
@@ -11,11 +11,20 @@ SOUL.md
 TOOLS.md
 USER.md
 
+# Skills
+skills/
+skills-lock.json
+
 # Credentials
 credentials/
 *.token
 *.key
+.env
 
 # System files
 .DS_Store
 *.log
+nohup.out
+
+# Node modules (if any)
+node_modules/
