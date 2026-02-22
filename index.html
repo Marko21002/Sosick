@@ -64,17 +64,67 @@
             background: rgba(236, 72, 153, 0.1);
         }
 
-        /* Navigation */
-        nav {
+        /* Countdown Banner */
+        .countdown-banner {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
+            z-index: 200;
+            background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626);
+            background-size: 200% 100%;
+            animation: gradient-shift 3s ease infinite;
+            padding: 10px 16px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .countdown-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-label {
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: 8px;
+            font-family: 'Courier New', monospace;
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        .countdown-timer span {
+            background: rgba(0,0,0,0.3);
+            padding: 4px 8px;
+            border-radius: 6px;
+            min-width: 32px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 46px;
+            left: 0;
+            right: 0;
             z-index: 100;
-            background: rgba(10, 10, 15, 0.8);
+            background: rgba(10, 10, 15, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: top 0.3s;
         }
 
         .nav-content {
@@ -115,6 +165,7 @@
         main {
             position: relative;
             z-index: 1;
+            padding-top: 46px;
         }
 
         section {
@@ -253,6 +304,75 @@
             margin-bottom: 32px;
         }
 
+        h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        /* Instructor Section */
+        .instructor {
+            background: linear-gradient(to bottom, rgba(147, 51, 234, 0.08), transparent);
+        }
+
+        .instructor-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .instructor-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #9333ea;
+            margin-bottom: 16px;
+            box-shadow: 0 0 40px rgba(147, 51, 234, 0.3);
+        }
+
+        .instructor-name {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .instructor-title {
+            color: #c084fc;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .instructor-story {
+            color: #9ca3af;
+            font-size: 14px;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .instructor-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 900;
+            color: #c084fc;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
         /* Cards Grid */
         .grid-2 {
             display: grid;
@@ -286,6 +406,133 @@
 
         .card p {
             font-size: 12px;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        /* Comparison Table */
+        .comparison {
+            background: linear-gradient(to bottom, transparent, rgba(147, 51, 234, 0.05));
+        }
+
+        .comparison-table {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 1fr 100px 100px;
+            background: rgba(147, 51, 234, 0.2);
+            padding: 16px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .comparison-header .col-feature {
+            text-align: left;
+        }
+
+        .comparison-header .col-before,
+        .comparison-header .col-after {
+            text-align: center;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 100px 100px;
+            padding: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+            align-items: center;
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-row:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .col-feature {
+            color: #e5e7eb;
+        }
+
+        .col-before {
+            text-align: center;
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        .col-after {
+            text-align: center;
+            color: #22c55e;
+            font-weight: 700;
+        }
+
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            margin: 0 auto;
+        }
+
+        .cross-icon {
+            width: 20px;
+            height: 20px;
+            margin: 0 auto;
+            opacity: 0.5;
+        }
+
+        /* Results Section */
+        .results {
+            background: linear-gradient(to bottom, rgba(147, 51, 234, 0.1), transparent);
+        }
+
+        .result-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .result-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .result-content h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .result-content .result-meta {
+            font-size: 12px;
+            color: #c084fc;
+            margin-bottom: 8px;
+        }
+
+        .result-content p {
+            font-size: 14px;
             color: #9ca3af;
             line-height: 1.5;
         }
@@ -377,6 +624,13 @@
         .tariff-price {
             font-size: 32px;
             font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .old-price {
+            font-size: 18px;
+            color: #6b7280;
+            text-decoration: line-through;
             margin-bottom: 20px;
         }
 
@@ -450,6 +704,17 @@
 
         .vip-icon {
             color: #fbbf24;
+        }
+
+        .discount-badge {
+            display: inline-block;
+            background: #dc2626;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-left: 8px;
         }
 
         /* FAQ */
@@ -586,6 +851,18 @@
 <body>
     <div class="bg-glow"></div>
     
+    <!-- Countdown Banner -->
+    <div class="countdown-banner">
+        <div class="countdown-text">
+            <span class="countdown-label">🔥 Скидка 50% закончится через:</span>
+            <div class="countdown-timer" id="countdown">
+                <span id="hours">23</span>:
+                <span id="minutes">59</span>:
+                <span id="seconds">59</span>
+            </div>
+        </div>
+    </div>
+
     <nav>
         <div class="nav-content">
             <span class="logo">LoveCode</span>
@@ -617,7 +894,7 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
-                        Записаться на курс
+                        Получить скидку 50%
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"></path>
                         </svg>
@@ -637,6 +914,43 @@
                         </svg>
                         4.9/5
                     </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instructor Section -->
+        <section class="instructor">
+            <div class="container">
+                <h2>Ваш инструктор</h2>
+                
+                <div class="instructor-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" alt="Александр Волков" class="instructor-photo">
+                    
+                    <div class="instructor-name">Александр Волков</div>
+                    <div class="instructor-title">Эксперт по онлайн-знакомствам</div>
+                    
+                    <div class="instructor-story">
+                        <p>5 лет назад я был типичным «парнем из интернета» — не знал, что написать девушке, чтобы она ответила. Мои попытки знакомиться заканчивались провалом за провалом.</p>
+                        <br>
+                        <p>Я потратил 3 года на изучение психологии общения, протестировал 200+ подходов, разобрал 1000+ переписок. Результат? Создал систему, которая работает.</p>
+                        <br>
+                        <p>Сейчас я помог другим парням находить отношения через онлайн-знакомства. Мои ученики получают 5-10 свиданий в месяц — и это не магия, а проверенная методика.</p>
+                    </div>
+                    
+                    <div class="instructor-stats">
+                        <div>
+                            <div class="stat-number">1200+</div>
+                            <div class="stat-label">Выпускников</div>
+                        </div>
+                        <div>
+                            <div class="stat-number">5 лет</div>
+                            <div class="stat-label">Опыта</div>
+                        </div>
+                        <div>
+                            <div class="stat-number">87%</div>
+                            <div class="stat-label">Успеха</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -669,6 +983,111 @@
                         <div class="card-icon">🚀</div>
                         <h3>Готов к изменениям</h3>
                         <p>Открыт новому опыту и практикам</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="comparison">
+            <div class="container">
+                <h2>До и после курса</h2>
+                
+                <div class="comparison-table">
+                    <div class="comparison-header">
+                        <div class="col-feature">Что изменится</div>
+                        <div class="col-before">До</div>
+                        <div class="col-after">После</div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="col-feature">Ответы на сообщения</div>
+                        <div class="col-before">5-10%</div>
+                        <div class="col-after">70-90%</div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="col-feature">Профиль привлекает</div>
+                        <div class="col-before">
+                            <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </div>
+                        <div class="col-after">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="col-feature">Переписки в неделю</div>
+                        <div class="col-before">0-2</div>
+                        <div class="col-after">15-30</div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="col-feature">Свидания в месяц</div>
+                        <div class="col-before">0-1</div>
+                        <div class="col-after">5-10</div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="col-feature">Уверенность</div>
+                        <div class="col-before">
+                            <svg class="cross-icon" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </div>
+                        <div class="col-after">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="col-feature">Знание, что писать</div>
+                        <div class="col-before">Нет</div>
+                        <div class="col-after">Готовые скрипты</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results">
+            <div class="container">
+                <h2>Истории успеха</h2>
+                
+                <div class="result-cards">
+                    <div class="result-card">
+                        <div class="result-avatar">👨‍💼</div>
+                        <div class="result-content">
+                            <h4>Дмитрий, 28 лет</h4>
+                            <div class="result-meta">Москва · через 3 недели после курса</div>
+                            <p>"До курса написал 50 девушкам — 2 ответили. После — 15 свиданий за месяц. Методика реально работает, это не волшебство, а конкретные шаги."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-avatar">🎸</div>
+                        <div class="result-content">
+                            <h4>Артём, 32 года</h4>
+                            <div class="result-meta">Санкт-Петербург · через 2 месяца</div>
+                            <p>"Прошёл курс, переписывался с 20+ девушками одновременно, выбрал ту, что понравилась больше всего. Теперь встречаемся 4 месяца."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-avatar">💻</div>
+                        <div class="result-content">
+                            <h4>Иван, 26 лет</h4>
+                            <div class="result-meta">Казань · через 1 неделю</div>
+                            <p>"Я интроверт и не знал, о чём говорить. После курса научился вести разговор на любую тему. Теперь переписки — моё второе я."</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -729,7 +1148,11 @@
                 <!-- Basic -->
                 <div class="tariff-card">
                     <h3 class="tariff-name">Самостоятельный</h3>
-                    <div class="tariff-price">4 990 ₽</div>
+                    <div class="tariff-price">
+                        4 990 ₽
+                        <span class="discount-badge">-50%</span>
+                    </div>
+                    <div class="old-price">Было 9 990 ₽</div>
                     
                     <ul class="tariff-list">
                         <li>
@@ -760,7 +1183,11 @@
                     <div class="popular-badge">ПОПУЛЯРНОЕ</div>
                     
                     <h3 class="tariff-name">С обратной связью</h3>
-                    <div class="tariff-price">9 990 ₽</div>
+                    <div class="tariff-price">
+                        9 990 ₽
+                        <span class="discount-badge">-50%</span>
+                    </div>
+                    <div class="old-price">Было 19 990 ₽</div>
                     
                     <ul class="tariff-list">
                         <li>
@@ -806,8 +1233,11 @@
                         </svg>
                         <h3 class="tariff-name">VIP сопровождение</h3>
                     </div>
-                    
-                    <div class="tariff-price">24 990 ₽</div>
+                    <div class="tariff-price">
+                        24 990 ₽
+                        <span class="discount-badge">-50%</span>
+                    </div>
+                    <div class="old-price">Было 49 990 ₽</div>
                     
                     <ul class="tariff-list">
                         <li>
@@ -922,7 +1352,7 @@
                 
                 <div class="cta-wrapper">
                     <button class="cta-btn" onclick="scrollToSection('tariffs')">
-                        Выбрать тариф
+                        Получить скидку 50%
                     </button>
                 </div>
                 
@@ -943,7 +1373,6 @@
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
             </a>
-            
             <a href="#" class="social-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
@@ -955,6 +1384,27 @@
     </footer>
 
     <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            
+            const diff = tomorrow - now;
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
         function scrollToSection(id) {
             document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
         }
@@ -963,12 +1413,10 @@
             const item = button.parentElement;
             const isActive = item.classList.contains('active');
             
-            // Close all
             document.querySelectorAll('.faq-item').forEach(el => {
                 el.classList.remove('active');
             });
             
-            // Open clicked if wasn't active
             if (!isActive) {
                 item.classList.add('active');
             }
