@@ -1,0 +1,21 @@
+# OpenClaw system files
+.agents/
+.openclaw/
+skills/
+skills-lock.json
+AGENTS.md
+BOOTSTRAP.md
+HEARTBEAT.md
+IDENTITY.md
+SOUL.md
+TOOLS.md
+USER.md
+
+# Credentials
+credentials/
+*.token
+*.key
+
+# System files
+.DS_Store
+*.log
