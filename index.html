@@ -66,61 +66,75 @@
 
         /* Countdown Banner */
         .countdown-banner {
-            position: fixed;
+            position: sticky;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 200;
-            background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626);
-            background-size: 200% 100%;
-            animation: gradient-shift 3s ease infinite;
-            padding: 10px 16px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #1e1b4b 100%);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 12px 16px;
             text-align: center;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .countdown-text {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
         .countdown-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fbbf24;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .countdown-timer {
             display: flex;
-            gap: 8px;
-            font-family: 'Courier New', monospace;
-            font-weight: 800;
-            font-size: 16px;
+            gap: 6px;
         }
 
-        .countdown-timer span {
-            background: rgba(0,0,0,0.3);
-            padding: 4px 8px;
-            border-radius: 6px;
-            min-width: 32px;
+        .countdown-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 8px;
+            padding: 6px 10px;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        .countdown-value {
+            display: block;
+            font-family: 'Inter', monospace;
+            font-weight: 800;
+            font-size: 18px;
+            color: white;
+            line-height: 1;
+        }
+
+        .countdown-unit {
+            display: block;
+            font-size: 9px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
         }
 
         /* Navigation */
         nav {
-            position: fixed;
-            top: 46px;
+            position: sticky;
+            top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
-            background: rgba(10, 10, 15, 0.9);
+            z-index: 999;
+            background: rgba(10, 10, 15, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -165,7 +179,6 @@
         main {
             position: relative;
             z-index: 1;
-            padding-top: 46px;
         }
 
         section {
@@ -179,7 +192,7 @@
 
         /* Hero */
         .hero {
-            padding-top: 100px;
+            padding-top: 60px;
             text-align: center;
         }
 
@@ -854,11 +867,20 @@
     <!-- Countdown Banner -->
     <div class="countdown-banner">
         <div class="countdown-text">
-            <span class="countdown-label">🔥 Скидка 50% закончится через:</span>
+            <span class="countdown-label">🔥 Скидка 50% закончится через</span>
             <div class="countdown-timer" id="countdown">
-                <span id="hours">23</span>:
-                <span id="minutes">59</span>:
-                <span id="seconds">59</span>
+                <div class="countdown-box">
+                    <span class="countdown-value" id="hours">23</span>
+                    <span class="countdown-unit">час</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-value" id="minutes">59</span>
+                    <span class="countdown-unit">мин</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-value" id="seconds">59</span>
+                    <span class="countdown-unit">сек</span>
+                </div>
             </div>
         </div>
     </div>
