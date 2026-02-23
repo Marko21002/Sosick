@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinesische Neujahrs-Teezeremonie — Schloss Thalheim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg:#0c0a09;
+            --bg-card:#1c1917;
+            --bg-elevated:#292524;
+            --red:#dc2626;
+            --red-dark:#991b1b;
+            --gold:#fbbf24;
+            --gold-light:#fcd34d;
+            --cream:#faf7f5;
+            --text:#faf7f5;
+            --text-dim:#a8a29e;
+            --border:#44403c;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:'Inter',-apple-system,sans-serif;
+            background:var(--bg);
+            color:var(--text);
+            line-height:1.6;
+            overflow-x:hidden;
+        }
+        
+        /* Chinese pattern overlay */
+        body::before{
+            content:'';
+            position:fixed;
+            inset:0;
+            background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30L30 0z' fill='none' stroke='%23dc2626' stroke-opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events:none;
+            z-index:0;
+        }
+        
+        h1,h2,h3{font-family:'Cormorant Garamond','Noto Serif SC',serif;font-weight:600}
+        
+        /* Navigation */
+        nav{
+            position:fixed;
+            top:0;
+            left:0;
+            right:0;
+            z-index:100;
+            padding:20px 40px;
+            background:linear-gradient(180deg,rgba(12,10,9,0.95) 0%,transparent 100%);
+        }
+        .nav-content{
+            max-width:1400px;
+            margin:0 auto;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        .logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--gold);letter-spacing:2px}
+        .logo span{display:block;font-size:11px;color:var(--text-dim);letter-spacing:4px;text-transform:uppercase}
+        .nav-cta{
+            padding:14px 32px;
+            background:linear-gradient(135deg,var(--red),var(--red-dark));
+            color:var(--text);
+            text-decoration:none;
+            font-size:14px;
+            font-weight:500;
+            letter-spacing:1px;
+            border:1px solid var(--gold);
+            transition:all 0.3s;
+        }
+        .nav-cta:hover{box-shadow:0 0 30px rgba(220,38,38,0.4);transform:translateY(-2px)}
+        
+        /* Hero */
+        .hero{
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:140px 40px 100px;
+            position:relative;
+            background:linear-gradient(180deg,var(--bg) 0%,rgba(12,10,9,0.8) 50%,var(--bg) 100%),
+                       radial-gradient(ellipse at 50% 0%,rgba(220,38,38,0.15) 0%,transparent 60%);
+        }
+        .hero::after{
+            content:'';
+            position:absolute;
+            bottom:0;
+            left:0;
+            right:0;
+            height:200px;
+            background:linear-gradient(180deg,transparent 0%,var(--bg) 100%);
+        }
+        .hero-content{
+            max-width:900px;
+            text-align:center;
+            position:relative;
+            z-index:1;
+        }
+        .hero-badge{
+            display:inline-block;
+            padding:10px 24px;
+            background:rgba(220,38,38,0.2);
+            border:1px solid var(--red);
+            color:var(--gold);
+            font-size:12px;
+            letter-spacing:3px;
+            text-transform:uppercase;
+            margin-bottom:32px;
+        }
+        .hero h1{
+            font-size:clamp(40px,8vw,72px);
+            line-height:1.1;
+            margin-bottom:24px;
+            letter-spacing:-1px;
+        }
+        .hero h1 .chinese{
+            font-family:'Noto Serif SC',serif;
+            color:var(--gold);
+            display:block;
+            font-size:0.6em;
+            margin-top:16px;
+            letter-spacing:8px;
+        }
+        .hero-subtitle{
+            font-size:18px;
+            color:var(--text-dim);
+            margin-bottom:16px;
+            font-family:'Cormorant Garamond',serif;
+            font-style:italic;
+            font-size:22px;
+        }
+        .hero-date{
+            font-size:24px;
+            color:var(--gold);
+            font-weight:600;
+            letter-spacing:2px;
+            margin-bottom:40px;
+            font-family:'Cormorant Garamond',serif;
+        }
+        .hero-cta{
+            display:inline-flex;
+            align-items:center;
+            gap:12px;
+            padding:20px 48px;
+            background:linear-gradient(135deg,var(--gold),var(--gold-light));
+            color:var(--bg);
+            text-decoration:none;
+            font-size:16px;
+            font-weight:600;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            transition:all 0.3s;
+            box-shadow:0 10px 40px rgba(251,191,36,0.3);
+        }
+        .hero-cta:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(251,191,36,0.4)}
+        
+        /* Event Info Bar */
+        .event-bar{
+            padding:40px;
+            background:var(--bg-card);
+            border-top:1px solid var(--border);
+            border-bottom:1px solid var(--border);
+        }
+        .event-bar-content{
+            max-width:1400px;
+            margin:0 auto;
+            display:flex;
+            justify-content:center;
+            gap:60px;
+            flex-wrap:wrap;
+        }
+        .event-info-item{text-align:center}
+        .event-info-item strong{
+            display:block;
+            font-family:'Cormorant Garamond',serif;
+            font-size:28px;
+            color:var(--gold);
+            margin-bottom:4px;
+        }
+        .event-info-item span{font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:2px}
+        
+        /* About Section */
+        .about{
+            padding:120px 40px;
+            position:relative;
+        }
+        .about-content{
+            max-width:1200px;
+            margin:0 auto;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:80px;
+            align-items:center;
+        }
+        .about-text h2{
+            font-size:clamp(32px,5vw,48px));
+            margin-bottom:24px;
+            line-height:1.2;
+        }
+        .about-text p{
+            color:var(--text-dim);
+            font-size:17px;
+            line-height:1.8;
+            margin-bottom:20px;
+        }
+        .about-image{
+            aspect-ratio:4/5;
+            background:linear-gradient(135deg,#292524 0%,#1c1917 100%);
+            border:1px solid var(--border);
+            position:relative;
+            overflow:hidden;
+        }
+        .about-image::before{
+            content:'🏯';
+            position:absolute;
+            inset:0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:120px;
+            opacity:0.3;
+        }
+        .about-image::after{
+            content:'';
+            position:absolute;
+            inset:20px;
+            border:1px solid var(--gold);
+            opacity:0.3;
+        }
+        
+        /* Program Section */
+        .program{
+            padding:120px 40px;
+            background:var(--bg-card);
+            border-top:1px solid var(--border);
+        }
+        .program-content{max-width:1000px;margin:0 auto}
+        .section-header{text-align:center;margin-bottom:80px}
+        .section-label{
+            font-size:12px;
+            color:var(--red);
+            text-transform:uppercase;
+            letter-spacing:4px;
+            margin-bottom:16px;
+        }
+        .section-title{font-size:clamp(32px,5vw,48px))}
+        
+        .timeline{position:relative}
+        .timeline::before{
+            content:'';
+            position:absolute;
+            left:50%;
+            top:0;
+            bottom:0;
+            width:1px;
+            background:linear-gradient(180deg,transparent,var(--gold),transparent);
+        }
+        .timeline-item{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:60px;
+            margin-bottom:60px;
+            position:relative;
+        }
+        .timeline-item:nth-child(even) .timeline-content{grid-column:2}
+        .timeline-item:nth-child(even) .timeline-time{grid-column:1;text-align:right}
+        .timeline-time{
+            font-family:'Cormorant Garamond',serif;
+            font-size:32px;
+            color:var(--gold);
+        }
+        .timeline-content h3{
+            font-size:24px;
+            margin-bottom:8px;
+        }
+        .timeline-content p{color:var(--text-dim);font-size:15px}
+        
+        /* Tickets Section */
+        .tickets{
+            padding:120px 40px;
+            background:linear-gradient(180deg,var(--bg) 0%,var(--bg-card) 100%);
+        }
+        .tickets-content{max-width:1200px;margin:0 auto}
+        .tickets-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:24px;
+        }
+        .ticket-card{
+            background:var(--bg);
+            border:1px solid var(--border);
+            padding:48px 40px;
+            text-align:center;
+            position:relative;
+            transition:all 0.3s;
+        }
+        .ticket-card:hover{transform:translateY(-8px);border-color:var(--gold)}
+        .ticket-card.featured{
+            border-color:var(--gold);
+            background:linear-gradient(180deg,var(--bg) 0%,rgba(251,191,36,0.05) 100%);
+        }
+        .ticket-badge{
+            position:absolute;
+            top:-12px;
+            left:50%;
+            transform:translateX(-50%);
+            padding:8px 20px;
+            background:var(--red);
+            color:var(--text);
+            font-size:11px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+        }
+        .ticket-name{font-size:14px;color:var(--text-dim);text-transform:uppercase;letter-spacing:3px;margin-bottom:16px}
+        .ticket-price{font-family:'Cormorant Garamond',serif;font-size:56px;color:var(--gold);margin-bottom:8px}
+        .ticket-price span{font-size:16px;color:var(--text-dim)}
+        .ticket-desc{color:var(--text-dim);font-size:15px;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+        .ticket-features{list-style:none;margin-bottom:32px;text-align:left}
+        .ticket-features li{padding:12px 0;color:var(--text-dim);font-size:15px;display:flex;align-items:center;gap:12px}
+        .ticket-features li::before{content:'◆';color:var(--gold)}
+        .ticket-btn{
+            width:100%;
+            padding:18px;
+            background:transparent;
+            color:var(--text);
+            border:1px solid var(--gold);
+            font-size:14px;
+            font-weight:500;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            cursor:pointer;
+            transition:all 0.3s;
+        }
+        .ticket-btn:hover{background:var(--gold);color:var(--bg)}
+        .ticket-card.featured .ticket-btn{background:var(--gold);color:var(--bg)}
+        .ticket-card.featured .ticket-btn:hover{box-shadow:0 0 30px rgba(251,191,36,0.4)}
+        
+        /* Location */
+        .location{
+            padding:120px 40px;
+            background:var(--bg-card);
+            border-top:1px solid var(--border);
+        }
+        .location-content{
+            max-width:1200px;
+            margin:0 auto;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:60px;
+            align-items:center;
+        }
+        .location-info h2{font-size:clamp(28px,4vw,40px));margin-bottom:24px}
+        .location-info p{color:var(--text-dim);font-size:17px;line-height:1.8;margin-bottom:24px}
+        .location-address{
+            padding:24px;
+            background:var(--bg);
+            border-left:3px solid var(--gold);
+        }
+        .location-address strong{display:block;color:var(--gold);margin-bottom:8px}
+        .location-address p{color:var(--text-dim);font-size:15px;line-height:1.6}
+        .location-map{
+            aspect-ratio:16/10;
+            background:var(--bg);
+            border:1px solid var(--border);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:80px;
+        }
+        
+        /* CTA Section */
+        .cta-section{
+            padding:120px 40px;
+            text-align:center;
+            background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg) 100%);
+            border-top:1px solid var(--border);
+        }
+        .cta-section h2{font-size:clamp(32px,5vw,48px));margin-bottom:24px}
+        .cta-section p{color:var(--text-dim);font-size:18px;max-width:600px;margin:0 auto 40px}
+        
+        /* Footer */
+        footer{padding:60px 40px 30px;border-top:1px solid var(--border)}
+        .footer-content{
+            max-width:1400px;
+            margin:0 auto;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+            gap:24px;
+        }
+        .footer-logo{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold)}
+        .footer-links{display:flex;gap:32px}
+        .footer-links a{color:var(--text-dim);text-decoration:none;font-size:14px;transition:color 0.3s}
+        .footer-links a:hover{color:var(--gold)}
+        .footer-copy{color:var(--text-dim);font-size:13px}
+        
+        @media(max-width:968px){
+            .about-content,.location-content{grid-template-columns:1fr}
+            .tickets-grid{grid-template-columns:1fr}
+            .timeline::before{display:none}
+            .timeline-item{grid-template-columns:1fr;gap:20px}
+            .timeline-item:nth-child(even) .timeline-content,.timeline-item:nth-child(even) .timeline-time{grid-column:1;text-align:left}
+            .event-bar-content{gap:32px}
+            .nav-cta{display:none}
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">
+                Schloss Thalheim
+                <span>Since 1564</span>
+            </div>
+            <a href="#tickets" class="nav-cta">Tickets sichern</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🧧 Einmaliges Event</div>
+            
+            <h1>
+                Chinesische Neujahrs-
+                <br>
+                Teezeremonie
+                <span class="chinese">中国新年茶道</span>
+            </h1>
+            
+            <p class="hero-subtitle">Ein exklusiver Abend der Tradition, Kultur und Genuss</p>
+            
+            <div class="hero-date">28. Februar 2025 · 18:00 Uhr</div>
+            
+            <a href="#tickets" class="hero-cta">
+                Tickets sichern →
+            </a>
+        </div>
+    </section>
+
+    <div class="event-bar">
+        <div class="event-bar-content">
+            <div class="event-info-item">
+                <strong>28.02</strong>
+                <span>Datum</span>
+            </div>
+            
+            <div class="event-info-item">
+                <strong>18:00</strong>
+                <span>Beginn</span>
+            </div>
+            
+            <div class="event-info-item">
+                <strong>50</strong>
+                <span>Gäste</span>
+            </div>
+            
+            <div class="event-info-item">
+                <strong>Schloss</strong>
+                <span>Location</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="about">
+        <div class="about-content">
+            <div class="about-text">
+                <div class="section-label">Das Erlebnis</div>
+                <h2>Wo österreichische Eleganz auf asiatische Tradition trifft</h2>
+                
+                <p>
+                    Erleben Sie ein einzigartiges Zusammentreffen von Kulturen in den historischen Räumen des Schloss Thalheim. Unsere chinesische Neujahrs-Teezeremonie vereint die 500-jährige Geschichte des Schlosses mit der jahrtausendealten Kunst des chinesischen Tees.
+                </p>
+                
+                <p>
+                    Unter der Anleitung einer erfahrenen Teemeisterin werden Sie in die feinen Nuancen der Gongfu-Cha-Zeremonie eingeführt – eine meditative Reise durch Aroma, Geschmack und Tradition.
+                </p>
+            </div>
+            
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <section class="program">
+        <div class="program-content">
+            <div class="section-header">
+                <div class="section-label">Programm</div>
+                <h2 class="section-title">Der Abend im Detail</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">18:00</div>
+                    <div class="timeline-content">
+                        <h3>Empfang</h3>
+                        <p>Begrüßung mit Prosecco und asiatischen Canapés in der Schlosshalle</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">18:45</div>
+                    <div class="timeline-content">
+                        <h3>Die Zeremonie</h3>
+                        <p>Gongfu-Cha-Teezeremonie mit seltenen chinesischen Teesorten</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">20:00</div>
+                    <div class="timeline-content">
+                        <h3>Festliches Dinner</h3>
+                        <p>4-Gang-Menu mit asiatisch-österreichischer Fusion-Küche</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-time">22:00</div>
+                    <div class="timeline-content">
+                        <h3>Ausklang</h3>
+                        <p>Digestif und Musik im historischen Rokoko-Saal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tickets" id="tickets">
+        <div class="tickets-content">
+            <div class="section-header">
+                <div class="section-label">Tickets</div>
+                <h2 class="section-title">Wählen Sie Ihr Erlebnis</h2>
+            </div>
+            
+            <div class="tickets-grid">
+                <div class="ticket-card">
+                    <div class="ticket-name">Klassik</div>
+                    <div class="ticket-price">€89<span>/ Person</span></div>
+                    
+                    <div class="ticket-desc">Perfekt für Einsteiger und Genießer</div>
+                    
+                    <ul class="ticket-features">
+                        <li>Teezeremonie-Teilnahme</li>
+                        <li>4-Gang-Dinner</li>
+                        <li>Begrüßungsdrink</li>
+                        <li>Traditionelles Gebäck</li>
+                    </ul>
+                    
+                    <a href="#" class="ticket-btn">Ticket wählen</a>
+                </div>
+                
+                <div class="ticket-card featured">
+                    <div class="ticket-badge">Empfohlen</div>
+                    
+                    <div class="ticket-name">Premium</div>
+                    
+                    <div class="ticket-price">€149<span>/ Person</span></div>
+                    
+                    <div class="ticket-desc">Das komplette Erlebnis</div>
+                    
+                    <ul class="ticket-features">
+                        <li>Alles aus Klassik</li>
+                        <li>Premium-Teeverkostung</li>
+                        <li>Exklusives Goodie Bag</li>
+                        <li>Führung durch das Schloss</li>
+                        <li>Garantierte Front-Plätze</li>
+                    </ul>
+                    
+                    <a href="#" class="ticket-btn">Ticket wählen</a>
+                </div>
+                
+                <div class="ticket-card">
+                    <div class="ticket-name">VIP</div>
+                    
+                    <div class="ticket-price">€249<span>/ Person</span></div>
+                    
+                    <div class="ticket-desc">Für besondere Anlässe</div>
+                    
+                    <ul class="ticket-features">
+                        <li>Alles aus Premium</li>
+                        <li>Private Vorab-Führung</li>
+                        <li>Exklusiver Tee zum Mitnehmen</li>
+                        <li>Persönliche Beratung</li>
+                        <li>Champagner-Empfang</li>
+                    </ul>
+                    
+                    <a href="#" class="ticket-btn">Ticket wählen</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="location">
+        <div class="location-content">
+            <div class="location-info">
+                <div class="section-label">Location</div>
+                <h2>Schloss Thalheim</h2>
+                
+                <p>
+                    Ein historisches Juwel der Renaissance, nur 30 Minuten von Wien entfernt. Die perfekte Kulisse für einen unvergesslichen Abend.
+                </p>
+                
+                <div class="location-address">
+                    <strong>Adresse</strong>
+                    <p>Schloss Thalheim 1<br>2230 Thalheim bei Wels<br>Österreich</p>
+                </div>
+            </div>
+            
+            <div class="location-map">🏰</div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Sichern Sie sich Ihren Platz</h2>
+        <p>Nur 50 Plätze verfügbar. Erleben Sie einen unvergesslichen Abend der Kultur und des Genusses.</p>
+        
+        <a href="#tickets" class="hero-cta">Jetzt Ticket buchen →</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Schloss Thalheim</div>
+            
+            <div class="footer-links">
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+                <a href="#">Kontakt</a>
+            </div>
+            
+            <div class="footer-copy">© 2025 Schloss Thalheim. Alle Rechte vorbehalten.</div>
+        </div>
+    </footer>
+</body>
+</html>
