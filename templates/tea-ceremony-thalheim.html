@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chinesische Neujahrs-Teezeremonie — Schloss Thalheim</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root{
-            --bg:#faf8f5;
-            --bg-warm:#f5f0e8;
-            --bg-card:#fff;
+            --bg:#f7f5f2;
+            --bg-rose:#f5e6e0;
+            --bg-sage:#e8ebe4;
+            --bg-cream:#faf8f5;
             --clay:#c75b39;
-            --clay-light:#d97b5d;
+            --clay-light:#e07a5f;
             --clay-dark:#a84a2f;
-            --forest:#2d4a3e;
-            --forest-light:#3d6354;
-            --sage:#9caf88;
-            --sage-light:#b8c9a9;
-            --ochre:#c9a227;
-            --ochre-light:#e4c458;
+            --forest:#1f3a2f;
+            --forest-light:#2d4a3e;
+            --gold:#c9a227;
+            --gold-light:#e4c458;
             --ink:#1a1a1a;
             --ink-light:#4a4a4a;
             --ink-muted:#8a8a8a;
-            --border:#e8e4dc;
+            --border:#e0dcd4;
         }
         *{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth}
@@ -32,23 +31,11 @@
             color:var(--ink);
             line-height:1.6;
             font-size:16px;
-            overflow-x:hidden;
         }
         
         h1,h2,h3{font-family:'Playfair Display',serif;font-weight:500}
         .handwritten{font-family:'Caveat',cursive}
-        .label{font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:500}
-        
-        /* Grain texture */
-        body::before{
-            content:'';
-            position:fixed;
-            inset:0;
-            background:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity:0.03;
-            pointer-events:none;
-            z-index:1000;
-        }
+        .label{font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:3px;font-size:11px;font-weight:600}
         
         /* Navigation */
         nav{
@@ -57,406 +44,341 @@
             left:0;
             right:0;
             z-index:100;
-            padding:20px 24px;
-            background:rgba(250,248,245,0.9);
+            padding:16px 20px;
+            background:rgba(247,245,242,0.95);
             backdrop-filter:blur(20px);
             border-bottom:1px solid var(--border);
         }
-        @media(min-width:768px){nav{padding:24px 48px}}
         .nav-content{
-            max-width:1400px;
+            max-width:1200px;
             margin:0 auto;
             display:flex;
             justify-content:space-between;
             align-items:center;
         }
-        .nav-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--forest);letter-spacing:-0.5px}
-        @media(min-width:768px){.nav-logo{font-size:26px}}
-        .nav-right{display:flex;align-items:center;gap:20px}
+        .nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--forest)}
+        .nav-right{display:flex;align-items:center;gap:16px}
         
-        /* Language Switcher */
         .lang-switch{position:relative}
         .lang-btn{
             display:flex;
             align-items:center;
-            gap:8px;
-            padding:10px 16px;
-            background:var(--bg-card);
+            gap:6px;
+            padding:8px 14px;
+            background:#fff;
             border:1px solid var(--border);
             font-family:'Space Grotesk',sans-serif;
-            font-size:13px;
+            font-size:12px;
             font-weight:500;
             cursor:pointer;
-            transition:all 0.2s;
         }
-        .lang-btn:hover{border-color:var(--clay)}
-        .lang-btn svg{width:14px;height:14px;transition:transform 0.3s}
-        .lang-switch.open .lang-btn svg{transform:rotate(180deg)}
         .lang-dropdown{
             position:absolute;
-            top:calc(100% + 8px);
+            top:calc(100% + 6px);
             right:0;
-            background:var(--bg-card);
+            background:#fff;
             border:1px solid var(--border);
-            min-width:140px;
+            min-width:130px;
             display:none;
-            box-shadow:0 10px 40px rgba(0,0,0,0.1);
-            z-index:101;
+            box-shadow:0 10px 30px rgba(0,0,0,0.1);
         }
         .lang-switch.open .lang-dropdown{display:block}
         .lang-option{
-            padding:12px 16px;
+            padding:10px 14px;
             font-size:13px;
             cursor:pointer;
-            transition:all 0.2s;
         }
-        .lang-option:hover{background:var(--bg-warm);color:var(--clay)}
+        .lang-option:hover{background:var(--bg-sage)}
         .lang-option.active{background:var(--clay);color:#fff}
         
         .nav-cta{
             display:none;
-            padding:14px 28px;
+            padding:12px 24px;
             background:var(--clay);
             color:#fff;
             text-decoration:none;
             font-size:13px;
             font-weight:500;
             letter-spacing:1px;
-            transition:all 0.3s;
         }
         @media(min-width:768px){.nav-cta{display:block}}
-        .nav-cta:hover{background:var(--clay-dark);transform:translateY(-2px)}
         
         /* Hero */
         .hero{
             min-height:100dvh;
-            padding:120px 24px 80px;
+            padding:100px 20px 60px;
+            background:linear-gradient(180deg,var(--bg-rose) 0%,var(--bg) 50%,var(--bg-cream) 100%);
             display:flex;
-            flex-direction:column;
+            align-items:center;
             justify-content:center;
-            background:linear-gradient(180deg,var(--bg-warm) 0%,var(--bg) 100%);
-            position:relative;
-            overflow:hidden;
         }
-        @media(min-width:768px){.hero{padding:140px 48px 100px}}
+        @media(min-width:768px){.hero{padding:140px 40px 80px}}
+        
+        .hero-content{
+            max-width:900px;
+            margin:0 auto;
+            text-align:center;
+        }
         
         .hero-badge{
             display:inline-flex;
-            align-items:center;
+            flex-wrap:wrap;
+            justify-content:center;
             gap:8px;
-            margin-bottom:32px;
+            margin-bottom:28px;
         }
         .hero-badge span{
             padding:8px 16px;
-            background:var(--ochre);
-            color:var(--ink);
+            background:#fff;
+            border:1px solid var(--border);
             font-family:'Space Grotesk',sans-serif;
             font-size:11px;
-            font-weight:600;
             letter-spacing:2px;
-            text-transform:uppercase;
         }
-        .hero-badge .date{
-            background:var(--bg-card);
-            border:1px solid var(--border);
+        .hero-badge .highlight{
+            background:var(--clay);
+            color:#fff;
+            border-color:var(--clay);
         }
-        
-        .hero-content{max-width:1400px;margin:0 auto;width:100%}
-        .hero-grid{
-            display:grid;
-            gap:48px;
-        }
-        @media(min-width:1024px){.hero-grid{grid-template-columns:1.2fr 1fr;gap:80px;align-items:center}}
         
         .hero-title{
-            font-size:clamp(44px,10vw,80px);
-            line-height:0.95;
+            font-size:clamp(40px,8vw,72px);
+            line-height:1;
             letter-spacing:-2px;
-            margin-bottom:24px;
+            margin-bottom:16px;
         }
         .hero-title .chinese{
             display:block;
-            font-family:'Playfair Display',serif;
-            font-size:0.45em;
+            font-size:0.4em;
             color:var(--clay);
-            margin-top:16px;
-            letter-spacing:8px;
+            margin-top:12px;
+            letter-spacing:12px;
         }
         
         .hero-subtitle{
             font-size:18px;
             color:var(--ink-light);
-            max-width:480px;
-            margin-bottom:32px;
-            line-height:1.7;
-        }
-        @media(min-width:768px){.hero-subtitle{font-size:20px}}
-        
-        .hero-note{
-            display:inline-block;
-            padding:16px 24px;
-            background:var(--bg-card);
-            border:1px solid var(--border);
-            margin-bottom:32px;
-        }
-        .hero-note .handwritten{
-            font-size:24px;
-            color:var(--clay);
-            transform:rotate(-2deg);
-            display:inline-block;
+            max-width:500px;
+            margin:0 auto 32px;
         }
         
         .hero-cta{
             display:inline-flex;
             align-items:center;
-            gap:12px;
-            padding:20px 40px;
+            gap:10px;
+            padding:18px 36px;
             background:var(--clay);
             color:#fff;
             text-decoration:none;
-            font-size:15px;
+            font-size:14px;
             font-weight:500;
             letter-spacing:1px;
-            transition:all 0.3s;
+            margin-bottom:40px;
         }
-        .hero-cta:hover{background:var(--clay-dark);gap:20px}
+        .hero-cta:hover{background:var(--clay-dark)}
         
-        /* Hero Image Stack */
-        .hero-visual{position:relative}
-        .image-stack{position:relative;height:500px}
-        @media(min-width:768px){.image-stack{height:600px}}
-        
-        .image-card{
+        /* Hero Image */
+        .hero-image{
+            position:relative;
+            max-width:700px;
+            margin:0 auto;
+        }
+        .hero-image img{
+            width:100%;
+            aspect-ratio:16/10;
+            object-fit:cover;
+            display:block;
+        }
+        .hero-image .placeholder{
+            width:100%;
+            aspect-ratio:16/10;
+            background:linear-gradient(135deg,var(--bg-sage),var(--forest-light));
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#fff;
+            font-size:60px;
+        }
+        .hero-caption{
             position:absolute;
-            background:var(--bg-card);
-            padding:12px;
-            box-shadow:0 20px 60px rgba(0,0,0,0.15);
+            bottom:-16px;
+            left:20px;
+            background:#fff;
+            padding:16px 24px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.1);
         }
-        .image-card img,.image-card .placeholder{width:100%;height:100%;object-fit:cover;background:linear-gradient(135deg,var(--sage-light),var(--sage));display:flex;align-items:center;justify-content:center;font-size:60px}
+        .hero-caption .handwritten{font-size:22px;color:var(--clay)}
         
-        .image-card:nth-child(1){
-            width:70%;
-            aspect-ratio:3/4;
-            top:0;
-            left:0;
-            transform:rotate(-3deg);
-            z-index:3;
-        }
-        .image-card:nth-child(2){
-            width:55%;
-            aspect-ratio:1;
-            top:15%;
-            right:0;
-            transform:rotate(5deg);
-            z-index:2;
-        }
-        .image-card:nth-child(3){
-            width:45%;
-            aspect-ratio:4/3;
-            bottom:0;
-            left:20%;
-            transform:rotate(2deg);
-            z-index:1;
-        }
-        
-        /* Quick Info */
-        .quick-info{
-            padding:32px 24px;
+        /* Info Bar */
+        .info-bar{
+            padding:40px 20px;
             background:var(--forest);
             color:#fff;
         }
-        @media(min-width:768px){.quick-info{padding:40px 48px}}
-        .quick-info-grid{
-            max-width:1200px;
+        .info-bar-content{
+            max-width:900px;
             margin:0 auto;
             display:grid;
             grid-template-columns:repeat(2,1fr);
             gap:24px;
+            text-align:center;
         }
-        @media(min-width:768px){.quick-info-grid{grid-template-columns:repeat(4,1fr);gap:40px}}
-        .quick-info-item h4{
+        @media(min-width:640px){.info-bar-content{grid-template-columns:repeat(4,1fr)}}
+        .info-item h4{
             font-family:'Playfair Display',serif;
-            font-size:28px;
+            font-size:32px;
             margin-bottom:4px;
         }
-        @media(min-width:768px){.quick-info-item h4{font-size:36px}}
-        .quick-info-item p{
-            font-size:13px;
+        .info-item p{
+            font-size:12px;
             opacity:0.7;
-            letter-spacing:1px;
+            letter-spacing:2px;
             text-transform:uppercase;
         }
         
-        /* Story Section */
-        .story{
-            padding:100px 24px;
-            background:var(--bg);
-        }
-        @media(min-width:768px){.story{padding:140px 48px}}
+        /* Section Base */
+        section{padding:80px 20px}
+        @media(min-width:768px){section{padding:120px 40px}}
         
-        .story-content{
-            max-width:1100px;
+        .section-header{
+            max-width:700px;
+            margin:0 auto 60px;
+            text-align:center;
+        }
+        .section-header .label{
+            color:var(--clay);
+            margin-bottom:16px;
+            display:block;
+        }
+        .section-header h2{
+            font-size:clamp(32px,5vw,48px);
+            line-height:1.1;
+            margin-bottom:16px;
+        }
+        .section-header p{color:var(--ink-light);font-size:17px}
+        
+        /* Venue Section */
+        .venue{
+            background:var(--bg-cream);
+        }
+        .venue-content{
+            max-width:1000px;
             margin:0 auto;
         }
-        .story-header{
-            text-align:center;
-            margin-bottom:64px;
-        }
-        .story-header .label{color:var(--clay);margin-bottom:16px}
-        .story-header h2{font-size:clamp(36px,6vw,56px);line-height:1.1;margin-bottom:20px}
-        .story-header p{color:var(--ink-light);font-size:18px;max-width:600px;margin:0 auto}
-        
-        .story-grid{
+        .venue-grid{
             display:grid;
-            gap:48px;
+            gap:40px;
             align-items:center;
         }
-        @media(min-width:1024px){.story-grid{grid-template-columns:1fr 1fr;gap:80px}}
+        @media(min-width:900px){.venue-grid{grid-template-columns:1fr 1fr;gap:60px}}
         
-        .story-text p{
-            font-size:17px;
-            color:var(--ink-light);
-            line-height:1.9;
-            margin-bottom:24px;
-        }
-        .story-text .handwritten{
-            font-size:32px;
-            color:var(--clay);
-            display:block;
-            margin-top:32px;
-        }
-        
-        .story-image{
+        .venue-image{
             position:relative;
-            aspect-ratio:4/5;
         }
-        .story-image img,.story-image .placeholder{
+        .venue-image img,.venue-image .placeholder{
             width:100%;
-            height:100%;
+            aspect-ratio:4/5;
             object-fit:cover;
-            background:linear-gradient(135deg,var(--sage-light),var(--bg-warm));
-            display:flex;align-items:center;justify-content:center;font-size:80px;
+            display:block;
         }
-        .story-image .caption{
+        .venue-image .placeholder{
+            background:linear-gradient(135deg,var(--bg-sage),var(--forest));
+            display:flex;align-items:center;justify-content:center;color:#fff;font-size:80px;
+        }
+        .venue-sticker{
             position:absolute;
-            bottom:-20px;
+            top:-20px;
             right:-20px;
-            background:var(--bg-card);
-            padding:20px 24px;
-            box-shadow:0 10px 40px rgba(0,0,0,0.1);
-            max-width:200px;
+            width:100px;
+            height:100px;
+            background:var(--gold);
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-family:'Space Grotesk',sans-serif;
+            font-size:11px;
+            text-transform:uppercase;
+            text-align:center;
+            line-height:1.4;
+            transform:rotate(12deg);
         }
-        .story-image .caption .handwritten{font-size:20px;color:var(--clay);margin-bottom:4px}
-        .story-image .caption p{font-size:13px;color:var(--ink-muted);margin:0}
+        
+        .venue-text h3{
+            font-size:28px;
+            margin-bottom:20px;
+        }
+        .venue-text p{
+            color:var(--ink-light);
+            font-size:16px;
+            line-height:1.8;
+            margin-bottom:20px;
+        }
+        .venue-text .handwritten{
+            font-size:28px;
+            color:var(--clay);
+        }
         
         /* Experience Cards */
-        .experience{
-            padding:100px 24px;
-            background:var(--bg-warm);
-        }
-        @media(min-width:768px){.experience{padding:140px 48px}}
-        
-        .experience-content{max-width:1200px;margin:0 auto}
-        .experience-header{text-align:center;margin-bottom:64px}
-        .experience-header h2{font-size:clamp(32px,5vw,48px);margin-bottom:16px}
-        .experience-header p{color:var(--ink-light);font-size:18px}
+        .experience{background:var(--bg-rose)}
+        .experience-content{max-width:1000px;margin:0 auto}
         
         .cards-grid{
             display:grid;
-            gap:24px;
+            gap:20px;
         }
         @media(min-width:768px){.cards-grid{grid-template-columns:repeat(3,1fr)}}
         
         .exp-card{
-            background:var(--bg-card);
-            padding:40px 32px;
-            border:1px solid var(--border);
-            transition:all 0.3s;
+            background:#fff;
+            overflow:hidden;
+            box-shadow:0 4px 20px rgba(0,0,0,0.06);
         }
-        .exp-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,0.1)}
-        .exp-card .icon{font-size:48px;margin-bottom:24px}
-        .exp-card h3{font-size:24px;margin-bottom:12px}
-        .exp-card p{color:var(--ink-light);font-size:15px;line-height:1.7}
-        
-        /* Program Timeline */
-        .program{
-            padding:100px 24px;
-            background:var(--bg);
+        .exp-card-image{
+            aspect-ratio:4/3;
+            background:var(--bg-sage);
+            overflow:hidden;
         }
-        @media(min-width:768px){.program{padding:140px 48px}}
-        
-        .program-content{max-width:900px;margin:0 auto}
-        .program-header{text-align:center;margin-bottom:64px}
-        .program-header h2{font-size:clamp(32px,5vw,48px);margin-bottom:16px}
-        
-        .timeline{position:relative}
-        .timeline::before{
-            content:'';
-            position:absolute;
-            left:24px;
-            top:0;
-            bottom:0;
-            width:1px;
-            background:var(--border);
+        .exp-card-image img,.exp-card-image .placeholder{
+            width:100%;
+            height:100%;
+            object-fit:cover;
         }
-        @media(min-width:768px){.timeline::before{left:50%}}
-        
-        .timeline-item{
-            display:grid;
-            gap:16px;
-            margin-bottom:48px;
-            position:relative;
+        .exp-card-image .placeholder{
+            display:flex;align-items:center;justify-content:center;font-size:40px;
         }
-        @media(min-width:768px){
-            .timeline-item{grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-            .timeline-item:nth-child(even) .timeline-text{order:2}
-        }
+        .exp-card-content{padding:28px}
+        .exp-card-content h3{font-size:22px;margin-bottom:10px}
+        .exp-card-content p{color:var(--ink-light);font-size:14px;line-height:1.7}
         
-        .timeline-dot{
-            width:16px;
-            height:16px;
-            background:var(--clay);
-            border:4px solid var(--bg);
-            border-radius:50%;
-            position:absolute;
-            left:16px;
-            z-index:1;
-        }
-        @media(min-width:768px){.timeline-dot{left:50%;transform:translateX(-50%)}}
+        /* Program */
+        .program{background:var(--bg)}
+        .program-content{max-width:800px;margin:0 auto}
         
-        .timeline-time{
+        .program-list{max-width:600px;margin:0 auto}
+        .program-item{
+            display:flex;
+            gap:24px;
+            padding:32px 0;
+            border-bottom:1px solid var(--border);
+        }
+        .program-item:last-child{border-bottom:none}
+        
+        .program-time{
+            min-width:70px;
             font-family:'Space Grotesk',sans-serif;
             font-size:14px;
             font-weight:600;
             color:var(--clay);
-            letter-spacing:2px;
-            padding-left:48px;
+            letter-spacing:1px;
         }
-        @media(min-width:768px){.timeline-time{padding-left:0;text-align:right}}
-        .timeline-item:nth-child(even) .timeline-time{text-align:left}
         
-        .timeline-text{
-            background:var(--bg-card);
-            padding:32px;
-            border:1px solid var(--border);
-            margin-left:48px;
-        }
-        @media(min-width:768px){.timeline-text{margin-left:0}}
-        
-        .timeline-text h3{font-size:22px;margin-bottom:8px}
-        .timeline-text p{color:var(--ink-light);font-size:15px;line-height:1.7;margin:0}
+        .program-content-text h3{font-size:24px;margin-bottom:8px}
+        .program-content-text p{color:var(--ink-light);font-size:15px;line-height:1.7}
         
         /* Tickets */
-        .tickets{
-            padding:100px 24px;
-            background:linear-gradient(180deg,var(--bg-warm) 0%,var(--bg) 100%);
-        }
-        @media(min-width:768px){.tickets{padding:140px 48px}}
-        
-        .tickets-content{max-width:1100px;margin:0 auto}
-        .tickets-header{text-align:center;margin-bottom:64px}
-        .tickets-header h2{font-size:clamp(32px,5vw,48px);margin-bottom:16px}
-        .tickets-header p{color:var(--ink-light);font-size:18px}
+        .tickets{background:var(--bg-cream)}
+        .tickets-content{max-width:900px;margin:0 auto}
         
         .tickets-grid{
             display:grid;
@@ -465,32 +387,32 @@
         @media(min-width:768px){.tickets-grid{grid-template-columns:repeat(3,1fr)}}
         
         .ticket{
-            background:var(--bg-card);
-            padding:40px 32px;
-            border:1px solid var(--border);
+            background:#fff;
+            padding:36px 28px;
+            border:2px solid transparent;
             position:relative;
-            transition:all 0.3s;
+            text-align:center;
         }
-        .ticket:hover{transform:translateY(-4px)}
         .ticket.featured{
-            border:2px solid var(--clay);
-            box-shadow:0 20px 60px rgba(199,91,57,0.15);
+            border-color:var(--clay);
+            box-shadow:0 20px 50px rgba(199,91,57,0.15);
         }
         .ticket-badge{
             position:absolute;
-            top:-14px;
+            top:-13px;
             left:50%;
             transform:translateX(-50%);
             padding:8px 20px;
             background:var(--clay);
             color:#fff;
-            font-size:11px;
-            font-weight:600;
+            font-family:'Space Grotesk',sans-serif;
+            font-size:10px;
             letter-spacing:2px;
+            text-transform:uppercase;
         }
         .ticket-name{
             font-family:'Space Grotesk',sans-serif;
-            font-size:12px;
+            font-size:11px;
             color:var(--ink-muted);
             letter-spacing:3px;
             text-transform:uppercase;
@@ -498,19 +420,43 @@
         }
         .ticket-price{
             font-family:'Playfair Display',serif;
-            font-size:52px;
+            font-size:48px;
             margin-bottom:8px;
         }
-        .ticket-price span{font-size:16px;color:var(--ink-muted)}
-        .ticket-desc{color:var(--ink-light);margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+        .ticket-price span{font-size:14px;color:var(--ink-muted)}
+        .ticket-desc{
+            color:var(--ink-light);
+            font-size:15px;
+            margin-bottom:28px;
+            padding-bottom:28px;
+            border-bottom:1px solid var(--border);
+        }
         
-        .ticket-features{list-style:none;margin-bottom:32px}
-        .ticket-features li{padding:10px 0;color:var(--ink-light);font-size:14px;display:flex;gap:12px}
-        .ticket-features li::before{content:'—';color:var(--clay);font-weight:600}
+        .ticket-features{list-style:none;text-align:left;margin-bottom:28px}
+        .ticket-features li{
+            padding:10px 0;
+            color:var(--ink-light);
+            font-size:14px;
+            display:flex;
+            gap:12px;
+        }
+        .ticket-features li::before{
+            content:'';
+            width:18px;
+            height:18px;
+            background:var(--bg-sage);
+            border-radius:50%;
+            flex-shrink:0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:10px;
+        }
+        .ticket-features li::before{content:'✓';color:var(--forest)}
         
         .ticket-btn{
             width:100%;
-            padding:18px;
+            padding:16px;
             background:var(--ink);
             color:#fff;
             border:none;
@@ -518,108 +464,123 @@
             font-weight:500;
             letter-spacing:1px;
             cursor:pointer;
-            transition:all 0.3s;
         }
-        .ticket-btn:hover{background:var(--clay)}
         .ticket.featured .ticket-btn{background:var(--clay)}
-        .ticket.featured .ticket-btn:hover{background:var(--clay-dark)}
         
         /* Location */
         .location{
-            padding:100px 24px;
-            background:var(--forest);
-            color:#fff;
-        }
-        @media(min-width:768px){.location{padding:140px 48px}}
-        
-        .location-content{
-            max-width:1200px;
-            margin:0 auto;
-            display:grid;
-            gap:48px;
-            align-items:center;
-        }
-        @media(min-width:1024px){.location-content{grid-template-columns:1fr 1fr;gap:80px}}
-        
-        .location-text .label{color:var(--sage-light);margin-bottom:16px}
-        .location-text h2{font-size:clamp(32px,5vw,48px);margin-bottom:24px}
-        .location-text p{color:rgba(255,255,255,0.7);font-size:17px;line-height:1.8;margin-bottom:32px}
-        
-        .location-address{
-            padding:32px;
-            background:rgba(255,255,255,0.05);
-            border-left:4px solid var(--clay);
-        }
-        .location-address strong{display:block;margin-bottom:8px;font-size:14px;letter-spacing:2px;text-transform:uppercase}
-        .location-address p{color:rgba(255,255,255,0.7);font-size:15px;line-height:1.7;margin:0}
-        
-        .location-visual{
-            aspect-ratio:4/3;
-            background:linear-gradient(135deg,var(--forest-light),var(--sage));
-            display:flex;align-items:center;justify-content:center;font-size:120px;
-        }
-        
-        /* CTA Section */
-        .cta{
-            padding:120px 24px;
-            text-align:center;
+            padding:0;
             background:var(--bg);
         }
-        @media(min-width:768px){.cta{padding:160px 48px}}
+        .location-grid{
+            display:grid;
+        }
+        @media(min-width:900px){.location-grid{grid-template-columns:1fr 1fr}}
         
-        .cta h2{font-size:clamp(36px,6vw,64px);margin-bottom:24px}
-        .cta p{color:var(--ink-light);font-size:18px;max-width:500px;margin:0 auto 40px}
+        .location-image{
+            aspect-ratio:4/3;
+            background:linear-gradient(135deg,var(--forest),var(--forest-light));
+        }
+        .location-image img,.location-image .placeholder{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+        .location-image .placeholder{
+            display:flex;align-items:center;justify-content:center;color:#fff;font-size:100px;
+        }
+        
+        .location-info{
+            padding:60px 40px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+        }
+        @media(min-width:900px){.location-info{padding:80px}}
+        
+        .location-info .label{color:var(--clay);margin-bottom:16px}
+        .location-info h2{font-size:clamp(32px,5vw,44px);margin-bottom:20px}
+        .location-info p{color:var(--ink-light);font-size:16px;line-height:1.8;margin-bottom:32px}
+        
+        .location-address{
+            padding:28px;
+            background:var(--bg-cream);
+            border-left:4px solid var(--clay);
+        }
+        .location-address strong{
+            display:block;
+            margin-bottom:8px;
+            font-size:12px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+        }
+        .location-address p{color:var(--ink-light);font-size:15px;line-height:1.7;margin:0}
+        
+        /* CTA */
+        .cta{
+            padding:100px 20px;
+            text-align:center;
+            background:var(--bg-rose);
+        }
+        .cta-content{max-width:600px;margin:0 auto}
+        .cta h2{font-size:clamp(36px,6vw,56px);margin-bottom:20px}
+        .cta p{color:var(--ink-light);font-size:18px;margin-bottom:40px}
         
         .cta-btn{
             display:inline-flex;
             align-items:center;
             gap:12px;
-            padding:24px 48px;
+            padding:22px 44px;
             background:var(--clay);
             color:#fff;
             text-decoration:none;
-            font-size:16px;
+            font-size:15px;
             font-weight:500;
             letter-spacing:1px;
-            transition:all 0.3s;
         }
-        .cta-btn:hover{background:var(--clay-dark);gap:20px}
         
         /* Footer */
         footer{
-            padding:60px 24px 30px;
-            background:var(--ink);
+            padding:50px 20px 30px;
+            background:var(--forest);
             color:#fff;
         }
-        @media(min-width:768px){footer{padding:80px 48px 40px}}
-        
         .footer-content{
-            max-width:1200px;
+            max-width:1000px;
             margin:0 auto;
-            display:flex;
-            flex-direction:column;
-            gap:32px;
+            text-align:center;
         }
-        @media(min-width:768px){.footer-content{flex-direction:row;justify-content:space-between;align-items:center}}
-        
-        .footer-logo{font-family:'Playfair Display',serif;font-size:24px}
-        .footer-links{display:flex;gap:32px}
-        .footer-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.3s}
+        .footer-logo{
+            font-family:'Playfair Display',serif;
+            font-size:24px;
+            margin-bottom:24px;
+        }
+        .footer-links{
+            display:flex;
+            justify-content:center;
+            gap:32px;
+            margin-bottom:32px;
+        }
+        .footer-links a{
+            color:rgba(255,255,255,0.6);
+            text-decoration:none;
+            font-size:14px;
+        }
         .footer-links a:hover{color:#fff}
         .footer-copy{color:rgba(255,255,255,0.4);font-size:13px}
         
-        /* Mobile Menu Toggle */
+        /* Mobile Toggle */
         .mobile-toggle{
             display:flex;
             flex-direction:column;
             gap:5px;
-            padding:10px;
+            padding:8px;
             background:none;
             border:none;
             cursor:pointer;
         }
         @media(min-width:768px){.mobile-toggle{display:none}}
-        .mobile-toggle span{width:24px;height:2px;background:var(--ink)}
+        .mobile-toggle span{width:22px;height:2px;background:var(--ink)}
     </style>
 </head>
 <body>
@@ -631,7 +592,7 @@
                 <div class="lang-switch" id="langSwitch">
                     <button class="lang-btn" onclick="toggleLang()">
                         <span id="currentLang">DE</span>
-                        <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l5 5 5-5"/></svg>
+                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5"/></svg>
                     </button>
                     <div class="lang-dropdown">
                         <div class="lang-option active" onclick="setLang('de')">Deutsch</div>
@@ -654,66 +615,65 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">
-                <span class="date">28. Februar 2025</span>
-                <span>Einmaliges Event</span>
+                <span>28. Februar 2025</span>
+                <span class="highlight">Einmaliges Event</span>
             </div>
             
-            <div class="hero-grid">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        Chinesische<br>Neujahrs-<br>Teezeremonie
-                        <span class="chinese">迎春茶道</span>
-                    </h1>
-                    
-                    <p class="hero-subtitle">Ein Abend der Harmonie, Tradition und Schönheit im historischen Schloss Thalheim.</p>
-                    
-                    <div class="hero-note">
-                        <span class="handwritten">Nur 50 Plätze verfügbar</span>
-                    </div>
-                    
-                    <a href="#tickets" class="hero-cta">Platz sichern →</a>
-                </div>
+            <h1 class="hero-title">
+                Chinesische<br>Neujahrs-Teezeremonie
+                <span class="chinese">迎春茶道</span>
+            </h1>
+            
+            <p class="hero-subtitle">Ein Abend der Harmonie und Tradition im historischen Renaissance-Schloss.</p>
+            
+            <a href="#tickets" class="hero-cta">Platz reservieren →</a>
+            
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1200&q=80" alt="Schloss Thalheim" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="placeholder" style="display:none">🏰</div>
                 
-                <div class="hero-visual">
-                    <div class="image-stack">
-                        <div class="image-card"><div class="placeholder">🫖</div></div>
-                        <div class="image-card"><div class="placeholder">🏯</div></div>
-                        <div class="image-card"><div class="placeholder">🌸</div></div>
-                    </div>
+                <div class="hero-caption">
+                    <span class="handwritten">Schloss Thalheim</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="quick-info">
-        <div class="quick-info-grid">
-            <div class="quick-info-item"><h4>18:00</h4><p>Beginn</p></div>
-            <div class="quick-info-item"><h4>4h</h4><p>Dauer</p></div>
-            <div class="quick-info-item"><h4>50</h4><p>Gäste</p></div>
-            <div class="quick-info-item"><h4>Thalheim</h4><p>Schloss</p></div>
+    <div class="info-bar">
+        <div class="info-bar-content">
+            <div class="info-item"><h4>18:00</h4><p>Beginn</p></div>
+            <div class="info-item"><h4>4h</h4><p>Dauer</p></div>
+            <div class="info-item"><h4>50</h4><p>Gäste</p></div>
+            <div class="info-item"><h4>1564</h4><p>Seit</p></div>
         </div>
     </div>
 
-    <section class="story" id="story">
-        <div class="story-content">
-            <div class="story-header">
-                <span class="label">Das Erlebnis</span>
-                <h2>Wo Geschichte auf Weisheit trifft</h2>
-                <p>Eine Feier des Neuen Jahres im Zeichen von Harmonie und Achtsamkeit</p>
+    <section class="venue" id="venue">
+        <div class="venue-content">
+            <div class="section-header">
+                <span class="label">Der Ort</span>
+                <h2>Ein Schloss mit Geschichte</h2>
+                <p>Seit über 450 Jahren begeistert Schloss Thalheim mit seiner einzigartigen Atmosphäre.</p>
             </div>
             
-            <div class="story-grid">
-                <div class="story-text">
-                    <p>Im historischen Ambiente des Schloss Thalheim, das seit über 450 Jahren Geschichte schreibt, entfalten wir eine einzigartige Fusion zweier reicher Kulturen.</p>
-                    <p>Die chinesische Teezeremonie – 茶道 – ist mehr als das Zubereiten eines Getränks; sie ist ein Meditationsritual, das den Geist beruhigt und die Sinne schärft.</p>
-                    <span class="handwritten">"Jede Tasse Tee ist eine Reise"</span>
-                </div>
-                <div class="story-image">
-                    <div class="placeholder">🍵</div>
-                    <div class="caption">
-                        <span class="handwritten">Gongfu Cha</span>
-                        <p>Die Kunst des Tee mit großer Sorgfalt</p>
+            <div class="venue-grid">
+                <div class="venue-image">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" alt="Schloss Interieur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="placeholder" style="display:none">✨</div>
+                    
+                    <div class="venue-sticker">
+                        <span>1564<br>Eröffnet</span>
                     </div>
+                </div>
+                
+                <div class="venue-text">
+                    <h3>Wo österreichische Tradition auf fernöstliche Weisheit trifft</h3>
+                    
+                    <p>Die prächtigen Säle des Schlosses bieten den perfekten Rahmen für unsere Teezeremonie. Der Rittersaal mit seinen historischen Gemälden, der elegante Rokoko-Saal für den Ausklang – jeder Raum erzählt seine eigene Geschichte.</p>
+                    
+                    <p>Nur 30 Minuten von Wien entfernt, fühlen Sie sich hier wie in einer anderen Welt – einer Welt der Ruhe, des Genusses und der Zeitlosigkeit.</p>
+                    
+                    <span class="handwritten">"Zeitlos elegant"</span>
                 </div>
             </div>
         </div>
@@ -721,27 +681,46 @@
 
     <section class="experience" id="experience">
         <div class="experience-content">
-            <div class="experience-header">
-                <span class="label" style="color:var(--clay)">Highlights</span>
-                <h2>Was Sie erwartet</h2>
-                <p>Ein sorgfältig kuratiertes Erlebnis für alle Sinne</p>
+            <div class="section-header">
+                <span class="label">Das Erlebnis</span>
+                <h2>Für alle Sinne</h2>
+                <p>Ein sorgfältig kuratiertes Programm, das Sie verzaubern wird.</p>
             </div>
             
             <div class="cards-grid">
                 <div class="exp-card">
-                    <div class="icon">🫖</div>
-                    <h3>Authentische Zeremonie</h3>
-                    <p>Traditionelle Gongfu-Cha-Technik mit seltenen chinesischen Tees, präsentiert von einer erfahrenen Teemeisterin.</p>
+                    <div class="exp-card-image">
+                        <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&q=80" alt="Teezeremonie" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder" style="display:none">🫖</div>
+                    </div>
+                    <div class="exp-card-content">
+                        <h3>Die Zeremonie</h3>
+                        <p>Gongfu Cha – die Kunst des Tee mit großer Sorgfalt. Seltene chinesische Tees, traditionelle Gefäße, meditativer Fluss.</p>
+                    </div>
                 </div>
+                
                 <div class="exp-card">
-                    <div class="icon">🍽️</div>
-                    <h3>Kulinarik</h3>
-                    <p>Vier-Gang-Menü mit asiatisch-österreichischer Fusion-Küche, serviert im festlichen Rittersaal.</p>
+                    <div class="exp-card-image">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80" alt="Kulinarik" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder" style="display:none">🍽️</div>
+                    </div>
+                    
+                    <div class="exp-card-content">
+                        <h3>Das Menü</h3>
+                        <p>Vier-Gang-Dinner mit asiatisch-österreichischer Fusion. Lokale Zutaten treffen auf fernöstliche Aromen.</p>
+                    </div>
                 </div>
+                
                 <div class="exp-card">
-                    <div class="icon">🏛️</div>
-                    <h3>Historischer Rahmen</h3>
-                    <p>Das Renaissance-Schloss Thalheim – nur 30 Minuten von Wien entfernt, perfekt für einen unvergesslichen Abend.</p>
+                    <div class="exp-card-image">
+                        <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=600&q=80" alt="Ambiente" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder" style="display:none">🏛️</div>
+                    </div>
+                    
+                    <div class="exp-card-content">
+                        <h3>Das Ambiente</h3>
+                        <p>Historische Säle, Kerzenlicht, frische Blumen. Ein Abend wie im Märchen – nur 30 Minuten von Wien.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -749,42 +728,41 @@
 
     <section class="program" id="program">
         <div class="program-content">
-            <div class="program-header">
+            <div class="section-header">
                 <span class="label">Programm</span>
                 <h2>Der Abend im Detail</h2>
             </div>
             
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-time">18:00</div>
-                    <div class="timeline-text">
+            <div class="program-list">
+                <div class="program-item">
+                    <div class="program-time">18:00</div>
+                    <div class="program-content-text">
                         <h3>Empfang</h3>
-                        <p>Begrüßung mit hausgemachtem Prosecco und asiatischen Amuse-Bouches in der prächtigen Eingangshalle.</p>
+                        <p>Hausgemachter Prosecco und asiatische Amuse-Bouches in der prächtigen Eingangshalle des Schlosses.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-time">18:45</div>
-                    <div class="timeline-text">
+                
+                <div class="program-item">
+                    <div class="program-time">18:45</div>
+                    <div class="program-content-text">
                         <h3>Die Teezeremonie</h3>
-                        <p>Führung durch die Gongfu-Cha-Zeremonie mit seltenen chinesischen Teesorten und tiefem Einblick in die Tradition.</p>
+                        <p>Gongfu-Cha-Zeremonie mit seltenen chinesischen Tees. Unsere Teemeisterin führt Sie durch die Tradition.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-time">20:00</div>
-                    <div class="timeline-text">
+                
+                <div class="program-item">
+                    <div class="program-time">20:00</div>
+                    <div class="program-content-text">
                         <h3>Festliches Dinner</h3>
-                        <p>Vier-Gang-Menü im festlich geschmückten Rittersaal, inspiriert von der asiatischen Küche.</p>
+                        <p>Vier-Gang-Menü im festlich geschmückten Rittersaal. Asiatisch-österreichische Fusion-Küche.</p>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-time">22:00</div>
-                    <div class="timeline-text">
+                
+                <div class="program-item">
+                    <div class="program-time">22:00</div>
+                    <div class="program-content-text">
                         <h3>Ausklang</h3>
-                        <p>Verdauungstee und Musik im historischen Rokoko-Saal – Zeit für Gespräche und Genuss.</p>
+                        <p>Verdauungstee und Musik im Rokoko-Saal. Zeit zum Genießen und Plaudern.</p>
                     </div>
                 </div>
             </div>
@@ -793,106 +771,116 @@
 
     <section class="tickets" id="tickets">
         <div class="tickets-content">
-            <div class="tickets-header">
-                <span class="label" style="color:var(--clay)">Reservierung</span>
+            <div class="section-header">
+                <span class="label">Reservierung</span>
                 <h2>Wählen Sie Ihr Erlebnis</h2>
-                <p>Begrenzte Plätze für ein exklusives Event</p>
+                <p>Begrenzte Plätze – nur 50 Gäste.</p>
             </div>
             
             <div class="tickets-grid">
                 <div class="ticket">
                     <div class="ticket-name">Klassik</div>
                     <div class="ticket-price">€89<span>/ Person</span></div>
-                    <div class="ticket-desc">Für Genießer und Neugierige</div>
+                    <div class="ticket-desc">Für Genießer</div>
+                    
                     <ul class="ticket-features">
-                        <li>Teezeremonie-Teilnahme</li>
-                        <li>Vier-Gang-Menü</li>
+                        <li>Teezeremonie</li>
+                        <li>4-Gang-Menü</li>
                         <li>Begrüßungsgetränk</li>
-                        <li>Traditionelles Gebäck</li>
+                        <li>Teegebäck</li>
                     </ul>
+                    
                     <button class="ticket-btn">Auswählen</button>
                 </div>
                 
                 <div class="ticket featured">
                     <div class="ticket-badge">Empfohlen</div>
+                    
                     <div class="ticket-name">Premium</div>
                     <div class="ticket-price">€149<span>/ Person</span></div>
-                    <div class="ticket-desc">Das vollständige Erlebnis</div>
+                    <div class="ticket-desc">Volles Erlebnis</div>
+                    
                     <ul class="ticket-features">
                         <li>Alles aus Klassik</li>
-                        <li>Premium-Teeverkostung</li>
-                        <li>Exklusives Goodie Bag</li>
-                        <li>Schlossführung vorab</li>
-                        <li>Beste Plätze garantiert</li>
+                        <li>Premium-Tees</li>
+                        <li>Goodie Bag</li>
+                        <li>Schlossführung</li>
+                        <li>Beste Plätze</li>
                     </ul>
+                    
                     <button class="ticket-btn">Auswählen</button>
                 </div>
                 
                 <div class="ticket">
                     <div class="ticket-name">VIP</div>
                     <div class="ticket-price">€249<span>/ Person</span></div>
-                    <div class="ticket-desc">Für besondere Anlässe</div>
+                    <div class="ticket-desc">Besonderer Anlass</div>
+                    
                     <ul class="ticket-features">
                         <li>Alles aus Premium</li>
-                        <li>Private Vorab-Führung</li>
-                        <li>Exklusiver Tee zum Mitnehmen</li>
-                        <li>Persönliche Beratung</li>
+                        <li>Private Führung</li>
+                        <li>Tee zum Mitnehmen</li>
                         <li>Champagner-Empfang</li>
+                        <li>Persönlicher Service</li>
                     </ul>
+                    
                     <button class="ticket-btn">Auswählen</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="location" id="location">
-        <div class="location-content">
-            <div class="location-text">
-                <span class="label">Ort</span>
+    <section class="location">
+        <div class="location-grid">
+            <div class="location-image">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=80" alt="Schloss Thalheim" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="placeholder" style="display:none">🏰</div>
+            </div>
+            
+            <div class="location-info">
+                <span class="label">Anfahrt</span>
                 <h2>Schloss Thalheim</h2>
-                <p>Ein geschichtsträchtiger Ort der Renaissance, nur 30 Minuten von Wien entfernt. Die perfekte Kulisse für einen Abend, der Tradition und Moderne vereint.</p>
+                
+                <p>Nur 30 Minuten von Wien entfernt, direkt an der A1. Kostenlose Parkplätze vorhanden.</p>
+                
                 <div class="location-address">
                     <strong>Adresse</strong>
                     <p>Schloss Thalheim 1<br>2230 Thalheim bei Wels<br>Österreich</p>
                 </div>
             </div>
-            <div class="location-visual">🏰</div>
         </div>
     </section>
 
     <section class="cta">
-        <h2>Sichern Sie sich Ihren Platz</h2>
-        <p>Nur 50 Plätze verfügbar. Erleben Sie einen Abend, der in Erinnerung bleibt.</p>
-        <a href="#tickets" class="cta-btn">Jetzt reservieren →</a>
+        <div class="cta-content">
+            <h2>Sichern Sie sich Ihren Platz</h2>
+            
+            <p>Nur 50 Plätze verfügbar. Erleben Sie einen Abend, der in Erinnerung bleibt.</p>
+            
+            <a href="#tickets" class="cta-btn">Jetzt reservieren →</a>
+        </div>
     </section>
 
     <footer>
         <div class="footer-content">
             <div class="footer-logo">Schloss Thalheim</div>
+            
             <div class="footer-links">
                 <a href="#">Impressum</a>
                 <a href="#">Datenschutz</a>
                 <a href="#">Kontakt</a>
             </div>
+            
             <div class="footer-copy">© 2025 Schloss Thalheim · Mit Liebe zum Detail</div>
         </div>
     </footer>
 
     <script>
-        // Language switcher
-        function toggleLang() {
+        function toggleLang(){
             document.getElementById('langSwitch').classList.toggle('open');
         }
-        
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.lang-switch')) {
-                document.getElementById('langSwitch').classList.remove('open');
-            }
-        });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.lang-switch')) {
+        document.addEventListener('click',function(e){
+            if(!e.target.closest('.lang-switch')){
                 document.getElementById('langSwitch').classList.remove('open');
             }
         });
