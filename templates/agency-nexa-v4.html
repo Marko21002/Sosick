@@ -1593,8 +1593,12 @@
         function setLang(lang) {
             currentLang = lang;
             document.getElementById('currentLang').textContent = lang.toUpperCase();
-            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
-            event.target.classList.add('active');
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.getAttribute('onclick').includes(`'${lang}'`)) {
+                    opt.classList.add('active');
+                }
+            });
             document.getElementById('langSwitcher').classList.remove('open');
             updateContent();
             localStorage.setItem('nexus-lang', lang);
@@ -1606,7 +1610,10 @@
             currentLang = savedLang;
             document.getElementById('currentLang').textContent = savedLang.toUpperCase();
             document.querySelectorAll('.lang-option').forEach(opt => {
-                opt.classList.toggle('active', opt.textContent.toLowerCase().includes(savedLang === 'de' ? 'deutsch' : 'русский'));
+                opt.classList.remove('active');
+                if (opt.getAttribute('onclick').includes(`'${savedLang}'`)) {
+                    opt.classList.add('active');
+                }
             });
             updateContent();
         }
