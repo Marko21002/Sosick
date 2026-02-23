@@ -15,6 +15,16 @@
         .nav-links{display:flex;gap:24px;align-items:center}
         .nav-links a{color:#64748b;text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
         .nav-links a:hover{color:#0f172a}
+        .header-actions{display:flex;align-items:center;gap:12px}
+        .lang-dropdown{position:relative}
+        .lang-trigger{display:flex;align-items:center;gap:4px;padding:8px 12px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer;white-space:nowrap}
+        .lang-trigger svg{width:14px;height:14px;transition:transform .2s}
+        .lang-dropdown.open .lang-trigger svg{transform:rotate(180deg)}
+        .lang-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.15);padding:6px;min-width:100px;display:none;z-index:1000}
+        .lang-dropdown.open .lang-menu{display:block}
+        .lang-option{padding:8px 12px;border-radius:6px;font-size:13px;cursor:pointer;white-space:nowrap}
+        .lang-option:hover{background:#f1f5f9}
+        .lang-option.active{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff}
         .header-cta{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap}
         
         .hero{padding:140px 20px 80px;background:linear-gradient(135deg,#f5f3ff 0%,#fff 30%,#fdf2f8 70%,#fff 100%);text-align:center}
@@ -88,40 +98,53 @@
         <div class="header-content">
             <div class="logo">Sosick Templates</div>
             <nav class="nav-links">
-                <a href="#templates">Templates</a>
-                <a href="#features">Features</a>
+                <a href="#templates" data-i18n="navTemplates">Templates</a>
+                <a href="#features" data-i18n="navFeatures">Features</a>
                 <a href="https://github.com/Marko21002/Sosick" target="_blank">GitHub</a>
             </nav>
-            <a href="#templates" class="header-cta">Alle Templates</a>
+            <div class="header-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-trigger" onclick="toggleLang()">
+                        <span id="currentLang">DE</span>
+                        <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l5 5 5-5"/></svg>
+                    </button>
+                    <div class="lang-menu">
+                        <div class="lang-option active" onclick="setLang('de')" data-lang="de">Deutsch</div>
+                        <div class="lang-option" onclick="setLang('en')" data-lang="en">English</div>
+                        <div class="lang-option" onclick="setLang('ru')" data-lang="ru">Русский</div>
+                    </div>
+                </div>
+                <a href="#templates" class="header-cta" data-i18n="navCta">Alle Templates</a>
+            </div>
         </div>
     </header>
 
     <section class="hero">
         <div class="container">
-            <div class="hero-badge">✨ 8+ fertige Templates</div>
+            <div class="hero-badge" data-i18n="heroBadge">✨ 8+ fertige Templates</div>
             
-            <h1>Hochkonvertierende <span class="gradient">Landing Pages</span> für jedes Business</h1>
+            <h1 data-i18n="heroTitle">Hochkonvertierende <span class="gradient">Landing Pages</span> für jedes Business</h1>
             
-            <p class="hero-subtitle">
+            <p class="hero-subtitle" data-i18n="heroSubtitle">
                 Professionell designte, responsive Templates mit integriertem Lead-Gen, Quiz-Funktionalität und mehrsprachiger Unterstützung.
             </p>
             
             <div class="stats">
                 <div class="stat">
                     <div class="stat-value">8+</div>
-                    <div class="stat-label">Templates</div>
+                    <div class="stat-label" data-i18n="statTemplates">Templates</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value">3</div>
-                    <div class="stat-label">Sprachen</div>
+                    <div class="stat-label" data-i18n="statLanguages">Sprachen</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value">100%</div>
-                    <div class="stat-label">Responsive</div>
+                    <div class="stat-label" data-i18n="statResponsive">Responsive</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value">0€</div>
-                    <div class="stat-label">Kostenlos</div>
+                    <div class="stat-label" data-i18n="statFree">Kostenlos</div>
                 </div>
             </div>
         </div>
@@ -129,11 +152,11 @@
 
     <div class="filters" id="templates">
         <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filterTemplates('all')">Alle</button>
-            <button class="filter-btn" onclick="filterTemplates('local')">Lokale Business</button>
-            <button class="filter-btn" onclick="filterTemplates('service')">Dienstleistungen</button>
-            <button class="filter-btn" onclick="filterTemplates('agency')">Agenturen</button>
-            <button class="filter-btn" onclick="filterTemplates('event')">Events</button>
+            <button class="filter-btn active" onclick="filterTemplates('all')" data-i18n="filterAll">Alle</button>
+            <button class="filter-btn" onclick="filterTemplates('local')" data-i18n="filterLocal">Lokale Business</button>
+            <button class="filter-btn" onclick="filterTemplates('service')" data-i18n="filterService">Dienstleistungen</button>
+            <button class="filter-btn" onclick="filterTemplates('agency')" data-i18n="filterAgency">Agenturen</button>
+            <button class="filter-btn" onclick="filterTemplates('event')" data-i18n="filterEvent">Events</button>
         </div>
     </div>
 
@@ -321,10 +344,10 @@
     </section>
 
     <section class="cta-section" id="features">
-        <h2>Bereit für deine Landing Page?</h2>
-        <p>Alle Templates sind Open Source und kostenlos nutzbar. Fork auf GitHub, passe an, deploy auf Vercel.</p>
+        <h2 data-i18n="ctaTitle">Bereit für deine Landing Page?</h2>
+        <p data-i18n="ctaSubtitle">Alle Templates sind Open Source und kostenlos nutzbar. Fork auf GitHub, passe an, deploy auf Vercel.</p>
         
-        <a href="https://github.com/Marko21002/Sosick" class="btn-primary" style="display:inline-block;padding:16px 32px;font-size:16px" target="_blank">
+        <a href="https://github.com/Marko21002/Sosick" class="btn-primary" style="display:inline-block;padding:16px 32px;font-size:16px" target="_blank" data-i18n="ctaButton">
             ⭐ Auf GitHub sterne
         </a>
     </section>
@@ -335,25 +358,116 @@
             
             <div class="footer-links">
                 <a href="https://github.com/Marko21002/Sosick" target="_blank">GitHub</a>
-                <a href="#templates">Templates</a>
+                <a href="#templates" data-i18n="navTemplates">Templates</a>
                 <a href="mailto:hello@sosick.vercel.app">Kontakt</a>
             </div>
             
-            <div class="footer-copy">© 2024 — Open Source unter MIT License</div>
+            <div class="footer-copy" data-i18n="footerCopy">© 2024 — Open Source unter MIT License</div>
         </div>
     </footer>
 
     <script>
+        const t = {
+            de: {
+                navTemplates: 'Templates', navFeatures: 'Features', navCta: 'Alle Templates',
+                heroBadge: '✨ 8+ fertige Templates',
+                heroTitle: 'Hochkonvertierende Landing Pages für jedes Business',
+                heroSubtitle: 'Professionell designte, responsive Templates mit integriertem Lead-Gen, Quiz-Funktionalität und mehrsprachiger Unterstützung.',
+                statTemplates: 'Templates', statLanguages: 'Sprachen', statResponsive: 'Responsive', statFree: 'Kostenlos',
+                filterAll: 'Alle', filterLocal: 'Lokale Business', filterService: 'Dienstleistungen', filterAgency: 'Agenturen', filterEvent: 'Events',
+                badgeLocal: 'Lokal', badgeService: 'Service', badgeAgency: 'Agentur', badgeEvent: 'Event',
+                btnPreview: 'Vorschau', btnCode: 'Code',
+                ctaTitle: 'Bereit für deine Landing Page?',
+                ctaSubtitle: 'Alle Templates sind Open Source und kostenlos nutzbar. Fork auf GitHub, passe an, deploy auf Vercel.',
+                ctaButton: '⭐ Auf GitHub sterne',
+                footerCopy: '© 2024 — Open Source unter MIT License'
+            },
+            en: {
+                navTemplates: 'Templates', navFeatures: 'Features', navCta: 'All Templates',
+                heroBadge: '✨ 8+ ready templates',
+                heroTitle: 'High-converting landing pages for every business',
+                heroSubtitle: 'Professionally designed, responsive templates with integrated lead generation, quiz functionality and multilingual support.',
+                statTemplates: 'Templates', statLanguages: 'Languages', statResponsive: 'Responsive', statFree: 'Free',
+                filterAll: 'All', filterLocal: 'Local Business', filterService: 'Services', filterAgency: 'Agencies', filterEvent: 'Events',
+                badgeLocal: 'Local', badgeService: 'Service', badgeAgency: 'Agency', badgeEvent: 'Event',
+                btnPreview: 'Preview', btnCode: 'Code',
+                ctaTitle: 'Ready for your landing page?',
+                ctaSubtitle: 'All templates are open source and free to use. Fork on GitHub, customize, deploy on Vercel.',
+                ctaButton: '⭐ Star on GitHub',
+                footerCopy: '© 2024 — Open Source under MIT License'
+            },
+            ru: {
+                navTemplates: 'Шаблоны', navFeatures: 'Фичи', navCta: 'Все шаблоны',
+                heroBadge: '✨ 8+ готовых шаблонов',
+                heroTitle: 'Лендинги с высокой конверсией для любого бизнеса',
+                heroSubtitle: 'Профессионально разработанные адаптивные шаблоны с интегрированным lead-gen, квизами и мультиязычностью.',
+                statTemplates: 'Шаблонов', statLanguages: 'Языка', statResponsive: 'Адаптивно', statFree: 'Бесплатно',
+                filterAll: 'Все', filterLocal: 'Локальный бизнес', filterService: 'Услуги', filterAgency: 'Агентства', filterEvent: 'Ивенты',
+                badgeLocal: 'Локальный', badgeService: 'Сервис', badgeAgency: 'Агентство', badgeEvent: 'Ивент',
+                btnPreview: 'Превью', btnCode: 'Код',
+                ctaTitle: 'Готовы к лендингу?',
+                ctaSubtitle: 'Все шаблоны open source и бесплатны. Форкай на GitHub, кастомизируй, деплой на Vercel.',
+                ctaButton: '⭐ Звезда на GitHub',
+                footerCopy: '© 2024 — Open Source под MIT License'
+            }
+        };
+
+        let currentLang = 'de';
+
+        function toggleLang() {
+            document.getElementById('langDropdown').classList.toggle('open');
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.toggle('active', opt.dataset.lang === lang));
+            document.getElementById('currentLang').textContent = lang.toUpperCase();
+            document.getElementById('langDropdown').classList.remove('open');
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (t[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = t[lang][key];
+                    } else {
+                        el.textContent = t[lang][key];
+                    }
+                }
+            });
+            
+            // Update filter button active state
+            updateFilterButtons();
+            
+            document.documentElement.lang = lang;
+            localStorage.setItem('sosick-lang', lang);
+        }
+
+        function updateFilterButtons() {
+            const activeBtn = document.querySelector('.filter-btn.active');
+            if (activeBtn) {
+                const currentFilter = activeBtn.dataset.filter || 'all';
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    const filterKey = btn.getAttribute('onclick').match(/filterTemplates\('(\w+)'\)/)?.[1];
+                    if (filterKey) {
+                        btn.dataset.filter = filterKey;
+                        btn.textContent = t[currentLang]['filter' + filterKey.charAt(0).toUpperCase() + filterKey.slice(1)];
+                        btn.classList.toggle('active', filterKey === currentFilter);
+                    }
+                });
+            }
+        }
+
         function filterTemplates(category) {
             // Update buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.toggle('active', 
-                    (category === 'all' && btn.textContent === 'Alle') ||
-                    (category === 'local' && btn.textContent === 'Lokale Business') ||
-                    (category === 'service' && btn.textContent === 'Dienstleistungen') ||
-                    (category === 'agency' && btn.textContent === 'Agenturen') ||
-                    (category === 'event' && btn.textContent === 'Events')
-                );
+                const filterKey = btn.getAttribute('onclick').match(/filterTemplates\('(\w+)'\)/)?.[1];
+                btn.dataset.filter = filterKey;
+                btn.classList.toggle('active', filterKey === category);
+                // Update text based on current language
+                const langKey = 'filter' + filterKey.charAt(0).toUpperCase() + filterKey.slice(1);
+                if (t[currentLang][langKey]) {
+                    btn.textContent = t[currentLang][langKey];
+                }
             });
             
             // Filter cards
@@ -367,6 +481,24 @@
                 }
             });
         }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-dropdown')) {
+                document.getElementById('langDropdown').classList.remove('open');
+            }
+        });
+
+        // Load saved language or default to 'de'
+        const savedLang = localStorage.getItem('sosick-lang') || 'de';
+        if (savedLang !== 'de') {
+            setLang(savedLang);
+        }
+        
+        // Store initial filter values
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            const filterKey = btn.getAttribute('onclick').match(/filterTemplates\('(\w+)'\)/)?.[1];
+            if (filterKey) btn.dataset.filter = filterKey;
+        });
     </script>
 </body>
 </html>
