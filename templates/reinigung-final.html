@@ -6,16 +6,25 @@
     <title>CleanPro Wien — Professionelle Reinigung</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
+        html,body{overflow-x:hidden}
         body{font-family:'Inter',-apple-system,sans-serif;background:#fff;color:#0f172a;line-height:1.6}
-        .lang-switcher{position:fixed;top:80px;right:20px;z-index:999;background:#fff;border-radius:50px;padding:6px;box-shadow:0 4px 20px rgba(0,0,0,0.15);display:flex;gap:4px}
-        .lang-btn{border:none;padding:10px 18px;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;background:transparent;color:#64748b}
-        .lang-btn.active{background:#0ea5e9;color:#fff}
         header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0;z-index:100;padding:16px 20px}
-        .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-        .logo{font-size:22px;font-weight:800;color:#0ea5e9}
+        .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+        .header-actions{display:flex;align-items:center;gap:8px}
+        .lang-dropdown{position:relative;flex-shrink:0}
+        .lang-trigger{display:flex;align-items:center;gap:4px;padding:8px 12px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer;white-space:nowrap}
+        .lang-trigger svg{width:14px;height:14px;transition:transform .2s}
+        .lang-dropdown.open .lang-trigger svg{transform:rotate(180deg)}
+        .lang-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.15);padding:6px;min-width:100px;display:none;z-index:1000}
+        .lang-dropdown.open .lang-menu{display:block}
+        .lang-option{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;font-size:13px;cursor:pointer;white-space:nowrap}
+        .lang-option:hover{background:#f1f5f9}
+        .lang-option.active{background:#0ea5e9;color:#fff}
+        .lang-flag{font-size:14px}
+        .logo{font-size:22px;font-weight:800;color:#0ea5e9;flex-shrink:0}
         .logo span{color:#0f172a}
-        .header-cta{background:#0ea5e9;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none}
-        .hero{padding:140px 20px 100px;background:linear-gradient(135deg,#f0f9ff 0%,#fff 50%,#ecfdf5 100%)}
+        .header-cta{background:#0ea5e9;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;flex-shrink:0;white-space:nowrap}
+        .hero{padding:100px 20px 100px;background:linear-gradient(135deg,#f0f9ff 0%,#fff 50%,#ecfdf5 100%)}
         .container{max-width:1200px;margin:0 auto}
         .hero-container{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
         .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e2e8f0;padding:10px 20px;border-radius:50px;font-size:14px;font-weight:700;color:#0ea5e9;margin-bottom:24px}
@@ -69,20 +78,27 @@
         .footer-column h4{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px;color:#94a3b8}
         .footer-column a{display:block;color:#fff;text-decoration:none;padding:8px 0;font-size:15px}
         .footer-bottom{padding-top:30px;border-top:1px solid #334155;text-align:center;color:#64748b;font-size:14px}
-        @media(max-width:968px){.hero-container,.about-grid{grid-template-columns:1fr}.hero h1{font-size:36px}.services-grid,.testimonials-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.lang-switcher{top:70px;right:10px}}
+        @media(max-width:968px){.hero-container,.about-grid{grid-template-columns:1fr}.hero h1{font-size:36px}.services-grid,.testimonials-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.header-cta{padding:10px 16px;font-size:13px}.logo{font-size:18px}}
     </style>
 </head>
 <body>
-    <div class="lang-switcher">
-        <button class="lang-btn active" onclick="setLang('de')" data-lang="de">DE</button>
-        <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
-        <button class="lang-btn" onclick="setLang('ru')" data-lang="ru">RU</button>
-    </div>
-
     <header>
         <div class="header-content">
             <div class="logo">CleanPro <span>Wien</span></div>
-            <a href="#calculator" class="header-cta" data-i18n="book">Preis berechnen</a>
+            <div class="header-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-trigger" onclick="toggleLang()">
+                        <span id="currentLang">DE</span>
+                        <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l5 5 5-5"/></svg>
+                    </button>
+                    <div class="lang-menu">
+                        <div class="lang-option active" onclick="setLang('de')" data-lang="de"><span class="lang-flag">🇩🇪</span> DE</div>
+                        <div class="lang-option" onclick="setLang('en')" data-lang="en"><span class="lang-flag">🇬🇧</span> EN</div>
+                        <div class="lang-option" onclick="setLang('ru')" data-lang="ru"><span class="lang-flag">🇷🇺</span> RU</div>
+                    </div>
+                </div>
+                <a href="#calculator" class="header-cta" data-i18n="book">Preis berechnen</a>
+            </div>
         </div>
     </header>
 
@@ -295,14 +311,26 @@
             }
         };
 
+        function toggleLang() {
+            document.getElementById('langDropdown').classList.toggle('open');
+        }
+        
         function setLang(lang) {
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.toggle('active', opt.dataset.lang === lang));
+            document.getElementById('currentLang').textContent = lang.toUpperCase();
+            document.getElementById('langDropdown').classList.remove('open');
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.dataset.i18n;
                 if (t[lang][key]) el.textContent = t[lang][key];
             });
             document.title = lang === 'ru' ? 'CleanPro Вена — Уборка' : lang === 'en' ? 'CleanPro Vienna — Cleaning' : 'CleanPro Wien — Reinigung';
         }
+        
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-dropdown')) {
+                document.getElementById('langDropdown').classList.remove('open');
+            }
+        });
 
         function calcPrice() {
             const size = parseInt(document.getElementById('sizeRange').value);
