@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="Professionelle Websites und Online-Terminbuchung für Zahnärzte in Wien. Mehr Patienten, weniger Telefonstress.">
+    <title>Zahnarzt Webdesign Wien — Mehr Patienten durch smarte Website</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --accent-emerald: #10b981;
+            --accent-emerald-glow: rgba(16, 185, 129, 0.3);
+            --accent-amber: #f59e0b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-subtle: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            background: linear-gradient(90deg, #059669, #10b981);
+            padding: 10px 16px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent-emerald);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-emerald);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 24px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-emerald);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.1;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent-emerald);
+            text-shadow: 0 0 40px var(--accent-emerald-glow);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--accent-emerald);
+        }
+
+        .hero-stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.5); }
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 80px 24px;
+            background: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-eyebrow {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-amber);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .problem-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .problem-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .problem-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ef4444;
+        }
+
+        .problem-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Solution */
+        .solution {
+            padding: 80px 24px;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .solution-content h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .solution-list {
+            list-style: none;
+        }
+
+        .solution-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        .solution-list li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .solution-visual {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 32px;
+        }
+
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .mockup-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .mockup-dot.red { background: #ef4444; }
+        .mockup-dot.yellow { background: #f59e0b; }
+        .mockup-dot.green { background: #10b981; }
+
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .booking-form input,
+        .booking-form select {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
+            padding: 14px;
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .booking-form button {
+            background: var(--accent-emerald);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Results */
+        .results {
+            padding: 80px 24px;
+            background: var(--bg-secondary);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .result-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--accent-emerald);
+            margin-bottom: 8px;
+        }
+
+        .result-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Testimonial */
+        .testimonial {
+            padding: 80px 24px;
+        }
+
+        .testimonial-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-size: 24px;
+            font-style: italic;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+        }
+
+        .testimonial-role {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 24px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+
+        .cta-section h2 {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .problems-grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        🏆 Bereits 47 Zahnarztpraxen in Wien erfolgreich digitalisiert
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Dental<span>Web</span> Wien</div>
+            <div class="nav-links">
+                <a href="#problem">Problem</a>
+                <a href="#loesung">Lösung</a>
+                <a href="#ergebnisse">Ergebnisse</a>
+                <a href="#kontakt">Kontakt</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">
+            Spezialisiert auf Zahnarztpraxen
+        </div>
+
+        <h1>
+            Mehr Patienten durch Ihre
+            <span class="highlight">smarte Website</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            Professionelle Websites mit Online-Terminbuchung für Zahnärzte in Wien. 
+            Weniger Telefonstress, mehr gebuchte Termine, zufriedenere Patienten.
+        </p>
+
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-number">+156%</div>
+                <div class="hero-stat-label">Mehr Online-Termine</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">-70%</div>
+                <div class="hero-stat-label">Weniger Telefonate</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">4.9★</div>
+                <div class="hero-stat-label">Durchschnittsbewertung</div>
+            </div>
+        </div>
+
+        <a href="#kontakt" class="cta-btn">
+            Kostenloses Erstgespräch vereinbaren
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </section>
+
+    <!-- Problem -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Das Problem</div>
+                <h2 class="section-title">Warum Ihre Praxis Patienten verliert</h2>
+            </div>
+
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">📞</div>
+                    <h3>Telefon ständig besetzt</h3>
+                    <p>60% der Anrufe gehen verloren. Patienten buchen bei der Konkurrenz.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">😴</div>
+                    <h3>Website von 2008</h3>
+                    <p>Veraltetes Design, nicht mobil-optimiert, Google straf Sie ab.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">⏰</div>
+                    <h3>Zeitverschwendung</h3>
+                    <p>Ihre MFA verbringt 4h täglich am Telefon statt Patienten zu betreuen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution -->
+    <section class="solution" id="loesung">
+        <div class="container">
+            <div class="solution-grid">
+                <div class="solution-content">
+                    <div class="section-eyebrow">Die Lösung</div>
+                    <h2>Ihre neue Website arbeitet 24/7 für Sie</h2>
+
+                    <ul class="solution-list">
+                        <li>Online-Terminbuchung rund um die Uhr</li>
+                        <li>Automatische Erinnerungen per SMS/E-Mail</li>
+                        <li>Google-optimiert für "Zahnarzt Wien"</li>
+                        <li>Patienten können Behandlungen online sehen</li>
+                        <li>Integration mit Ihrem Praxissoftware</li>
+                    </ul>
+                </div>
+
+                <div class="solution-visual">
+                    <div class="mockup-header">
+                        <div class="mockup-dot red"></div>
+                        <div class="mockup-dot yellow"></div>
+                        <div class="mockup-dot green"></div>
+                        <span style="margin-left: auto; font-size: 12px; color: var(--text-muted);">Terminbuchung</span>
+                    </div>
+
+                    <form class="booking-form">
+                        <select>
+                            <option>Behandlung wählen...</option>
+                            <option>✓ Professionelle Zahnreinigung</option>
+                            <option>✓ Kontrolluntersuchung</option>
+                            <option>✓ Bleaching</option>
+                        </select>
+
+                        <input type="date" placeholder="Wunschtermin">
+                        <input type="text" placeholder="Ihr Name">
+                        <input type="tel" placeholder="Telefonnummer">
+
+                        <button type="button">Termin buchen →</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section class="results" id="ergebnisse">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Ergebnisse</div>
+                <h2 class="section-title">Was unsere Kunden erreichen</h2>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-number">+47</div>
+                    <div class="result-label">Neue Patienten/Monat</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-number">68%</div>
+                    <div class="result-label">Online gebucht</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-number">-40%</div>
+                    <div class="result-label">Terminausfälle</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-number">4.9★</div>
+                    <div class="result-label">Bewertung</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial">
+        <div class="container">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Seit wir die Online-Terminbuchung haben, ist unser Telefon nicht mehr ständig besetzt. 
+                    Wir haben 40% mehr neue Patienten und die MFA kann sich endlich auf die Betreuung konzentrieren."
+                </div>
+
+                <div class="testimonial-author">Dr. Sarah Müller</div>
+                <div class="testimonial-role">Zahnärztin, 1080 Wien</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="kontakt">
+        <h2>Bereit für mehr Patienten?</h2>
+        <p>Kostenloses Erstgespräch. Keine Verpflichtung.</p>
+
+        <a href="mailto:hello@dentalweb.wien" class="cta-btn">
+            Termin vereinbaren
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </section>
+</body>
+</html>
