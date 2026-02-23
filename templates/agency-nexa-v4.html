@@ -19,8 +19,6 @@
             --text-muted:#71717a;
             --border:#1f1f2e;
             --border-light:#2a2a3e;
-            --success:#22c55e;
-            --warning:#f59e0b;
             --grid:rgba(163,230,53,0.03);
         }
         *{margin:0;padding:0;box-sizing:border-box}
@@ -33,7 +31,6 @@
             overflow-x:hidden;
         }
         
-        /* Grid background */
         body::before{
             content:'';
             position:fixed;
@@ -45,8 +42,6 @@
             pointer-events:none;
             z-index:0;
         }
-        
-        /* Scanline effect */
         body::after{
             content:'';
             position:fixed;
@@ -56,6 +51,18 @@
             z-index:9999;
         }
         
+        /* Section backgrounds */
+        .hero{background:radial-gradient(ellipse at 70% 50%,var(--accent-glow-soft) 0%,transparent 50%),var(--bg)}
+        .problems{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-card) 100%)}
+        .solution{background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative}
+        .solution::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.5}
+        .process{background:var(--bg)}
+        .process::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+        .pricing{background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg-elevated) 100%);border-top:1px solid var(--border)}
+        .quiz-section{background:radial-gradient(ellipse at 30% 50%,rgba(163,230,53,0.08) 0%,transparent 60%),var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+        .testimonials{background:var(--bg-card);border-top:1px solid var(--border)}
+        .final-cta{background:radial-gradient(ellipse at center,var(--accent-glow-soft) 0%,transparent 70%),var(--bg-elevated);border-top:1px solid var(--border)}
+        
         /* Navigation */
         nav{
             position:fixed;
@@ -63,11 +70,12 @@
             left:0;
             right:0;
             z-index:100;
-            padding:20px 40px;
+            padding:16px 20px;
             border-bottom:1px solid var(--border);
-            background:rgba(5,5,8,0.9);
+            background:rgba(5,5,8,0.95);
             backdrop-filter:blur(20px);
         }
+        @media(min-width:769px){nav{padding:20px 40px}}
         .nav-content{
             max-width:1400px;
             margin:0 auto;
@@ -77,15 +85,18 @@
         }
         .logo{
             font-family:'JetBrains Mono',monospace;
-            font-size:24px;
+            font-size:22px;
             font-weight:700;
             color:var(--accent);
             letter-spacing:-1px;
             text-decoration:none;
         }
+        @media(min-width:769px){.logo{font-size:24px}}
         .logo::before{content:'>_';margin-right:8px;opacity:0.7}
         
-        .nav-links{display:flex;gap:40px;align-items:center}
+        .nav-right{display:flex;align-items:center;gap:24px}
+        .nav-links{display:none;gap:32px}
+        @media(min-width:769px){.nav-links{display:flex}}
         .nav-links a{
             color:var(--text-dim);
             text-decoration:none;
@@ -111,7 +122,8 @@
         .nav-links a:hover::after{width:100%}
         
         .nav-cta{
-            padding:12px 28px;
+            display:none;
+            padding:12px 24px;
             background:var(--accent);
             color:var(--bg);
             font-family:'JetBrains Mono',monospace;
@@ -123,53 +135,136 @@
             border:none;
             cursor:pointer;
             transition:all 0.3s;
-            position:relative;
-            overflow:hidden;
         }
-        .nav-cta::before{
-            content:'';
-            position:absolute;
-            inset:0;
-            background:var(--text);
-            transform:translateX(-100%);
-            transition:transform 0.3s;
-            z-index:-1;
-        }
-        .nav-cta:hover{box-shadow:0 0 30px var(--accent-glow);transform:translateY(-2px)}
-        .nav-cta:hover::before{transform:translateX(0)}
+        @media(min-width:769px){.nav-cta{display:block;padding:12px 28px}}
+        .nav-cta:hover{box-shadow:0 0 30px var(--accent-glow)}
         
-        /* Hero Section */
+        /* Language Switcher */
+        .lang-switcher{position:relative}
+        .lang-trigger{
+            display:flex;
+            align-items:center;
+            gap:6px;
+            padding:8px 12px;
+            background:var(--bg-card);
+            border:1px solid var(--border);
+            color:var(--text);
+            font-family:'JetBrains Mono',monospace;
+            font-size:12px;
+            cursor:pointer;
+            transition:all 0.3s;
+        }
+        .lang-trigger:hover{border-color:var(--accent)}
+        .lang-trigger svg{width:12px;height:12px;transition:transform 0.3s}
+        .lang-switcher.open .lang-trigger svg{transform:rotate(180deg)}
+        .lang-dropdown{
+            position:absolute;
+            top:calc(100% + 8px);
+            right:0;
+            background:var(--bg-card);
+            border:1px solid var(--border);
+            min-width:120px;
+            display:none;
+            z-index:1000;
+            box-shadow:0 20px 40px rgba(0,0,0,0.5);
+        }
+        .lang-switcher.open .lang-dropdown{display:block}
+        .lang-option{
+            padding:10px 14px;
+            font-family:'JetBrains Mono',monospace;
+            font-size:12px;
+            cursor:pointer;
+            transition:all 0.2s;
+        }
+        .lang-option:hover{background:var(--bg-elevated);color:var(--accent)}
+        .lang-option.active{background:var(--accent);color:var(--bg)}
+        
+        /* Mobile Menu */
+        .mobile-toggle{
+            display:flex;
+            flex-direction:column;
+            gap:5px;
+            cursor:pointer;
+            padding:10px;
+            z-index:101;
+            background:none;
+            border:none;
+        }
+        .mobile-toggle span{
+            width:22px;
+            height:2px;
+            background:var(--text);
+            transition:all 0.3s;
+            display:block;
+        }
+        .mobile-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .mobile-toggle.active span:nth-child(2){opacity:0}
+        .mobile-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        @media(min-width:769px){.mobile-toggle{display:none}}
+        
+        .mobile-menu{
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            background:rgba(5,5,8,0.98);
+            z-index:99;
+            padding:100px 24px 40px;
+            flex-direction:column;
+            gap:24px;
+        }
+        .mobile-menu.active{display:flex}
+        .mobile-menu a{
+            color:var(--text);
+            text-decoration:none;
+            font-size:28px;
+            font-weight:600;
+            text-transform:uppercase;
+            letter-spacing:2px;
+            padding:12px 0;
+            border-bottom:1px solid var(--border);
+        }
+        .mobile-menu a:hover{color:var(--accent)}
+        @media(min-width:769px){.mobile-menu{display:none!important}}
+        
+        /* Hero */
         .hero{
             min-height:100vh;
             display:flex;
             align-items:center;
-            padding:140px 40px 80px;
+            padding:120px 20px 80px;
             position:relative;
-            background:radial-gradient(ellipse at 70% 50%,var(--accent-glow-soft) 0%,transparent 50%);
         }
+        @media(min-width:769px){.hero{padding:140px 40px 100px}}
         .hero-content{
             max-width:1400px;
             margin:0 auto;
             width:100%;
             display:grid;
-            grid-template-columns:1.2fr 0.8fr;
-            gap:100px;
+            grid-template-columns:1fr;
+            gap:40px;
             align-items:center;
         }
+        @media(min-width:1024px){.hero-content{grid-template-columns:1.2fr 0.8fr;gap:80px}}
         
         .hero-badge{
             display:inline-flex;
             align-items:center;
-            gap:12px;
+            gap:10px;
             font-family:'JetBrains Mono',monospace;
-            font-size:13px;
+            font-size:12px;
             color:var(--accent);
-            margin-bottom:32px;
+            margin-bottom:24px;
             text-transform:uppercase;
-            letter-spacing:2px;
-            padding:10px 20px;
+            letter-spacing:1px;
+            padding:8px 16px;
             border:1px solid var(--border);
             background:var(--bg-card);
+        }
+        @media(min-width:769px){
+            .hero-badge{font-size:13px;padding:10px 20px;margin-bottom:32px;letter-spacing:2px}
         }
         .status-dot{
             width:8px;
@@ -182,12 +277,13 @@
         @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
         
         h1{
-            font-size:clamp(48px,6vw,80px);
+            font-size:clamp(36px,10vw,72px);
             font-weight:700;
             line-height:0.95;
-            letter-spacing:-4px;
-            margin-bottom:24px;
+            letter-spacing:-3px;
+            margin-bottom:20px;
         }
+        @media(min-width:769px){h1{letter-spacing:-4px;margin-bottom:24px}}
         h1 .accent{
             color:var(--accent);
             text-shadow:0 0 40px var(--accent-glow);
@@ -198,23 +294,25 @@
         }
         
         .hero-subtitle{
-            font-size:18px;
+            font-size:15px;
             color:var(--text-dim);
             line-height:1.7;
-            margin-bottom:40px;
-            max-width:540px;
+            margin-bottom:32px;
             font-family:'JetBrains Mono',monospace;
-            font-size:15px;
+        }
+        @media(min-width:769px){
+            .hero-subtitle{font-size:16px;margin-bottom:40px;max-width:540px}
         }
         
-        .hero-cta-group{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px}
+        .hero-cta-group{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+        @media(min-width:769px){.hero-cta-group{gap:16px;margin-bottom:60px}}
         
         .btn-primary{
-            padding:18px 36px;
+            padding:16px 28px;
             background:var(--accent);
             color:var(--bg);
             font-family:'Space Grotesk',sans-serif;
-            font-size:16px;
+            font-size:14px;
             font-weight:600;
             text-decoration:none;
             text-transform:uppercase;
@@ -222,16 +320,17 @@
             border:none;
             cursor:pointer;
             transition:all 0.3s;
-            position:relative;
-            overflow:hidden;
+            display:inline-block;
+            text-align:center;
         }
-        .btn-primary:hover{box-shadow:0 0 60px var(--accent-glow);transform:translateY(-2px) scale(1.02)}
+        @media(min-width:769px){.btn-primary{padding:18px 36px;font-size:16px}}
+        .btn-primary:hover{box-shadow:0 0 60px var(--accent-glow);transform:translateY(-2px)}
         
         .btn-outline{
-            padding:18px 36px;
+            padding:16px 28px;
             background:transparent;
             color:var(--text);
-            font-size:16px;
+            font-size:14px;
             font-weight:600;
             text-decoration:none;
             text-transform:uppercase;
@@ -239,45 +338,48 @@
             border:1px solid var(--border);
             cursor:pointer;
             transition:all 0.3s;
+            display:inline-block;
+            text-align:center;
         }
-        .btn-outline:hover{
-            border-color:var(--accent);
-            color:var(--accent);
-            box-shadow:0 0 30px var(--accent-glow);
-        }
+        @media(min-width:769px){.btn-outline{padding:18px 36px;font-size:16px}}
+        .btn-outline:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 30px var(--accent-glow)}
         
         .hero-stats{
             display:flex;
-            gap:48px;
-            padding-top:40px;
+            gap:24px;
+            padding-top:32px;
             border-top:1px solid var(--border);
         }
+        @media(min-width:769px){.hero-stats{gap:48px;padding-top:40px}}
         .hero-stat strong{
             display:block;
-            font-size:36px;
+            font-size:28px;
             font-weight:700;
             color:var(--accent);
             text-shadow:0 0 20px var(--accent-glow);
             font-family:'JetBrains Mono',monospace;
         }
+        @media(min-width:769px){.hero-stat strong{font-size:36px}}
         .hero-stat span{
-            font-size:13px;
+            font-size:12px;
             color:var(--text-muted);
             text-transform:uppercase;
             letter-spacing:1px;
         }
         
-        /* Code Block */
-        .hero-visual{position:relative}
+        .hero-visual{display:none}
+        @media(min-width:1024px){.hero-visual{display:block}}
+        
         .code-block{
             background:var(--bg-card);
             border:1px solid var(--border);
-            border-radius:12px;
-            padding:28px;
+            border-radius:8px;
+            padding:20px;
             font-family:'JetBrains Mono',monospace;
-            font-size:13px;
+            font-size:12px;
             position:relative;
         }
+        @media(min-width:769px){.code-block{padding:28px;font-size:13px}}
         .code-block::before{
             content:'';
             position:absolute;
@@ -291,766 +393,409 @@
         .code-header{
             display:flex;
             gap:8px;
-            margin-bottom:20px;
-            padding-bottom:16px;
+            margin-bottom:16px;
+            padding-bottom:12px;
             border-bottom:1px solid var(--border);
         }
-        .code-dot{width:12px;height:12px;border-radius:50%;background:var(--text-muted)}
+        @media(min-width:769px){.code-header{margin-bottom:20px;padding-bottom:16px}}
+        .code-dot{width:10px;height:10px;border-radius:50%;background:var(--text-muted)}
+        @media(min-width:769px){.code-dot{width:12px;height:12px}}
         .code-dot:nth-child(1){background:#ef4444}
         .code-dot:nth-child(2){background:#f59e0b}
         .code-dot:nth-child(3){background:#22c55e}
         
-        .code-content{color:var(--text-dim);line-height:1.9}
+        .code-content{color:var(--text-dim);line-height:1.8}
         .code-content .keyword{color:var(--accent);font-weight:600}
         .code-content .string{color:#60a5fa}
         .code-content .comment{color:var(--text-muted)}
-        .code-content .function{color:#f472b6}
         
         /* Trust Bar */
         .trust-bar{
-            padding:30px 40px;
+            padding:20px;
             border-top:1px solid var(--border);
             border-bottom:1px solid var(--border);
             background:var(--bg-card);
             overflow:hidden;
         }
+        @media(min-width:769px){.trust-bar{padding:24px 40px}}
         .trust-scroll{
             display:flex;
-            gap:80px;
+            gap:40px;
             animation:scroll 25s linear infinite;
             white-space:nowrap;
         }
+        @media(min-width:769px){.trust-scroll{gap:80px}}
         @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
         .trust-item{
             display:flex;
             align-items:center;
-            gap:12px;
+            gap:8px;
             color:var(--text-muted);
-            font-size:14px;
+            font-size:13px;
             text-transform:uppercase;
-            letter-spacing:2px;
+            letter-spacing:1px;
         }
+        @media(min-width:769px){.trust-item{font-size:14px;gap:12px;letter-spacing:2px}}
         .trust-item::before{
             content:'◆';
             color:var(--accent);
         }
         
-        /* Problems Section */
-        .problems{
-            padding:120px 40px;
-            position:relative;
+        /* Sections common */
+        .problems,.process,.testimonials{padding:80px 20px;position:relative}
+        .solution,.pricing,.quiz-section{padding:80px 20px}
+        .final-cta{padding:80px 20px}
+        @media(min-width:769px){
+            .problems,.solution,.process,.pricing,.quiz-section,.testimonials,.final-cta{padding:120px 40px}
         }
-        .problems-content{
-            max-width:1400px;
-            margin:0 auto;
-        }
-        .section-header{
-            text-align:center;
-            margin-bottom:80px;
-        }
+        
+        .section-header{text-align:center;margin-bottom:48px}
+        @media(min-width:769px){.section-header{margin-bottom:80px}}
         .section-label{
             font-family:'JetBrains Mono',monospace;
-            font-size:13px;
+            font-size:12px;
             color:var(--accent);
             text-transform:uppercase;
-            letter-spacing:3px;
-            margin-bottom:16px;
+            letter-spacing:2px;
+            margin-bottom:12px;
             display:inline-flex;
             align-items:center;
-            gap:12px;
+            gap:8px;
+        }
+        @media(min-width:769px){
+            .section-label{font-size:13px;letter-spacing:3px;margin-bottom:16px;gap:12px}
         }
         .section-label::before{content:'//';opacity:0.5}
         .section-title{
-            font-size:clamp(36px,4vw,56px);
+            font-size:clamp(28px,8vw,48px);
             font-weight:700;
             letter-spacing:-2px;
         }
         
+        .problems-content,.process-content,.pricing-content,.testimonials-content,.quiz-content{
+            max-width:1400px;
+            margin:0 auto;
+        }
+        
+        /* Problems Grid */
         .problems-grid{
             display:grid;
-            grid-template-columns:repeat(3,1fr);
-            gap:24px;
+            grid-template-columns:1fr;
+            gap:16px;
         }
+        @media(min-width:640px){.problems-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(min-width:1024px){.problems-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
         .problem-card{
-            background:var(--bg-card);
+            background:var(--bg);
             border:1px solid var(--border);
-            padding:40px;
-            position:relative;
+            padding:28px;
             transition:all 0.3s;
         }
-        .problem-card:hover{
-            border-color:var(--border-light);
-            transform:translateY(-4px);
-        }
+        @media(min-width:769px){.problem-card{padding:40px}}
+        .problem-card:hover{border-color:var(--border-light);transform:translateY(-4px)}
         .problem-icon{
-            width:56px;
-            height:56px;
+            width:48px;
+            height:48px;
             background:var(--bg-elevated);
             border:1px solid var(--border);
             display:flex;
             align-items:center;
             justify-content:center;
-            font-size:28px;
-            margin-bottom:24px;
+            font-size:24px;
+            margin-bottom:20px;
         }
-        .problem-card h3{
-            font-size:22px;
-            font-weight:600;
-            margin-bottom:12px;
-            letter-spacing:-0.5px;
+        @media(min-width:769px){
+            .problem-icon{width:56px;height:56px;font-size:28px;margin-bottom:24px}
         }
-        .problem-card p{
-            color:var(--text-dim);
-            font-size:15px;
-            line-height:1.7;
-        }
+        .problem-card h3{font-size:20px;font-weight:600;margin-bottom:10px;letter-spacing:-0.5px}
+        @media(min-width:769px){.problem-card h3{font-size:22px;margin-bottom:12px}}
+        .problem-card p{color:var(--text-dim);font-size:14px;line-height:1.7}
+        @media(min-width:769px){.problem-card p{font-size:15px}}
         
         /* Solution */
-        .solution{
-            padding:120px 40px;
-            background:var(--bg-card);
-            border-top:1px solid var(--border);
-            border-bottom:1px solid var(--border);
-        }
         .solution-content{
             max-width:1400px;
             margin:0 auto;
             display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:80px;
-            align-items:center;
+            grid-template-columns:1fr;
+            gap:40px;
         }
-        .solution-text h2{
-            font-size:clamp(32px,4vw,48px));
-            font-weight:700;
-            letter-spacing:-2px;
-            margin-bottom:24px;
-        }
-        .solution-text > p{
-            color:var(--text-dim);
-            font-size:17px;
-            line-height:1.8;
-            margin-bottom:40px;
-        }
-        .solution-features{space:24px}
+        @media(min-width:1024px){.solution-content{grid-template-columns:1fr 1fr;gap:80px;align-items:center}}
+        .solution-text h2{font-size:clamp(26px,6vw,40px);font-weight:700;letter-spacing:-2px;margin-bottom:20px}
+        @media(min-width:769px){.solution-text h2{font-size:clamp(32px,4vw,48px);margin-bottom:24px}}
+        .solution-text > p{color:var(--text-dim);font-size:15px;line-height:1.8;margin-bottom:32px}
+        @media(min-width:769px){.solution-text > p{font-size:17px;margin-bottom:40px}}
+        
         .solution-feature{
             display:flex;
-            gap:20px;
-            padding:24px;
+            gap:16px;
+            padding:20px;
             background:var(--bg);
             border:1px solid var(--border);
-            margin-bottom:16px;
+            margin-bottom:12px;
             transition:all 0.3s;
         }
-        .solution-feature:hover{
-            border-color:var(--accent);
-            box-shadow:0 0 20px var(--accent-glow-soft);
-        }
+        @media(min-width:769px){.solution-feature{gap:20px;padding:24px;margin-bottom:16px}}
+        .solution-feature:hover{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow-soft)}
         .solution-feature-icon{
-            width:48px;
-            height:48px;
+            width:44px;
+            height:44px;
             background:var(--accent-glow-soft);
             border:1px solid var(--accent);
             display:flex;
             align-items:center;
             justify-content:center;
-            font-size:24px;
+            font-size:20px;
             flex-shrink:0;
         }
-        .solution-feature h4{
-            font-size:18px;
-            font-weight:600;
-            margin-bottom:6px;
-        }
-        .solution-feature p{
-            color:var(--text-dim);
-            font-size:14px;
-        }
+        @media(min-width:769px){.solution-feature-icon{width:48px;height:48px;font-size:24px}}
+        .solution-feature h4{font-size:16px;font-weight:600;margin-bottom:4px}
+        @media(min-width:769px){.solution-feature h4{font-size:18px;margin-bottom:6px}}
+        .solution-feature p{color:var(--text-dim);font-size:13px}
+        @media(min-width:769px){.solution-feature p{font-size:14px}}
+        
+        .solution-visual{display:none}
+        @media(min-width:1024px){.solution-visual{display:block}}
         
         /* Process */
-        .process{
-            padding:120px 40px;
-            position:relative;
-        }
-        .process-content{max-width:1400px;margin:0 auto}
         .process-steps{
             display:grid;
-            grid-template-columns:repeat(4,1fr);
-            gap:32px;
-            margin-top:60px;
+            grid-template-columns:1fr;
+            gap:16px;
         }
+        @media(min-width:640px){.process-steps{grid-template-columns:repeat(2,1fr)}}
+        @media(min-width:1024px){.process-steps{grid-template-columns:repeat(4,1fr);gap:24px}}
         .process-step{
             position:relative;
-            padding:32px;
+            padding:28px;
             background:var(--bg-card);
             border:1px solid var(--border);
             transition:all 0.3s;
         }
-        .process-step:hover{
-            border-color:var(--accent);
-            box-shadow:0 0 30px var(--accent-glow-soft);
-        }
+        @media(min-width:769px){.process-step{padding:32px}}
+        .process-step:hover{border-color:var(--accent);box-shadow:0 0 30px var(--accent-glow-soft)}
         .process-step::before{
             content:attr(data-step);
             position:absolute;
-            top:-15px;
-            left:24px;
-            padding:4px 16px;
-            background:var(--accent);
-            color:var(--bg);
-            font-family:'JetBrains Mono',monospace;
-            font-size:13px;
-            font-weight:600;
-        }
-        .process-step h3{
-            font-size:20px;
-            font-weight:600;
-            margin:16px 0 12px;
-        }
-        .process-step p{
-            color:var(--text-dim);
-            font-size:14px;
-            line-height:1.7;
-        }
-        
-        /* Pricing */
-        .pricing{
-            padding:120px 40px;
-            background:var(--bg-card);
-            border-top:1px solid var(--border);
-        }
-        .pricing-content{max-width:1400px;margin:0 auto}
-        .pricing-grid{
-            display:grid;
-            grid-template-columns:repeat(3,1fr);
-            gap:24px;
-            margin-top:60px;
-        }
-        .pricing-card{
-            background:var(--bg);
-            border:1px solid var(--border);
-            padding:40px;
-            position:relative;
-            transition:all 0.3s;
-        }
-        .pricing-card:hover{
-            border-color:var(--border-light);
-            transform:translateY(-8px);
-        }
-        .pricing-card.popular{
-            border-color:var(--accent);
-            box-shadow:0 0 40px var(--accent-glow-soft);
-        }
-        .popular-badge{
-            position:absolute;
             top:-12px;
-            left:50%;
-            transform:translateX(-50%);
-            padding:6px 20px;
+            left:20px;
+            padding:4px 14px;
             background:var(--accent);
             color:var(--bg);
             font-family:'JetBrains Mono',monospace;
             font-size:12px;
             font-weight:600;
-            text-transform:uppercase;
-            letter-spacing:1px;
         }
-        .pricing-name{
-            font-size:14px;
-            color:var(--text-muted);
-            text-transform:uppercase;
-            letter-spacing:2px;
-            margin-bottom:16px;
+        .process-step h3{font-size:18px;font-weight:600;margin:16px 0 10px;letter-spacing:-0.5px}
+        @media(min-width:769px){.process-step h3{font-size:20px;margin:16px 0 12px}}
+        .process-step p{color:var(--text-dim);font-size:14px;line-height:1.7}
+        
+        /* Pricing */
+        .pricing-grid{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:16px;
         }
-        .pricing-price{
-            font-size:56px;
-            font-weight:700;
-            color:var(--text);
-            margin-bottom:8px;
-            font-family:'JetBrains Mono',monospace;
-        }
-        .pricing-price span{
-            font-size:18px;
-            color:var(--text-muted);
-            font-weight:400;
-        }
-        .pricing-desc{
-            color:var(--text-dim);
-            font-size:15px;
-            margin-bottom:32px;
-            padding-bottom:32px;
-            border-bottom:1px solid var(--border);
-        }
-        .pricing-features{list-style:none;margin-bottom:32px}
-        .pricing-features li{
-            padding:12px 0;
-            color:var(--text-dim);
-            font-size:15px;
-            display:flex;
-            align-items:center;
-            gap:12px;
-        }
-        .pricing-features li::before{
-            content:'✓';
-            color:var(--accent);
-            font-weight:700;
-        }
-        .pricing-btn{
-            width:100%;
-            padding:18px;
-            background:transparent;
-            color:var(--text);
+        @media(min-width:640px){.pricing-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(min-width:1024px){.pricing-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
+        .pricing-card{
+            background:var(--bg);
             border:1px solid var(--border);
-            font-size:15px;
-            font-weight:600;
-            text-transform:uppercase;
-            letter-spacing:1px;
-            cursor:pointer;
+            padding:32px;
+            position:relative;
             transition:all 0.3s;
         }
-        .pricing-card.popular .pricing-btn{
-            background:var(--accent);
-            color:var(--bg);
+        @media(min-width:769px){.pricing-card{padding:40px}}
+        .pricing-card:hover{border-color:var(--border-light);transform:translateY(-8px)}
+        .pricing-card.popular{
             border-color:var(--accent);
+            box-shadow:0 0 40px var(--accent-glow-soft);
         }
-        .pricing-btn:hover{
-            border-color:var(--accent);
-            color:var(--accent);
-            box-shadow:0 0 20px var(--accent-glow);
-        }
-        .pricing-card.popular .pricing-btn:hover{
-            box-shadow:0 0 40px var(--accent-glow);
-        }
-        
-        /* Calculator Section */
-        .calculator{
-            padding:120px 40px;
-            position:relative;
-        }
-        .calculator-content{
-            max-width:1000px;
-            margin:0 auto;
-            background:var(--bg-card);
-            border:1px solid var(--border);
-            padding:60px;
-        }
-        .calculator-content::before{
-            content:'';
+        @media(min-width:640px) and (max-width:1023px){.pricing-card.popular{grid-column:span 2}}
+        .popular-badge{
             position:absolute;
-            top:120px;
+            top:-12px;
             left:50%;
             transform:translateX(-50%);
-            width:200px;
-            height:1px;
+            padding:6px 18px;
             background:var(--accent);
-            box-shadow:0 0 20px var(--accent);
-        }
-        .calculator-grid{
-            display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:60px;
-            margin-top:40px;
-        }
-        .calculator-controls h3{
-            font-size:18px;
+            color:var(--bg);
+            font-family:'JetBrains Mono',monospace;
+            font-size:11px;
             font-weight:600;
-            margin-bottom:24px;
-        }
-        .calculator-option{
-            margin-bottom:24px;
-        }
-        .calculator-option label{
-            display:block;
-            font-size:13px;
-            color:var(--text-muted);
             text-transform:uppercase;
             letter-spacing:1px;
-            margin-bottom:12px;
         }
-        .option-buttons{
-            display:flex;
-            gap:12px;
-            flex-wrap:wrap;
-        }
-        .option-btn{
-            padding:12px 24px;
-            background:var(--bg);
-            border:1px solid var(--border);
-            color:var(--text-dim);
-            font-size:14px;
-            cursor:pointer;
-            transition:all 0.3s;
-        }
-        .option-btn:hover,.option-btn.active{
-            border-color:var(--accent);
-            color:var(--accent);
-            background:var(--accent-glow-soft);
-        }
+        .pricing-name{font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+        .pricing-price{font-size:48px;font-weight:700;color:var(--text);margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+        @media(min-width:769px){.pricing-price{font-size:56px}}
+        .pricing-price span{font-size:16px;color:var(--text-muted);font-weight:400;margin-left:8px}
+        .pricing-desc{color:var(--text-dim);font-size:14px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+        @media(min-width:769px){.pricing-desc{font-size:15px;margin-bottom:32px;padding-bottom:32px}}
+        .pricing-features{list-style:none;margin-bottom:28px}
+        @media(min-width:769px){.pricing-features{margin-bottom:32px}}
+        .pricing-features li{padding:10px 0;color:var(--text-dim);font-size:14px;display:flex;align-items:center;gap:12px}
+        @media(min-width:769px){.pricing-features li{padding:12px 0;font-size:15px}}
+        .pricing-features li::before{content:'✓';color:var(--accent);font-weight:700}
+        .pricing-btn{width:100%;padding:16px;background:transparent;color:var(--text);border:1px solid var(--border);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.3s}
+        @media(min-width:769px){.pricing-btn{padding:18px;font-size:15px}}
+        .pricing-card.popular .pricing-btn{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+        .pricing-btn:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 20px var(--accent-glow)}
+        .pricing-card.popular .pricing-btn:hover{box-shadow:0 0 40px var(--accent-glow)}
         
-        .calculator-result{
-            background:var(--bg);
-            border:1px solid var(--border);
-            padding:40px;
-            text-align:center;
-        }
-        .result-label{
-            font-size:13px;
-            color:var(--text-muted);
-            text-transform:uppercase;
-            letter-spacing:2px;
-            margin-bottom:16px;
-        }
-        .result-price{
-            font-size:64px;
-            font-weight:700;
-            color:var(--accent);
-            font-family:'JetBrains Mono',monospace;
-            text-shadow:0 0 40px var(--accent-glow);
-            margin-bottom:8px;
-        }
-        .result-note{
-            color:var(--text-dim);
-            font-size:14px;
-            margin-bottom:32px;
-        }
-        
-        /* Quiz Funnel */
-        .quiz-section{
-            padding:120px 40px;
-            background:radial-gradient(ellipse at center,var(--accent-glow-soft) 0%,transparent 60%);
-            position:relative;
-        }
-        .quiz-content{max-width:800px;margin:0 auto}
+        /* Quiz */
         .quiz-box{
             background:var(--bg-card);
             border:1px solid var(--border);
-            padding:60px;
+            padding:24px;
             position:relative;
+            max-width:800px;
+            margin:0 auto;
         }
+        @media(min-width:640px){.quiz-box{padding:40px}}
+        @media(min-width:769px){.quiz-box{padding:60px}}
         .quiz-box::before{
             content:'';
             position:absolute;
             top:-1px;
-            left:60px;
-            right:60px;
+            left:24px;
+            right:24px;
             height:1px;
             background:var(--accent);
             box-shadow:0 0 20px var(--accent);
         }
-        .quiz-progress{
-            display:flex;
-            gap:8px;
-            margin-bottom:40px;
-        }
-        .quiz-step-indicator{
-            flex:1;
-            height:4px;
-            background:var(--border);
-            transition:all 0.3s;
-        }
-        .quiz-step-indicator.active{
-            background:var(--accent);
-            box-shadow:0 0 10px var(--accent);
-        }
+        @media(min-width:640px){.quiz-box::before{left:40px;right:40px}}
+        @media(min-width:769px){.quiz-box::before{left:60px;right:60px}}
+        
+        .quiz-progress{display:flex;gap:6px;margin-bottom:28px}
+        @media(min-width:769px){.quiz-progress{gap:8px;margin-bottom:40px}}
+        .quiz-step-indicator{flex:1;height:3px;background:var(--border);transition:all 0.3s}
+        .quiz-step-indicator.active{background:var(--accent);box-shadow:0 0 10px var(--accent)}
         
         .quiz-step-content{display:none}
         .quiz-step-content.active{display:block;animation:fadeIn 0.5s ease}
         @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
         
-        .quiz-step-content h3{
-            font-size:32px;
-            font-weight:700;
-            margin-bottom:40px;
-            letter-spacing:-1px;
-        }
-        .quiz-options{display:grid;gap:16px}
-        .quiz-option{
-            display:flex;
-            align-items:center;
-            gap:20px;
-            padding:24px;
-            background:var(--bg);
-            border:1px solid var(--border);
-            cursor:pointer;
-            transition:all 0.3s;
-        }
-        .quiz-option:hover{
-            border-color:var(--accent);
-            background:var(--accent-glow-soft);
-            transform:translateX(8px);
-        }
-        .quiz-option-icon{
-            width:56px;
-            height:56px;
-            background:var(--bg-elevated);
-            border:1px solid var(--border);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:28px;
-            flex-shrink:0;
-        }
-        .quiz-option:hover .quiz-option-icon{
-            border-color:var(--accent);
-        }
-        .quiz-option-text h4{
-            font-size:18px;
-            font-weight:600;
-            margin-bottom:4px;
-        }
-        .quiz-option-text p{
-            color:var(--text-dim);
-            font-size:14px;
-        }
+        .quiz-step-content h3{font-size:24px;font-weight:700;margin-bottom:28px;letter-spacing:-1px}
+        @media(min-width:769px){.quiz-step-content h3{font-size:32px;margin-bottom:40px}}
+        .quiz-options{display:grid;gap:12px}
+        @media(min-width:769px){.quiz-options{gap:16px}}
+        .quiz-option{display:flex;align-items:center;gap:16px;padding:20px;background:var(--bg);border:1px solid var(--border);cursor:pointer;transition:all 0.3s}
+        @media(min-width:769px){.quiz-option{gap:20px;padding:24px}}
+        .quiz-option:hover{border-color:var(--accent);background:var(--accent-glow-soft);transform:translateX(8px)}
+        .quiz-option-icon{width:48px;height:48px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+        @media(min-width:769px){.quiz-option-icon{width:56px;height:56px;font-size:28px}}
+        .quiz-option:hover .quiz-option-icon{border-color:var(--accent)}
+        .quiz-option-text h4{font-size:16px;font-weight:600;margin-bottom:3px}
+        @media(min-width:769px){.quiz-option-text h4{font-size:18px;margin-bottom:4px}}
+        .quiz-option-text p{color:var(--text-dim);font-size:13px}
+        @media(min-width:769px){.quiz-option-text p{font-size:14px}}
         
-        .quiz-nav{
-            display:flex;
-            justify-content:space-between;
-            margin-top:40px;
-            padding-top:40px;
-            border-top:1px solid var(--border);
-        }
-        .quiz-btn{
-            padding:16px 32px;
-            background:var(--accent);
-            color:var(--bg);
-            border:none;
-            font-size:15px;
-            font-weight:600;
-            text-transform:uppercase;
-            letter-spacing:1px;
-            cursor:pointer;
-            transition:all 0.3s;
-        }
+        .form-input{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:15px;margin-bottom:12px;transition:all 0.3s}
+        @media(min-width:769px){.form-input{padding:18px 24px;font-size:16px;margin-bottom:16px}}
+        .form-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow-soft)}
+        .form-input::placeholder{color:var(--text-muted)}
+        
+        .quiz-nav{display:flex;justify-content:space-between;margin-top:32px;padding-top:32px;border-top:1px solid var(--border)}
+        @media(min-width:769px){.quiz-nav{margin-top:40px;padding-top:40px}}
+        .quiz-btn{padding:16px 28px;background:var(--accent);color:var(--bg);border:none;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.3s}
+        @media(min-width:769px){.quiz-btn{padding:16px 32px;font-size:15px}}
         .quiz-btn:hover{box-shadow:0 0 30px var(--accent-glow)}
-        .quiz-btn.secondary{
-            background:transparent;
-            color:var(--text);
-            border:1px solid var(--border);
-        }
-        .quiz-btn.secondary:hover{
-            border-color:var(--accent);
-            color:var(--accent);
-        }
+        .quiz-btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border)}
+        .quiz-btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
         
         /* Testimonials */
-        .testimonials{
-            padding:120px 40px;
-            background:var(--bg-card);
-            border-top:1px solid var(--border);
-            border-bottom:1px solid var(--border);
-        }
-        .testimonials-content{max-width:1400px;margin:0 auto}
-        .testimonials-grid{
-            display:grid;
-            grid-template-columns:repeat(3,1fr);
-            gap:24px;
-            margin-top:60px;
-        }
-        .testimonial-card{
-            background:var(--bg);
-            border:1px solid var(--border);
-            padding:40px;
-            position:relative;
-            transition:all 0.3s;
-        }
-        .testimonial-card:hover{
-            border-color:var(--border-light);
-            transform:translateY(-4px);
-        }
-        .testimonial-card::before{
-            content:''"'';
-            font-size:80px;
-            color:var(--accent);
-            opacity:0.2;
-            position:absolute;
-            top:20px;
-            left:24px;
-            font-family:serif;
-            line-height:1;
-        }
-        .testimonial-text{
-            color:var(--text-dim);
-            font-size:16px;
-            line-height:1.8;
-            margin-bottom:32px;
-            position:relative;
-            z-index:1;
-        }
-        .testimonial-author{
-            display:flex;
-            align-items:center;
-            gap:16px;
-        }
-        .testimonial-avatar{
-            width:48px;
-            height:48px;
-            background:var(--bg-elevated);
-            border:1px solid var(--border);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:20px;
-        }
-        .testimonial-author strong{
-            display:block;
-            font-size:15px;
-            font-weight:600;
-        }
-        .testimonial-author span{
-            font-size:13px;
-            color:var(--text-muted);
-        }
-        .testimonial-rating{
-            margin-left:auto;
-            color:var(--accent);
-            font-size:18px;
-            letter-spacing:2px;
-        }
+        .testimonials-grid{display:grid;grid-template-columns:1fr;gap:16px}
+        @media(min-width:640px){.testimonials-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(min-width:1024px){.testimonials-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
+        .testimonial-card{background:var(--bg);border:1px solid var(--border);padding:28px;position:relative;transition:all 0.3s}
+        @media(min-width:769px){.testimonial-card{padding:40px}}
+        .testimonial-card:hover{border-color:var(--border-light);transform:translateY(-4px)}
+        .testimonial-card::before{content:''"'';font-size:60px;color:var(--accent);opacity:0.2;position:absolute;top:16px;left:20px;font-family:serif;line-height:1}
+        @media(min-width:769px){.testimonial-card::before{font-size:80px;top:20px;left:24px}}
+        .testimonial-text{color:var(--text-dim);font-size:15px;line-height:1.8;margin-bottom:24px;position:relative;z-index:1}
+        @media(min-width:769px){.testimonial-text{font-size:16px;margin-bottom:32px}}
+        .testimonial-author{display:flex;align-items:center;gap:12px}
+        @media(min-width:769px){.testimonial-author{gap:16px}}
+        .testimonial-avatar{width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px}
+        @media(min-width:769px){.testimonial-avatar{width:48px;height:48px;font-size:20px}}
+        .testimonial-author strong{display:block;font-size:14px;font-weight:600}
+        @media(min-width:769px){.testimonial-author strong{font-size:15px}}
+        .testimonial-author span{font-size:12px;color:var(--text-muted)}
+        @media(min-width:769px){.testimonial-author span{font-size:13px}}
+        .testimonial-rating{margin-left:auto;color:var(--accent);font-size:16px;letter-spacing:2px}
+        @media(min-width:769px){.testimonial-rating{font-size:18px}}
         
         /* Final CTA */
-        .final-cta{
-            padding:120px 40px;
-            text-align:center;
-            position:relative;
-            background:radial-gradient(ellipse at center,var(--accent-glow-soft) 0%,transparent 60%);
-        }
-        .final-cta h2{
-            font-size:clamp(36px,5vw,56px);
-            font-weight:700;
-            letter-spacing:-2px;
-            margin-bottom:24px;
-        }
-        .final-cta > p{
-            color:var(--text-dim);
-            font-size:18px;
-            max-width:600px;
-            margin:0 auto 40px;
-        }
+        .final-cta{text-align:center}
+        .final-cta h2{font-size:clamp(28px,8vw,48px);font-weight:700;letter-spacing:-2px;margin-bottom:16px}
+        @media(min-width:769px){.final-cta h2{font-size:clamp(36px,5vw,56px);margin-bottom:24px}}
+        .final-cta > p{color:var(--text-dim);font-size:16px;max-width:600px;margin:0 auto 32px}
+        @media(min-width:769px){.final-cta > p{font-size:18px}}
         
         /* Footer */
-        footer{
-            padding:80px 40px 40px;
-            border-top:1px solid var(--border);
-            background:var(--bg-card);
-        }
-        .footer-content{
-            max-width:1400px;
-            margin:0 auto;
-            display:grid;
-            grid-template-columns:2fr 1fr 1fr 1fr;
-            gap:60px;
-            margin-bottom:60px;
-        }
-        .footer-brand .logo{margin-bottom:16px;display:inline-block}
-        .footer-brand p{
-            color:var(--text-muted);
-            font-size:15px;
-            line-height:1.7;
-            margin-bottom:24px;
-            max-width:320px;
-        }
-        .footer-social{display:flex;gap:16px}
-        .footer-social a{
-            width:44px;
-            height:44px;
-            background:var(--bg);
-            border:1px solid var(--border);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:18px;
-            text-decoration:none;
-            transition:all 0.3s;
-        }
-        .footer-social a:hover{
-            border-color:var(--accent);
-            color:var(--accent);
-            box-shadow:0 0 20px var(--accent-glow);
-        }
-        .footer-col h4{
-            font-family:'JetBrains Mono',monospace;
-            font-size:13px;
-            color:var(--text);
-            text-transform:uppercase;
-            letter-spacing:2px;
-            margin-bottom:24px;
-        }
-        .footer-col a{
-            display:block;
-            color:var(--text-muted);
-            text-decoration:none;
-            font-size:14px;
-            padding:8px 0;
-            transition:color 0.3s;
-        }
+        footer{padding:60px 20px 30px;border-top:1px solid var(--border);background:var(--bg-card)}
+        @media(min-width:769px){footer{padding:80px 40px 40px}}
+        .footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:32px;margin-bottom:40px}
+        @media(min-width:640px){.footer-content{grid-template-columns:1fr 1fr}}
+        @media(min-width:1024px){.footer-content{grid-template-columns:2fr 1fr 1fr 1fr;gap:60px}}
+        .footer-brand .logo{margin-bottom:12px;display:inline-block}
+        @media(min-width:769px){.footer-brand .logo{margin-bottom:16px}}
+        .footer-brand p{color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:20px;max-width:320px}
+        @media(min-width:769px){.footer-brand p{font-size:15px;margin-bottom:24px}}
+        .footer-social{display:flex;gap:12px}
+        @media(min-width:769px){.footer-social{gap:16px}}
+        .footer-social a{width:40px;height:40px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;color:var(--text);transition:all 0.3s}
+        @media(min-width:769px){.footer-social a{width:44px;height:44px;font-size:18px}}
+        .footer-social a:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 20px var(--accent-glow)}
+        .footer-col h4{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text);text-transform:uppercase;letter-spacing:2px;margin-bottom:20px}
+        @media(min-width:769px){.footer-col h4{font-size:13px}}
+        .footer-col a{display:block;color:var(--text-muted);text-decoration:none;font-size:14px;padding:6px 0;transition:color 0.3s}
+        @media(min-width:769px){.footer-col a{font-size:15px;padding:8px 0}}
         .footer-col a:hover{color:var(--accent)}
-        .footer-bottom{
-            max-width:1400px;
-            margin:0 auto;
-            padding-top:40px;
-            border-top:1px solid var(--border);
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            font-family:'JetBrains Mono',monospace;
-            font-size:13px;
-            color:var(--text-muted);
-        }
-        
-        /* Mobile Menu Toggle */
-        .mobile-toggle{display:none;flex-direction:column;gap:6px;cursor:pointer;padding:10px}
-        .mobile-toggle span{
-            width:24px;
-            height:2px;
-            background:var(--text);
-            transition:all 0.3s;
-        }
-        
-        @media(max-width:1024px){
-            .hero-content{grid-template-columns:1fr;gap:60px}
-            .hero-visual{order:-1}
-            .problems-grid{grid-template-columns:repeat(2,1fr)}
-            .solution-content{grid-template-columns:1fr}
-            .process-steps{grid-template-columns:repeat(2,1fr)}
-            .pricing-grid{grid-template-columns:1fr}
-            .pricing-card.popular{order:-1}
-            .calculator-grid{grid-template-columns:1fr}
-            .testimonials-grid{grid-template-columns:1fr}
-            .footer-content{grid-template-columns:1fr 1fr}
-        }
-        
-        @media(max-width:768px){
-            nav{padding:16px 20px}
-            .nav-links{display:none}
-            .mobile-toggle{display:flex}
-            .hero{padding:100px 20px 60px}
-            .problems-grid{grid-template-columns:1fr}
-            .process-steps{grid-template-columns:1fr}
-            .quiz-box{padding:32px}
-            .footer-content{grid-template-columns:1fr;text-align:center}
-            .footer-brand p{max-width:none}
-            .footer-social{justify-content:center}
-            .footer-bottom{flex-direction:column;gap:16px;text-align:center}
-        }
+        .footer-bottom{max-width:1400px;margin:0 auto;padding-top:32px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:12px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted)}
+        @media(min-width:769px){.footer-bottom{flex-direction:row;justify-content:space-between;align-items:center;text-align:left;font-size:13px;padding-top:40px}}
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-content">
             <a href="#" class="logo">NEXUS</a>
-            <div class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#process">Process</a>
-                <a href="#quiz">Start Project</a>
+            
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#services">Services</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#process">Process</a>
+                </div>
+                
+                <div class="lang-switcher" id="langSwitcher">
+                    <button class="lang-trigger" onclick="toggleLang()">
+                        <span id="currentLang">EN</span>
+                        <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l5 5 5-5"/></svg>
+                    </button>
+                    <div class="lang-dropdown">
+                        <div class="lang-option active" onclick="setLang('en')">English</div>
+                        <div class="lang-option" onclick="setLang('de')">Deutsch</div>
+                        <div class="lang-option" onclick="setLang('ru')">Русский</div>
+                    </div>
+                </div>
+                
+                <a href="#quiz" class="nav-cta">Get Quote</a>
+                
+                <button class="mobile-toggle" id="mobileToggle" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            <a href="#quiz" class="nav-cta">Get Quote</a>
-            <div class="mobile-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#services" onclick="toggleMenu()">Services</a>
+            <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+            <a href="#process" onclick="toggleMenu()">Process</a>
+            <a href="#quiz" onclick="toggleMenu()">Get Quote →</a>
         </div>
     </nav>
 
@@ -1071,7 +816,7 @@
                 </h1>
                 
                 <p class="hero-subtitle">
-                    Engineering-first digital agency. We don't just build websites—we architect revenue-generating systems. 150+ projects delivered. $50M+ revenue generated for clients.
+                    Engineering-first digital agency. 150+ projects delivered. $50M+ revenue generated for clients.
                 </p>
                 
                 <div class="hero-cta-group">
@@ -1080,18 +825,9 @@
                 </div>
                 
                 <div class="hero-stats">
-                    <div class="hero-stat">
-                        <strong>150+</strong>
-                        <span>Projects</span>
-                    </div>
-                    <div class="hero-stat">
-                        <strong>$50M+</strong>
-                        <span>Revenue Generated</span>
-                    </div>
-                    <div class="hero-stat">
-                        <strong>98%</strong>
-                        <span>Client Retention</span>
-                    </div>
+                    <div class="hero-stat"><strong>150+</strong><span>Projects</span></div>
+                    <div class="hero-stat"><strong>$50M+</strong><span>Revenue</span></div>
+                    <div class="hero-stat"><strong>98%</strong><span>Retention</span></div>
                 </div>
             </div>
             
@@ -1109,7 +845,6 @@
                         <div>  conversionRate: <span class="string">'+340%'</span>,</div>
                         <div>  loadTime: <span class="string">'0.8s'</span>,</div>
                         <div>  roi: <span class="string">'12x'</span>,</div>
-                        <div>  status: <span class="string">'crushing_it'</span></div>
                         <div>};</div>
                     </div>
                 </div>
@@ -1134,26 +869,26 @@
         <div class="problems-content">
             <div class="section-header">
                 <div class="section-label">The Problem</div>
-                <h2 class="section-title">Why most agencies fail you</h2>
+                <h2 class="section-title">Why most agencies fail</h2>
             </div>
             
             <div class="problems-grid">
                 <div class="problem-card">
                     <div class="problem-icon">🐌</div>
                     <h3>Slow Websites</h3>
-                    <p>Most sites load in 3+ seconds. You lose 40% of visitors before they even see your offer.</p>
+                    <p>Most sites load in 3+ seconds. You lose 40% of visitors before they see your offer.</p>
                 </div>
                 
                 <div class="problem-card">
                     <div class="problem-icon">📉</div>
                     <h3>No Conversion Focus</h3>
-                    <p>Pretty designs that don't sell. You need engineering that drives revenue, not vanity metrics.</p>
+                    <p>Pretty designs that don't sell. You need engineering that drives revenue.</p>
                 </div>
                 
                 <div class="problem-card">
                     <div class="problem-icon">🔧</div>
                     <h3>Technical Debt</h3>
-                    <p>Quick fixes that break later. We build systems that scale to millions of users without crashing.</p>
+                    <p>Quick fixes that break later. We build systems that scale to millions.</p>
                 </div>
             </div>
         </div>
@@ -1164,31 +899,29 @@
             <div class="solution-text">
                 <div class="section-label">The Solution</div>
                 <h2>Engineering that drives revenue</h2>
-                <p>We combine cutting-edge technology with conversion optimization to build systems that don't just work—they perform.</p>
+                <p>We combine cutting-edge technology with conversion optimization to build systems that perform.</p>
                 
-                <div class="solution-features">
-                    <div class="solution-feature">
-                        <div class="solution-feature-icon">⚡</div>
-                        <div>
-                            <h4>Sub-Second Load Times</h4>
-                            <p>Our sites load in under 1 second. Better UX = higher conversions.</p>
-                        </div>
+                <div class="solution-feature">
+                    <div class="solution-feature-icon">⚡</div>
+                    <div>
+                        <h4>Sub-Second Load Times</h4>
+                        <p>Our sites load in under 1 second. Better UX = higher conversions.</p>
                     </div>
-                    
-                    <div class="solution-feature">
-                        <div class="solution-feature-icon">🎯</div>
-                        <div>
-                            <h4>Conversion-First Design</h4>
-                            <p>Every pixel optimized for revenue. Average client sees 3x conversion lift.</p>
-                        </div>
+                </div>
+                
+                <div class="solution-feature">
+                    <div class="solution-feature-icon">🎯</div>
+                    <div>
+                        <h4>Conversion-First Design</h4>
+                        <p>Every pixel optimized for revenue. Average 3x conversion lift.</p>
                     </div>
-                    
-                    <div class="solution-feature">
-                        <div class="solution-feature-icon">🚀</div>
-                        <div>
-                            <h4>Scale Without Limits</h4>
-                            <p>From 1K to 10M users without breaking. Built for growth.</p>
-                        </div>
+                </div>
+                
+                <div class="solution-feature">
+                    <div class="solution-feature-icon">🚀</div>
+                    <div>
+                        <h4>Scale Without Limits</h4>
+                        <p>From 1K to 10M users without breaking. Built for growth.</p>
                     </div>
                 </div>
             </div>
@@ -1216,13 +949,13 @@
         <div class="process-content">
             <div class="section-header">
                 <div class="section-label">Our Process</div>
-                <h2 class="section-title">How we deliver excellence</h2>
+                <h2 class="section-title">How we deliver</h2>
             </div>
             
             <div class="process-steps">
                 <div class="process-step" data-step="01">
                     <h3>Discovery</h3>
-                    <p>Deep dive into your business, competitors, and goals. We identify conversion bottlenecks and opportunities.</p>
+                    <p>Deep dive into your business, competitors, and goals. We identify conversion opportunities.</p>
                 </div>
                 
                 <div class="process-step" data-step="02">
@@ -1237,7 +970,7 @@
                 
                 <div class="process-step" data-step="04">
                     <h3>Optimize</h3>
-                    <p>Launch is just the beginning. We continuously A/B test and improve conversions.</p>
+                    <p>Launch is just the beginning. We continuously A/B test and improve.</p>
                 </div>
             </div>
         </div>
@@ -1254,13 +987,11 @@
                 <div class="pricing-card">
                     <div class="pricing-name">Starter</div>
                     <div class="pricing-price">$15k<span>/project</span></div>
-                    <div class="pricing-desc">Perfect for MVPs and landing pages that convert.</div>
-                    
+                    <div class="pricing-desc">Perfect for MVPs and landing pages.</div>
                     <ul class="pricing-features">
                         <li>5-page website</li>
                         <li>Conversion optimization</li>
                         <li>Mobile responsive</li>
-                        <li>Basic SEO setup</li>
                         <li>2 weeks delivery</li>
                     </ul>
                     
@@ -1272,13 +1003,11 @@
                     <div class="pricing-name">Growth</div>
                     <div class="pricing-price">$35k<span>/project</span></div>
                     <div class="pricing-desc">Full web application with advanced features.</div>
-                    
                     <ul class="pricing-features">
                         <li>Everything in Starter</li>
                         <li>Custom web application</li>
                         <li>User dashboard</li>
                         <li>Payment integration</li>
-                        <li>4 weeks delivery</li>
                         <li>30-day support</li>
                     </ul>
                     
@@ -1289,12 +1018,10 @@
                     <div class="pricing-name">Enterprise</div>
                     <div class="pricing-price">Custom</span></div>
                     <div class="pricing-desc">Complex systems for established businesses.</div>
-                    
                     <ul class="pricing-features">
                         <li>Everything in Growth</li>
                         <li>Custom integrations</li>
                         <li>Dedicated team</li>
-                        <li>Priority support</li>
                         <li>SLA guarantee</li>
                         <li>White-label options</li>
                     </ul>
@@ -1328,7 +1055,7 @@
                             <div class="quiz-option-icon">🌐</div>
                             <div class="quiz-option-text">
                                 <h4>Website / Landing Page</h4>
-                                <p>High-converting site to capture leads and sales</p>
+                                <p>High-converting site to capture leads</p>
                             </div>
                         </div>
                         
@@ -1336,7 +1063,7 @@
                             <div class="quiz-option-icon">⚙️</div>
                             <div class="quiz-option-text">
                                 <h4>Web Application</h4>
-                                <p>Custom platform with user accounts, dashboards, etc.</p>
+                                <p>Custom platform with dashboards</p>
                             </div>
                         </div>
                         
@@ -1344,7 +1071,7 @@
                             <div class="quiz-option-icon">🛒</div>
                             <div class="quiz-option-text">
                                 <h4>E-commerce</h4>
-                                <p>Online store with payments and inventory</p>
+                                <p>Online store with payments</p>
                             </div>
                         </div>
                         
@@ -1352,7 +1079,7 @@
                             <div class="quiz-option-icon">🔄</div>
                             <div class="quiz-option-text">
                                 <h4>Redesign / Migration</h4>
-                                <p>Improve existing site or migrate to better tech</p>
+                                <p>Improve existing site</p>
                             </div>
                         </div>
                     </div>
@@ -1366,7 +1093,7 @@
                             <div class="quiz-option-icon">🏃</div>
                             <div class="quiz-option-text">
                                 <h4>ASAP (Rush)</h4>
-                                <p>Under 2 weeks — 25% rush fee applies</p>
+                                <p>Under 2 weeks — 25% rush fee</p>
                             </div>
                         </div>
                         
@@ -1374,7 +1101,7 @@
                             <div class="quiz-option-icon">📅</div>
                             <div class="quiz-option-text">
                                 <h4>Standard (1-2 months)</h4>
-                                <p>Most projects fit here — optimal quality/time balance</p>
+                                <p>Optimal quality/time balance</p>
                             </div>
                         </div>
                         
@@ -1382,7 +1109,7 @@
                             <div class="quiz-option-icon">🎯</div>
                             <div class="quiz-option-text">
                                 <h4>Flexible (3+ months)</h4>
-                                <p>Complex project — we take time to perfect every detail</p>
+                                <p>Perfect every detail</p>
                             </div>
                         </div>
                     </div>
@@ -1400,7 +1127,7 @@
                             <div class="quiz-option-icon">💰</div>
                             <div class="quiz-option-text">
                                 <h4>$10k – $25k</h4>
-                                <p>Starter package — perfect for MVPs</p>
+                                <p>Starter package</p>
                             </div>
                         </div>
                         
@@ -1408,7 +1135,7 @@
                             <div class="quiz-option-icon">💎</div>
                             <div class="quiz-option-text">
                                 <h4>$25k – $50k</h4>
-                                <p>Growth package — full web applications</p>
+                                <p>Growth package</p>
                             </div>
                         </div>
                         
@@ -1416,7 +1143,7 @@
                             <div class="quiz-option-icon">🏢</div>
                             <div class="quiz-option-text">
                                 <h4>$50k+</h4>
-                                <p>Enterprise — complex systems and ongoing work</p>
+                                <p>Enterprise solution</p>
                             </div>
                         </div>
                     </div>
@@ -1427,20 +1154,20 @@
                 </div>
                 
                 <div class="quiz-step-content" data-step="4">
-                    <h3>Almost done! Your details:</h3>
+                    <h3>Your details:</h3>
                     
                     <div style="margin-bottom:24px">
-                        <input type="text" class="form-input" placeholder="Your name" style="margin-bottom:16px">
-                        <input type="email" class="form-input" placeholder="Work email" style="margin-bottom:16px">
+                        <input type="text" class="form-input" placeholder="Your name" style="margin-bottom:12px">
+                        <input type="email" class="form-input" placeholder="Work email" style="margin-bottom:12px">
                         <input type="text" class="form-input" placeholder="Company name">
                     </div>
                     
                     <button class="quiz-btn" onclick="showSuccess()" style="width:100%">
-                        Get My Custom Quote →
+                        Get My Quote →
                     </button>
                     
                     <p style="text-align:center;margin-top:16px;color:var(--text-muted);font-size:13px">
-                        🔒 We respect your privacy. No spam, ever.
+                        🔒 We respect your privacy. No spam.
                     </p>
                     
                     <div class="quiz-nav" style="border:none;margin-top:24px;padding-top:0">
@@ -1449,31 +1176,31 @@
                 </div>
                 
                 <div class="quiz-step-content" data-step="success">
-                    <div style="text-align:center;padding:40px 0">
-                        <div style="width:100px;height:100px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto 32px;box-shadow:0 0 60px var(--accent-glow);animation:scaleIn 0.5s ease">
+                    <div style="text-align:center;padding:20px 0">
+                        <div style="width:80px;height:80px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 24px;box-shadow:0 0 40px var(--accent-glow);animation:scaleIn 0.5s ease">
                             ✓
                         </div>
                         
-                        <h3 style="margin-bottom:16px">Quote request sent! 🎉</h3>
+                        <h3 style="margin-bottom:12px;font-size:24px">Quote request sent! 🎉</h3>
                         
-                        <p style="color:var(--text-dim);font-size:16px;margin-bottom:32px">
-                            We'll analyze your requirements and send a detailed proposal within 24 hours.
+                        <p style="color:var(--text-dim);font-size:15px;margin-bottom:24px">
+                            We'll analyze your requirements and respond within 24 hours.
                         </p>
                         
-                        <div style="background:var(--bg);padding:24px;border-radius:12px;border:1px solid var(--border)">
-                            <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">What happens next?</div>
-                            <div style="display:flex;flex-direction:column;gap:12px;text-align:left">
-                                <div style="display:flex;align-items:center;gap:12px">
-                                    <span style="color:var(--accent)">1.</span>
+                        <div style="background:var(--bg);padding:20px;border-radius:8px;border:1px solid var(--border);text-align:left">
+                            <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">What happens next?</div>
+                            <div style="display:flex;flex-direction:column;gap:10px">
+                                <div style="display:flex;align-items:center;gap:10px">
+                                    <span style="color:var(--accent);font-weight:600">1.</span>
                                     <span>We review your project details</span>
                                 </div>
-                                <div style="display:flex;align-items:center;gap:12px">
-                                    <span style="color:var(--accent)">2.</span>
+                                <div style="display:flex;align-items:center;gap:10px">
+                                    <span style="color:var(--accent);font-weight:600">2.</span>
                                     <span>Schedule a free strategy call</span>
                                 </div>
-                                <div style="display:flex;align-items:center;gap:12px">
-                                    <span style="color:var(--accent)">3.</span>
-                                    <span>Receive detailed proposal + timeline</span>
+                                <div style="display:flex;align-items:center;gap:10px">
+                                    <span style="color:var(--accent);font-weight:600">3.</span>
+                                    <span>Receive detailed proposal</span>
                                 </div>
                             </div>
                         </div>
@@ -1487,45 +1214,36 @@
         <div class="testimonials-content">
             <div class="section-header">
                 <div class="section-label">Testimonials</div>
-                <h2 class="section-title">What our clients say</h2>
+                <h2 class="section-title">Client results</h2>
             </div>
             
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"Nexus transformed our online presence completely. Website loads in 0.8s and conversions are up 340%. Best investment we've made."</div>
+                    <div class="testimonial-text">"Nexus transformed our online presence. Website loads in 0.8s and conversions are up 340%."</div>
                     
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">👨‍💼</div>
-                        <div>
-                            <strong>Marcus Chen</strong>
-                            <span>CEO, TechFlow</span>
-                        </div>
+                        <div><strong>Marcus Chen</strong><span>CEO, TechFlow</span></div>
                         <div class="testimonial-rating">★★★★★</div>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"Finally an agency that understands both design AND engineering. Our platform handles 100k users without breaking. Incredible work."</div>
+                    <div class="testimonial-text">"Finally an agency that understands both design AND engineering. 100k users, zero downtime."</div>
                     
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">👩‍💼</div>
-                        <div>
-                            <strong>Sarah Miller</strong>
-                            <span>CTO, ScaleShop</span>
-                        </div>
+                        <div><strong>Sarah Miller</strong><span>CTO, ScaleShop</span></div>
                         <div class="testimonial-rating">★★★★★</div>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"The ROI speaks for itself. $35k investment generated $2.4M in additional revenue. Nexus doesn't build websites—they build money machines."</div>
+                    <div class="testimonial-text">"$35k investment generated $2.4M in revenue. Nexus builds money machines."</div>
                     
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">👨‍💼</div>
-                        <div>
-                            <strong>David Park</strong>
-                            <span>Founder, GrowthLab</span>
-                        </div>
+                        <div><strong>David Park</strong><span>Founder, GrowthLab</span></div>
                         <div class="testimonial-rating">★★★★★</div>
                     </div>
                 </div>
@@ -1534,8 +1252,8 @@
     </section>
 
     <section class="final-cta">
-        <h2>Ready to scale your business?</h2>
-        <p>Join 150+ companies that trust Nexus with their digital success. Your competitors are already optimizing—don't get left behind.</p>
+        <h2>Ready to scale?</h2>
+        <p>Join 150+ companies that trust Nexus. Your competitors are optimizing—don't get left behind.</p>
         
         <a href="#quiz" class="btn-primary" style="display:inline-block">Get Free Quote →</a>
     </section>
@@ -1544,96 +1262,100 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <a href="#" class="logo">NEXUS</a>
-                <p>Engineering-first digital agency. Building revenue-generating systems since 2018.</p>
+                <p>Engineering-first agency. Building revenue systems since 2018.</p>
                 
                 <div class="footer-social">
                     <a href="#">𝕏</a>
                     <a href="#">in</a>
-                    <a href="#">GitHub</a>
-                    <a href="#">📧</a>
+                    <a href="#">Git</a>
                 </div>
             </div>
             
             <div class="footer-col">
                 <h4>Services</h4>
                 <a href="#">Web Development</a>
-                <a href="#">Web Applications</a>
+                <a href="#">Web Apps</a>
                 <a href="#">E-commerce</a>
-                <a href="#">Optimization</a>
             </div>
             
             <div class="footer-col">
                 <h4>Company</h4>
                 <a href="#">About</a>
-                <a href="#">Case Studies</a>
                 <a href="#">Careers</a>
                 <a href="#">Contact</a>
             </div>
             
             <div class="footer-col">
                 <h4>Legal</h4>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Cookie Policy</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
             </div>
         </div>
         
         <div class="footer-bottom">
             <span>© 2024 NEXUS. All systems operational.</span>
-            <span>Made with precision in Vienna 🇦🇹</span>
+            <span>Made in Vienna 🇦🇹</span>
         </div>
     </footer>
 
     <script>
-        // Navigation scroll effect
-        window.addEventListener('scroll',()=>{
-            const nav=document.querySelector('nav');
-            if(window.scrollY>50){
-                nav.style.background='rgba(5,5,8,0.95)';
-            }else{
-                nav.style.background='rgba(5,5,8,0.9)';
+        // Mobile Menu
+        function toggleMenu(){
+            const menu=document.getElementById('mobileMenu');
+            const toggle=document.getElementById('mobileToggle');
+            menu.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+        
+        // Language Switcher
+        function toggleLang(){
+            document.getElementById('langSwitcher').classList.toggle('open');
+        }
+        function setLang(lang){
+            document.getElementById('currentLang').textContent=lang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(opt=>opt.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('langSwitcher').classList.remove('open');
+        }
+        
+        // Close dropdowns on outside click
+        document.addEventListener('click',(e)=>{
+            if(!e.target.closest('.lang-switcher')){
+                document.getElementById('langSwitcher').classList.remove('open');
             }
         });
-
-        // Quiz functionality
+        
+        // Quiz
         let currentStep=1;
-        const totalSteps=4;
-
         function updateProgress(){
-            const indicators=document.querySelectorAll('.quiz-step-indicator');
-            indicators.forEach((ind,i)=>{
+            document.querySelectorAll('.quiz-step-indicator').forEach((ind,i)=>{
                 ind.classList.toggle('active',i<currentStep);
             });
         }
-
         function nextStep(step){
             document.querySelector(`.quiz-step-content[data-step="${currentStep}"]`).classList.remove('active');
             document.querySelector(`.quiz-step-content[data-step="${step}"]`).classList.add('active');
             currentStep=step;
             updateProgress();
         }
-
         function prevStep(step){
             document.querySelector(`.quiz-step-content[data-step="${currentStep}"]`).classList.remove('active');
             document.querySelector(`.quiz-step-content[data-step="${step}"]`).classList.add('active');
             currentStep=step;
             updateProgress();
         }
-
         function showSuccess(){
             document.querySelector(`.quiz-step-content[data-step="${currentStep}"]`).classList.remove('active');
             document.querySelector('.quiz-step-content[data-step="success"]').classList.add('active');
             document.querySelector('.quiz-progress').style.display='none';
         }
-
-        // Smooth scroll for anchor links
+        
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
             anchor.addEventListener('click',function(e){
                 e.preventDefault();
                 const target=document.querySelector(this.getAttribute('href'));
-                if(target){
-                    target.scrollIntoView({behavior:'smooth',block:'start'});
-                }
+                if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
             });
         });
     </script>
