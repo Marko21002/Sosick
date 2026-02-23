@@ -738,9 +738,55 @@
             background:none;
             border:none;
             cursor:pointer;
+            z-index:1002;
         }
         @media(min-width:768px){.mobile-toggle{display:none}}
-        .mobile-toggle span{width:24px;height:2px;background:var(--black)}
+        .mobile-toggle span{
+            width:24px;
+            height:2px;
+            background:var(--black);
+            transition:all 0.3s;
+        }
+        .mobile-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .mobile-toggle.active span:nth-child(2){opacity:0}
+        .mobile-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        
+        .mobile-menu{
+            position:fixed;
+            inset:0;
+            background:var(--bg);
+            z-index:1001;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            gap:32px;
+            opacity:0;
+            visibility:hidden;
+            transition:all 0.3s;
+        }
+        .mobile-menu.open{
+            opacity:1;
+            visibility:visible;
+        }
+        
+        .mobile-menu a{
+            font-family:'Space Grotesk',sans-serif;
+            font-size:32px;
+            font-weight:500;
+            color:var(--black);
+            text-decoration:none;
+            transition:color 0.3s;
+        }
+        .mobile-menu a:hover{color:var(--clay)}
+        
+        .mobile-menu .mobile-cta{
+            margin-top:20px;
+            padding:18px 40px;
+            background:var(--black);
+            color:var(--white);
+            font-size:16px;
+        }
     </style>
 </head>
 <body>
@@ -764,7 +810,7 @@
                 
                 <a href="#tickets" class="nav-cta" data-i18n="nav_cta">Tickets</a>
                 
-                <button class="mobile-toggle">
+                <button class="mobile-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -772,6 +818,14 @@
             </div>
         </div>
     </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#venue" onclick="closeMobileMenu()" data-i18n="nav_venue">Der Ort</a>
+        <a href="#program" onclick="closeMobileMenu()" data-i18n="nav_program">Programm</a>
+        <a href="#tickets" onclick="closeMobileMenu()" data-i18n="nav_tickets">Tickets</a>
+        <a href="#location" onclick="closeMobileMenu()" data-i18n="nav_location">Anfahrt</a>
+        <a href="#tickets" class="mobile-cta" onclick="closeMobileMenu()" data-i18n="nav_cta">Tickets</a>
+    </div>
 
     <section class="hero">
         <div class="hero-bg">
@@ -1055,6 +1109,7 @@
         const translations = {
             de: {
                 nav_brand: 'Schloss Thalheim', nav_cta: 'Tickets',
+                nav_venue: 'Der Ort', nav_program: 'Programm', nav_tickets: 'Tickets', nav_location: 'Anfahrt',
                 hero_badge: 'Einmaliges Event', hero_deco: 'Chinesische',
                 hero_title: 'Neujahrs-Teezeremonie',
                 hero_date: '28. Februar 2025', hero_location: 'Schloss Thalheim',
@@ -1092,6 +1147,7 @@
             },
             en: {
                 nav_brand: 'Schloss Thalheim', nav_cta: 'Tickets',
+                nav_venue: 'The Venue', nav_program: 'Program', nav_tickets: 'Tickets', nav_location: 'Directions',
                 hero_badge: 'One-time Event', hero_deco: 'Chinese',
                 hero_title: 'New Year Tea Ceremony',
                 hero_date: 'February 28, 2025', hero_location: 'Schloss Thalheim',
@@ -1129,6 +1185,7 @@
             },
             ru: {
                 nav_brand: 'Schloss Thalheim', nav_cta: 'Билеты',
+                nav_venue: 'Место', nav_program: 'Программа', nav_tickets: 'Билеты', nav_location: 'Как добраться',
                 hero_badge: 'Единственный показ', hero_deco: 'Китайская',
                 hero_title: 'Чайная церемония',
                 hero_date: '28 февраля 2025', hero_location: 'Schloss Thalheim',
@@ -1194,6 +1251,20 @@
 
         function toggleLang() {
             document.getElementById('langSwitch').classList.toggle('open');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const toggle = document.getElementById('mobileToggle');
+            menu.classList.toggle('open');
+            toggle.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('mobileToggle').classList.remove('active');
+            document.body.style.overflow = '';
         }
 
         document.addEventListener('click', function(e) {
