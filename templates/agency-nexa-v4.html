@@ -10,11 +10,13 @@
             --bg:#050508;
             --bg-card:#0c0c12;
             --bg-elevated:#14141c;
+            --bg-white:#fafafa;
+            --bg-light:#f0f0f5;
             --accent:#a3e635;
             --accent-dim:#84cc16;
             --accent-glow:rgba(163,230,53,0.4);
-            --accent-glow-soft:rgba(163,230,53,0.1);
             --text:#fafafa;
+            --text-dark:#0a0a0f;
             --text-dim:#a1a1aa;
             --text-muted:#71717a;
             --border:#1f1f2e;
@@ -42,28 +44,8 @@
             pointer-events:none;
             z-index:0;
         }
-        body::after{
-            content:'';
-            position:fixed;
-            inset:0;
-            background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
-            pointer-events:none;
-            z-index:9999;
-        }
         
-        /* Section backgrounds */
-        .hero{background:radial-gradient(ellipse at 70% 50%,var(--accent-glow-soft) 0%,transparent 50%),var(--bg)}
-        .problems{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-card) 100%)}
-        .solution{background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative}
-        .solution::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.5}
-        .process{background:var(--bg)}
-        .process::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
-        .pricing{background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg-elevated) 100%);border-top:1px solid var(--border)}
-        .quiz-section{background:radial-gradient(ellipse at 30% 50%,rgba(163,230,53,0.08) 0%,transparent 60%),var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-        .testimonials{background:var(--bg-card);border-top:1px solid var(--border)}
-        .final-cta{background:radial-gradient(ellipse at center,var(--accent-glow-soft) 0%,transparent 70%),var(--bg-elevated);border-top:1px solid var(--border)}
-        
-        /* Navigation */
+        /* Navigation - SOLID BACKGROUND */
         nav{
             position:fixed;
             top:0;
@@ -72,8 +54,7 @@
             z-index:100;
             padding:16px 20px;
             border-bottom:1px solid var(--border);
-            background:rgba(5,5,8,0.95);
-            backdrop-filter:blur(20px);
+            background:#050508;
         }
         @media(min-width:769px){nav{padding:20px 40px}}
         .nav-content{
@@ -94,7 +75,8 @@
         @media(min-width:769px){.logo{font-size:24px}}
         .logo::before{content:'>_';margin-right:8px;opacity:0.7}
         
-        .nav-right{display:flex;align-items:center;gap:24px}
+        .nav-right{display:flex;align-items:center;gap:16px}
+        @media(min-width:769px){.nav-right{gap:24px}}
         .nav-links{display:none;gap:32px}
         @media(min-width:769px){.nav-links{display:flex}}
         .nav-links a{
@@ -117,7 +99,6 @@
             height:2px;
             background:var(--accent);
             transition:width 0.3s;
-            box-shadow:0 0 10px var(--accent);
         }
         .nav-links a:hover::after{width:100%}
         
@@ -132,8 +113,6 @@
             text-decoration:none;
             text-transform:uppercase;
             letter-spacing:1px;
-            border:none;
-            cursor:pointer;
             transition:all 0.3s;
         }
         @media(min-width:769px){.nav-cta{display:block;padding:12px 28px}}
@@ -161,12 +140,11 @@
             position:absolute;
             top:calc(100% + 8px);
             right:0;
-            background:var(--bg-card);
+            background:#050508;
             border:1px solid var(--border);
             min-width:120px;
             display:none;
             z-index:1000;
-            box-shadow:0 20px 40px rgba(0,0,0,0.5);
         }
         .lang-switcher.open .lang-dropdown{display:block}
         .lang-option{
@@ -175,8 +153,9 @@
             font-size:12px;
             cursor:pointer;
             transition:all 0.2s;
+            color:var(--text);
         }
-        .lang-option:hover{background:var(--bg-elevated);color:var(--accent)}
+        .lang-option:hover{background:var(--bg-card);color:var(--accent)}
         .lang-option.active{background:var(--accent);color:var(--bg)}
         
         /* Mobile Menu */
@@ -209,7 +188,7 @@
             left:0;
             right:0;
             bottom:0;
-            background:rgba(5,5,8,0.98);
+            background:#050508;
             z-index:99;
             padding:100px 24px 40px;
             flex-direction:column;
@@ -236,6 +215,7 @@
             align-items:center;
             padding:120px 20px 80px;
             position:relative;
+            background:#050508;
         }
         @media(min-width:769px){.hero{padding:140px 40px 100px}}
         .hero-content{
@@ -264,7 +244,7 @@
             background:var(--bg-card);
         }
         @media(min-width:769px){
-            .hero-badge{font-size:13px;padding:10px 20px;margin-bottom:32px;letter-spacing:2px}
+            .hero-badge{font-size:13px;padding:10px 20px;margin-bottom:32px}
         }
         .status-dot{
             width:8px;
@@ -300,9 +280,7 @@
             margin-bottom:32px;
             font-family:'JetBrains Mono',monospace;
         }
-        @media(min-width:769px){
-            .hero-subtitle{font-size:16px;margin-bottom:40px;max-width:540px}
-        }
+        @media(min-width:769px){.hero-subtitle{font-size:16px;margin-bottom:40px;max-width:540px}}
         
         .hero-cta-group{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
         @media(min-width:769px){.hero-cta-group{gap:16px;margin-bottom:60px}}
@@ -324,7 +302,7 @@
             text-align:center;
         }
         @media(min-width:769px){.btn-primary{padding:18px 36px;font-size:16px}}
-        .btn-primary:hover{box-shadow:0 0 60px var(--accent-glow);transform:translateY(-2px)}
+        .btn-primary:hover{box-shadow:0 0 60px var(--accent-glow)}
         
         .btn-outline{
             padding:16px 28px;
@@ -342,7 +320,7 @@
             text-align:center;
         }
         @media(min-width:769px){.btn-outline{padding:18px 36px;font-size:16px}}
-        .btn-outline:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 30px var(--accent-glow)}
+        .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
         
         .hero-stats{
             display:flex;
@@ -377,19 +355,8 @@
             padding:20px;
             font-family:'JetBrains Mono',monospace;
             font-size:12px;
-            position:relative;
         }
         @media(min-width:769px){.code-block{padding:28px;font-size:13px}}
-        .code-block::before{
-            content:'';
-            position:absolute;
-            top:-1px;
-            left:20px;
-            right:20px;
-            height:1px;
-            background:var(--accent);
-            box-shadow:0 0 20px var(--accent);
-        }
         .code-header{
             display:flex;
             gap:8px;
@@ -397,13 +364,10 @@
             padding-bottom:12px;
             border-bottom:1px solid var(--border);
         }
-        @media(min-width:769px){.code-header{margin-bottom:20px;padding-bottom:16px}}
         .code-dot{width:10px;height:10px;border-radius:50%;background:var(--text-muted)}
-        @media(min-width:769px){.code-dot{width:12px;height:12px}}
         .code-dot:nth-child(1){background:#ef4444}
         .code-dot:nth-child(2){background:#f59e0b}
         .code-dot:nth-child(3){background:#22c55e}
-        
         .code-content{color:var(--text-dim);line-height:1.8}
         .code-content .keyword{color:var(--accent);font-weight:600}
         .code-content .string{color:#60a5fa}
@@ -417,14 +381,12 @@
             background:var(--bg-card);
             overflow:hidden;
         }
-        @media(min-width:769px){.trust-bar{padding:24px 40px}}
         .trust-scroll{
             display:flex;
             gap:40px;
             animation:scroll 25s linear infinite;
             white-space:nowrap;
         }
-        @media(min-width:769px){.trust-scroll{gap:80px}}
         @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
         .trust-item{
             display:flex;
@@ -433,21 +395,30 @@
             color:var(--text-muted);
             font-size:13px;
             text-transform:uppercase;
-            letter-spacing:1px;
         }
-        @media(min-width:769px){.trust-item{font-size:14px;gap:12px;letter-spacing:2px}}
-        .trust-item::before{
-            content:'◆';
-            color:var(--accent);
-        }
+        .trust-item::before{content:'◆';color:var(--accent)}
         
-        /* Sections common */
-        .problems,.process,.testimonials{padding:80px 20px;position:relative}
+        /* Sections */
+        .problems,.process,.testimonials{padding:80px 20px}
         .solution,.pricing,.quiz-section{padding:80px 20px}
         .final-cta{padding:80px 20px}
         @media(min-width:769px){
             .problems,.solution,.process,.pricing,.quiz-section,.testimonials,.final-cta{padding:120px 40px}
         }
+        
+        /* WHITE SECTION */
+        .white-section{
+            background:var(--bg-white);
+            color:var(--text-dark);
+            padding:80px 20px;
+        }
+        @media(min-width:769px){.white-section{padding:120px 40px}}
+        .white-section .section-label{color:var(--accent-dim)}
+        .white-section .section-title{color:var(--text-dark)}
+        .white-section .problem-card{background:#fff;border-color:#e5e5e5}
+        .white-section .problem-card h3{color:var(--text-dark)}
+        .white-section .problem-card p{color:#666}
+        .white-section .problem-icon{background:#f5f5f5;border-color:#e5e5e5}
         
         .section-header{text-align:center;margin-bottom:48px}
         @media(min-width:769px){.section-header{margin-bottom:80px}}
@@ -462,9 +433,6 @@
             align-items:center;
             gap:8px;
         }
-        @media(min-width:769px){
-            .section-label{font-size:13px;letter-spacing:3px;margin-bottom:16px;gap:12px}
-        }
         .section-label::before{content:'//';opacity:0.5}
         .section-title{
             font-size:clamp(28px,8vw,48px);
@@ -472,27 +440,22 @@
             letter-spacing:-2px;
         }
         
-        .problems-content,.process-content,.pricing-content,.testimonials-content,.quiz-content{
-            max-width:1400px;
-            margin:0 auto;
-        }
-        
         /* Problems Grid */
         .problems-grid{
             display:grid;
             grid-template-columns:1fr;
             gap:16px;
+            max-width:1400px;
+            margin:0 auto;
         }
         @media(min-width:640px){.problems-grid{grid-template-columns:repeat(2,1fr)}}
         @media(min-width:1024px){.problems-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
         .problem-card{
-            background:var(--bg);
+            background:var(--bg-card);
             border:1px solid var(--border);
             padding:28px;
-            transition:all 0.3s;
         }
         @media(min-width:769px){.problem-card{padding:40px}}
-        .problem-card:hover{border-color:var(--border-light);transform:translateY(-4px)}
         .problem-icon{
             width:48px;
             height:48px;
@@ -504,15 +467,14 @@
             font-size:24px;
             margin-bottom:20px;
         }
-        @media(min-width:769px){
-            .problem-icon{width:56px;height:56px;font-size:28px;margin-bottom:24px}
-        }
-        .problem-card h3{font-size:20px;font-weight:600;margin-bottom:10px;letter-spacing:-0.5px}
-        @media(min-width:769px){.problem-card h3{font-size:22px;margin-bottom:12px}}
+        @media(min-width:769px){.problem-icon{width:56px;height:56px;font-size:28px;margin-bottom:24px}}
+        .problem-card h3{font-size:20px;font-weight:600;margin-bottom:10px}
+        @media(min-width:769px){.problem-card h3{font-size:22px}}
         .problem-card p{color:var(--text-dim);font-size:14px;line-height:1.7}
         @media(min-width:769px){.problem-card p{font-size:15px}}
         
         /* Solution */
+        .solution{background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
         .solution-content{
             max-width:1400px;
             margin:0 auto;
@@ -521,8 +483,7 @@
             gap:40px;
         }
         @media(min-width:1024px){.solution-content{grid-template-columns:1fr 1fr;gap:80px;align-items:center}}
-        .solution-text h2{font-size:clamp(26px,6vw,40px);font-weight:700;letter-spacing:-2px;margin-bottom:20px}
-        @media(min-width:769px){.solution-text h2{font-size:clamp(32px,4vw,48px);margin-bottom:24px}}
+        .solution-text h2{font-size:clamp(26px,6vw,40px));font-weight:700;letter-spacing:-2px;margin-bottom:20px}
         .solution-text > p{color:var(--text-dim);font-size:15px;line-height:1.8;margin-bottom:32px}
         @media(min-width:769px){.solution-text > p{font-size:17px;margin-bottom:40px}}
         
@@ -533,14 +494,12 @@
             background:var(--bg);
             border:1px solid var(--border);
             margin-bottom:12px;
-            transition:all 0.3s;
         }
         @media(min-width:769px){.solution-feature{gap:20px;padding:24px;margin-bottom:16px}}
-        .solution-feature:hover{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow-soft)}
         .solution-feature-icon{
             width:44px;
             height:44px;
-            background:var(--accent-glow-soft);
+            background:rgba(163,230,53,0.1);
             border:1px solid var(--accent);
             display:flex;
             align-items:center;
@@ -550,14 +509,13 @@
         }
         @media(min-width:769px){.solution-feature-icon{width:48px;height:48px;font-size:24px}}
         .solution-feature h4{font-size:16px;font-weight:600;margin-bottom:4px}
-        @media(min-width:769px){.solution-feature h4{font-size:18px;margin-bottom:6px}}
+        @media(min-width:769px){.solution-feature h4{font-size:18px}}
         .solution-feature p{color:var(--text-dim);font-size:13px}
         @media(min-width:769px){.solution-feature p{font-size:14px}}
         
-        .solution-visual{display:none}
-        @media(min-width:1024px){.solution-visual{display:block}}
-        
         /* Process */
+        .process{position:relative}
+        .process-content{max-width:1400px;margin:0 auto}
         .process-steps{
             display:grid;
             grid-template-columns:1fr;
@@ -570,10 +528,8 @@
             padding:28px;
             background:var(--bg-card);
             border:1px solid var(--border);
-            transition:all 0.3s;
         }
         @media(min-width:769px){.process-step{padding:32px}}
-        .process-step:hover{border-color:var(--accent);box-shadow:0 0 30px var(--accent-glow-soft)}
         .process-step::before{
             content:attr(data-step);
             position:absolute;
@@ -586,11 +542,13 @@
             font-size:12px;
             font-weight:600;
         }
-        .process-step h3{font-size:18px;font-weight:600;margin:16px 0 10px;letter-spacing:-0.5px}
-        @media(min-width:769px){.process-step h3{font-size:20px;margin:16px 0 12px}}
+        .process-step h3{font-size:18px;font-weight:600;margin:16px 0 10px}
+        @media(min-width:769px){.process-step h3{font-size:20px}}
         .process-step p{color:var(--text-dim);font-size:14px;line-height:1.7}
         
         /* Pricing */
+        .pricing{background:var(--bg-card)}
+        .pricing-content{max-width:1400px;margin:0 auto}
         .pricing-grid{
             display:grid;
             grid-template-columns:1fr;
@@ -603,15 +561,9 @@
             border:1px solid var(--border);
             padding:32px;
             position:relative;
-            transition:all 0.3s;
         }
         @media(min-width:769px){.pricing-card{padding:40px}}
-        .pricing-card:hover{border-color:var(--border-light);transform:translateY(-8px)}
-        .pricing-card.popular{
-            border-color:var(--accent);
-            box-shadow:0 0 40px var(--accent-glow-soft);
-        }
-        @media(min-width:640px) and (max-width:1023px){.pricing-card.popular{grid-column:span 2}}
+        .pricing-card.popular{border-color:var(--accent)}
         .popular-badge{
             position:absolute;
             top:-12px;
@@ -624,149 +576,208 @@
             font-size:11px;
             font-weight:600;
             text-transform:uppercase;
-            letter-spacing:1px;
         }
         .pricing-name{font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
         .pricing-price{font-size:48px;font-weight:700;color:var(--text);margin-bottom:6px;font-family:'JetBrains Mono',monospace}
         @media(min-width:769px){.pricing-price{font-size:56px}}
-        .pricing-price span{font-size:16px;color:var(--text-muted);font-weight:400;margin-left:8px}
+        .pricing-price span{font-size:16px;color:var(--text-muted);margin-left:8px}
         .pricing-desc{color:var(--text-dim);font-size:14px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
         @media(min-width:769px){.pricing-desc{font-size:15px;margin-bottom:32px;padding-bottom:32px}}
         .pricing-features{list-style:none;margin-bottom:28px}
         @media(min-width:769px){.pricing-features{margin-bottom:32px}}
         .pricing-features li{padding:10px 0;color:var(--text-dim);font-size:14px;display:flex;align-items:center;gap:12px}
-        @media(min-width:769px){.pricing-features li{padding:12px 0;font-size:15px}}
         .pricing-features li::before{content:'✓';color:var(--accent);font-weight:700}
-        .pricing-btn{width:100%;padding:16px;background:transparent;color:var(--text);border:1px solid var(--border);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.3s}
-        @media(min-width:769px){.pricing-btn{padding:18px;font-size:15px}}
+        .pricing-btn{
+            width:100%;
+            padding:16px;
+            background:transparent;
+            color:var(--text);
+            border:1px solid var(--border);
+            font-size:14px;
+            font-weight:600;
+            text-transform:uppercase;
+            cursor:pointer;
+            transition:all 0.3s;
+        }
         .pricing-card.popular .pricing-btn{background:var(--accent);color:var(--bg);border-color:var(--accent)}
-        .pricing-btn:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 20px var(--accent-glow)}
-        .pricing-card.popular .pricing-btn:hover{box-shadow:0 0 40px var(--accent-glow)}
+        .pricing-btn:hover{border-color:var(--accent);color:var(--accent)}
         
         /* Quiz */
+        .quiz-section{background:#050508;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+        .quiz-content{max-width:900px;margin:0 auto}
         .quiz-box{
             background:var(--bg-card);
             border:1px solid var(--border);
             padding:24px;
-            position:relative;
-            max-width:800px;
-            margin:0 auto;
         }
         @media(min-width:640px){.quiz-box{padding:40px}}
         @media(min-width:769px){.quiz-box{padding:60px}}
-        .quiz-box::before{
-            content:'';
-            position:absolute;
-            top:-1px;
-            left:24px;
-            right:24px;
-            height:1px;
-            background:var(--accent);
-            box-shadow:0 0 20px var(--accent);
-        }
-        @media(min-width:640px){.quiz-box::before{left:40px;right:40px}}
-        @media(min-width:769px){.quiz-box::before{left:60px;right:60px}}
-        
         .quiz-progress{display:flex;gap:6px;margin-bottom:28px}
         @media(min-width:769px){.quiz-progress{gap:8px;margin-bottom:40px}}
-        .quiz-step-indicator{flex:1;height:3px;background:var(--border);transition:all 0.3s}
-        .quiz-step-indicator.active{background:var(--accent);box-shadow:0 0 10px var(--accent)}
+        .quiz-step-indicator{flex:1;height:3px;background:var(--border)}
+        .quiz-step-indicator.active{background:var(--accent)}
         
         .quiz-step-content{display:none}
-        .quiz-step-content.active{display:block;animation:fadeIn 0.5s ease}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-        
+        .quiz-step-content.active{display:block}
         .quiz-step-content h3{font-size:24px;font-weight:700;margin-bottom:28px;letter-spacing:-1px}
         @media(min-width:769px){.quiz-step-content h3{font-size:32px;margin-bottom:40px}}
         .quiz-options{display:grid;gap:12px}
         @media(min-width:769px){.quiz-options{gap:16px}}
-        .quiz-option{display:flex;align-items:center;gap:16px;padding:20px;background:var(--bg);border:1px solid var(--border);cursor:pointer;transition:all 0.3s}
-        @media(min-width:769px){.quiz-option{gap:20px;padding:24px}}
-        .quiz-option:hover{border-color:var(--accent);background:var(--accent-glow-soft);transform:translateX(8px)}
-        .quiz-option-icon{width:48px;height:48px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
-        @media(min-width:769px){.quiz-option-icon{width:56px;height:56px;font-size:28px}}
-        .quiz-option:hover .quiz-option-icon{border-color:var(--accent)}
+        .quiz-option{
+            display:flex;
+            align-items:center;
+            gap:16px;
+            padding:20px;
+            background:var(--bg);
+            border:1px solid var(--border);
+            cursor:pointer;
+            transition:all 0.3s;
+        }
+        .quiz-option:hover{border-color:var(--accent);background:rgba(163,230,53,0.05)}
+        .quiz-option-icon{
+            width:48px;
+            height:48px;
+            background:var(--bg-elevated);
+            border:1px solid var(--border);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:24px;
+            flex-shrink:0;
+        }
         .quiz-option-text h4{font-size:16px;font-weight:600;margin-bottom:3px}
-        @media(min-width:769px){.quiz-option-text h4{font-size:18px;margin-bottom:4px}}
         .quiz-option-text p{color:var(--text-dim);font-size:13px}
-        @media(min-width:769px){.quiz-option-text p{font-size:14px}}
         
-        .form-input{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:15px;margin-bottom:12px;transition:all 0.3s}
-        @media(min-width:769px){.form-input{padding:18px 24px;font-size:16px;margin-bottom:16px}}
-        .form-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow-soft)}
+        .form-input{
+            width:100%;
+            padding:16px;
+            background:var(--bg);
+            border:1px solid var(--border);
+            color:var(--text);
+            font-size:15px;
+            margin-bottom:12px;
+        }
+        .form-input:focus{outline:none;border-color:var(--accent)}
         .form-input::placeholder{color:var(--text-muted)}
         
         .quiz-nav{display:flex;justify-content:space-between;margin-top:32px;padding-top:32px;border-top:1px solid var(--border)}
-        @media(min-width:769px){.quiz-nav{margin-top:40px;padding-top:40px}}
-        .quiz-btn{padding:16px 28px;background:var(--accent);color:var(--bg);border:none;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.3s}
-        @media(min-width:769px){.quiz-btn{padding:16px 32px;font-size:15px}}
-        .quiz-btn:hover{box-shadow:0 0 30px var(--accent-glow)}
+        .quiz-btn{padding:16px 28px;background:var(--accent);color:var(--bg);border:none;font-size:14px;font-weight:600;text-transform:uppercase;cursor:pointer}
         .quiz-btn.secondary{background:transparent;color:var(--text);border:1px solid var(--border)}
-        .quiz-btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
         
         /* Testimonials */
-        .testimonials-grid{display:grid;grid-template-columns:1fr;gap:16px}
+        .testimonials{background:var(--bg-card);border-top:1px solid var(--border)}
+        .testimonials-content{max-width:1400px;margin:0 auto}
+        .testimonials-grid{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:16px;
+        }
         @media(min-width:640px){.testimonials-grid{grid-template-columns:repeat(2,1fr)}}
         @media(min-width:1024px){.testimonials-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
-        .testimonial-card{background:var(--bg);border:1px solid var(--border);padding:28px;position:relative;transition:all 0.3s}
+        .testimonial-card{
+            background:var(--bg);
+            border:1px solid var(--border);
+            padding:28px;
+            position:relative;
+        }
         @media(min-width:769px){.testimonial-card{padding:40px}}
-        .testimonial-card:hover{border-color:var(--border-light);transform:translateY(-4px)}
-        .testimonial-card::before{content:''"'';font-size:60px;color:var(--accent);opacity:0.2;position:absolute;top:16px;left:20px;font-family:serif;line-height:1}
-        @media(min-width:769px){.testimonial-card::before{font-size:80px;top:20px;left:24px}}
-        .testimonial-text{color:var(--text-dim);font-size:15px;line-height:1.8;margin-bottom:24px;position:relative;z-index:1}
+        .testimonial-text{color:var(--text-dim);font-size:15px;line-height:1.8;margin-bottom:24px}
         @media(min-width:769px){.testimonial-text{font-size:16px;margin-bottom:32px}}
         .testimonial-author{display:flex;align-items:center;gap:12px}
-        @media(min-width:769px){.testimonial-author{gap:16px}}
         .testimonial-avatar{width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px}
-        @media(min-width:769px){.testimonial-avatar{width:48px;height:48px;font-size:20px}}
         .testimonial-author strong{display:block;font-size:14px;font-weight:600}
-        @media(min-width:769px){.testimonial-author strong{font-size:15px}}
         .testimonial-author span{font-size:12px;color:var(--text-muted)}
-        @media(min-width:769px){.testimonial-author span{font-size:13px}}
-        .testimonial-rating{margin-left:auto;color:var(--accent);font-size:16px;letter-spacing:2px}
-        @media(min-width:769px){.testimonial-rating{font-size:18px}}
+        .testimonial-rating{margin-left:auto;color:var(--accent);font-size:16px}
         
         /* Final CTA */
-        .final-cta{text-align:center}
-        .final-cta h2{font-size:clamp(28px,8vw,48px);font-weight:700;letter-spacing:-2px;margin-bottom:16px}
-        @media(min-width:769px){.final-cta h2{font-size:clamp(36px,5vw,56px);margin-bottom:24px}}
-        .final-cta > p{color:var(--text-dim);font-size:16px;max-width:600px;margin:0 auto 32px}
+        .final-cta{text-align:center;background:var(--bg-elevated);border-top:1px solid var(--border)}
+        .final-cta h2{font-size:clamp(28px,8vw,48px));font-weight:700;letter-spacing:-2px;margin-bottom:16px}
+        .final-cta > p{color:var(--text-dim);font-size:16px;max-width:600px;margin:0 auto 40px}
         @media(min-width:769px){.final-cta > p{font-size:18px}}
         
-        /* Footer */
-        footer{padding:60px 20px 30px;border-top:1px solid var(--border);background:var(--bg-card)}
+        /* Footer - FIXED */
+        footer{
+            padding:60px 20px 30px;
+            border-top:1px solid var(--border);
+            background:#050508;
+        }
         @media(min-width:769px){footer{padding:80px 40px 40px}}
-        .footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:32px;margin-bottom:40px}
+        .footer-content{
+            max-width:1400px;
+            margin:0 auto;
+            display:grid;
+            grid-template-columns:1fr;
+            gap:40px;
+            margin-bottom:40px;
+        }
         @media(min-width:640px){.footer-content{grid-template-columns:1fr 1fr}}
         @media(min-width:1024px){.footer-content{grid-template-columns:2fr 1fr 1fr 1fr;gap:60px}}
-        .footer-brand .logo{margin-bottom:12px;display:inline-block}
-        @media(min-width:769px){.footer-brand .logo{margin-bottom:16px}}
-        .footer-brand p{color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:20px;max-width:320px}
-        @media(min-width:769px){.footer-brand p{font-size:15px;margin-bottom:24px}}
+        .footer-brand .logo{margin-bottom:16px;display:block}
+        .footer-brand p{color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:24px}
+        @media(min-width:769px){.footer-brand p{font-size:15px}}
         .footer-social{display:flex;gap:12px}
-        @media(min-width:769px){.footer-social{gap:16px}}
-        .footer-social a{width:40px;height:40px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;color:var(--text);transition:all 0.3s}
-        @media(min-width:769px){.footer-social a{width:44px;height:44px;font-size:18px}}
-        .footer-social a:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 20px var(--accent-glow)}
-        .footer-col h4{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text);text-transform:uppercase;letter-spacing:2px;margin-bottom:20px}
-        @media(min-width:769px){.footer-col h4{font-size:13px}}
-        .footer-col a{display:block;color:var(--text-muted);text-decoration:none;font-size:14px;padding:6px 0;transition:color 0.3s}
-        @media(min-width:769px){.footer-col a{font-size:15px;padding:8px 0}}
+        .footer-social a{
+            width:40px;
+            height:40px;
+            background:var(--bg-card);
+            border:1px solid var(--border);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:16px;
+            text-decoration:none;
+            color:var(--text);
+            transition:all 0.3s;
+        }
+        .footer-social a:hover{border-color:var(--accent);color:var(--accent)}
+        
+        .footer-col h4{
+            font-family:'JetBrains Mono',monospace;
+            font-size:13px;
+            color:var(--text);
+            text-transform:uppercase;
+            letter-spacing:2px;
+            margin-bottom:20px;
+        }
+        .footer-col a{
+            display:block;
+            color:var(--text-muted);
+            text-decoration:none;
+            font-size:14px;
+            padding:8px 0;
+            transition:color 0.3s;
+        }
         .footer-col a:hover{color:var(--accent)}
-        .footer-bottom{max-width:1400px;margin:0 auto;padding-top:32px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:12px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted)}
-        @media(min-width:769px){.footer-bottom{flex-direction:row;justify-content:space-between;align-items:center;text-align:left;font-size:13px;padding-top:40px}}
+        
+        .footer-bottom{
+            max-width:1400px;
+            margin:0 auto;
+            padding-top:32px;
+            border-top:1px solid var(--border);
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+            text-align:center;
+            font-family:'JetBrains Mono',monospace;
+            font-size:12px;
+            color:var(--text-muted);
+        }
+        @media(min-width:769px){
+            .footer-bottom{flex-direction:row;justify-content:space-between;text-align:left;font-size:13px}
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav>
         <div class="nav-content">
             <a href="#" class="logo">NEXUS</a>
             
             <div class="nav-right">
                 <div class="nav-links">
-                    <a href="#services">Services</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#process">Process</a>
+                    <a href="#services" data-i18n="nav_services">Services</a>
+                    <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+                    <a href="#process" data-i18n="nav_process">Process</a>
                 </div>
                 
                 <div class="lang-switcher" id="langSwitcher">
@@ -781,7 +792,7 @@
                     </div>
                 </div>
                 
-                <a href="#quiz" class="nav-cta">Get Quote</a>
+                <a href="#quiz" class="nav-cta" data-i18n="nav_cta">Get Quote</a>
                 
                 <button class="mobile-toggle" id="mobileToggle" onclick="toggleMenu()">
                     <span></span>
@@ -792,42 +803,52 @@
         </div>
         
         <div class="mobile-menu" id="mobileMenu">
-            <a href="#services" onclick="toggleMenu()">Services</a>
-            <a href="#pricing" onclick="toggleMenu()">Pricing</a>
-            <a href="#process" onclick="toggleMenu()">Process</a>
-            <a href="#quiz" onclick="toggleMenu()">Get Quote →</a>
+            <a href="#services" onclick="toggleMenu()" data-i18n="nav_services">Services</a>
+            <a href="#pricing" onclick="toggleMenu()" data-i18n="nav_pricing">Pricing</a>
+            <a href="#process" onclick="toggleMenu()" data-i18n="nav_process">Process</a>
+            <a href="#quiz" onclick="toggleMenu()" data-i18n="nav_cta">Get Quote →</a>
         </div>
     </nav>
 
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
                 <div class="hero-badge">
                     <span class="status-dot"></span>
-                    Available for Q1 2025
+                    <span data-i18n="hero_badge">Available for Q1 2025</span>
                 </div>
                 
                 <h1>
-                    We build
+                    <span data-i18n="hero_line1">We build</span>
                     <br>
-                    <span class="accent">scalable systems</span>
+                    <span class="accent" data-i18n="hero_line2">scalable systems</span>
                     <br>
-                    <span class="outline">that convert</span>
+                    <span class="outline" data-i18n="hero_line3">that convert</span>
                 </h1>
                 
-                <p class="hero-subtitle">
+                <p class="hero-subtitle" data-i18n="hero_subtitle">
                     Engineering-first digital agency. 150+ projects delivered. $50M+ revenue generated for clients.
                 </p>
                 
                 <div class="hero-cta-group">
-                    <a href="#quiz" class="btn-primary">Get Free Quote →</a>
-                    <a href="#pricing" class="btn-outline">View Pricing</a>
+                    <a href="#quiz" class="btn-primary" data-i18n="cta_primary">Get Free Quote →</a>
+                    <a href="#pricing" class="btn-outline" data-i18n="cta_secondary">View Pricing</a>
                 </div>
                 
                 <div class="hero-stats">
-                    <div class="hero-stat"><strong>150+</strong><span>Projects</span></div>
-                    <div class="hero-stat"><strong>$50M+</strong><span>Revenue</span></div>
-                    <div class="hero-stat"><strong>98%</strong><span>Retention</span></div>
+                    <div class="hero-stat">
+                        <strong>150+</strong>
+                        <span data-i18n="stat_projects">Projects</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>$50M+</strong>
+                        <span data-i18n="stat_revenue">Revenue</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>98%</strong>
+                        <span data-i18n="stat_retention">Retention</span>
+                    </div>
                 </div>
             </div>
             
@@ -852,76 +873,77 @@
         </div>
     </section>
 
+    <!-- Trust Bar -->
     <div class="trust-bar">
         <div class="trust-scroll">
-            <span class="trust-item">Trusted by 150+ companies</span>
-            <span class="trust-item">Average ROI 8.5x</span>
-            <span class="trust-item">100% on-time delivery</span>
-            <span class="trust-item">24/7 support included</span>
-            <span class="trust-item">Trusted by 150+ companies</span>
-            <span class="trust-item">Average ROI 8.5x</span>
-            <span class="trust-item">100% on-time delivery</span>
-            <span class="trust-item">24/7 support included</span>
+            <span class="trust-item" data-i18n="trust1">Trusted by 150+ companies</span>
+            <span class="trust-item" data-i18n="trust2">Average ROI 8.5x</span>
+            <span class="trust-item" data-i18n="trust3">100% on-time delivery</span>
+            <span class="trust-item" data-i18n="trust4">24/7 support included</span>
+            <span class="trust-item" data-i18n="trust1">Trusted by 150+ companies</span>
+            <span class="trust-item" data-i18n="trust2">Average ROI 8.5x</span>
+            <span class="trust-item" data-i18n="trust3">100% on-time delivery</span>
+            <span class="trust-item" data-i18n="trust4">24/7 support included</span>
         </div>
     </div>
 
-    <section class="problems" id="services">
-        <div class="problems-content">
-            <div class="section-header">
-                <div class="section-label">The Problem</div>
-                <h2 class="section-title">Why most agencies fail</h2>
+    <!-- WHITE SECTION: Problems -->
+    <section class="white-section" id="services">
+        <div class="section-header">
+            <div class="section-label" data-i18n="problems_label">The Problem</div>
+            <h2 class="section-title" data-i18n="problems_title">Why most agencies fail</h2>
+        </div>
+        
+        <div class="problems-grid">
+            <div class="problem-card">
+                <div class="problem-icon">🐌</div>
+                <h3 data-i18n="problem1_title">Slow Websites</h3>
+                <p data-i18n="problem1_desc">Most sites load in 3+ seconds. You lose 40% of visitors before they see your offer.</p>
             </div>
             
-            <div class="problems-grid">
-                <div class="problem-card">
-                    <div class="problem-icon">🐌</div>
-                    <h3>Slow Websites</h3>
-                    <p>Most sites load in 3+ seconds. You lose 40% of visitors before they see your offer.</p>
-                </div>
-                
-                <div class="problem-card">
-                    <div class="problem-icon">📉</div>
-                    <h3>No Conversion Focus</h3>
-                    <p>Pretty designs that don't sell. You need engineering that drives revenue.</p>
-                </div>
-                
-                <div class="problem-card">
-                    <div class="problem-icon">🔧</div>
-                    <h3>Technical Debt</h3>
-                    <p>Quick fixes that break later. We build systems that scale to millions.</p>
-                </div>
+            <div class="problem-card">
+                <div class="problem-icon">📉</div>
+                <h3 data-i18n="problem2_title">No Conversion Focus</h3>
+                <p data-i18n="problem2_desc">Pretty designs that don't sell. You need engineering that drives revenue.</p>
+            </div>
+            
+            <div class="problem-card">
+                <div class="problem-icon">🔧</div>
+                <h3 data-i18n="problem3_title">Technical Debt</h3>
+                <p data-i18n="problem3_desc">Quick fixes that break later. We build systems that scale to millions.</p>
             </div>
         </div>
     </section>
 
+    <!-- Solution -->
     <section class="solution">
         <div class="solution-content">
             <div class="solution-text">
-                <div class="section-label">The Solution</div>
-                <h2>Engineering that drives revenue</h2>
-                <p>We combine cutting-edge technology with conversion optimization to build systems that perform.</p>
+                <div class="section-label" data-i18n="solution_label">The Solution</div>
+                <h2 data-i18n="solution_title">Engineering that drives revenue</h2>
+                <p data-i18n="solution_desc">We combine cutting-edge technology with conversion optimization to build systems that perform.</p>
                 
                 <div class="solution-feature">
                     <div class="solution-feature-icon">⚡</div>
                     <div>
-                        <h4>Sub-Second Load Times</h4>
-                        <p>Our sites load in under 1 second. Better UX = higher conversions.</p>
+                        <h4 data-i18n="feature1_title">Sub-Second Load Times</h4>
+                        <p data-i18n="feature1_desc">Our sites load in under 1 second. Better UX = higher conversions.</p>
                     </div>
                 </div>
                 
                 <div class="solution-feature">
                     <div class="solution-feature-icon">🎯</div>
                     <div>
-                        <h4>Conversion-First Design</h4>
-                        <p>Every pixel optimized for revenue. Average 3x conversion lift.</p>
+                        <h4 data-i18n="feature2_title">Conversion-First Design</h4>
+                        <p data-i18n="feature2_desc">Every pixel optimized for revenue. Average 3x conversion lift.</p>
                     </div>
                 </div>
                 
                 <div class="solution-feature">
                     <div class="solution-feature-icon">🚀</div>
                     <div>
-                        <h4>Scale Without Limits</h4>
-                        <p>From 1K to 10M users without breaking. Built for growth.</p>
+                        <h4 data-i18n="feature3_title">Scale Without Limits</h4>
+                        <p data-i18n="feature3_desc">From 1K to 10M users without breaking. Built for growth.</p>
                     </div>
                 </div>
             </div>
@@ -945,98 +967,104 @@
         </div>
     </section>
 
-    <section class="process" id="process">
+    <!-- WHITE SECTION: Process -->
+    <section class="white-section process" id="process">
         <div class="process-content">
             <div class="section-header">
-                <div class="section-label">Our Process</div>
-                <h2 class="section-title">How we deliver</h2>
+                <div class="section-label" data-i18n="process_label">Our Process</div>
+                <h2 class="section-title" data-i18n="process_title">How we deliver</h2>
             </div>
             
             <div class="process-steps">
                 <div class="process-step" data-step="01">
-                    <h3>Discovery</h3>
-                    <p>Deep dive into your business, competitors, and goals. We identify conversion opportunities.</p>
+                    <h3 data-i18n="step1_title">Discovery</h3>
+                    <p data-i18n="step1_desc">Deep dive into your business, competitors, and goals. We identify conversion opportunities.</p>
                 </div>
                 
                 <div class="process-step" data-step="02">
-                    <h3>Strategy</h3>
-                    <p>Data-driven roadmap with clear KPIs. You know exactly what we're building and why.</p>
+                    <h3 data-i18n="step2_title">Strategy</h3>
+                    <p data-i18n="step2_desc">Data-driven roadmap with clear KPIs. You know exactly what we're building and why.</p>
                 </div>
                 
                 <div class="process-step" data-step="03">
-                    <h3>Build</h3>
-                    <p>Agile development with weekly demos. Full transparency, no surprises.</p>
+                    <h3 data-i18n="step3_title">Build</h3>
+                    <p data-i18n="step3_desc">Agile development with weekly demos. Full transparency, no surprises.</p>
                 </div>
                 
                 <div class="process-step" data-step="04">
-                    <h3>Optimize</h3>
-                    <p>Launch is just the beginning. We continuously A/B test and improve.</p>
+                    <h3 data-i18n="step4_title">Optimize</h3>
+                    <p data-i18n="step4_desc">Launch is just the beginning. We continuously A/B test and improve.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Pricing -->
     <section class="pricing" id="pricing">
         <div class="pricing-content">
             <div class="section-header">
-                <div class="section-label">Investment</div>
-                <h2 class="section-title">Transparent pricing</h2>
+                <div class="section-label" data-i18n="pricing_label">Investment</div>
+                <h2 class="section-title" data-i18n="pricing_title">Transparent pricing</h2>
             </div>
             
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <div class="pricing-name">Starter</div>
-                    <div class="pricing-price">$15k<span>/project</span></div>
-                    <div class="pricing-desc">Perfect for MVPs and landing pages.</div>
+                    <div class="pricing-name" data-i18n="tier_starter">Starter</div>
+                    <div class="pricing-price">$15k<span data-i18n="per_project">/project</span></div>
+                    <div class="pricing-desc" data-i18n="starter_desc">Perfect for MVPs and landing pages.</div>
+                    
                     <ul class="pricing-features">
-                        <li>5-page website</li>
-                        <li>Conversion optimization</li>
-                        <li>Mobile responsive</li>
-                        <li>2 weeks delivery</li>
+                        <li data-i18n="starter_feat1">5-page website</li>
+                        <li data-i18n="starter_feat2">Conversion optimization</li>
+                        <li data-i18n="starter_feat3">Mobile responsive</li>
+                        <li data-i18n="starter_feat4">2 weeks delivery</li>
                     </ul>
                     
-                    <button class="pricing-btn" onclick="window.location.href='#quiz'">Get Started</button>
+                    <button class="pricing-btn" onclick="window.location.href='#quiz'" data-i18n="btn_get_started">Get Started</button>
                 </div>
                 
                 <div class="pricing-card popular">
-                    <div class="popular-badge">Most Popular</div>
-                    <div class="pricing-name">Growth</div>
-                    <div class="pricing-price">$35k<span>/project</span></div>
-                    <div class="pricing-desc">Full web application with advanced features.</div>
+                    <div class="popular-badge" data-i18n="badge_popular">Most Popular</div>
+                    <div class="pricing-name" data-i18n="tier_growth">Growth</div>
+                    <div class="pricing-price">$35k<span data-i18n="per_project">/project</span></div>
+                    <div class="pricing-desc" data-i18n="growth_desc">Full web application with advanced features.</div>
+                    
                     <ul class="pricing-features">
-                        <li>Everything in Starter</li>
-                        <li>Custom web application</li>
-                        <li>User dashboard</li>
-                        <li>Payment integration</li>
-                        <li>30-day support</li>
+                        <li data-i18n="growth_feat1">Everything in Starter</li>
+                        <li data-i18n="growth_feat2">Custom web application</li>
+                        <li data-i18n="growth_feat3">User dashboard</li>
+                        <li data-i18n="growth_feat4">Payment integration</li>
+                        <li data-i18n="growth_feat5">30-day support</li>
                     </ul>
                     
-                    <button class="pricing-btn" onclick="window.location.href='#quiz'">Get Started</button>
+                    <button class="pricing-btn" onclick="window.location.href='#quiz'" data-i18n="btn_get_started">Get Started</button>
                 </div>
                 
                 <div class="pricing-card">
-                    <div class="pricing-name">Enterprise</div>
-                    <div class="pricing-price">Custom</span></div>
-                    <div class="pricing-desc">Complex systems for established businesses.</div>
+                    <div class="pricing-name" data-i18n="tier_enterprise">Enterprise</div>
+                    <div class="pricing-price" data-i18n="custom_price">Custom</span></div>
+                    <div class="pricing-desc" data-i18n="enterprise_desc">Complex systems for established businesses.</div>
+                    
                     <ul class="pricing-features">
-                        <li>Everything in Growth</li>
-                        <li>Custom integrations</li>
-                        <li>Dedicated team</li>
-                        <li>SLA guarantee</li>
-                        <li>White-label options</li>
+                        <li data-i18n="enterprise_feat1">Everything in Growth</li>
+                        <li data-i18n="enterprise_feat2">Custom integrations</li>
+                        <li data-i18n="enterprise_feat3">Dedicated team</li>
+                        <li data-i18n="enterprise_feat4">SLA guarantee</li>
+                        <li data-i18n="enterprise_feat5">White-label options</li>
                     </ul>
                     
-                    <button class="pricing-btn" onclick="window.location.href='#quiz'">Contact Us</button>
+                    <button class="pricing-btn" onclick="window.location.href='#quiz'" data-i18n="btn_contact">Contact Us</button>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Quiz -->
     <section class="quiz-section" id="quiz">
         <div class="quiz-content">
             <div class="section-header">
-                <div class="section-label">Start Your Project</div>
-                <h2 class="section-title">Get your custom quote</h2>
+                <div class="section-label" data-i18n="quiz_label">Start Your Project</div>
+                <h2 class="section-title" data-i18n="quiz_title">Get your custom quote</h2>
             </div>
             
             <div class="quiz-box">
@@ -1047,87 +1075,80 @@
                     <div class="quiz-step-indicator"></div>
                 </div>
                 
+                <!-- Quiz steps here -->
                 <div class="quiz-step-content active" data-step="1">
-                    <h3>What do you need?</h3>
+                    <h3 data-i18n="q1_title">What do you need?</h3>
                     
                     <div class="quiz-options">
                         <div class="quiz-option" onclick="nextStep(2)">
                             <div class="quiz-option-icon">🌐</div>
                             <div class="quiz-option-text">
-                                <h4>Website / Landing Page</h4>
-                                <p>High-converting site to capture leads</p>
+                                <h4 data-i18n="opt1_title">Website / Landing Page</h4>
+                                <p data-i18n="opt1_desc">High-converting site to capture leads</p>
                             </div>
                         </div>
                         
                         <div class="quiz-option" onclick="nextStep(2)">
                             <div class="quiz-option-icon">⚙️</div>
                             <div class="quiz-option-text">
-                                <h4>Web Application</h4>
-                                <p>Custom platform with dashboards</p>
+                                <h4 data-i18n="opt2_title">Web Application</h4>
+                                <p data-i18n="opt2_desc">Custom platform with dashboards</p>
                             </div>
                         </div>
                         
                         <div class="quiz-option" onclick="nextStep(2)">
                             <div class="quiz-option-icon">🛒</div>
                             <div class="quiz-option-text">
-                                <h4>E-commerce</h4>
-                                <p>Online store with payments</p>
-                            </div>
-                        </div>
-                        
-                        <div class="quiz-option" onclick="nextStep(2)">
-                            <div class="quiz-option-icon">🔄</div>
-                            <div class="quiz-option-text">
-                                <h4>Redesign / Migration</h4>
-                                <p>Improve existing site</p>
+                                <h4 data-i18n="opt3_title">E-commerce</h4>
+                                <p data-i18n="opt3_desc">Online store with payments</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="quiz-step-content" data-step="2">
-                    <h3>What's your timeline?</h3>
+                    <h3 data-i18n="q2_title">What's your timeline?</h3>
                     
                     <div class="quiz-options">
                         <div class="quiz-option" onclick="nextStep(3)">
                             <div class="quiz-option-icon">🏃</div>
                             <div class="quiz-option-text">
-                                <h4>ASAP (Rush)</h4>
-                                <p>Under 2 weeks — 25% rush fee</p>
+                                <h4 data-i18n="time1_title">ASAP (Rush)</h4>
+                                <p data-i18n="time1_desc">Under 2 weeks — 25% rush fee</p>
                             </div>
                         </div>
                         
                         <div class="quiz-option" onclick="nextStep(3)">
                             <div class="quiz-option-icon">📅</div>
                             <div class="quiz-option-text">
-                                <h4>Standard (1-2 months)</h4>
-                                <p>Optimal quality/time balance</p>
+                                <h4 data-i18n="time2_title">Standard (1-2 months)</h4>
+                                <p data-i18n="time2_desc">Optimal quality/time balance</p>
                             </div>
                         </div>
                         
                         <div class="quiz-option" onclick="nextStep(3)">
                             <div class="quiz-option-icon">🎯</div>
                             <div class="quiz-option-text">
-                                <h4>Flexible (3+ months)</h4>
-                                <p>Perfect every detail</p>
+                                <h4 data-i18n="time3_title">Flexible (3+ months)</h4>
+                                <p data-i18n="time3_desc">Perfect every detail</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="quiz-nav">
-                        <button class="quiz-btn secondary" onclick="prevStep(1)">← Back</button>
+                        <button class="quiz-btn secondary" onclick="prevStep(1)" data-i18n="btn_back">← Back</button>
                     </div>
                 </div>
                 
                 <div class="quiz-step-content" data-step="3">
-                    <h3>What's your budget?</h3>
+                    <h3 data-i18n="q3_title">What's your budget?</h3>
                     
                     <div class="quiz-options">
                         <div class="quiz-option" onclick="nextStep(4)">
                             <div class="quiz-option-icon">💰</div>
                             <div class="quiz-option-text">
                                 <h4>$10k – $25k</h4>
-                                <p>Starter package</p>
+                                <p data-i18n="budget1_desc">Starter package</p>
                             </div>
                         </div>
                         
@@ -1135,7 +1156,7 @@
                             <div class="quiz-option-icon">💎</div>
                             <div class="quiz-option-text">
                                 <h4>$25k – $50k</h4>
-                                <p>Growth package</p>
+                                <p data-i18n="budget2_desc">Growth package</p>
                             </div>
                         </div>
                         
@@ -1143,64 +1164,65 @@
                             <div class="quiz-option-icon">🏢</div>
                             <div class="quiz-option-text">
                                 <h4>$50k+</h4>
-                                <p>Enterprise solution</p>
+                                <p data-i18n="budget3_desc">Enterprise solution</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="quiz-nav">
-                        <button class="quiz-btn secondary" onclick="prevStep(2)">← Back</button>
+                        <button class="quiz-btn secondary" onclick="prevStep(2)" data-i18n="btn_back">← Back</button>
                     </div>
                 </div>
                 
                 <div class="quiz-step-content" data-step="4">
-                    <h3>Your details:</h3>
+                    <h3 data-i18n="q4_title">Your details:</h3>
                     
                     <div style="margin-bottom:24px">
-                        <input type="text" class="form-input" placeholder="Your name" style="margin-bottom:12px">
-                        <input type="email" class="form-input" placeholder="Work email" style="margin-bottom:12px">
-                        <input type="text" class="form-input" placeholder="Company name">
+                        <input type="text" class="form-input" data-i18n-placeholder="placeholder_name" placeholder="Your name" style="margin-bottom:12px">
+                        <input type="email" class="form-input" data-i18n-placeholder="placeholder_email" placeholder="Work email" style="margin-bottom:12px">
+                        <input type="text" class="form-input" data-i18n-placeholder="placeholder_company" placeholder="Company name">
                     </div>
                     
-                    <button class="quiz-btn" onclick="showSuccess()" style="width:100%">
+                    <button class="quiz-btn" onclick="showSuccess()" style="width:100%" data-i18n="btn_get_quote">
                         Get My Quote →
                     </button>
                     
                     <p style="text-align:center;margin-top:16px;color:var(--text-muted);font-size:13px">
-                        🔒 We respect your privacy. No spam.
+                        🔒 <span data-i18n="privacy_note">We respect your privacy. No spam.</span>
                     </p>
                     
                     <div class="quiz-nav" style="border:none;margin-top:24px;padding-top:0">
-                        <button class="quiz-btn secondary" onclick="prevStep(3)">← Back</button>
+                        <button class="quiz-btn secondary" onclick="prevStep(3)" data-i18n="btn_back">← Back</button>
                     </div>
                 </div>
                 
                 <div class="quiz-step-content" data-step="success">
                     <div style="text-align:center;padding:20px 0">
-                        <div style="width:80px;height:80px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 24px;box-shadow:0 0 40px var(--accent-glow);animation:scaleIn 0.5s ease">
+                        <div style="width:80px;height:80px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 24px">
                             ✓
                         </div>
                         
-                        <h3 style="margin-bottom:12px;font-size:24px">Quote request sent! 🎉</h3>
+                        <h3 style="margin-bottom:12px;font-size:24px" data-i18n="success_title">Quote request sent! 🎉</h3>
                         
-                        <p style="color:var(--text-dim);font-size:15px;margin-bottom:24px">
+                        <p style="color:var(--text-dim);font-size:15px;margin-bottom:24px" data-i18n="success_desc">
                             We'll analyze your requirements and respond within 24 hours.
                         </p>
                         
                         <div style="background:var(--bg);padding:20px;border-radius:8px;border:1px solid var(--border);text-align:left">
-                            <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">What happens next?</div>
+                            <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px" data-i18n="next_steps">What happens next?</div>
+                            
                             <div style="display:flex;flex-direction:column;gap:10px">
                                 <div style="display:flex;align-items:center;gap:10px">
                                     <span style="color:var(--accent);font-weight:600">1.</span>
-                                    <span>We review your project details</span>
+                                    <span data-i18n="step_next1">We review your project details</span>
                                 </div>
                                 <div style="display:flex;align-items:center;gap:10px">
                                     <span style="color:var(--accent);font-weight:600">2.</span>
-                                    <span>Schedule a free strategy call</span>
+                                    <span data-i18n="step_next2">Schedule a free strategy call</span>
                                 </div>
                                 <div style="display:flex;align-items:center;gap:10px">
                                     <span style="color:var(--accent);font-weight:600">3.</span>
-                                    <span>Receive detailed proposal</span>
+                                    <span data-i18n="step_next3">Receive detailed proposal</span>
                                 </div>
                             </div>
                         </div>
@@ -1210,16 +1232,17 @@
         </div>
     </section>
 
+    <!-- Testimonials -->
     <section class="testimonials">
         <div class="testimonials-content">
             <div class="section-header">
-                <div class="section-label">Testimonials</div>
-                <h2 class="section-title">Client results</h2>
+                <div class="section-label" data-i18n="testimonials_label">Testimonials</div>
+                <h2 class="section-title" data-i18n="testimonials_title">Client results</h2>
             </div>
             
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"Nexus transformed our online presence. Website loads in 0.8s and conversions are up 340%."</div>
+                    <div class="testimonial-text" data-i18n="testimonial1">"Nexus transformed our online presence. Website loads in 0.8s and conversions are up 340%."</div>
                     
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">👨‍💼</div>
@@ -1229,7 +1252,7 @@
                 </div>
                 
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"Finally an agency that understands both design AND engineering. 100k users, zero downtime."</div>
+                    <div class="testimonial-text" data-i18n="testimonial2">"Finally an agency that understands both design AND engineering. 100k users, zero downtime."</div>
                     
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">👩‍💼</div>
@@ -1239,7 +1262,7 @@
                 </div>
                 
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"$35k investment generated $2.4M in revenue. Nexus builds money machines."</div>
+                    <div class="testimonial-text" data-i18n="testimonial3">"$35k investment generated $2.4M in revenue. Nexus builds money machines."</div>
                     
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">👨‍💼</div>
@@ -1251,18 +1274,20 @@
         </div>
     </section>
 
+    <!-- Final CTA -->
     <section class="final-cta">
-        <h2>Ready to scale?</h2>
-        <p>Join 150+ companies that trust Nexus. Your competitors are optimizing—don't get left behind.</p>
+        <h2 data-i18n="final_title">Ready to scale?</h2>
+        <p data-i18n="final_desc">Join 150+ companies that trust Nexus. Your competitors are optimizing—don't get left behind.</p>
         
-        <a href="#quiz" class="btn-primary" style="display:inline-block">Get Free Quote →</a>
+        <a href="#quiz" class="btn-primary" style="display:inline-block" data-i18n="final_cta">Get Free Quote →</a>
     </section>
 
+    <!-- Footer - FIXED -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
                 <a href="#" class="logo">NEXUS</a>
-                <p>Engineering-first agency. Building revenue systems since 2018.</p>
+                <p data-i18n="footer_desc">Engineering-first agency. Building revenue systems since 2018.</p>
                 
                 <div class="footer-social">
                     <a href="#">𝕏</a>
@@ -1272,90 +1297,287 @@
             </div>
             
             <div class="footer-col">
-                <h4>Services</h4>
-                <a href="#">Web Development</a>
-                <a href="#">Web Apps</a>
-                <a href="#">E-commerce</a>
+                <h4 data-i18n="footer_services">Services</h4>
+                <a href="#" data-i18n="footer_link1">Web Development</a>
+                <a href="#" data-i18n="footer_link2">Web Apps</a>
+                <a href="#" data-i18n="footer_link3">E-commerce</a>
             </div>
             
             <div class="footer-col">
-                <h4>Company</h4>
-                <a href="#">About</a>
-                <a href="#">Careers</a>
-                <a href="#">Contact</a>
+                <h4 data-i18n="footer_company">Company</h4>
+                <a href="#" data-i18n="footer_link4">About</a>
+                <a href="#" data-i18n="footer_link5">Careers</a>
+                <a href="#" data-i18n="footer_link6">Contact</a>
             </div>
             
             <div class="footer-col">
-                <h4>Legal</h4>
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
+                <h4 data-i18n="footer_legal">Legal</h4>
+                <a href="#" data-i18n="footer_link7">Privacy</a>
+                <a href="#" data-i18n="footer_link8">Terms</a>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <span>© 2024 NEXUS. All systems operational.</span>
+            <span>© 2024 NEXUS. <span data-i18n="footer_copy">All systems operational.</span></span>
             <span>Made in Vienna 🇦🇹</span>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu
-        function toggleMenu(){
-            const menu=document.getElementById('mobileMenu');
-            const toggle=document.getElementById('mobileToggle');
-            menu.classList.toggle('active');
-            toggle.classList.toggle('active');
+        // Translations
+        const translations = {
+            en: {
+                nav_services: 'Services', nav_pricing: 'Pricing', nav_process: 'Process', nav_cta: 'Get Quote',
+                hero_badge: 'Available for Q1 2025', hero_line1: 'We build', hero_line2: 'scalable systems', hero_line3: 'that convert',
+                hero_subtitle: 'Engineering-first digital agency. 150+ projects delivered. $50M+ revenue generated for clients.',
+                cta_primary: 'Get Free Quote →', cta_secondary: 'View Pricing',
+                stat_projects: 'Projects', stat_revenue: 'Revenue', stat_retention: 'Retention',
+                trust1: 'Trusted by 150+ companies', trust2: 'Average ROI 8.5x', trust3: '100% on-time delivery', trust4: '24/7 support included',
+                problems_label: 'The Problem', problems_title: 'Why most agencies fail',
+                problem1_title: 'Slow Websites', problem1_desc: 'Most sites load in 3+ seconds. You lose 40% of visitors before they see your offer.',
+                problem2_title: 'No Conversion Focus', problem2_desc: 'Pretty designs that don\'t sell. You need engineering that drives revenue.',
+                problem3_title: 'Technical Debt', problem3_desc: 'Quick fixes that break later. We build systems that scale to millions.',
+                solution_label: 'The Solution', solution_title: 'Engineering that drives revenue', solution_desc: 'We combine cutting-edge technology with conversion optimization to build systems that perform.',
+                feature1_title: 'Sub-Second Load Times', feature1_desc: 'Our sites load in under 1 second. Better UX = higher conversions.',
+                feature2_title: 'Conversion-First Design', feature2_desc: 'Every pixel optimized for revenue. Average 3x conversion lift.',
+                feature3_title: 'Scale Without Limits', feature3_desc: 'From 1K to 10M users without breaking. Built for growth.',
+                process_label: 'Our Process', process_title: 'How we deliver',
+                step1_title: 'Discovery', step1_desc: 'Deep dive into your business, competitors, and goals. We identify conversion opportunities.',
+                step2_title: 'Strategy', step2_desc: 'Data-driven roadmap with clear KPIs. You know exactly what we\'re building and why.',
+                step3_title: 'Build', step3_desc: 'Agile development with weekly demos. Full transparency, no surprises.',
+                step4_title: 'Optimize', step4_desc: 'Launch is just the beginning. We continuously A/B test and improve.',
+                pricing_label: 'Investment', pricing_title: 'Transparent pricing',
+                tier_starter: 'Starter', tier_growth: 'Growth', tier_enterprise: 'Enterprise',
+                per_project: '/project', custom_price: 'Custom',
+                starter_desc: 'Perfect for MVPs and landing pages.', growth_desc: 'Full web application with advanced features.', enterprise_desc: 'Complex systems for established businesses.',
+                starter_feat1: '5-page website', starter_feat2: 'Conversion optimization', starter_feat3: 'Mobile responsive', starter_feat4: '2 weeks delivery',
+                growth_feat1: 'Everything in Starter', growth_feat2: 'Custom web application', growth_feat3: 'User dashboard', growth_feat4: 'Payment integration', growth_feat5: '30-day support',
+                enterprise_feat1: 'Everything in Growth', enterprise_feat2: 'Custom integrations', enterprise_feat3: 'Dedicated team', enterprise_feat4: 'SLA guarantee', enterprise_feat5: 'White-label options',
+                badge_popular: 'Most Popular', btn_get_started: 'Get Started', btn_contact: 'Contact Us',
+                quiz_label: 'Start Your Project', quiz_title: 'Get your custom quote',
+                q1_title: 'What do you need?', q2_title: 'What\'s your timeline?', q3_title: 'What\'s your budget?', q4_title: 'Your details:',
+                opt1_title: 'Website / Landing Page', opt1_desc: 'High-converting site to capture leads',
+                opt2_title: 'Web Application', opt2_desc: 'Custom platform with dashboards',
+                opt3_title: 'E-commerce', opt3_desc: 'Online store with payments',
+                time1_title: 'ASAP (Rush)', time1_desc: 'Under 2 weeks — 25% rush fee',
+                time2_title: 'Standard (1-2 months)', time2_desc: 'Optimal quality/time balance',
+                time3_title: 'Flexible (3+ months)', time3_desc: 'Perfect every detail',
+                budget1_desc: 'Starter package', budget2_desc: 'Growth package', budget3_desc: 'Enterprise solution',
+                placeholder_name: 'Your name', placeholder_email: 'Work email', placeholder_company: 'Company name',
+                btn_get_quote: 'Get My Quote →', btn_back: '← Back',
+                privacy_note: 'We respect your privacy. No spam.',
+                success_title: 'Quote request sent! 🎉', success_desc: 'We\'ll analyze your requirements and respond within 24 hours.',
+                next_steps: 'What happens next?', step_next1: 'We review your project details', step_next2: 'Schedule a free strategy call', step_next3: 'Receive detailed proposal',
+                testimonials_label: 'Testimonials', testimonials_title: 'Client results',
+                testimonial1: '"Nexus transformed our online presence. Website loads in 0.8s and conversions are up 340%."',
+                testimonial2: '"Finally an agency that understands both design AND engineering. 100k users, zero downtime."',
+                testimonial3: '"$35k investment generated $2.4M in revenue. Nexus builds money machines."',
+                final_title: 'Ready to scale?', final_desc: 'Join 150+ companies that trust Nexus. Your competitors are optimizing—don\'t get left behind.', final_cta: 'Get Free Quote →',
+                footer_desc: 'Engineering-first agency. Building revenue systems since 2018.',
+                footer_services: 'Services', footer_company: 'Company', footer_legal: 'Legal',
+                footer_link1: 'Web Development', footer_link2: 'Web Apps', footer_link3: 'E-commerce',
+                footer_link4: 'About', footer_link5: 'Careers', footer_link6: 'Contact',
+                footer_link7: 'Privacy', footer_link8: 'Terms',
+                footer_copy: 'All systems operational.'
+            },
+            de: {
+                nav_services: 'Leistungen', nav_pricing: 'Preise', nav_process: 'Prozess', nav_cta: 'Angebot',
+                hero_badge: 'Verfügbar für Q1 2025', hero_line1: 'Wir bauen', hero_line2: 'skalierbare Systeme', hero_line3: 'die konvertieren',
+                hero_subtitle: 'Engineering-first Digitalagentur. 150+ Projekte umgesetzt. $50M+ Umsatz für Kunden generiert.',
+                cta_primary: 'Kostenloses Angebot →', cta_secondary: 'Preise ansehen',
+                stat_projects: 'Projekte', stat_revenue: 'Umsatz', stat_retention: 'Bindung',
+                trust1: 'Vertrauen von 150+ Unternehmen', trust2: 'Ø ROI 8,5x', trust3: '100% pünktliche Lieferung', trust4: '24/7 Support inklusive',
+                problems_label: 'Das Problem', problems_title: 'Warum die meisten Agenturen scheitern',
+                problem1_title: 'Langsame Websites', problem1_desc: 'Die meisten Seiten laden 3+ Sekunden. Sie verlieren 40% der Besucher vor dem Angebot.',
+                problem2_title: 'Kein Fokus auf Conversion', problem2_desc: 'Hübsche Designs, die nicht verkaufen. Sie brauchen Engineering, das Umsatz generiert.',
+                problem3_title: 'Technische Schulden', problem3_desc: 'Schnelle Fixes, die später brechen. Wir bauen Systeme, die Millionen skalieren.',
+                solution_label: 'Die Lösung', solution_title: 'Engineering, das Umsatz generiert', solution_desc: 'Wir kombinieren modernste Technologie mit Conversion-Optimierung für Systeme, die performen.',
+                feature1_title: 'Ladezeit unter 1 Sekunde', feature1_desc: 'Unsere Seiten laden in unter 1 Sekunde. Bessere UX = höhere Conversions.',
+                feature2_title: 'Conversion-First Design', feature2_desc: 'Jedes Pixel optimiert für Umsatz. Durchschnittlich 3x Conversion-Steigerung.',
+                feature3_title: 'Unbegrenzte Skalierung', feature3_desc: 'Von 1K bis 10M Nutzer ohne Probleme. Gebaut für Wachstum.',
+                process_label: 'Unser Prozess', process_title: 'Wie wir liefern',
+                step1_title: 'Discovery', step1_desc: 'Tiefer Einblick in Ihr Business, Wettbewerber und Ziele. Wir identifizieren Conversion-Potenziale.',
+                step2_title: 'Strategie', step2_desc: 'Datengestützte Roadmap mit klaren KPIs. Sie wissen genau, was wir bauen und warum.',
+                step3_title: 'Entwicklung', step3_desc: 'Agile Entwicklung mit wöchentlichen Demos. Volle Transparenz, keine Überraschungen.',
+                step4_title: 'Optimierung', step4_desc: 'Launch ist nur der Anfang. Wir testen und verbessern kontinuierlich.',
+                pricing_label: 'Investition', pricing_title: 'Transparente Preise',
+                tier_starter: 'Starter', tier_growth: 'Growth', tier_enterprise: 'Enterprise',
+                per_project: '/Projekt', custom_price: 'Individuell',
+                starter_desc: 'Perfekt für MVPs und Landing Pages.', growth_desc: 'Vollständige Web-App mit erweiterten Funktionen.', enterprise_desc: 'Komplexe Systeme für etablierte Unternehmen.',
+                starter_feat1: '5-Seiten Website', starter_feat2: 'Conversion-Optimierung', starter_feat3: 'Mobile responsive', starter_feat4: '2 Wochen Lieferzeit',
+                growth_feat1: 'Alles aus Starter', growth_feat2: 'Individuelle Web-App', growth_feat3: 'User Dashboard', growth_feat4: 'Zahlungsintegration', growth_feat5: '30-Tage Support',
+                enterprise_feat1: 'Alles aus Growth', enterprise_feat2: 'Individuelle Integrationen', enterprise_feat3: 'Dediziertes Team', enterprise_feat4: 'SLA-Garantie', enterprise_feat5: 'White-Label Optionen',
+                badge_popular: 'Beliebt', btn_get_started: 'Loslegen', btn_contact: 'Kontakt',
+                quiz_label: 'Projekt starten', quiz_title: 'Ihr individuelles Angebot',
+                q1_title: 'Was brauchen Sie?', q2_title: 'Wie ist Ihr Zeitplan?', q3_title: 'Was ist Ihr Budget?', q4_title: 'Ihre Daten:',
+                opt1_title: 'Website / Landing Page', opt1_desc: 'High-Converting Seite für Leads',
+                opt2_title: 'Web Application', opt2_desc: 'Individuelle Plattform mit Dashboards',
+                opt3_title: 'E-commerce', opt3_desc: 'Online-Shop mit Zahlungen',
+                time1_title: 'ASAP (Express)', time1_desc: 'Unter 2 Wochen — 25% Expressgebühr',
+                time2_title: 'Standard (1-2 Monate)', time2_desc: 'Optimale Qualität/Zeit Balance',
+                time3_title: 'Flexibel (3+ Monate)', time3_desc: 'Jedes Detail perfekt',
+                budget1_desc: 'Starter Paket', budget2_desc: 'Growth Paket', budget3_desc: 'Enterprise Lösung',
+                placeholder_name: 'Ihr Name', placeholder_email: 'E-Mail', placeholder_company: 'Unternehmen',
+                btn_get_quote: 'Angebot anfordern →', btn_back: '← Zurück',
+                privacy_note: 'Wir respektieren Ihre Privatsphäre. Kein Spam.',
+                success_title: 'Anfrage gesendet! 🎉', success_desc: 'Wir analysieren Ihre Anforderungen und antworten innerhalb von 24 Stunden.',
+                next_steps: 'Was passiert als nächstes?', step_next1: 'Wir prüfen Ihre Projektdetails', step_next2: 'Kostenloses Strategie-Gespräch', step_next3: 'Detailliertes Angebot erhalten',
+                testimonials_label: 'Kundenstimmen', testimonials_title: 'Kundenergebnisse',
+                testimonial1: '"Nexus hat unsere Online-Präsenz transformiert. Website lädt in 0,8s, Conversions +340%."',
+                testimonial2: '"Endlich eine Agentur, die Design UND Engineering versteht. 100k Nutzer, null Ausfälle."',
+                testimonial3: '"$35k Investition generierte $2,4M Umsatz. Nexus baut Geldmaschinen."',
+                final_title: 'Bereit zu skalieren?', final_desc: 'Schließen Sie sich 150+ Unternehmen an, die Nexus vertrauen.', final_cta: 'Kostenloses Angebot →',
+                footer_desc: 'Engineering-first Agentur. Umsatzsysteme seit 2018.',
+                footer_services: 'Leistungen', footer_company: 'Unternehmen', footer_legal: 'Rechtliches',
+                footer_link1: 'Webentwicklung', footer_link2: 'Web Apps', footer_link3: 'E-commerce',
+                footer_link4: 'Über uns', footer_link5: 'Karriere', footer_link6: 'Kontakt',
+                footer_link7: 'Datenschutz', footer_link8: 'AGB',
+                footer_copy: 'Alle Systeme operational.'
+            },
+            ru: {
+                nav_services: 'Услуги', nav_pricing: 'Цены', nav_process: 'Процесс', nav_cta: 'Запросить',
+                hero_badge: 'Доступны для Q1 2025', hero_line1: 'Мы строим', hero_line2: 'масштабируемые системы', hero_line3: 'которые конвертируют',
+                hero_subtitle: 'Digital-агентство с фокусом на инженерию. 150+ проектов. $50M+ выручки для клиентов.',
+                cta_primary: 'Бесплатная консультация →', cta_secondary: 'Смотреть цены',
+                stat_projects: 'Проектов', stat_revenue: 'Выручка', stat_retention: 'Удержание',
+                trust1: '150+ компаний доверяют', trust2: 'Средний ROI 8.5x', trust3: '100% в срок', trust4: 'Поддержка 24/7',
+                problems_label: 'Проблема', problems_title: 'Почему другие агентства проваливают',
+                problem1_title: 'Медленные сайты', problem1_desc: 'Большинство сайтов грузятся 3+ секунд. Вы теряете 40% посетителей.',
+                problem2_title: 'Нет фокуса на конверсию', problem2_desc: 'Красивый дизайн, который не продает. Нужна инженерия для роста выручки.',
+                problem3_title: 'Технический долг', problem3_desc: 'Быстрые фиксы, которые ломаются. Мы строим системы на миллионы пользователей.',
+                solution_label: 'Решение', solution_title: 'Инженерия для роста выручки', solution_desc: 'Мы объединяем передовые технологии с оптимизацией конверсии.',
+                feature1_title: 'Загрузка за 1 секунду', feature1_desc: 'Наши сайты грузятся менее чем за 1 секунду. Лучший UX = выше конверсия.',
+                feature2_title: 'Design для конверсии', feature2_desc: 'Каждый пиксель оптимизирован для выручки. В среднем рост конверсии в 3x.',
+                feature3_title: 'Масштаб без лимитов', feature3_desc: 'От 1K до 10M пользователей без сбоев. Построено для роста.',
+                process_label: 'Процесс', process_title: 'Как мы работаем',
+                step1_title: 'Исследование', step1_desc: 'Глубокое погружение в ваш бизнес, конкурентов и цели. Находим возможности для роста.',
+                step2_title: 'Стратегия', step2_desc: 'Data-driven роадмап с четкими KPI. Вы точно знаете, что и зачем мы строим.',
+                step3_title: 'Разработка', step3_desc: 'Agile разработка с еженедельными демо. Полная прозрачность, без сюрпризов.',
+                step4_title: 'Оптимизация', step4_desc: 'Запуск — это только начало. Мы постоянно тестируем и улучшаем.',
+                pricing_label: 'Инвестиции', pricing_title: 'Прозрачные цены',
+                tier_starter: 'Starter', tier_growth: 'Growth', tier_enterprise: 'Enterprise',
+                per_project: '/проект', custom_price: 'Индивидуально',
+                starter_desc: 'Идеально для MVP и лендингов.', growth_desc: 'Полноценное веб-приложение с продвинутыми фичами.', enterprise_desc: 'Сложные системы для крупных компаний.',
+                starter_feat1: 'Сайт 5 страниц', starter_feat2: 'Оптимизация конверсии', starter_feat3: 'Мобильная версия', starter_feat4: '2 недели разработки',
+                growth_feat1: 'Всё из Starter', growth_feat2: 'Кастомное приложение', growth_feat3: 'User dashboard', growth_feat4: 'Интеграция платежей', growth_feat5: '30 дней поддержки',
+                enterprise_feat1: 'Всё из Growth', enterprise_feat2: 'Кастомные интеграции', enterprise_feat3: 'Выделенная команда', enterprise_feat4: 'SLA гарантия', enterprise_feat5: 'White-label',
+                badge_popular: 'Популярный', btn_get_started: 'Начать', btn_contact: 'Связаться',
+                quiz_label: 'Начать проект', quiz_title: 'Получить индивидуальную оценку',
+                q1_title: 'Что вам нужно?', q2_title: 'Какие сроки?', q3_title: 'Какой бюджет?', q4_title: 'Ваши данные:',
+                opt1_title: 'Сайт / Лендинг', opt1_desc: 'Высококонверсионный сайт для лидов',
+                opt2_title: 'Веб-приложение', opt2_desc: 'Кастомная платформа с дашбордами',
+                opt3_title: 'E-commerce', opt3_desc: 'Онлайн-магазин с оплатой',
+                time1_title: 'ASAP (Срочно)', time1_desc: 'До 2 недель — +25% к стоимости',
+                time2_title: 'Стандарт (1-2 мес)', time2_desc: 'Оптимальный баланс качества и времени',
+                time3_title: 'Гибкий (3+ мес)', time3_desc: 'Всё идеально до мелочей',
+                budget1_desc: 'Starter пакет', budget2_desc: 'Growth пакет', budget3_desc: 'Enterprise решение',
+                placeholder_name: 'Ваше имя', placeholder_email: 'Email', placeholder_company: 'Компания',
+                btn_get_quote: 'Получить оценку →', btn_back: '← Назад',
+                privacy_note: 'Мы уважаем вашу приватность. Никакого спама.',
+                success_title: 'Запрос отправлен! 🎉', success_desc: 'Мы проанализируем ваш проект и ответим в течение 24 часов.',
+                next_steps: 'Что дальше?', step_next1: 'Анализируем детали проекта', step_next2: 'Бесплатная консультация', step_next3: 'Детальное предложение',
+                testimonials_label: 'Отзывы', testimonials_title: 'Результаты клиентов',
+                testimonial1: '"Nexus полностью трансформировал нашу онлайн-презентацию. Сайт грузится за 0.8с, конверсия +340%."',
+                testimonial2: '"Наконец-то агентство, которое понимает и дизайн, И инженерию. 100к пользователей, ноль простоев."',
+                testimonial3: '"$35k инвестиций сгенерировали $2.4M выручки. Nexus строит денежные машины."',
+                final_title: 'Готовы масштабироваться?', final_desc: 'Присоединяйтесь к 150+ компаниям, которые доверяют Nexus.', final_cta: 'Бесплатная консультация →',
+                footer_desc: 'Агентство с фокусом на инженерию. Строим системы для роста выручки с 2018.',
+                footer_services: 'Услуги', footer_company: 'Компания', footer_legal: 'Правовая инфо',
+                footer_link1: 'Веб-разработка', footer_link2: 'Веб-приложения', footer_link3: 'E-commerce',
+                footer_link4: 'О нас', footer_link5: 'Карьера', footer_link6: 'Контакты',
+                footer_link7: 'Приватность', footer_link8: 'Условия',
+                footer_copy: 'Все системы работают.'
+            }
+        };
+
+        let currentLang = 'en';
+
+        function updateContent() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[currentLang][key]) {
+                    el.placeholder = translations[currentLang][key];
+                }
+            });
         }
-        
-        // Language Switcher
-        function toggleLang(){
+
+        function toggleLang() {
             document.getElementById('langSwitcher').classList.toggle('open');
         }
-        function setLang(lang){
-            document.getElementById('currentLang').textContent=lang.toUpperCase();
-            document.querySelectorAll('.lang-option').forEach(opt=>opt.classList.remove('active'));
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('currentLang').textContent = lang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
             event.target.classList.add('active');
             document.getElementById('langSwitcher').classList.remove('open');
+            updateContent();
+            localStorage.setItem('nexus-lang', lang);
         }
-        
+
+        // Load saved language
+        const savedLang = localStorage.getItem('nexus-lang');
+        if (savedLang && savedLang !== 'en') {
+            currentLang = savedLang;
+            document.getElementById('currentLang').textContent = savedLang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.toggle('active', opt.textContent.toLowerCase().includes(savedLang === 'de' ? 'deutsch' : 'русский'));
+            });
+            updateContent();
+        }
+
         // Close dropdowns on outside click
-        document.addEventListener('click',(e)=>{
-            if(!e.target.closest('.lang-switcher')){
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-switcher')) {
                 document.getElementById('langSwitcher').classList.remove('open');
             }
         });
-        
+
+        // Mobile Menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const toggle = document.getElementById('mobileToggle');
+            menu.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
         // Quiz
-        let currentStep=1;
-        function updateProgress(){
-            document.querySelectorAll('.quiz-step-indicator').forEach((ind,i)=>{
-                ind.classList.toggle('active',i<currentStep);
+        let currentStep = 1;
+        function updateProgress() {
+            document.querySelectorAll('.quiz-step-indicator').forEach((ind, i) => {
+                ind.classList.toggle('active', i < currentStep);
             });
         }
-        function nextStep(step){
+        function nextStep(step) {
             document.querySelector(`.quiz-step-content[data-step="${currentStep}"]`).classList.remove('active');
             document.querySelector(`.quiz-step-content[data-step="${step}"]`).classList.add('active');
-            currentStep=step;
+            currentStep = step;
             updateProgress();
         }
-        function prevStep(step){
+        function prevStep(step) {
             document.querySelector(`.quiz-step-content[data-step="${currentStep}"]`).classList.remove('active');
             document.querySelector(`.quiz-step-content[data-step="${step}"]`).classList.add('active');
-            currentStep=step;
+            currentStep = step;
             updateProgress();
         }
-        function showSuccess(){
+        function showSuccess() {
             document.querySelector(`.quiz-step-content[data-step="${currentStep}"]`).classList.remove('active');
             document.querySelector('.quiz-step-content[data-step="success"]').classList.add('active');
-            document.querySelector('.quiz-progress').style.display='none';
+            document.querySelector('.quiz-progress').style.display = 'none';
         }
-        
+
         // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-            anchor.addEventListener('click',function(e){
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target=document.querySelector(this.getAttribute('href'));
-                if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
     </script>
