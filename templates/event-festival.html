@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer Beats Festival 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html,body{overflow-x:hidden}
+        body{font-family:'Inter',sans-serif;background:#fff;color:#0f172a;line-height:1.6}
+        header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0;z-index:100;padding:16px 20px}
+        .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+        .header-actions{display:flex;align-items:center;gap:8px}
+        .lang-dropdown{position:relative;flex-shrink:0}
+        .lang-trigger{display:flex;align-items:center;gap:4px;padding:8px 12px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer;white-space:nowrap}
+        .lang-trigger svg{width:14px;height:14px;transition:transform .2s}
+        .lang-dropdown.open .lang-trigger svg{transform:rotate(180deg)}
+        .lang-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.15);padding:6px;min-width:100px;display:none;z-index:1000}
+        .lang-dropdown.open .lang-menu{display:block}
+        .lang-option{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;font-size:13px;cursor:pointer;white-space:nowrap}
+        .lang-option:hover{background:#f1f5f9}
+        .lang-option.active{background:#db2777;color:#fff}
+        .lang-flag{font-size:14px}
+        .logo{font-size:22px;font-weight:800;color:#db2777;flex-shrink:0}
+        .logo span{color:#0f172a}
+        .header-cta{background:#db2777;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;flex-shrink:0;white-space:nowrap}
+        .hero{padding:140px 20px 100px;background:linear-gradient(135deg,#fdf2f8 0%,#fff 50%,#fce7f3 100%);text-align:center}
+        .container{max-width:1200px;margin:0 auto}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #fbcfe8;padding:10px 20px;border-radius:50px;font-size:14px;font-weight:700;color:#db2777;margin-bottom:24px}
+        .hero h1{font-size:52px;font-weight:800;line-height:1.1;margin-bottom:20px}
+        .hero h1 .highlight{color:#db2777}
+        .hero-subtitle{font-size:20px;color:#64748b;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
+        .hero-cta{display:inline-flex;align-items:center;gap:12px;background:#db2777;color:#fff;padding:20px 36px;border-radius:14px;font-size:18px;font-weight:700;text-decoration:none;box-shadow:0 10px 30px rgba(219,39,119,0.3)}
+        .event-info{display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap}
+        .event-info-item{text-align:center}
+        .event-info-item strong{display:block;font-size:18px;color:#0f172a}
+        .event-info-item span{font-size:14px;color:#64748b}
+        
+        /* Countdown */
+        .countdown-section{padding:40px 20px;background:#fdf2f8;text-align:center}
+        .countdown{display:flex;justify-content:center;gap:24px;margin-top:20px}
+        .countdown-item{background:#fff;padding:20px 24px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.08);min-width:80px}
+        .countdown-item .number{font-size:36px;font-weight:800;color:#db2777;line-height:1}
+        .countdown-item .label{font-size:12px;color:#64748b;text-transform:uppercase;margin-top:4px}
+        
+        .lineup{padding:100px 20px}
+        .section-header{text-align:center;margin-bottom:60px}
+        .section-label{font-size:13px;font-weight:700;color:#db2777;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+        h2{font-size:42px;font-weight:800;margin-bottom:16px}
+        .artists-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+        .artist-card{background:#f8fafc;border-radius:20px;overflow:hidden;transition:all .3s}
+        .artist-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.1)}
+        .artist-image{aspect-ratio:1;background:linear-gradient(135deg,#db2777,#ec4899);display:flex;align-items:center;justify-content:center;font-size:48px}
+        .artist-info{padding:20px;text-align:center}
+        .artist-info h3{font-size:18px;font-weight:700}
+        .artist-info p{font-size:14px;color:#64748b}
+        
+        /* Tickets */
+        .tickets-section{padding:100px 20px;background:linear-gradient(180deg,#fdf2f8 0%,#fff 100%)}
+        .tickets-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:0 auto}
+        .ticket-card{background:#fff;border:2px solid #e2e8f0;border-radius:24px;padding:32px;text-align:center;position:relative;transition:all .3s}
+        .ticket-card:hover{border-color:#db2777}
+        .ticket-card.featured{border-color:#db2777;box-shadow:0 20px 40px rgba(219,39,119,0.15)}
+        .ticket-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#db2777;color:#fff;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700}
+        .ticket-name{font-size:20px;font-weight:700;margin-bottom:8px}
+        .ticket-price{font-size:48px;font-weight:800;color:#db2777;margin-bottom:16px}
+        .ticket-price span{font-size:16px;color:#64748b;font-weight:400}
+        .ticket-features{list-style:none;margin-bottom:24px}
+        .ticket-features li{padding:8px 0;color:#64748b;font-size:15px}
+        .ticket-btn{width:100%;padding:16px;background:#db2777;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s}
+        .ticket-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(219,39,119,0.3)}
+        .ticket-card.featured .ticket-btn{background:linear-gradient(135deg,#db2777,#ec4899)}
+        
+        /* Location */
+        .location{padding:100px 20px}
+        .location-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+        .location-info h3{font-size:24px;font-weight:700;margin-bottom:16px}
+        .location-info p{color:#64748b;margin-bottom:24px}
+        .location-feature{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+        .location-feature-icon{width:40px;height:40px;background:#fdf2f8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+        .location-map{background:#f8fafc;border-radius:20px;height:400px;display:flex;align-items:center;justify-content:center;font-size:64px}
+        
+        /* Quiz */
+        .quiz-section{padding:100px 20px;background:linear-gradient(135deg,#db2777,#ec4899);color:#fff}
+        .quiz-box{max-width:600px;margin:0 auto;background:#fff;border-radius:24px;padding:40px;color:#0f172a}
+        .quiz-step{display:none}
+        .quiz-step.active{display:block}
+        .quiz-step h3{font-size:26px;font-weight:700;margin-bottom:24px;text-align:center}
+        .quiz-options{display:grid;gap:12px}
+        .quiz-option{background:#f8fafc;border:2px solid transparent;border-radius:12px;padding:20px;cursor:pointer;transition:all .2s}
+        .quiz-option:hover{border-color:#db2777;background:#fff}
+        .form-input{width:100%;padding:16px;margin-bottom:12px;border:2px solid #e2e8f0;border-radius:12px;font-size:16px}
+        .form-input:focus{outline:none;border-color:#db2777}
+        .cta-btn{width:100%;background:linear-gradient(135deg,#db2777,#ec4899);color:#fff;border:none;border-radius:14px;padding:20px;font-size:18px;font-weight:700;cursor:pointer}
+        .progress-bar{height:4px;background:#e2e8f0;border-radius:2px;margin-bottom:32px;overflow:hidden}
+        .progress-fill{height:100%;background:#db2777;width:33%;transition:width .4s ease}
+        
+        /* FAQ */
+        .faq{padding:100px 20px;background:#f8fafc}
+        .faq-list{max-width:800px;margin:0 auto}
+        .faq-item{background:#fff;border-radius:16px;margin-bottom:12px;overflow:hidden}
+        .faq-question{padding:24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600}
+        .faq-answer{padding:0 24px 24px;color:#64748b;display:none}
+        .faq-item.active .faq-answer{display:block}
+        
+        footer{padding:60px 20px 30px;background:#0f172a;color:#fff}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+        .footer-brand{font-size:24px;font-weight:800;margin-bottom:16px}
+        .footer-desc{color:#94a3b8;font-size:15px;line-height:1.7}
+        .footer-column h4{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px;color:#94a3b8}
+        .footer-column a{display:block;color:#fff;text-decoration:none;padding:8px 0;font-size:15px}
+        .footer-bottom{padding-top:30px;border-top:1px solid #334155;text-align:center;color:#64748b;font-size:14px}
+        
+        @media(max-width:968px){
+            .hero h1{font-size:36px}
+            .artists-grid{grid-template-columns:repeat(2,1fr)}
+            .tickets-grid{grid-template-columns:1fr}
+            .location-grid{grid-template-columns:1fr}
+            .countdown{gap:12px}
+            .countdown-item{padding:16px 20px;min-width:70px}
+            .countdown-item .number{font-size:28px}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Summer <span>Beats</span></div>
+            <div class="header-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-trigger" onclick="toggleLang()">
+                        <span id="currentLang">DE</span>
+                        <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l5 5 5-5"/></svg>
+                    </button>
+                    <div class="lang-menu">
+                        <div class="lang-option active" onclick="setLang('de')" data-lang="de">DE</div>
+                        <div class="lang-option" onclick="setLang('en')" data-lang="en">EN</div>
+                        <div class="lang-option" onclick="setLang('ru')" data-lang="ru">RU</div>
+                    </div>
+                </div>
+                <a href="#tickets" class="header-cta" data-i18n="headerCta">Tickets</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge" data-i18n="heroBadge">🎵 15.–17. August 2024</div>
+            
+            <h1 data-i18n="heroTitle">
+                Summer Beats <span class="highlight">Festival</span> 2024
+            </h1>
+            
+            <p class="hero-subtitle" data-i18n="heroSubtitle">
+                3 Tage Musik, Kunst und unvergessliche Momente. Die besten DJs und Live-Acts an einem Ort.
+            </p>
+            
+            <a href="#tickets" class="hero-cta" data-i18n="heroCta">Tickets sichern →</a>
+            
+            <div class="event-info">
+                <div class="event-info-item">
+                    <strong data-i18n="dateLabel">15.–17. August</strong>
+                    <span data-i18n="dateSublabel">2024</span>
+                </div>
+                <div class="event-info-item">
+                    <strong data-i18n="locationLabel">Wien</strong>
+                    <span data-i18n="locationSublabel">Donauinsel</span>
+                </div>
+                <div class="event-info-item">
+                    <strong data-i18n="artistsLabel">50+</strong>
+                    <span data-i18n="artistsSublabel">Artists</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="countdown-section">
+        <div class="container">
+            <div class="section-label" data-i18n="countdownLabel">Countdown</div>
+            <h2 data-i18n="countdownTitle">Bis zum Festival</h2>
+            
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="number" id="days">42</div>
+                    <div class="label" data-i18n="days">Tage</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="hours">18</div>
+                    <div class="label" data-i18n="hours">Stunden</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="minutes">45</div>
+                    <div class="label" data-i18n="minutes">Minuten</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="seconds">30</div>
+                    <div class="label" data-i18n="seconds">Sekunden</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="lineup" id="lineup">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="lineupLabel">Line-Up</div>
+                <h2 data-i18n="lineupTitle">Die Artists</h2>
+            </div>
+            
+            <div class="artists-grid">
+                <div class="artist-card">
+                    <div class="artist-image">🎧</div>
+                    <div class="artist-info">
+                        <h3>DJ Pulse</h3>
+                        <p>Electronic / House</p>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-image">🎸</div>
+                    <div class="artist-info">
+                        <h3>The Waves</h3>
+                        <p>Indie Rock</p>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-image">🎤</div>
+                    <div class="artist-info">
+                        <h3>Luna Ray</h3>
+                        <p>Pop / R&B</p>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-image">🎹</div>
+                    <div class="artist-info">
+                        <h3>Techno Kings</h3>
+                        <p>Techno</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tickets-section" id="tickets">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="ticketsLabel">Tickets</div>
+                <h2 data-i18n="ticketsTitle">Wähle dein Erlebnis</h2>
+            </div>
+            
+            <div class="tickets-grid">
+                <div class="ticket-card">
+                    <div class="ticket-name" data-i18n="ticket1Name">Tagespass</div>
+                    <div class="ticket-price">€89</span></div>
+                    <ul class="ticket-features">
+                        <li data-i18n="ticket1Feature1">✓ Ein Tag Zugang</li>
+                        <li data-i18n="ticket1Feature2">✓ Alle Bühnen</li>
+                        <li data-i18n="ticket1Feature3">✓ Festival-Band</li>
+                    </ul>
+                    <button class="ticket-btn" onclick="selectTicket('day')" data-i18n="ticketBtn">Auswählen</button>
+                </div>
+                
+                <div class="ticket-card featured">
+                    <div class="ticket-badge" data-i18n="ticketBadge">Bestseller</div>
+                    <div class="ticket-name" data-i18n="ticket2Name">Weekend Pass</div>
+                    <div class="ticket-price">€199</span></div>
+                    <ul class="ticket-features">
+                        <li data-i18n="ticket2Feature1">✓ Alle 3 Tage</li>
+                        <li data-i18n="ticket2Feature2">✓ VIP Camping</li>
+                        <li data-i18n="ticket2Feature3">✓ Fast Lane Zugang</li>
+                        <li data-i18n="ticket2Feature4">✓ Exklusive Goodie Bag</li>
+                    </ul>
+                    <button class="ticket-btn" onclick="selectTicket('weekend')" data-i18n="ticketBtn">Auswählen</button>
+                </div>
+                
+                <div class="ticket-card">
+                    <div class="ticket-name" data-i18n="ticket3Name">VIP Experience</div>
+                    <div class="ticket-price">€399</span></div>
+                    <ul class="ticket-features">
+                        <li data-i18n="ticket3Feature1">✓ Backstage Zugang</li>
+                        <li data-i18n="ticket3Feature2">✓ Premium Camping</li>
+                        <li data-i18n="ticket3Feature3">✓ Free Drinks</li>
+                        <li data-i18n="ticket3Feature4">✓ Meet & Greet</li>
+                    </ul>
+                    <button class="ticket-btn" onclick="selectTicket('vip')" data-i18n="ticketBtn">Auswählen</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="location" id="location">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="locationSectionLabel">Location</div>
+                <h2 data-i18n="locationTitle">Wo ist das Festival?</h2>
+            </div>
+            
+            <div class="location-grid">
+                <div class="location-info">
+                    <h3 data-i18n="venueName">Donauinsel Wien</h3>
+                    
+                    <p data-i18n="venueDesc">Das Festival findet auf der Donauinsel statt – mitten in Wien, umgeben von Natur und der Stadt.</p>
+                    
+                    <div class="location-feature">
+                        <div class="location-feature-icon">🚇</div>
+                        <span data-i18n="feature1">Direkt an der U1/U6</span>
+                    </div>
+                    
+                    <div class="location-feature">
+                        <div class="location-feature-icon">🚗</div>
+                        <span data-i18n="feature2">Parkplätze verfügbar</span>
+                    </div>
+                    
+                    <div class="location-feature">
+                        <div class="location-feature-icon">♿</div>
+                        <span data-i18n="feature3">Barrierefrei</span>
+                    </div>
+                </div>
+                
+                <div class="location-map">🗺️</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quiz-section" id="checkout">
+        <div class="container">
+            <div class="quiz-box">
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                
+                <div class="quiz-step active" id="step1">
+                    <h3 data-i18n="quiz1Title">Wähle dein Ticket</h3>
+                    
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="nextStep(2)">
+                            <strong>🎫 Tagespass — €89</strong>
+                        </div>
+                        
+                        <div class="quiz-option" onclick="nextStep(2)">
+                            <strong>🌟 Weekend Pass — €199</strong>
+                        </div>
+                        
+                        <div class="quiz-option" onclick="nextStep(2)">
+                            <strong>👑 VIP Experience — €399</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quiz-step" id="step2">
+                    <h3 data-i18n="quiz2Title">Persönliche Daten</h3>
+                    
+                    <input type="text" class="form-input" placeholder="Vorname" data-i18n-placeholder="firstName">
+                    
+                    <input type="text" class="form-input" placeholder="Nachname" data-i18n-placeholder="lastName">
+                    
+                    <input type="email" class="form-input" placeholder="E-Mail" data-i18n-placeholder="email">
+                    
+                    <button class="cta-btn" onclick="nextStep(3)" data-i18n="nextBtn">Weiter →</button>
+                </div>
+                
+                <div class="quiz-step" id="step3">
+                    <h3 data-i18n="quiz3Title">Zahlung</h3>
+                    
+                    <div class="quiz-options" style="margin-bottom:20px">
+                        <div class="quiz-option">💳 Kreditkarte</div>
+                        <div class="quiz-option">📱 PayPal</div>
+                        <div class="quiz-option">🏦 Sofortüberweisung</div>
+                    </div>
+                    
+                    <button class="cta-btn" onclick="showSuccess()" data-i18n="payBtn">Jetzt bezahlen →</button>
+                </div>
+                
+                <div class="quiz-step" id="stepSuccess" style="text-align:center;padding:40px 0">
+                    <div style="width:80px;height:80px;background:linear-gradient(135deg,#db2777,#ec4899);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 24px">✓</div>
+                    
+                    <h3 data-i18n="successTitle">Ticket gesichert! 🎉</h3>
+                    
+                    <p data-i18n="successText">Wir haben dein Ticket an deine E-Mail geschickt. See you at the festival!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="faqLabel">FAQ</div>
+                <h2 data-i18n="faqTitle">Häufige Fragen</h2>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <span data-i18n="faq1Q">Ab welchem Alter ist das Festival?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer" data-i18n="faq1A">Das Festival ist ab 18 Jahren. Bei der Einlasskontrolle wird ein gültiger Ausweis verlangt.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <span data-i18n="faq2Q">Kann ich mein Ticket zurückgeben?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer" data-i18n="faq2A">Tickets können bis 14 Tage vor dem Festival gegen eine Gebühr von €10 storniert werden.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <span data-i18n="faq3Q">Gibt es Camping?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer" data-i18n="faq3A">Ja! Camping ist inklusive beim Weekend Pass und VIP. Für Tagespass-Inhaber gibt es begrenzte Camping-Optionen.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">Summer Beats</div>
+                    
+                    <p class="footer-desc" data-i18n="footerDesc">Das größte Musikfestival Wiens. 3 Tage unvergessliche Momente.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="footerLinks">Links</h4>
+                    
+                    <a href="#lineup">Line-Up</a>
+                    
+                    <a href="#tickets">Tickets</a>
+                    
+                    <a href="#location">Location</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="footerLegal">Rechtliches</h4>
+                    
+                    <a href="#">AGB</a>
+                    
+                    <a href="#">Datenschutz</a>
+                    
+                    <a href="#">Impressum</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="footerContact">Kontakt</h4>
+                    
+                    <a href="mailto:info@summerbeats.at">info@summerbeats.at</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © 2024 Summer Beats Festival. <span data-i18n="footerRights">Alle Rechte vorbehalten.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown
+        function updateCountdown() {
+            const festivalDate = new Date('2024-08-15T12:00:00');
+            const now = new Date();
+            const diff = festivalDate - now;
+            
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Translations
+        const t = {
+            de: {
+                headerCta: 'Tickets', heroBadge: '🎵 15.–17. August 2024',
+                heroTitle: 'Summer Beats Festival 2024', heroSubtitle: '3 Tage Musik, Kunst und unvergessliche Momente. Die besten DJs und Live-Acts an einem Ort.',
+                heroCta: 'Tickets sichern →',
+                dateLabel: '15.–17. August', dateSublabel: '2024',
+                locationLabel: 'Wien', locationSublabel: 'Donauinsel',
+                artistsLabel: '50+', artistsSublabel: 'Artists',
+                countdownLabel: 'Countdown', countdownTitle: 'Bis zum Festival',
+                days: 'Tage', hours: 'Stunden', minutes: 'Minuten', seconds: 'Sekunden',
+                lineupLabel: 'Line-Up', lineupTitle: 'Die Artists',
+                ticketsLabel: 'Tickets', ticketsTitle: 'Wähle dein Erlebnis',
+                ticket1Name: 'Tagespass', ticket1Feature1: '✓ Ein Tag Zugang', ticket1Feature2: '✓ Alle Bühnen', ticket1Feature3: '✓ Festival-Band',
+                ticket2Name: 'Weekend Pass', ticket2Feature1: '✓ Alle 3 Tage', ticket2Feature2: '✓ VIP Camping', ticket2Feature3: '✓ Fast Lane Zugang', ticket2Feature4: '✓ Exklusive Goodie Bag',
+                ticket3Name: 'VIP Experience', ticket3Feature1: '✓ Backstage Zugang', ticket3Feature2: '✓ Premium Camping', ticket3Feature3: '✓ Free Drinks', ticket3Feature4: '✓ Meet & Greet',
+                ticketBadge: 'Bestseller', ticketBtn: 'Auswählen',
+                locationSectionLabel: 'Location', locationTitle: 'Wo ist das Festival?',
+                venueName: 'Donauinsel Wien', venueDesc: 'Das Festival findet auf der Donauinsel statt – mitten in Wien, umgeben von Natur und der Stadt.',
+                feature1: 'Direkt an der U1/U6', feature2: 'Parkplätze verfügbar', feature3: 'Barrierefrei',
+                quiz1Title: 'Wähle dein Ticket', quiz2Title: 'Persönliche Daten', quiz3Title: 'Zahlung',
+                nextBtn: 'Weiter →', payBtn: 'Jetzt bezahlen →',
+                successTitle: 'Ticket gesichert! 🎉', successText: 'Wir haben dein Ticket an deine E-Mail geschickt. See you at the festival!',
+                faqLabel: 'FAQ', faqTitle: 'Häufige Fragen',
+                faq1Q: 'Ab welchem Alter ist das Festival?', faq1A: 'Das Festival ist ab 18 Jahren. Bei der Einlasskontrolle wird ein gültiger Ausweis verlangt.',
+                faq2Q: 'Kann ich mein Ticket zurückgeben?', faq2A: 'Tickets können bis 14 Tage vor dem Festival gegen eine Gebühr von €10 storniert werden.',
+                faq3Q: 'Gibt es Camping?', faq3A: 'Ja! Camping ist inklusive beim Weekend Pass und VIP. Für Tagespass-Inhaber gibt es begrenzte Camping-Optionen.',
+                footerDesc: 'Das größte Musikfestival Wiens. 3 Tage unvergessliche Momente.',
+                footerLinks: 'Links', footerLegal: 'Rechtliches', footerContact: 'Kontakt', footerRights: 'Alle Rechte vorbehalten.'
+            },
+            en: {
+                headerCta: 'Tickets', heroBadge: '🎵 August 15–17, 2024',
+                heroTitle: 'Summer Beats Festival 2024', heroSubtitle: '3 days of music, art and unforgettable moments. The best DJs and live acts in one place.',
+                heroCta: 'Get tickets →',
+                dateLabel: 'Aug 15–17', dateSublabel: '2024',
+                locationLabel: 'Vienna', locationSublabel: 'Donauinsel',
+                artistsLabel: '50+', artistsSublabel: 'Artists',
+                countdownLabel: 'Countdown', countdownTitle: 'Until the festival',
+                days: 'Days', hours: 'Hours', minutes: 'Minutes', seconds: 'Seconds',
+                lineupLabel: 'Line-Up', lineupTitle: 'The Artists',
+                ticketsLabel: 'Tickets', ticketsTitle: 'Choose your experience',
+                ticket1Name: 'Day Pass', ticket1Feature1: '✓ One day access', ticket1Feature2: '✓ All stages', ticket1Feature3: '✓ Festival wristband',
+                ticket2Name: 'Weekend Pass', ticket2Feature1: '✓ All 3 days', ticket2Feature2: '✓ VIP camping', ticket2Feature3: '✓ Fast lane entry', ticket2Feature4: '✓ Exclusive goodie bag',
+                ticket3Name: 'VIP Experience', ticket3Feature1: '✓ Backstage access', ticket3Feature2: '✓ Premium camping', ticket3Feature3: '✓ Free drinks', ticket3Feature4: '✓ Meet & greet',
+                ticketBadge: 'Bestseller', ticketBtn: 'Select',
+                locationSectionLabel: 'Location', locationTitle: 'Where is the festival?',
+                venueName: 'Donauinsel Vienna', venueDesc: 'The festival takes place on the Donauinsel – in the heart of Vienna, surrounded by nature and the city.',
+                feature1: 'Direct at U1/U6', feature2: 'Parking available', feature3: 'Wheelchair accessible',
+                quiz1Title: 'Choose your ticket', quiz2Title: 'Personal details', quiz3Title: 'Payment',
+                nextBtn: 'Next →', payBtn: 'Pay now →',
+                successTitle: 'Ticket secured! 🎉', successText: 'We sent your ticket to your email. See you at the festival!',
+                faqLabel: 'FAQ', faqTitle: 'Frequently Asked Questions',
+                faq1Q: 'What is the minimum age?', faq1A: 'The festival is 18+. Valid ID required at entry.',
+                faq2Q: 'Can I return my ticket?', faq2A: 'Tickets can be cancelled up to 14 days before the festival for a €10 fee.',
+                faq3Q: 'Is there camping?', faq3A: 'Yes! Camping is included with Weekend Pass and VIP. Limited camping for Day Pass holders.',
+                footerDesc: "Vienna's biggest music festival. 3 days of unforgettable moments.",
+                footerLinks: 'Links', footerLegal: 'Legal', footerContact: 'Contact', footerRights: 'All rights reserved.'
+            },
+            ru: {
+                headerCta: 'Билеты', heroBadge: '🎵 15–17 августа 2024',
+                heroTitle: 'Summer Beats Festival 2024', heroSubtitle: '3 дня музыки, искусства и незабываемых моментов. Лучшие DJs и живые выступления в одном месте.',
+                heroCta: 'Купить билеты →',
+                dateLabel: '15–17 августа', dateSublabel: '2024',
+                locationLabel: 'Вена', locationSublabel: 'Donauinsel',
+                artistsLabel: '50+', artistsSublabel: 'Артистов',
+                countdownLabel: 'Обратный отсчёт', countdownTitle: 'До фестиваля',
+                days: 'Дней', hours: 'Часов', minutes: 'Минут', seconds: 'Секунд',
+                lineupLabel: 'Line-Up', lineupTitle: 'Артисты',
+                ticketsLabel: 'Билеты', ticketsTitle: 'Выбери свой опыт',
+                ticket1Name: 'Дневной', ticket1Feature1: '✓ Доступ на 1 день', ticket1Feature2: '✓ Все сцены', ticket1Feature3: '✓ Фестивальный браслет',
+                ticket2Name: 'Weekend', ticket2Feature1: '✓ Все 3 дня', ticket2Feature2: '✓ VIP кемпинг', ticket2Feature3: '✓ Fast lane', ticket2Feature4: '✓ Подарочный набор',
+                ticket3Name: 'VIP', ticket3Feature1: '✓ Backstage', ticket3Feature2: '✓ Премиум кемпинг', ticket3Feature3: '✓ Напитки включены', ticket3Feature4: '✓ Meet & greet',
+                ticketBadge: 'Хит', ticketBtn: 'Выбрать',
+                locationSectionLabel: 'Локация', locationTitle: 'Где проходит фестиваль?',
+                venueName: 'Donauinsel Вена', venueDesc: 'Фестиваль проходит на Donauinsel — в сердце Вены, окружённой природой и городом.',
+                feature1: 'Рядом U1/U6', feature2: 'Есть парковка', feature3: 'Доступно для инвалидов',
+                quiz1Title: 'Выбери билет', quiz2Title: 'Личные данные', quiz3Title: 'Оплата',
+                nextBtn: 'Далее →', payBtn: 'Оплатить →',
+                successTitle: 'Билет получен! 🎉', successText: 'Мы отправили билет на твою почту. Увидимся на фестивале!',
+                faqLabel: 'FAQ', faqTitle: 'Частые вопросы',
+                faq1Q: 'С какого возраста можно?', faq1A: 'Фестиваль 18+. При входе требуется документ.',
+                faq2Q: 'Можно ли вернуть билет?', faq2A: 'Билеты можно отменить за 14 дней до фестиваля с комиссией €10.',
+                faq3Q: 'Есть ли кемпинг?', faq3A: 'Да! Кемпинг включён в Weekend и VIP. Для Day Pass — ограниченные места.',
+                footerDesc: 'Крупнейший музыкальный фестиваль Вены. 3 дня незабываемых моментов.',
+                footerLinks: 'Ссылки', footerLegal: 'Правовая информация', footerContact: 'Контакты', footerRights: 'Все права защищены.'
+            }
+        };
+
+        function toggleLang() {
+            document.getElementById('langDropdown').classList.toggle('open');
+        }
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.toggle('active', opt.dataset.lang === lang));
+            document.getElementById('currentLang').textContent = lang.toUpperCase();
+            document.getElementById('langDropdown').classList.remove('open');
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (t[lang][key]) el.textContent = t[lang][key];
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-dropdown')) {
+                document.getElementById('langDropdown').classList.remove('open');
+            }
+        });
+
+        let currentStep = 1;
+        function nextStep(step) {
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.getElementById('step' + step).classList.add('active');
+            currentStep = step;
+            document.getElementById('progressFill').style.width = (step / 3 * 100) + '%';
+        }
+
+        function showSuccess() {
+            document.getElementById('step3').classList.remove('active');
+            document.getElementById('stepSuccess').classList.add('active');
+            document.getElementById('progressFill').style.width = '100%';
+        }
+
+        function selectTicket(type) {
+            document.getElementById('checkout').scrollIntoView({behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexa Digital — Agentur für Web & Marketing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html,body{overflow-x:hidden}
+        body{font-family:'Inter',sans-serif;background:#fff;color:#0f172a;line-height:1.6}
+        header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0;z-index:100;padding:16px 20px}
+        .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+        .header-actions{display:flex;align-items:center;gap:8px}
+        .lang-dropdown{position:relative;flex-shrink:0}
+        .lang-trigger{display:flex;align-items:center;gap:4px;padding:8px 12px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer;white-space:nowrap}
+        .lang-trigger svg{width:14px;height:14px;transition:transform .2s}
+        .lang-dropdown.open .lang-trigger svg{transform:rotate(180deg)}
+        .lang-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.15);padding:6px;min-width:100px;display:none;z-index:1000}
+        .lang-dropdown.open .lang-menu{display:block}
+        .lang-option{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;font-size:13px;cursor:pointer;white-space:nowrap}
+        .lang-option:hover{background:#f1f5f9}
+        .lang-option.active{background:#7c3aed;color:#fff}
+        .lang-flag{font-size:14px}
+        .logo{font-size:22px;font-weight:800;color:#7c3aed;flex-shrink:0}
+        .logo span{color:#0f172a}
+        .header-cta{background:#7c3aed;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;flex-shrink:0;white-space:nowrap}
+        .hero{padding:140px 20px 100px;background:linear-gradient(135deg,#f5f3ff 0%,#fff 50%,#ede9fe 100%)}
+        .container{max-width:1200px;margin:0 auto}
+        .hero-content{min-width:0;max-width:100%}
+        .hero-container{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:100%}
+        .hero-image{max-width:100%;overflow:hidden}
+        .hero-image img{max-width:100%;height:auto;display:block;border-radius:24px;box-shadow:0 25px 50px -12px rgba(124,58,237,0.25)}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #ddd6fe;padding:10px 20px;border-radius:50px;font-size:14px;font-weight:700;color:#7c3aed;margin-bottom:24px}
+        .hero h1{font-size:52px;font-weight:800;line-height:1.1;margin-bottom:20px}
+        .hero h1 .highlight{color:#7c3aed}
+        .hero-subtitle{font-size:20px;color:#64748b;margin-bottom:32px}
+        .hero-cta{display:inline-flex;align-items:center;gap:12px;background:#7c3aed;color:#fff;padding:20px 36px;border-radius:14px;font-size:18px;font-weight:700;text-decoration:none;box-shadow:0 10px 30px rgba(124,58,237,0.3)}
+        .about{padding:100px 20px;background:#f8fafc}
+        .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+        .section-header{text-align:center;margin-bottom:60px}
+        .section-label{font-size:13px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+        h2{font-size:42px;font-weight:800;margin-bottom:16px}
+        .services{padding:100px 20px}
+        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .service-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:32px;transition:all .3s}
+        .service-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.08);border-color:#7c3aed}
+        .service-icon{width:60px;height:60px;background:linear-gradient(135deg,#7c3aed,#a855f7);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:20px}
+        .service-card h3{font-size:20px;font-weight:700;margin-bottom:12px}
+        .service-card p{color:#64748b;font-size:15px}
+        .quiz-section{padding:100px 20px;background:linear-gradient(180deg,#f5f3ff 0%,#fff 100%)}
+        .quiz-box{max-width:600px;margin:0 auto;background:#fff;border-radius:24px;padding:40px;box-shadow:0 10px 40px rgba(0,0,0,0.08)}
+        .progress-bar{height:4px;background:#e2e8f0;border-radius:2px;margin-bottom:32px;overflow:hidden}
+        .progress-fill{height:100%;background:#7c3aed;width:33%;transition:width .4s ease}
+        .quiz-step{display:none}
+        .quiz-step.active{display:block}
+        .quiz-step h3{font-size:26px;font-weight:700;margin-bottom:24px;text-align:center}
+        .quiz-options{display:grid;gap:12px}
+        .quiz-option{background:#f8fafc;border:2px solid transparent;border-radius:12px;padding:20px;cursor:pointer;display:flex;align-items:center;gap:16px;transition:all .2s}
+        .quiz-option:hover{border-color:#7c3aed;background:#fff}
+        .quiz-option-icon{font-size:28px}
+        .quiz-option-text{flex:1}
+        .quiz-option-text strong{display:block;margin-bottom:4px}
+        .quiz-option-text span{font-size:14px;color:#64748b}
+        .cta-btn{width:100%;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;border-radius:14px;padding:20px;font-size:18px;font-weight:700;cursor:pointer;margin-top:8px}
+        .testimonials{padding:100px 20px;background:#f8fafc}
+        .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .testimonial-card{background:#fff;border-radius:20px;padding:32px;box-shadow:0 4px 20px rgba(0,0,0,0.05)}
+        .stars{color:#fbbf0b;font-size:18px;margin-bottom:16px}
+        .testimonial-text{font-size:16px;margin-bottom:20px;line-height:1.7}
+        .testimonial-author{display:flex;align-items:center;gap:12px}
+        .author-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#a855f7);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+        .author-info strong{display:block;font-size:15px}
+        .author-info span{font-size:13px;color:#64748b}
+        .final-cta{padding:100px 20px;text-align:center;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff}
+        .final-cta h2{font-size:48px;margin-bottom:20px}
+        .final-cta p{font-size:20px;opacity:0.9;margin-bottom:40px}
+        .final-cta .cta-button{background:#fff;color:#7c3aed;padding:20px 40px;border-radius:12px;font-size:18px;font-weight:700;text-decoration:none;display:inline-block}
+        footer{padding:60px 20px 30px;background:#0f172a;color:#fff}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+        .footer-brand{font-size:24px;font-weight:800;margin-bottom:16px}
+        .footer-desc{color:#94a3b8;font-size:15px;line-height:1.7}
+        .footer-column h4{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px;color:#94a3b8}
+        .footer-column a{display:block;color:#fff;text-decoration:none;padding:8px 0;font-size:15px}
+        .footer-bottom{padding-top:30px;border-top:1px solid #334155;text-align:center;color:#64748b;font-size:14px}
+        @media(max-width:968px){.hero-container,.about-grid{grid-template-columns:1fr;gap:30px}.hero h1{font-size:32px;word-wrap:break-word;overflow-wrap:break-word}.hero-subtitle{font-size:18px}.hero-image{margin-top:30px}.services-grid,.testimonials-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.header-cta{padding:10px 16px;font-size:13px}.logo{font-size:18px}}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Nexa <span>Digital</span></div>
+            <div class="header-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-trigger" onclick="toggleLang()">
+                        <span id="currentLang">DE</span>
+                        <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l5 5 5-5"/></svg>
+                    </button>
+                    <div class="lang-menu">
+                        <div class="lang-option active" onclick="setLang('de')" data-lang="de">DE</div>
+                        <div class="lang-option" onclick="setLang('en')" data-lang="en">EN</div>
+                        <div class="lang-option" onclick="setLang('ru')" data-lang="ru">RU</div>
+                    </div>
+                </div>
+                <a href="#quiz" class="header-cta" data-i18n="headerCta">Beratung anfragen</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        ⭐️ 4.9/5 <span data-i18n="reviews">von 200+ Kunden</span>
+                    </div>
+                    <h1>
+                        <span data-i18n="heroTitle1">Wir bauen</span> 
+                        <span class="highlight" data-i18n="heroTitle2">digitale Produkte</span>
+                        <span data-i18n="heroTitle3">die begeistern</span>
+                    </h1>
+                    <p class="hero-subtitle" data-i18n="heroSubtitle">
+                        Websites, Apps und Marketing aus einer Hand. Wir verwandeln Ideen in skalierbare Lösungen.
+                    </p>
+                    <a href="#quiz" class="hero-cta" data-i18n="heroCta">Kostenlose Beratung →</a>
+                </div>
+                
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=700&fit=crop" alt="Team working" style="border-radius:24px;box-shadow:0 25px 50px -12px rgba(124,58,237,0.25)">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="aboutLabel">Über uns</div>
+                <h2 data-i18n="aboutTitle">Ihr Partner für digitale Transformation</h2>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-content">
+                    <p data-i18n="aboutText1">Wir sind ein Team aus Designern, Entwicklern und Marketern, das seit 8 Jahren Unternehmen beim digitalen Wachstum begleitet.</p>
+                    
+                    <p data-i18n="aboutText2">Unser Ziel: Technologie, die funktioniert, und Designs, die beeindrucken.</p>
+                </div>
+                
+                <div style="background:linear-gradient(135deg,#7c3aed,#a855f7);border-radius:20px;padding:40px;color:#fff;text-align:center">
+                    <div style="font-size:72px;font-weight:800">150+</div>
+                    
+                    <div style="font-size:18px" data-i18n="projectsCompleted">Projekte abgeschlossen</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="servicesLabel">Leistungen</div>
+                <h2 data-i18n="servicesTitle">Was wir für Sie tun</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3 data-i18n="service1Title">Webentwicklung</h3>
+                    <p data-i18n="service1Desc">Moderne Websites und Web-Apps mit React, Next.js und Node.js</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3 data-i18n="service2Title">App Entwicklung</h3>
+                    <p data-i18n="service2Desc">Native und Cross-Platform Apps für iOS und Android</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3 data-i18n="service3Title">UI/UX Design</h3>
+                    <p data-i18n="service3Desc">Nutzerfreundliche Interfaces, die begeistern und konvertieren</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3 data-i18n="service4Title">Digital Marketing</h3>
+                    <p data-i18n="service4Desc">SEO, SEA und Social Media für mehr Sichtbarkeit</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3 data-i18n="service5Title">Performance</h3>
+                    <p data-i18n="service5Desc">Ladezeiten optimieren und Conversion steigern</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3 data-i18n="service6Title">Wartung & Support</h3>
+                    <p data-i18n="service6Desc">24/7 Monitoring und kontinuierliche Optimierung</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quiz-section" id="quiz">
+        <div class="quiz-box">
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            
+            <div class="quiz-step active" id="step1">
+                <h3 data-i18n="quiz1Title">Was brauchen Sie?</h3>
+                
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="nextStep(2)">
+                        <span class="quiz-option-icon">💻</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt1_1">Neue Website</strong>
+                            <span data-i18n="opt1_1sub">Webseite oder Web-App entwickeln</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="nextStep(2)">
+                        <span class="quiz-option-icon">📱</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt1_2">Mobile App</strong>
+                            <span data-i18n="opt1_2sub">iOS oder Android App</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="nextStep(2)">
+                        <span class="quiz-option-icon">🚀</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt1_3">Marketing & SEO</strong>
+                            <span data-i18n="opt1_3sub">Mehr Traffic und Leads</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-step" id="step2">
+                <h3 data-i18n="quiz2Title">Wie ist Ihr Budget?</h3>
+                
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="nextStep(3)">
+                        <span class="quiz-option-icon">💰</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt2_1">€5.000 - €15.000</strong>
+                            <span data-i18n="opt2_1sub">Start-Up Paket</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="nextStep(3)">
+                        <span class="quiz-option-icon">💎</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt2_2">€15.000 - €50.000</strong>
+                            <span data-i18n="opt2_2sub">Business Paket</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="nextStep(3)">
+                        <span class="quiz-option-icon">🏢</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt2_3">€50.000+</strong>
+                            <span data-i18n="opt2_3sub">Enterprise Lösung</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-step" id="step3">
+                <h3 data-i18n="quiz3Title">Ihre Kontaktdaten</h3>
+                
+                <input type="text" placeholder="Name" style="width:100%;padding:16px;margin-bottom:12px;border:2px solid #e2e8f0;border-radius:12px;font-size:16px">
+                
+                <input type="email" placeholder="E-Mail" style="width:100%;padding:16px;margin-bottom:12px;border:2px solid #e2e8f0;border-radius:12px;font-size:16px">
+                
+                <input type="tel" placeholder="Telefon" style="width:100%;padding:16px;margin-bottom:12px;border:2px solid #e2e8f0;border-radius:12px;font-size:16px">
+                
+                <button class="cta-btn" onclick="showSuccess()" data-i18n="submitBtn">ANFRAGE SENDEN →</button>
+            </div>
+            
+            <div class="quiz-step" id="stepSuccess" style="text-align:center;padding:40px 0">
+                <div style="width:80px;height:80px;background:#7c3aed;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 24px">✓</div>
+                
+                <h3 data-i18n="successTitle">Perfekt! 🎉</h3>
+                
+                <p data-i18n="successText">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="testimonialsLabel">Testimonials</div>
+                <h2 data-i18n="testimonialsTitle">Was unsere Kunden sagen</h2>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="review1">"Nexa hat unsere Website in Rekordzeit neu aufgebaut. Die Conversion ist um 80% gestiegen!"</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div class="author-info">
+                            <strong>Michael Klein</strong>
+                            <span>CEO, TechStart</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="review2">"Professionell, kreativ und extrem zuverlässig. Das beste Agentur-Erlebnis, das wir je hatten."</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SW</div>
+                        <div class="author-info">
+                            <strong>Sarah Weber</strong>
+                            <span>Marketing Director</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="review3">"Unsere App wurde innerhalb von 3 Monaten live. Qualität und Kommunikation top!"</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TB</div>
+                        <div class="author-info">
+                            <strong>Thomas Berger</strong>
+                            <span>Founder, AppWorks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <h2 data-i18n="finalTitle">Bereit für Ihr Projekt?</h2>
+        
+        <p data-i18n="finalText">Lassen Sie uns in einem kostenlosen Gespräch Ihre Ziele besprechen.</p>
+        
+        <a href="#quiz" class="cta-button" data-i18n="finalCta">Jetzt Beratung anfragen</a>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">Nexa Digital</div>
+                    
+                    <p class="footer-desc" data-i18n="footerDesc">Ihr Partner für digitale Transformation. Wir bauen Produkte, die skalieren.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="footerServices">Leistungen</h4>
+                    
+                    <a href="#" data-i18n="footerLink1">Webentwicklung</a>
+                    
+                    <a href="#" data-i18n="footerLink2">App Entwicklung</a>
+                    
+                    <a href="#" data-i18n="footerLink3">UI/UX Design</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="footerCompany">Unternehmen</h4>
+                    
+                    <a href="#" data-i18n="footerLink4">Über uns</a>
+                    
+                    <a href="#" data-i18n="footerLink5">Karriere</a>
+                    
+                    <a href="#" data-i18n="footerLink6">Kontakt</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="footerContact">Kontakt</h4>
+                    
+                    <a href="mailto:hello@nexa.digital">hello@nexa.digital</a>
+                    
+                    <a href="tel:+43123456789">+43 1 234 56 78</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © 2024 Nexa Digital. <span data-i18n="footerRights">Alle Rechte vorbehalten.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const t = {
+            de: {
+                headerCta: 'Beratung anfragen', reviews: 'von 200+ Kunden',
+                heroTitle1: 'Wir bauen ', heroTitle2: 'digitale Produkte', heroTitle3: ' die begeistern',
+                heroSubtitle: 'Websites, Apps und Marketing aus einer Hand. Wir verwandeln Ideen in skalierbare Lösungen.',
+                heroCta: 'Kostenlose Beratung →',
+                aboutLabel: 'Über uns', aboutTitle: 'Ihr Partner für digitale Transformation',
+                aboutText1: 'Wir sind ein Team aus Designern, Entwicklern und Marketern, das seit 8 Jahren Unternehmen beim digitalen Wachstum begleitet.',
+                aboutText2: 'Unser Ziel: Technologie, die funktioniert, und Designs, die beeindrucken.',
+                projectsCompleted: 'Projekte abgeschlossen',
+                servicesLabel: 'Leistungen', servicesTitle: 'Was wir für Sie tun',
+                service1Title: 'Webentwicklung', service1Desc: 'Moderne Websites und Web-Apps mit React, Next.js und Node.js',
+                service2Title: 'App Entwicklung', service2Desc: 'Native und Cross-Platform Apps für iOS und Android',
+                service3Title: 'UI/UX Design', service3Desc: 'Nutzerfreundliche Interfaces, die begeistern und konvertieren',
+                service4Title: 'Digital Marketing', service4Desc: 'SEO, SEA und Social Media für mehr Sichtbarkeit',
+                service5Title: 'Performance', service5Desc: 'Ladezeiten optimieren und Conversion steigern',
+                service6Title: 'Wartung & Support', service6Desc: '24/7 Monitoring und kontinuierliche Optimierung',
+                quiz1Title: 'Was brauchen Sie?', opt1_1: 'Neue Website', opt1_1sub: 'Webseite oder Web-App entwickeln',
+                opt1_2: 'Mobile App', opt1_2sub: 'iOS oder Android App', opt1_3: 'Marketing & SEO', opt1_3sub: 'Mehr Traffic und Leads',
+                quiz2Title: 'Wie ist Ihr Budget?', opt2_1: '€5.000 - €15.000', opt2_1sub: 'Start-Up Paket',
+                opt2_2: '€15.000 - €50.000', opt2_2sub: 'Business Paket', opt2_3: '€50.000+', opt2_3sub: 'Enterprise Lösung',
+                quiz3Title: 'Ihre Kontaktdaten', submitBtn: 'ANFRAGE SENDEN →',
+                successTitle: 'Perfekt! 🎉', successText: 'Wir melden uns innerhalb von 24 Stunden bei Ihnen.',
+                testimonialsLabel: 'Testimonials', testimonialsTitle: 'Was unsere Kunden sagen',
+                review1: '"Nexa hat unsere Website in Rekordzeit neu aufgebaut. Die Conversion ist um 80% gestiegen!"',
+                review2: '"Professionell, kreativ und extrem zuverlässig. Das beste Agentur-Erlebnis, das wir je hatten."',
+                review3: '"Unsere App wurde innerhalb von 3 Monaten live. Qualität und Kommunikation top!"',
+                finalTitle: 'Bereit für Ihr Projekt?', finalText: 'Lassen Sie uns in einem kostenlosen Gespräch Ihre Ziele besprechen.',
+                finalCta: 'Jetzt Beratung anfragen',
+                footerDesc: 'Ihr Partner für digitale Transformation. Wir bauen Produkte, die skalieren.',
+                footerServices: 'Leistungen', footerLink1: 'Webentwicklung', footerLink2: 'App Entwicklung', footerLink3: 'UI/UX Design',
+                footerCompany: 'Unternehmen', footerLink4: 'Über uns', footerLink5: 'Karriere', footerLink6: 'Kontakt',
+                footerContact: 'Kontakt', footerRights: 'Alle Rechte vorbehalten.'
+            },
+            en: {
+                headerCta: 'Request consultation', reviews: 'from 200+ clients',
+                heroTitle1: 'We build ', heroTitle2: 'digital products', heroTitle3: ' that inspire',
+                heroSubtitle: 'Websites, apps and marketing from one source. We transform ideas into scalable solutions.',
+                heroCta: 'Free consultation →',
+                aboutLabel: 'About us', aboutTitle: 'Your partner for digital transformation',
+                aboutText1: 'We are a team of designers, developers and marketers who have been helping businesses grow digitally for 8 years.',
+                aboutText2: 'Our goal: technology that works and designs that impress.',
+                projectsCompleted: 'Projects completed',
+                servicesLabel: 'Services', servicesTitle: 'What we do for you',
+                service1Title: 'Web Development', service1Desc: 'Modern websites and web apps with React, Next.js and Node.js',
+                service2Title: 'App Development', service2Desc: 'Native and cross-platform apps for iOS and Android',
+                service3Title: 'UI/UX Design', service3Desc: 'User-friendly interfaces that inspire and convert',
+                service4Title: 'Digital Marketing', service4Desc: 'SEO, SEM and Social Media for more visibility',
+                service5Title: 'Performance', service5Desc: 'Optimize load times and increase conversion',
+                service6Title: 'Maintenance & Support', service6Desc: '24/7 monitoring and continuous optimization',
+                quiz1Title: 'What do you need?', opt1_1: 'New Website', opt1_1sub: 'Develop website or web app',
+                opt1_2: 'Mobile App', opt1_2sub: 'iOS or Android app', opt1_3: 'Marketing & SEO', opt1_3sub: 'More traffic and leads',
+                quiz2Title: 'What is your budget?', opt2_1: '€5,000 - €15,000', opt2_1sub: 'Start-Up Package',
+                opt2_2: '€15,000 - €50,000', opt2_2sub: 'Business Package', opt2_3: '€50,000+', opt2_3sub: 'Enterprise Solution',
+                quiz3Title: 'Your contact details', submitBtn: 'SEND REQUEST →',
+                successTitle: 'Perfect! 🎉', successText: 'We will get back to you within 24 hours.',
+                testimonialsLabel: 'Testimonials', testimonialsTitle: 'What our clients say',
+                review1: '"Nexa rebuilt our website in record time. Conversion is up 80%!"',
+                review2: '"Professional, creative and extremely reliable. The best agency experience we ever had."',
+                review3: '"Our app went live within 3 months. Quality and communication top!"',
+                finalTitle: 'Ready for your project?', finalText: "Let's discuss your goals in a free consultation.",
+                finalCta: 'Request consultation now',
+                footerDesc: 'Your partner for digital transformation. We build products that scale.',
+                footerServices: 'Services', footerLink1: 'Web Development', footerLink2: 'App Development', footerLink3: 'UI/UX Design',
+                footerCompany: 'Company', footerLink4: 'About us', footerLink5: 'Careers', footerLink6: 'Contact',
+                footerContact: 'Contact', footerRights: 'All rights reserved.'
+            },
+            ru: {
+                headerCta: 'Запросить консультацию', reviews: 'от 200+ клиентов',
+                heroTitle1: 'Создаем ', heroTitle2: 'цифровые продукты', heroTitle3: ' которые вдохновляют',
+                heroSubtitle: 'Сайты, приложения и маркетинг из одних рук. Мы превращаем идеи в масштабируемые решения.',
+                heroCta: 'Бесплатная консультация →',
+                aboutLabel: 'О нас', aboutTitle: 'Ваш партнёр для цифровой трансформации',
+                aboutText1: 'Мы — команда дизайнеров, разработчиков и маркетологов, которая 8 лет помогает бизнесу расти в digital.',
+                aboutText2: 'Наша цель: технологии, которые работают, и дизайн, который впечатляет.',
+                projectsCompleted: 'Проектов завершено',
+                servicesLabel: 'Услуги', servicesTitle: 'Что мы делаем для вас',
+                service1Title: 'Веб-разработка', service1Desc: 'Современные сайты и веб-приложения на React, Next.js и Node.js',
+                service2Title: 'Разработка приложений', service2Desc: 'Нативные и кроссплатформенные приложения для iOS и Android',
+                service3Title: 'UI/UX Дизайн', service3Desc: 'Удобные интерфейсы, которые вдохновляют и конвертируют',
+                service4Title: 'Digital-маркетинг', service4Desc: 'SEO, контекст и соцсети для большей узнаваемости',
+                service5Title: 'Производительность', service5Desc: 'Оптимизация скорости и рост конверсии',
+                service6Title: 'Поддержка', service6Desc: 'Мониторинг 24/7 и непрерывная оптимизация',
+                quiz1Title: 'Что вам нужно?', opt1_1: 'Новый сайт', opt1_1sub: 'Разработка сайта или веб-приложения',
+                opt1_2: 'Мобильное приложение', opt1_2sub: 'Приложение для iOS или Android', opt1_3: 'Маркетинг и SEO', opt1_3sub: 'Больше трафика и лидов',
+                quiz2Title: 'Какой у вас бюджет?', opt2_1: '€5.000 - €15.000', opt2_1sub: 'Пакет Start-Up',
+                opt2_2: '€15.000 - €50.000', opt2_2sub: 'Бизнес-пакет', opt2_3: '€50.000+', opt2_3sub: 'Enterprise-решение',
+                quiz3Title: 'Ваши контактные данные', submitBtn: 'ОТПРАВИТЬ ЗАПРОС →',
+                successTitle: 'Отлично! 🎉', successText: 'Мы свяжемся с вами в течение 24 часов.',
+                testimonialsLabel: 'Отзывы', testimonialsTitle: 'Что говорят наши клиенты',
+                review1: '"Nexa пересобрал нам сайт в рекордные сроки. Конверсия выросла на 80%!"',
+                review2: '"Профессионально, креативно и очень надёжно. Лучший опыт работы с агентством."',
+                review3: '"Наше приложение запустилось за 3 месяца. Качество и коммуникация на высоте!"',
+                finalTitle: 'Готовы к проекту?', finalText: 'Давайте обсудим ваши цели на бесплатной консультации.',
+                finalCta: 'Запросить консультацию',
+                footerDesc: 'Ваш партнёр для цифровой трансформации. Мы создаём продукты, которые масштабируются.',
+                footerServices: 'Услуги', footerLink1: 'Веб-разработка', footerLink2: 'Приложения', footerLink3: 'UI/UX Дизайн',
+                footerCompany: 'Компания', footerLink4: 'О нас', footerLink5: 'Карьера', footerLink6: 'Контакты',
+                footerContact: 'Контакты', footerRights: 'Все права защищены.'
+            }
+        };
+
+        function toggleLang() {
+            document.getElementById('langDropdown').classList.toggle('open');
+        }
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.toggle('active', opt.dataset.lang === lang));
+            document.getElementById('currentLang').textContent = lang.toUpperCase();
+            document.getElementById('langDropdown').classList.remove('open');
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (t[lang][key]) el.textContent = t[lang][key];
+            });
+            document.title = lang === 'ru' ? 'Nexa Digital — Веб и Маркетинг' : lang === 'en' ? 'Nexa Digital — Web & Marketing' : 'Nexa Digital — Agentur für Web & Marketing';
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-dropdown')) {
+                document.getElementById('langDropdown').classList.remove('open');
+            }
+        });
+
+        let currentStep = 1;
+        function nextStep(step) {
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.getElementById('step' + step).classList.add('active');
+            currentStep = step;
+            document.getElementById('progressFill').style.width = (step / 3 * 100) + '%';
+        }
+
+        function showSuccess() {
+            document.getElementById('step3').classList.remove('active');
+            document.getElementById('stepSuccess').classList.add('active');
+            document.getElementById('progressFill').style.width = '100%';
+        }
+    </script>
+</body>
+</html>
