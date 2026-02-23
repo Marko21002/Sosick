@@ -21,6 +21,15 @@
         .lang-option:hover{background:#f1f5f9}
         .lang-option.active{background:#0ea5e9;color:#fff}
         .lang-flag{font-size:14px}
+        .custom-select{position:relative;margin-bottom:24px}
+        .custom-select-trigger{width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#fff;border:2px solid #e2e8f0;border-radius:12px;font-size:16px;font-weight:500;color:#0f172a;cursor:pointer;text-align:left}
+        .custom-select-trigger svg{width:16px;height:16px;transition:transform .2s;flex-shrink:0;margin-left:12px}
+        .custom-select.open .custom-select-trigger svg{transform:rotate(180deg)}
+        .custom-select-menu{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border:2px solid #e2e8f0;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,0.15);padding:8px;display:none;z-index:100}
+        .custom-select.open .custom-select-menu{display:block}
+        .custom-option{padding:14px 16px;border-radius:8px;font-size:15px;cursor:pointer;transition:background .15s}
+        .custom-option:hover{background:#f0f9ff}
+        .custom-option.active{background:#0ea5e9;color:#fff}
         .logo{font-size:22px;font-weight:800;color:#0ea5e9;flex-shrink:0}
         .logo span{color:#0f172a}
         .header-cta{background:#0ea5e9;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;flex-shrink:0;white-space:nowrap}
@@ -182,11 +191,18 @@
                 <h2 data-i18n="calcTitle">Berechnen Sie Ihren Preis</h2>
             </div>
             
-            <select id="serviceType" onchange="calcPrice()" style="width:100%;padding:16px;margin-bottom:24px;border:2px solid #e2e8f0;border-radius:12px;font-size:16px">
-                <option value="home" data-i18n="optHome">🏠 Wohnungsreinigung</option>
-                <option value="office" data-i18n="optOffice">🏢 Büroreinigung</option>
-                <option value="windows" data-i18n="optWindows">🪟 Fensterreinigung</option>
-            </select>
+            <div class="custom-select" id="serviceSelect">
+                <button class="custom-select-trigger" onclick="toggleServiceSelect()">
+                    <span id="selectedService">🏠 Wohnungsreinigung</span>
+                    <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l5 5 5-5"/></svg>
+                </button>
+                <div class="custom-select-menu">
+                    <div class="custom-option active" onclick="selectService('home')" data-value="home" data-i18n="optHome">🏠 Wohnungsreinigung</div>
+                    <div class="custom-option" onclick="selectService('office')" data-value="office" data-i18n="optOffice">🏢 Büroreinigung</div>
+                    <div class="custom-option" onclick="selectService('windows')" data-value="windows" data-i18n="optWindows">🪟 Fensterreinigung</div>
+                </div>
+                <input type="hidden" id="serviceType" value="home">
+            </div>
 
             <div style="margin-bottom:24px">
                 <label style="display:block;margin-bottom:8px;font-weight:600">Größe: <span id="sizeLabel">60</span> m²</label>
@@ -265,6 +281,7 @@
                 service2: 'Büroreinigung', service2Desc: 'Professionelle Reinigung für Ihr Büro.',
                 service3: 'Fensterreinigung', service3Desc: 'Streifenfreie Fenster für perfekte Sicht.',
                 calcLabel: 'Preisrechner', calcTitle: 'Berechnen Sie Ihren Preis',
+                optHome: '🏠 Wohnungsreinigung', optOffice: '🏢 Büroreinigung', optWindows: '🪟 Fensterreinigung',
                 basePrice: 'Basispreis', sizePrice: 'Zusatz für Größe', discount: '✓ Online-Buchung Rabatt',
                 total: 'Geschätzter Preis', submit: 'JETZT KOSTENLOS ANGEBOT ANFORDERN →',
                 finalTitle: 'Bereit für Ihre Reinigung?', finalText: 'Vereinbaren Sie jetzt Ihren Termin und erhalten Sie 10% Rabatt!',
@@ -284,6 +301,7 @@
                 service2: 'Office Cleaning', service2Desc: 'Professional cleaning for your office.',
                 service3: 'Window Cleaning', service3Desc: 'Streak-free windows for perfect view.',
                 calcLabel: 'Price Calculator', calcTitle: 'Calculate your price',
+                optHome: '🏠 Home Cleaning', optOffice: '🏢 Office Cleaning', optWindows: '🪟 Window Cleaning',
                 basePrice: 'Base price', sizePrice: 'Extra for size', discount: '✓ Online booking discount',
                 total: 'Estimated price', submit: 'REQUEST FREE QUOTE NOW →',
                 finalTitle: 'Ready for your cleaning?', finalText: 'Book now and get 10% off your first booking!',
@@ -303,6 +321,7 @@
                 service2: 'Уборка офисов', service2Desc: 'Профессиональная уборка для вашего офиса.',
                 service3: 'Мытье окон', service3Desc: 'Окна без разводов для идеального вида.',
                 calcLabel: 'Калькулятор цен', calcTitle: 'Рассчитайте свою цену',
+                optHome: '🏠 Уборка квартир', optOffice: '🏢 Уборка офисов', optWindows: '🪟 Мытье окон',
                 basePrice: 'Базовая цена', sizePrice: 'Доплата за размер', discount: '✓ Скидка онлайн-бронирования',
                 total: 'Итоговая цена', submit: 'ПОЛУЧИТЬ БЕСПЛАТНУЮ СМЕТУ →',
                 finalTitle: 'Готовы к уборке?', finalText: 'Запишитесь сейчас и получите скидку 10% на первую уборку!',
@@ -323,6 +342,7 @@
                 const key = el.dataset.i18n;
                 if (t[lang][key]) el.textContent = t[lang][key];
             });
+            updateSelectedServiceText();
             document.title = lang === 'ru' ? 'CleanPro Вена — Уборка' : lang === 'en' ? 'CleanPro Vienna — Cleaning' : 'CleanPro Wien — Reinigung';
         }
         
@@ -330,7 +350,33 @@
             if (!e.target.closest('.lang-dropdown')) {
                 document.getElementById('langDropdown').classList.remove('open');
             }
+            if (!e.target.closest('.custom-select')) {
+                document.getElementById('serviceSelect').classList.remove('open');
+            }
         });
+
+        function toggleServiceSelect() {
+            document.getElementById('serviceSelect').classList.toggle('open');
+        }
+
+        function selectService(value) {
+            document.getElementById('serviceType').value = value;
+            document.querySelectorAll('.custom-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.value === value);
+            });
+            updateSelectedServiceText();
+            document.getElementById('serviceSelect').classList.remove('open');
+            calcPrice();
+        }
+
+        function updateSelectedServiceText() {
+            const lang = document.getElementById('currentLang').textContent.toLowerCase();
+            const value = document.getElementById('serviceType').value;
+            const key = value === 'office' ? 'optOffice' : value === 'windows' ? 'optWindows' : 'optHome';
+            if (t[lang] && t[lang][key]) {
+                document.getElementById('selectedService').textContent = t[lang][key];
+            }
+        }
 
         function calcPrice() {
             const size = parseInt(document.getElementById('sizeRange').value);
