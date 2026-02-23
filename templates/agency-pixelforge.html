@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>PixelForge — Digital Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #16161d;
+            --surface-elevated: #1e1e28;
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --accent: #22d3ee;
+            --success: #10b981;
+            --text: #fafafa;
+            --text-secondary: #a1a1aa;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #22d3ee 100%);
+            --gradient-subtle: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(139,92,246,0.05) 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        /* Background Effects */
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-glow::before, .bg-glow::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+        }
+        .bg-glow::before {
+            top: 10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(99, 102, 241, 0.15);
+        }
+        .bg-glow::after {
+            bottom: 20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(34, 211, 238, 0.1);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .lang-dropdown {
+            position: relative;
+        }
+        .lang-trigger {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-trigger:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--text);
+        }
+        .lang-trigger svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.2s;
+        }
+        .lang-dropdown.open .lang-trigger svg {
+            transform: rotate(180deg);
+        }
+        .lang-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--surface-elevated);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 120px;
+            display: none;
+            z-index: 1001;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .lang-dropdown.open .lang-menu {
+            display: block;
+        }
+        .lang-option {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+        }
+        .lang-option:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+        }
+        .lang-option.active {
+            background: var(--primary);
+            color: white;
+        }
+        .nav-cta {
+            display: none;
+            padding: 10px 20px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99,102,241,0.3);
+        }
+        @media (min-width: 640px) {
+            .nav-cta { display: block; }
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 32px;
+        }
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        h1 {
+            font-size: clamp(36px, 8vw, 64px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+        h1 .gradient {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: clamp(16px, 3vw, 20px);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+        .hero-cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (min-width: 480px) {
+            .hero-cta-group {
+                flex-direction: row;
+            }
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            white-space: nowrap;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(99,102,241,0.3);
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: transparent;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 32px;
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        @media (min-width: 640px) {
+            .stats-bar {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* Section Base */
+        section {
+            padding: 100px 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .section-label {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-light);
+            margin-bottom: 16px;
+        }
+        h2 {
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            gap: 24px;
+        }
+        @media (min-width: 640px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .service-card {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-subtle);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99,102,241,0.3);
+        }
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        .service-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .portfolio-item {
+            background: var(--surface);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-4px);
+        }
+        .portfolio-image {
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, #1e1e28 0%, #2d2d3d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+        .portfolio-content {
+            padding: 24px;
+        }
+        .portfolio-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .portfolio-content p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .portfolio-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .tag {
+            padding: 6px 12px;
+            background: rgba(99,102,241,0.1);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-light);
+        }
+
+        /* Process */
+        .process-steps {
+            display: grid;
+            gap: 32px;
+            counter-reset: step;
+        }
+        @media (min-width: 768px) {
+            .process-steps {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+        @media (min-width: 768px) {
+            .process-step:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                top: 32px;
+                right: -50%;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, var(--primary), transparent);
+                opacity: 0.3;
+            }
+        }
+        .step-number {
+            width: 64px;
+            height: 64px;
+            background: var(--surface);
+            border: 2px solid rgba(99,102,241,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-light);
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .process-step h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .process-step p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .testimonials-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .testimonial-card {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 32px;
+        }
+        .testimonial-stars {
+            color: #fbbf24;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+        .testimonial-text {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .author-info strong {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .author-info span {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: var(--surface);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .cta-section h2 {
+            font-size: clamp(32px, 6vw, 48px);
+            margin-bottom: 20px;
+        }
+        .cta-section p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 24px 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .footer-grid {
+            display: grid;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+            }
+        }
+        .footer-brand {
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+        .footer-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+        .footer-column a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 6px 0;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .footer-column a:hover {
+            color: var(--text);
+        }
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    
+    <nav>
+        <div class="nav-content">
+            <div class="logo">PixelForge</div>
+            <div class="nav-actions">
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-trigger" onclick="toggleLang()">
+                        <span id="currentLang">DE</span>
+                        <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l5 5 5-5"/></svg>
+                    </button>
+                    <div class="lang-menu">
+                        <div class="lang-option active" onclick="setLang('de')" data-lang="de">Deutsch</div>
+                        <div class="lang-option" onclick="setLang('en')" data-lang="en">English</div>
+                        <div class="lang-option" onclick="setLang('ru')" data-lang="ru">Русский</div>
+                    </div>
+                </div>
+                <a href="#contact" class="nav-cta" data-i18n="navCta">Projekt starten</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge" data-i18n="heroBadge">Verfügbar für neue Projekte</div>
+            <h1 data-i18n="heroTitle">Wir bauen <span class="gradient">digitale Erlebnisse</span>, die begeistern</h1>
+            <p class="hero-subtitle" data-i18n="heroSubtitle">Webentwicklung, Branding und digitales Marketing aus einer Hand. Wir verwandeln Ideen in skalierbare Lösungen.</p>
+            <div class="hero-cta-group">
+                <a href="#contact" class="btn-primary" data-i18n="heroCta1">Kostenlos beraten lassen</a>
+                <a href="#portfolio" class="btn-secondary" data-i18n="heroCta2">Projekte ansehen</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value">150+</div>
+                <div class="stat-label" data-i18n="stat1">Projekte</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">50+</div>
+                <div class="stat-label" data-i18n="stat2">Kunden</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">8+</div>
+                <div class="stat-label" data-i18n="stat3">Jahre Erfahrung</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">98%</div>
+                <div class="stat-label" data-i18n="stat4">Zufriedenheit</div>
+            </div>
+        </div>
+    </div>
+
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="servicesLabel">Leistungen</div>
+                <h2 data-i18n="servicesTitle">Alles, was du für deinen digitalen Erfolg brauchst</h2>
+                <p class="section-subtitle" data-i18n="servicesSubtitle">Von der Strategie bis zur Umsetzung begleiten wir dich auf dem gesamten Weg.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3 data-i18n="service1Title">Webentwicklung</h3>
+                    <p data-i18n="service1Desc">Maßgeschneiderte Websites und Webapps mit modernsten Technologien. React, Next.js, Node.js – alles, was dein Projekt braucht.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3 data-i18n="service2Title">UI/UX Design</h3>
+                    <p data-i18n="service2Desc">Nutzerfreundliche Interfaces, die begeistern. Von Wireframes bis zum fertigen Designsystem – wir machen dein Produkt schön und funktional.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3 data-i18n="service3Title">App Entwicklung</h3>
+                    <p data-i18n="service3Desc">Native und Cross-Platform Apps für iOS und Android. Wir bringen deine Idee auf jedes Gerät.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3 data-i18n="service4Title">Digitales Marketing</h3>
+                    <p data-i18n="service4Desc">SEO, SEA, Social Media und Content Marketing. Wir bringen dich vor deine Zielgruppe.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3 data-i18n="service5Title">Performance</h3>
+                    <p data-i18n="service5Desc">Ladezeiten optimieren, Conversion steigern. Wir sorgen dafür, dass deine Website fliegt.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3 data-i18n="service6Title">Wartung & Support</h3>
+                    <p data-i18n="service6Desc">24/7 Monitoring, regelmäßige Updates und schneller Support. Deine Website ist bei uns in guten Händen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="portfolioLabel">Portfolio</div>
+                <h2 data-i18n="portfolioTitle">Ausgewählte Projekte</h2>
+                <p class="section-subtitle" data-i18n="portfolioSubtitle">Ein Einblick in unsere jüngste Arbeit.</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🛒</div>
+                    <div class="portfolio-content">
+                        <h3 data-i18n="project1Title">E-Commerce Platform</h3>
+                        <p data-i18n="project1Desc">Kompletter Relaunch mit 40% mehr Conversion</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🏦</div>
+                    <div class="portfolio-content">
+                        <h3 data-i18n="project2Title">Fintech Dashboard</h3>
+                        <p data-i18n="project2Desc">Real-time Datenvisualisierung für Banken</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">D3.js</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🎓</div>
+                    <div class="portfolio-content">
+                        <h3 data-i18n="project3Title">EdTech Plattform</h3>
+                        <p data-i18n="project3Desc">Lernplattform mit 50.000+ Nutzern</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">Prisma</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🏥</div>
+                    <div class="portfolio-content">
+                        <h3 data-i18n="project4Title">Health App</h3>
+                        <p data-i18n="project4Desc">Telemedizin-App für Patienten</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="processLabel">Prozess</div>
+                <h2 data-i18n="processTitle">So arbeiten wir</h2>
+                <p class="section-subtitle" data-i18n="processSubtitle">Transparent, agil und effizient.</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 data-i18n="step1Title">Discovery</h3>
+                    <p data-i18n="step1Desc">Wir verstehen dein Business, deine Ziele und deine Nutzer.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 data-i18n="step2Title">Strategie</h3>
+                    <p data-i18n="step2Desc">Konzept, Wireframes und Technologie-Stack werden festgelegt.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 data-i18n="step3Title">Entwicklung</h3>
+                    <p data-i18n="step3Desc">Agile Entwicklung mit wöchentlichen Demos und Feedback.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 data-i18n="step4Title">Launch</h3>
+                    <p data-i18n="step4Desc">Deployment, Monitoring und kontinuierliche Optimierung.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="testimonialsLabel">Testimonials</div>
+                <h2 data-i18n="testimonialsTitle">Was unsere Kunden sagen</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="review1">"PixelForge hat unsere Erwartungen übertroffen. Die neue Website läuft schneller und die Conversion ist um 60% gestiegen."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div class="author-info">
+                            <strong>Michael Klein</strong>
+                            <span>CEO, TechStart GmbH</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="review2">"Professionell, kreativ und zuverlässig. Das Team versteht wirklich, was wir brauchen und liefert immer pünktlich."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SW</div>
+                        <div class="author-info">
+                            <strong>Sarah Weber</strong>
+                            <span>Marketing Director, StyleShop</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="review3">"Endlich eine Agentur, die technisch auf höchstem Niveau arbeitet UND wirklich gutes Design liefert."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TB</div>
+                        <div class="author-info">
+                            <strong>Thomas Berger</strong>
+                            <span>Founder, FinTech Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2 data-i18n="ctaTitle">Bereit für dein <span class="gradient">nächstes Projekt?</span></h2>
+            <p data-i18n="ctaSubtitle">Lass uns in einem kostenlosen Gespräch herausfinden, wie wir dir helfen können.</p>
+            <a href="mailto:hello@pixelforge.agency" class="btn-primary" data-i18n="ctaButton">Projekt besprechen</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">PixelForge</div>
+                    <p class="footer-desc" data-i18n="footerDesc">Wir sind eine digitale Agentur aus Wien, die Marken hilft, durch herausragende digitale Erlebnisse zu wachsen.</p>
+                </div>
+                <div class="footer-column">
+                    <h4 data-i18n="footerServices">Leistungen</h4>
+                    <a href="#" data-i18n="footerLink1">Webentwicklung</a>
+                    <a href="#" data-i18n="footerLink2">App Entwicklung</a>
+                    <a href="#" data-i18n="footerLink3">UI/UX Design</a>
+                    <a href="#" data-i18n="footerLink4">Marketing</a>
+                </div>
+                <div class="footer-column">
+                    <h4 data-i18n="footerCompany">Unternehmen</h4>
+                    <a href="#" data-i18n="footerLink5">Über uns</a>
+                    <a href="#" data-i18n="footerLink6">Karriere</a>
+                    <a href="#portfolio" data-i18n="footerLink7">Portfolio</a>
+                    <a href="#" data-i18n="footerLink8">Blog</a>
+                </div>
+                <div class="footer-column">
+                    <h4 data-i18n="footerContact">Kontakt</h4>
+                    <a href="mailto:hello@pixelforge.agency">hello@pixelforge.agency</a>
+                    <a href="tel:+43123456789">+43 1 234 56 78</a>
+                    <a href="#" data-i18n="footerAddress">Wien, Österreich</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2024 PixelForge. <span data-i18n="footerRights">Alle Rechte vorbehalten.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const t = {
+            de: {
+                navCta: 'Projekt starten',
+                heroBadge: 'Verfügbar für neue Projekte',
+                heroTitle: 'Wir bauen digitale Erlebnisse, die begeistern',
+                heroSubtitle: 'Webentwicklung, Branding und digitales Marketing aus einer Hand. Wir verwandeln Ideen in skalierbare Lösungen.',
+                heroCta1: 'Kostenlos beraten lassen',
+                heroCta2: 'Projekte ansehen',
+                stat1: 'Projekte', stat2: 'Kunden', stat3: 'Jahre Erfahrung', stat4: 'Zufriedenheit',
+                servicesLabel: 'Leistungen',
+                servicesTitle: 'Alles, was du für deinen digitalen Erfolg brauchst',
+                servicesSubtitle: 'Von der Strategie bis zur Umsetzung begleiten wir dich auf dem gesamten Weg.',
+                service1Title: 'Webentwicklung', service1Desc: 'Maßgeschneiderte Websites und Webapps mit modernsten Technologien. React, Next.js, Node.js – alles, was dein Projekt braucht.',
+                service2Title: 'UI/UX Design', service2Desc: 'Nutzerfreundliche Interfaces, die begeistern. Von Wireframes bis zum fertigen Designsystem.',
+                service3Title: 'App Entwicklung', service3Desc: 'Native und Cross-Platform Apps für iOS und Android.',
+                service4Title: 'Digitales Marketing', service4Desc: 'SEO, SEA, Social Media und Content Marketing. Wir bringen dich vor deine Zielgruppe.',
+                service5Title: 'Performance', service5Desc: 'Ladezeiten optimieren, Conversion steigern. Wir sorgen dafür, dass deine Website fliegt.',
+                service6Title: 'Wartung & Support', service6Desc: '24/7 Monitoring, regelmäßige Updates und schneller Support.',
+                portfolioLabel: 'Portfolio', portfolioTitle: 'Ausgewählte Projekte', portfolioSubtitle: 'Ein Einblick in unsere jüngste Arbeit.',
+                project1Title: 'E-Commerce Platform', project1Desc: 'Kompletter Relaunch mit 40% mehr Conversion',
+                project2Title: 'Fintech Dashboard', project2Desc: 'Real-time Datenvisualisierung für Banken',
+                project3Title: 'EdTech Plattform', project3Desc: 'Lernplattform mit 50.000+ Nutzern',
+                project4Title: 'Health App', project4Desc: 'Telemedizin-App für Patienten',
+                processLabel: 'Prozess', processTitle: 'So arbeiten wir', processSubtitle: 'Transparent, agil und effizient.',
+                step1Title: 'Discovery', step1Desc: 'Wir verstehen dein Business, deine Ziele und deine Nutzer.',
+                step2Title: 'Strategie', step2Desc: 'Konzept, Wireframes und Technologie-Stack werden festgelegt.',
+                step3Title: 'Entwicklung', step3Desc: 'Agile Entwicklung mit wöchentlichen Demos und Feedback.',
+                step4Title: 'Launch', step4Desc: 'Deployment, Monitoring und kontinuierliche Optimierung.',
+                testimonialsLabel: 'Testimonials', testimonialsTitle: 'Was unsere Kunden sagen',
+                review1: '"PixelForge hat unsere Erwartungen übertroffen. Die neue Website läuft schneller und die Conversion ist um 60% gestiegen."',
+                review2: '"Professionell, kreativ und zuverlässig. Das Team versteht wirklich, was wir brauchen."',
+                review3: '"Endlich eine Agentur, die technisch auf höchstem Niveau arbeitet UND wirklich gutes Design liefert."',
+                ctaTitle: 'Bereit für dein nächstes Projekt?',
+                ctaSubtitle: 'Lass uns in einem kostenlosen Gespräch herausfinden, wie wir dir helfen können.',
+                ctaButton: 'Projekt besprechen',
+                footerDesc: 'Wir sind eine digitale Agentur aus Wien, die Marken hilft, durch herausragende digitale Erlebnisse zu wachsen.',
+                footerServices: 'Leistungen', footerLink1: 'Webentwicklung', footerLink2: 'App Entwicklung', footerLink3: 'UI/UX Design', footerLink4: 'Marketing',
+                footerCompany: 'Unternehmen', footerLink5: 'Über uns', footerLink6: 'Karriere', footerLink7: 'Portfolio', footerLink8: 'Blog',
+                footerContact: 'Kontakt', footerAddress: 'Wien, Österreich', footerRights: 'Alle Rechte vorbehalten.'
+            },
+            en: {
+                navCta: 'Start Project',
+                heroBadge: 'Available for new projects',
+                heroTitle: 'We build digital experiences that inspire',
+                heroSubtitle: 'Web development, branding and digital marketing from one source. We transform ideas into scalable solutions.',
+                heroCta1: 'Get free consultation',
+                heroCta2: 'View projects',
+                stat1: 'Projects', stat2: 'Clients', stat3: 'Years Experience', stat4: 'Satisfaction',
+                servicesLabel: 'Services',
+                servicesTitle: 'Everything you need for digital success',
+                servicesSubtitle: 'From strategy to implementation, we guide you every step of the way.',
+                service1Title: 'Web Development', service1Desc: 'Custom websites and web apps with cutting-edge technologies. React, Next.js, Node.js – everything your project needs.',
+                service2Title: 'UI/UX Design', service2Desc: 'User-friendly interfaces that inspire. From wireframes to complete design systems.',
+                service3Title: 'App Development', service3Desc: 'Native and cross-platform apps for iOS and Android.',
+                service4Title: 'Digital Marketing', service4Desc: 'SEO, SEM, Social Media and Content Marketing. We get you in front of your target audience.',
+                service5Title: 'Performance', service5Desc: 'Optimize load times, increase conversion. We make your website fly.',
+                service6Title: 'Maintenance & Support', service6Desc: '24/7 monitoring, regular updates and fast support.',
+                portfolioLabel: 'Portfolio', portfolioTitle: 'Selected Projects', portfolioSubtitle: 'A glimpse into our recent work.',
+                project1Title: 'E-Commerce Platform', project1Desc: 'Complete relaunch with 40% more conversion',
+                project2Title: 'Fintech Dashboard', project2Desc: 'Real-time data visualization for banks',
+                project3Title: 'EdTech Platform', project3Desc: 'Learning platform with 50,000+ users',
+                project4Title: 'Health App', project4Desc: 'Telemedicine app for patients',
+                processLabel: 'Process', processTitle: 'How we work', processSubtitle: 'Transparent, agile and efficient.',
+                step1Title: 'Discovery', step1Desc: 'We understand your business, goals and users.',
+                step2Title: 'Strategy', step2Desc: 'Concept, wireframes and technology stack are defined.',
+                step3Title: 'Development', step3Desc: 'Agile development with weekly demos and feedback.',
+                step4Title: 'Launch', step4Desc: 'Deployment, monitoring and continuous optimization.',
+                testimonialsLabel: 'Testimonials', testimonialsTitle: 'What our clients say',
+                review1: '"PixelForge exceeded our expectations. The new website runs faster and conversion is up 60%."',
+                review2: '"Professional, creative and reliable. The team really understands what we need."',
+                review3: '"Finally an agency that works at the highest technical level AND delivers great design."',
+                ctaTitle: 'Ready for your next project?',
+                ctaSubtitle: "Let's find out in a free conversation how we can help you.",
+                ctaButton: 'Discuss project',
+                footerDesc: 'We are a digital agency from Vienna helping brands grow through outstanding digital experiences.',
+                footerServices: 'Services', footerLink1: 'Web Development', footerLink2: 'App Development', footerLink3: 'UI/UX Design', footerLink4: 'Marketing',
+                footerCompany: 'Company', footerLink5: 'About', footerLink6: 'Careers', footerLink7: 'Portfolio', footerLink8: 'Blog',
+                footerContact: 'Contact', footerAddress: 'Vienna, Austria', footerRights: 'All rights reserved.'
+            },
+            ru: {
+                navCta: 'Начать проект',
+                heroBadge: 'Доступны для новых проектов',
+                heroTitle: 'Создаем цифровые продукты, которые вдохновляют',
+                heroSubtitle: 'Веб-разработка, брендинг и digital-маркетинг из одних рук. Мы превращаем идеи в масштабируемые решения.',
+                heroCta1: 'Бесплатная консультация',
+                heroCta2: 'Смотреть проекты',
+                stat1: 'Проектов', stat2: 'Клиентов', stat3: 'Лет опыта', stat4: 'Удовлетворённость',
+                servicesLabel: 'Услуги',
+                servicesTitle: 'Всё, что нужно для цифрового успеха',
+                servicesSubtitle: 'От стратегии до внедрения — сопровождаем вас на каждом этапе.',
+                service1Title: 'Веб-разработка', service1Desc: 'Сайты и веб-приложения на современных технологиях. React, Next.js, Node.js — всё, что нужно проекту.',
+                service2Title: 'UI/UX Дизайн', service2Desc: 'Удобные интерфейсы, которые вдохновляют. От wireframes до полноценной дизайн-системы.',
+                service3Title: 'Разработка приложений', service3Desc: 'Нативные и кроссплатформенные приложения для iOS и Android.',
+                service4Title: 'Digital-маркетинг', service4Desc: 'SEO, контекст, соцсети и контент-маркетинг. Мы выведем вас на целевую аудиторию.',
+                service5Title: 'Производительность', service5Desc: 'Оптимизация скорости, рост конверсии. Мы заставим ваш сайт летать.',
+                service6Title: 'Поддержка', service6Desc: 'Мониторинг 24/7, регулярные обновления и быстрая поддержка.',
+                portfolioLabel: 'Портфолио', portfolioTitle: 'Избранные проекты', portfolioSubtitle: 'Наши последние работы.',
+                project1Title: 'E-Commerce платформа', project1Desc: 'Полный редизайн с ростом конверсии на 40%',
+                project2Title: 'Fintech Dashboard', project2Desc: 'Визуализация данных в реальном времени для банков',
+                project3Title: 'EdTech платформа', project3Desc: 'Образовательная платформа с 50 000+ пользователей',
+                project4Title: 'Медицинское приложение', project4Desc: 'Приложение телемедицины для пациентов',
+                processLabel: 'Процесс', processTitle: 'Как мы работаем', processSubtitle: 'Прозрачно, гибко и эффективно.',
+                step1Title: 'Исследование', step1Desc: 'Изучаем ваш бизнес, цели и пользователей.',
+                step2Title: 'Стратегия', step2Desc: 'Определяем концепцию, wireframes и технологии.',
+                step3Title: 'Разработка', step3Desc: 'Гибкая разработка с еженедельными демо и фидбеком.',
+                step4Title: 'Запуск', step4Desc: 'Деплой, мониторинг и непрерывная оптимизация.',
+                testimonialsLabel: 'Отзывы', testimonialsTitle: 'Что говорят клиенты',
+                review1: '"PixelForge превзошёл все ожидания. Новый сайт работает быстрее, конверсия выросла на 60%."',
+                review2: '"Профессионально, креативно и надёжно. Команда действительно понимает наши потребности."',
+                review3: '"Наконец-то агентство, которое работает на высшем техническом уровне И создаёт отличный дизайн."',
+                ctaTitle: 'Готовы к новому проекту?',
+                ctaSubtitle: 'Давайте на бесплатной консультации выясним, как мы можем помочь.',
+                ctaButton: 'Обсудить проект',
+                footerDesc: 'Мы — digital-агентство из Вены, помогающее брендам расти через выдающиеся цифровые продукты.',
+                footerServices: 'Услуги', footerLink1: 'Веб-разработка', footerLink2: 'Приложения', footerLink3: 'UI/UX Дизайн', footerLink4: 'Маркетинг',
+                footerCompany: 'Компания', footerLink5: 'О нас', footerLink6: 'Карьера', footerLink7: 'Портфолио', footerLink8: 'Блог',
+                footerContact: 'Контакты', footerAddress: 'Вена, Австрия', footerRights: 'Все права защищены.'
+            }
+        };
+
+        function toggleLang() {
+            document.getElementById('langDropdown').classList.toggle('open');
+        }
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.lang === lang);
+            });
+            document.getElementById('currentLang').textContent = lang.toUpperCase();
+            document.getElementById('langDropdown').classList.remove('open');
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (t[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = t[lang][key];
+                    } else {
+                        el.innerHTML = t[lang][key];
+                    }
+                }
+            });
+            
+            document.documentElement.lang = lang;
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-dropdown')) {
+                document.getElementById('langDropdown').classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
