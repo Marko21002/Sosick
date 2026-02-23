@@ -1185,7 +1185,33 @@
                 </div>
                 
                 <div class="quiz-step-content" data-step="4">
-                    <h3 data-i18n="q4_title">Your details:</h3>
+                    <h3 data-i18n="q4_title">How would you like to proceed?</h3>
+                    
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="nextStep('form')">
+                            <div class="quiz-option-icon">📝</div>
+                            <div class="quiz-option-text">
+                                <h4 data-i18n="choice_form_title">Fill out form</h4>
+                                <p data-i18n="choice_form_desc">Get a detailed proposal via email within 24 hours</p>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-option" onclick="nextStep('calendar')">
+                            <div class="quiz-option-icon">📅</div>
+                            <div class="quiz-option-text">
+                                <h4 data-i18n="choice_call_title">Book a call</h4>
+                                <p data-i18n="choice_call_desc">Schedule a free 30-min strategy call</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-nav">
+                        <button class="quiz-btn secondary" onclick="prevStep(3)" data-i18n="btn_back">← Back</button>
+                    </div>
+                </div>
+                
+                <div class="quiz-step-content" data-step="form">
+                    <h3 data-i18n="form_title">Your details:</h3>
                     
                     <div style="margin-bottom:24px">
                         <input type="text" class="form-input" data-i18n-placeholder="placeholder_name" placeholder="Your name" style="margin-bottom:12px">
@@ -1193,7 +1219,7 @@
                         <input type="text" class="form-input" data-i18n-placeholder="placeholder_company" placeholder="Company name">
                     </div>
                     
-                    <button class="quiz-btn" onclick="showSuccess()" style="width:100%" data-i18n="btn_get_quote">
+                    <button class="quiz-btn" onclick="showSuccess('form')" style="width:100%" data-i18n="btn_get_quote">
                         Get My Quote →
                     </button>
                     
@@ -1202,7 +1228,47 @@
                     </p>
                     
                     <div class="quiz-nav" style="border:none;margin-top:24px;padding-top:0">
-                        <button class="quiz-btn secondary" onclick="prevStep(3)" data-i18n="btn_back">← Back</button>
+                        <button class="quiz-btn secondary" onclick="prevStep(4)" data-i18n="btn_back">← Back</button>
+                    </div>
+                </div>
+                
+                <div class="quiz-step-content" data-step="calendar">
+                    <h3 data-i18n="calendar_title">Book your free call</h3>
+                    
+                    <div style="background:var(--bg);border:1px solid var(--border);padding:24px;text-align:center;margin-bottom:24px">
+                        <div style="font-size:48px;margin-bottom:16px">📅</div>
+                        <p style="color:var(--text-dim);margin-bottom:20px" data-i18n="calendar_desc">
+                            Choose a time that works for you. We'll discuss your project and answer all your questions.
+                        </p>
+                        
+                        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px">
+                            <div style="display:flex;align-items:center;gap:12px;padding:16px;background:var(--bg-card);border:1px solid var(--border)">
+                                <span style="color:var(--accent)">✓</span>
+                                <span data-i18n="call_benefit1">Free 30-minute strategy session</span>
+                            </div>
+                            
+                            <div style="display:flex;align-items:center;gap:12px;padding:16px;background:var(--bg-card);border:1px solid var(--border)">
+                                <span style="color:var(--accent)">✓</span>
+                                <span data-i18n="call_benefit2">Get a rough estimate on the call</span>
+                            </div>
+                            
+                            <div style="display:flex;align-items:center;gap:12px;padding:16px;background:var(--bg-card);border:1px solid var(--border)">
+                                <span style="color:var(--accent)">✓</span>
+                                <span data-i18n="call_benefit3">No commitment required</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://calendly.com/YOUR-CALENDAR-LINK" target="_blank" class="quiz-btn" style="display:block;width:100%;text-align:center;text-decoration:none" data-i18n="btn_book_call">
+                            Book Call →
+                        </a>
+                        
+                        <p style="color:var(--text-muted);font-size:12px;margin-top:16px">
+                            <span data-i18n="calendar_note">Powered by Calendly. You'll be redirected to select a time slot.</span>
+                        </p>
+                    </div>
+                    
+                    <div class="quiz-nav" style="border:none;margin-top:0;padding-top:0">
+                        <button class="quiz-btn secondary" onclick="prevStep(4)" data-i18n="btn_back">← Back</button>
                     </div>
                 </div>
                 
@@ -1376,7 +1442,8 @@
                 placeholder_name: 'Your name', placeholder_email: 'Work email', placeholder_company: 'Company name',
                 btn_get_quote: 'Get My Quote →', btn_back: '← Back',
                 privacy_note: 'We respect your privacy. No spam.',
-                success_title: 'Quote request sent! 🎉', success_desc: 'We\'ll analyze your requirements and respond within 24 hours.',
+                success_title: 'Quote request sent! 🎉', success_desc: "We'll analyze your requirements and respond within 24 hours.",
+                success_title_call: 'See you soon! 📅', success_desc_call: "You're all set. Check your email for the calendar invite.",
                 next_steps: 'What happens next?', step_next1: 'We review your project details', step_next2: 'Schedule a free strategy call', step_next3: 'Receive detailed proposal',
                 testimonials_label: 'Testimonials', testimonials_title: 'Client results',
                 testimonial1: '"Nexus transformed our online presence. Website loads in 0.8s and conversions are up 340%."',
@@ -1431,6 +1498,7 @@
                 btn_get_quote: 'Angebot anfordern →', btn_back: '← Zurück',
                 privacy_note: 'Wir respektieren Ihre Privatsphäre. Kein Spam.',
                 success_title: 'Anfrage gesendet! 🎉', success_desc: 'Wir analysieren Ihre Anforderungen und antworten innerhalb von 24 Stunden.',
+                success_title_call: 'Bis bald! 📅', success_desc_call: 'Alles bereit. Prüfen Sie Ihre E-Mails für die Kalendereinladung.',
                 next_steps: 'Was passiert als nächstes?', step_next1: 'Wir prüfen Ihre Projektdetails', step_next2: 'Kostenloses Strategie-Gespräch', step_next3: 'Detailliertes Angebot erhalten',
                 testimonials_label: 'Kundenstimmen', testimonials_title: 'Kundenergebnisse',
                 testimonial1: '"Nexus hat unsere Online-Präsenz transformiert. Website lädt in 0,8s, Conversions +340%."',
@@ -1485,6 +1553,7 @@
                 btn_get_quote: 'Получить оценку →', btn_back: '← Назад',
                 privacy_note: 'Мы уважаем вашу приватность. Никакого спама.',
                 success_title: 'Запрос отправлен! 🎉', success_desc: 'Мы проанализируем ваш проект и ответим в течение 24 часов.',
+                success_title_call: 'До встречи! 📅', success_desc_call: 'Всё готово. Проверьте почту для приглашения в календарь.',
                 next_steps: 'Что дальше?', step_next1: 'Анализируем детали проекта', step_next2: 'Бесплатная консультация', step_next3: 'Детальное предложение',
                 testimonials_label: 'Отзывы', testimonials_title: 'Результаты клиентов',
                 testimonial1: '"Nexus полностью трансформировал нашу онлайн-презентацию. Сайт грузится за 0.8с, конверсия +340%."',
@@ -1561,7 +1630,7 @@
         let currentStep = 1;
         function updateProgress() {
             document.querySelectorAll('.quiz-step-indicator').forEach((ind, i) => {
-                ind.classList.toggle('active', i < currentStep);
+                ind.classList.toggle('active', i < Math.min(currentStep, 4));
             });
         }
         function nextStep(step) {
@@ -1576,10 +1645,16 @@
             currentStep = step;
             updateProgress();
         }
-        function showSuccess() {
+        function showSuccess(type) {
             document.querySelector(`.quiz-step-content[data-step="${currentStep}"]`).classList.remove('active');
             document.querySelector('.quiz-step-content[data-step="success"]').classList.add('active');
             document.querySelector('.quiz-progress').style.display = 'none';
+            
+            // Update success message based on type
+            if (type === 'call') {
+                document.querySelector('[data-i18n="success_title"]').textContent = translations[currentLang].success_title_call;
+                document.querySelector('[data-i18n="success_desc"]').textContent = translations[currentLang].success_desc_call;
+            }
         }
 
         // Smooth scroll
