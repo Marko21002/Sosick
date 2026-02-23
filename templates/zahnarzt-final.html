@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Weber Zahnarzt Wien</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#fff;color:#0f172a;line-height:1.6}
+        .lang-switcher{position:fixed;top:80px;right:20px;z-index:999;background:#fff;border-radius:50px;padding:6px;box-shadow:0 4px 20px rgba(0,0,0,0.15);display:flex;gap:4px}
+        .lang-btn{border:none;padding:10px 18px;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;background:transparent;color:#64748b;transition:all .2s}
+        .lang-btn.active{background:#0891b2;color:#fff}
+        header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0;z-index:100;padding:16px 20px}
+        .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-size:22px;font-weight:800;color:#0891b2}
+        .logo span{color:#0f172a}
+        .header-cta{background:#0891b2;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none}
+        .hero{padding:140px 20px 100px;background:linear-gradient(135deg,#ecfeff 0%,#fff 50%,#f0f9ff 100%)}
+        .container{max-width:1200px;margin:0 auto}
+        .hero-container{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e2e8f0;padding:10px 20px;border-radius:50px;font-size:14px;font-weight:700;color:#0891b2;margin-bottom:24px}
+        .hero h1{font-size:52px;font-weight:800;line-height:1.1;margin-bottom:20px}
+        .hero h1 .highlight{color:#0891b2}
+        .hero-subtitle{font-size:20px;color:#64748b;margin-bottom:32px}
+        .hero-cta{display:inline-flex;align-items:center;gap:12px;background:#0891b2;color:#fff;padding:20px 36px;border-radius:14px;font-size:18px;font-weight:700;text-decoration:none;box-shadow:0 10px 30px rgba(8,145,178,0.3)}
+        .about{padding:100px 20px;background:#f8fafc}
+        .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+        .section-header{text-align:center;margin-bottom:60px}
+        .section-label{font-size:13px;font-weight:700;color:#0891b2;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+        h2{font-size:42px;font-weight:800;margin-bottom:16px}
+        .services{padding:100px 20px}
+        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .service-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:32px;transition:all .3s}
+        .service-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.08);border-color:#0891b2}
+        .service-icon{width:60px;height:60px;background:linear-gradient(135deg,#0891b2,#0e7490);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:20px}
+        .service-card h3{font-size:20px;font-weight:700;margin-bottom:12px}
+        .service-card p{color:#64748b;font-size:15px}
+        .quiz-section{padding:100px 20px;background:linear-gradient(180deg,#f0f9ff 0%,#fff 100%)}
+        .quiz-box{max-width:600px;margin:0 auto;background:#fff;border-radius:24px;padding:40px;box-shadow:0 10px 40px rgba(0,0,0,0.08)}
+        .progress-bar{height:4px;background:#e2e8f0;border-radius:2px;margin-bottom:32px;overflow:hidden}
+        .progress-fill{height:100%;background:#10b981;width:33%;transition:width .4s ease}
+        .quiz-step{display:none}
+        .quiz-step.active{display:block}
+        .quiz-step h3{font-size:26px;font-weight:700;margin-bottom:24px;text-align:center}
+        .quiz-options{display:grid;gap:12px}
+        .quiz-option{background:#f8fafc;border:2px solid transparent;border-radius:12px;padding:20px;cursor:pointer;display:flex;align-items:center;gap:16px;transition:all .2s}
+        .quiz-option:hover{border-color:#10b981;background:#fff}
+        .quiz-option-icon{font-size:28px}
+        .quiz-option-text{flex:1}
+        .quiz-option-text strong{display:block;margin-bottom:4px}
+        .quiz-option-text span{font-size:14px;color:#64748b}
+        .cta-btn{width:100%;background:linear-gradient(135deg,#10b981,#059669);color:#fff;border:none;border-radius:14px;padding:20px;font-size:18px;font-weight:700;cursor:pointer;margin-top:8px}
+        .testimonials{padding:100px 20px;background:#f8fafc}
+        .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .testimonial-card{background:#fff;border-radius:20px;padding:32px;box-shadow:0 4px 20px rgba(0,0,0,0.05)}
+        .stars{color:#f59e0b;font-size:18px;margin-bottom:16px}
+        .testimonial-text{font-size:16px;margin-bottom:20px;line-height:1.7}
+        .testimonial-author{display:flex;align-items:center;gap:12px}
+        .author-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#0891b2,#0e7490);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+        .author-info strong{display:block;font-size:15px}
+        .author-info span{font-size:13px;color:#64748b}
+        .faq{padding:100px 20px}
+        .faq-list{max-width:800px;margin:0 auto}
+        .faq-item{background:#f8fafc;border-radius:16px;margin-bottom:12px;overflow:hidden}
+        .faq-question{padding:24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600}
+        .faq-answer{padding:0 24px 24px;color:#64748b;display:none}
+        .faq-item.active .faq-answer{display:block}
+        .final-cta{padding:100px 20px;text-align:center;background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff}
+        .final-cta h2{font-size:48px;margin-bottom:20px}
+        .final-cta p{font-size:20px;opacity:0.9;margin-bottom:40px}
+        .final-cta .cta-button{background:#fff;color:#0891b2;padding:20px 40px;border-radius:12px;font-size:18px;font-weight:700;text-decoration:none;display:inline-block}
+        footer{padding:60px 20px 30px;background:#0f172a;color:#fff}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+        .footer-brand{font-size:24px;font-weight:800;margin-bottom:16px}
+        .footer-desc{color:#94a3b8;font-size:15px;line-height:1.7}
+        .footer-column h4{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px;color:#94a3b8}
+        .footer-column a{display:block;color:#fff;text-decoration:none;padding:8px 0;font-size:15px}
+        .footer-bottom{padding-top:30px;border-top:1px solid #334155;text-align:center;color:#64748b;font-size:14px}
+        @media(max-width:968px){.hero-container,.about-grid{grid-template-columns:1fr}.hero h1{font-size:36px}.services-grid,.testimonials-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.lang-switcher{top:70px;right:10px}}
+    </style>
+</head>
+<body>
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('de')" data-lang="de">DE</button>
+        <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+        <button class="lang-btn" onclick="setLang('ru')" data-lang="ru">RU</button>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">Dr. Weber <span>Zahnarzt</span></div>
+            <a href="#quiz" class="header-cta" data-i18n="headerCta">Termin buchen</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        ⭐️ 4.9/5 <span data-i18n="reviews">von 200+ Patienten</span>
+                    </div>
+                    <h1>
+                        <span data-i18n="heroTitle1">Ihr</span> 
+                        <span class="highlight" data-i18n="heroTitle2">Zahnarzt in Wien</span>
+                        <span data-i18n="heroTitle3">mit Herz und moderner Technik</span>
+                    </h1>
+                    <p class="hero-subtitle" data-i18n="heroSubtitle">
+                        Seit über 15 Jahren sorgen wir für gesunde, schöne Zähne. Angstfreie Behandlung, modernste Technik, fairer Preis.
+                    </p>
+                    <a href="#quiz" class="hero-cta" data-i18n="heroCta">Kostenlosen Termin vereinbaren →</a>
+                </div>
+                
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&h=700&fit=crop" alt="Dentist" style="border-radius:24px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.15)">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="aboutLabel">Über uns</div>
+                <h2 data-i18n="aboutTitle">Ihre Zahnarztpraxis im Herzen von Wien</h2>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-content">
+                    <p data-i18n="aboutText1">Willkommen in der Praxis von Dr. Markus Weber. Wir kombinieren jahrelange Erfahrung mit modernster Technik und einem herzlichen, persönlichen Service.</p>
+                    <p data-i18n="aboutText2">Unser Ziel: Ihre Zähne gesund und schön zu erhalten – ohne Angst vor dem Zahnarzt.</p>
+                </div>
+                
+                <div style="background:linear-gradient(135deg,#0891b2,#0e7490);border-radius:20px;padding:40px;color:#fff;text-align:center">
+                    <div style="font-size:72px;font-weight:800">15+</div>
+                    <div style="font-size:18px" data-i18n="yearsExp">Jahre Erfahrung</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="servicesLabel">Leistungen</div>
+                <h2 data-i18n="servicesTitle">Was wir für Sie tun</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3 data-i18n="service1Title">Vorsorge & Kontrolle</h3>
+                    <p data-i18n="service1Desc">Professionelle Zahnreinigung, Karies-Früherkennung, Parodontose-Behandlung</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3 data-i18n="service2Title">Ästhetische Zahnheilkunde</h3>
+                    <p data-i18n="service2Desc">Bleaching, Veneers, Zahnkorrektur – für Ihr perfektes Lächeln</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🦷</div>
+                    <h3 data-i18n="service3Title">Implantate & Zahnersatz</h3>
+                    <p data-i18n="service3Desc">Hochwertige Implantate, Kronen, Brücken – natürlich und haltbar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quiz-section" id="quiz">
+        <div class="quiz-box">
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            
+            <div class="quiz-step active" id="step1">
+                <h3 data-i18n="quiz1Title">Was beschreibt Ihre Situation?</h3>
+                
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="nextStep(2)">
+                        <span class="quiz-option-icon">⚡</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt1_1">Ich habe Zahnschmerzen</strong>
+                            <span data-i18n="opt1_1sub">Dringende Behandlung nötig</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="nextStep(2)">
+                        <span class="quiz-option-icon">🔍</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt1_2">Routine-Kontrolle</strong>
+                            <span data-i18n="opt1_2sub">Vorsorge-Untersuchung</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="nextStep(2)">
+                        <span class="quiz-option-icon">✨</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt1_3">Schönere Zähne</strong>
+                            <span data-i18n="opt1_3sub">Bleaching oder Veneers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-step" id="step2">
+                <h3 data-i18n="quiz2Title">Wie dringend?</h3>
+                
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="nextStep(3)">
+                        <span class="quiz-option-icon">🚨</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt2_1">Sehr dringend</strong>
+                            <span data-i18n="opt2_1sub">Heute oder morgen</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="nextStep(3)">
+                        <span class="quiz-option-icon">📅</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt2_2">Diese Woche</strong>
+                            <span data-i18n="opt2_2sub">In den nächsten 7 Tagen</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="nextStep(3)">
+                        <span class="quiz-option-icon">😊</span>
+                        <div class="quiz-option-text">
+                            <strong data-i18n="opt2_3">Flexibel</strong>
+                            <span data-i18n="opt2_3sub">Wann es passt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-step" id="step3">
+                <h3 data-i18n="quiz3Title">Ihre Kontaktdaten</h3>
+                
+                <input type="text" placeholder="Name" style="width:100%;padding:16px;margin-bottom:12px;border:2px solid #e2e8f0;border-radius:12px;font-size:16px">
+                
+                <input type="tel" placeholder="Telefon" style="width:100%;padding:16px;margin-bottom:12px;border:2px solid #e2e8f0;border-radius:12px;font-size:16px">
+                
+                <button class="cta-btn" onclick="showSuccess()" data-i18n="submitBtn">JETZT TERMIN ANFRAGEN →</button>
+            </div>
+            
+            <div class="quiz-step" id="stepSuccess" style="text-align:center;padding:40px 0">
+                <div style="width:80px;height:80px;background:#10b981;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 24px">✓</div>
+                
+                <h3 data-i18n="successTitle">Perfekt! 🎉</h3>
+                
+                <p data-i18n="successText">Wir rufen Sie in den nächsten 15 Minuten an.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="testimonialsLabel">Testimonials</div>
+                <h2 data-i18n="testimonialsTitle">Was unsere Patienten sagen</h2>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="review1">"Endlich ein Zahnarzt, bei dem ich keine Angst habe! Dr. Weber erklärt alles geduldig und behandelt schmerzfrei."</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <strong>Sarah M.</strong>
+                            <span>Patientin seit 2019</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="review2">"Mein neues Lächeln durch Veneers ist unglaublich! Die Beratung war ausführlich, der Preis fair."</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div class="author-info">
+                            <strong>Michael K.</strong>
+                            <span>Ästhetische Behandlung</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-i18n="review3">"Schnelle Termine, freundliches Personal, moderne Praxis. Meine Kinder fühlen sich hier wohl!"</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EB</div>
+                        <div class="author-info">
+                            <strong>Elena B.</strong>
+                            <span>Mutter von 2 Kindern</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <h2 data-i18n="finalTitle">Bereit für Ihren Termin?</h2>
+        
+        <p data-i18n="finalText">Vereinbaren Sie jetzt Ihren kostenlosen Beratungstermin.</p>
+        
+        <a href="#quiz" class="cta-button" data-i18n="finalCta">Termin online buchen</a>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">Dr. Weber Zahnarzt</div>
+                    
+                    <p class="footer-desc" data-i18n="footerDesc">Ihr Zahnarzt in Wien mit Herz und moderner Technik. Seit über 15 Jahren für Ihre Zahngesundheit da.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="contact">Kontakt</h4>
+                    
+                    <a href="#">Praterstraße 45</a>
+                    
+                    <a href="#">1020 Wien</a>
+                    
+                    <a href="#">+43 1 234 56 78</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="hours">Öffnungszeiten</h4>
+                    
+                    <a href="#">Mo-Fr: 08:00 - 18:00</a>
+                    
+                    <a href="#">Sa: 09:00 - 14:00</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="legal">Rechtliches</h4>
+                    
+                    <a href="#">Impressum</a>
+                    
+                    <a href="#">Datenschutz</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © 2024 Dr. Markus Weber Zahnarzt. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const t = {
+            de: {
+                headerCta: 'Termin buchen', reviews: 'von 200+ Patienten',
+                heroTitle1: 'Ihr ', heroTitle2: 'Zahnarzt in Wien', heroTitle3: ' mit Herz und moderner Technik',
+                heroSubtitle: 'Seit über 15 Jahren sorgen wir für gesunde, schöne Zähne. Angstfreie Behandlung, modernste Technik, fairer Preis.',
+                heroCta: 'Kostenlosen Termin vereinbaren →',
+                aboutLabel: 'Über uns', aboutTitle: 'Ihre Zahnarztpraxis im Herzen von Wien',
+                aboutText1: 'Willkommen in der Praxis von Dr. Markus Weber. Wir kombinieren jahrelange Erfahrung mit modernster Technik.',
+                aboutText2: 'Unser Ziel: Ihre Zähne gesund und schön zu erhalten – ohne Angst vor dem Zahnarzt.',
+                yearsExp: 'Jahre Erfahrung',
+                servicesLabel: 'Leistungen', servicesTitle: 'Was wir für Sie tun',
+                service1Title: 'Vorsorge & Kontrolle', service1Desc: 'Professionelle Zahnreinigung, Karies-Früherkennung, Parodontose-Behandlung',
+                service2Title: 'Ästhetische Zahnheilkunde', service2Desc: 'Bleaching, Veneers, Zahnkorrektur – für Ihr perfektes Lächeln',
+                service3Title: 'Implantate & Zahnersatz', service3Desc: 'Hochwertige Implantate, Kronen, Brücken – natürlich und haltbar',
+                quiz1Title: 'Was beschreibt Ihre Situation?', opt1_1: 'Ich habe Zahnschmerzen', opt1_1sub: 'Dringende Behandlung nötig',
+                opt1_2: 'Routine-Kontrolle', opt1_2sub: 'Vorsorge-Untersuchung', opt1_3: 'Schönere Zähne', opt1_3sub: 'Bleaching oder Veneers',
+                quiz2Title: 'Wie dringend?', opt2_1: 'Sehr dringend', opt2_1sub: 'Heute oder morgen',
+                opt2_2: 'Diese Woche', opt2_2sub: 'In den nächsten 7 Tagen', opt2_3: 'Flexibel', opt2_3sub: 'Wann es passt',
+                quiz3Title: 'Ihre Kontaktdaten', submitBtn: 'JETZT TERMIN ANFRAGEN →',
+                successTitle: 'Perfekt! 🎉', successText: 'Wir rufen Sie in den nächsten 15 Minuten an.',
+                testimonialsLabel: 'Testimonials', testimonialsTitle: 'Was unsere Patienten sagen',
+                review1: '"Endlich ein Zahnarzt, bei dem ich keine Angst habe! Dr. Weber erklärt alles geduldig und behandelt schmerzfrei."',
+                review2: '"Mein neues Lächeln durch Veneers ist unglaublich! Die Beratung war ausführlich, der Preis fair."',
+                review3: '"Schnelle Termine, freundliches Personal, moderne Praxis. Meine Kinder fühlen sich hier wohl!"',
+                finalTitle: 'Bereit für Ihren Termin?', finalText: 'Vereinbaren Sie jetzt Ihren kostenlosen Beratungstermin.',
+                finalCta: 'Termin online buchen', footerDesc: 'Ihr Zahnarzt in Wien mit Herz und moderner Technik. Seit über 15 Jahren für Ihre Zahngesundheit da.',
+                contact: 'Kontakt', hours: 'Öffnungszeiten', legal: 'Rechtliches'
+            },
+            en: {
+                headerCta: 'Book appointment', reviews: 'from 200+ patients',
+                heroTitle1: 'Your ', heroTitle2: 'dentist in Vienna', heroTitle3: ' with heart and modern technology',
+                heroSubtitle: 'For over 15 years, we have been ensuring healthy, beautiful teeth. Fear-free treatment, state-of-the-art technology, fair prices.',
+                heroCta: 'Schedule free appointment →',
+                aboutLabel: 'About us', aboutTitle: 'Your dental practice in the heart of Vienna',
+                aboutText1: 'Welcome to the practice of Dr. Markus Weber. We combine years of experience with state-of-the-art technology.',
+                aboutText2: 'Our goal: To keep your teeth healthy and beautiful – without fear of the dentist.',
+                yearsExp: 'Years experience',
+                servicesLabel: 'Services', servicesTitle: 'What we do for you',
+                service1Title: 'Prevention & Check-up', service1Desc: 'Professional dental cleaning, early cavity detection, periodontal treatment',
+                service2Title: 'Cosmetic Dentistry', service2Desc: 'Bleaching, veneers, dental correction – for your perfect smile',
+                service3Title: 'Implants & Prosthetics', service3Desc: 'High-quality implants, crowns, bridges – natural and durable',
+                quiz1Title: 'What describes your situation?', opt1_1: 'I have toothache', opt1_1sub: 'Urgent treatment needed',
+                opt1_2: 'Routine check-up', opt1_2sub: 'Preventive examination', opt1_3: 'More beautiful teeth', opt1_3sub: 'Bleaching or veneers',
+                quiz2Title: 'How urgent?', opt2_1: 'Very urgent', opt2_1sub: 'Today or tomorrow',
+                opt2_2: 'This week', opt2_2sub: 'Within the next 7 days', opt2_3: 'Flexible', opt2_3sub: 'Whenever it suits',
+                quiz3Title: 'Your contact details', submitBtn: 'REQUEST APPOINTMENT NOW →',
+                successTitle: 'Perfect! 🎉', successText: 'We will call you within the next 15 minutes.',
+                testimonialsLabel: 'Testimonials', testimonialsTitle: 'What our patients say',
+                review1: '"Finally a dentist I am not afraid of! Dr. Weber explains everything patiently and treats painlessly."',
+                review2: '"My new smile through veneers is incredible! The consultation was thorough, the price fair."',
+                review3: '"Quick appointments, friendly staff, modern practice. My children feel comfortable here!"',
+                finalTitle: 'Ready for your appointment?', finalText: 'Schedule your free consultation appointment now.',
+                finalCta: 'Book appointment online', footerDesc: 'Your dentist in Vienna with heart and modern technology. For over 15 years dedicated to your dental health.',
+                contact: 'Contact', hours: 'Opening hours', legal: 'Legal'
+            },
+            ru: {
+                headerCta: 'Записаться', reviews: 'от 200+ пациентов',
+                heroTitle1: 'Ваш ', heroTitle2: 'стоматолог в Вене', heroTitle3: ' с душой и современными технологиями',
+                heroSubtitle: 'Более 15 лет мы заботимся о здоровых, красивых зубах. Лечение без страха, современное оборудование, честные цены.',
+                heroCta: 'Записаться бесплатно →',
+                aboutLabel: 'О нас', aboutTitle: 'Ваша стоматология в центре Вены',
+                aboutText1: 'Добро пожаловать в практику др. Маркуса Вебера. Мы сочетаем многолетний опыт с современными технологиями.',
+                aboutText2: 'Наша цель: сохранить ваши зубы здоровыми и красивыми – без страха перед стоматологом.',
+                yearsExp: 'Лет опыта',
+                servicesLabel: 'Услуги', servicesTitle: 'Что мы делаем для вас',
+                service1Title: 'Профилактика и осмотр', service1Desc: 'Профессиональная чистка зубов, раннее выявление кариеса, лечение пародонтоза',
+                service2Title: 'Эстетическая стоматология', service2Desc: 'Отбеливание, виниры, коррекция зубов – для вашей идеальной улыбки',
+                service3Title: 'Импланты и протезирование', service3Desc: 'Высококачественные импланты, коронки, мосты – натурально и долговечно',
+                quiz1Title: 'Что описывает вашу ситуацию?', opt1_1: 'У меня зубная боль', opt1_1sub: 'Нужно срочное лечение',
+                opt1_2: 'Плановый осмотр', opt1_2sub: 'Профилактический осмотр', opt1_3: 'Более красивые зубы', opt1_3sub: 'Отбеливание или виниры',
+                quiz2Title: 'Насколько срочно?', opt2_1: 'Очень срочно', opt2_1sub: 'Сегодня или завтра',
+                opt2_2: 'На этой неделе', opt2_2sub: 'В течение 7 дней', opt2_3: 'Гибко', opt2_3sub: 'Когда удобно',
+                quiz3Title: 'Ваши контактные данные', submitBtn: 'ЗАПИСАТЬСЯ СЕЙЧАС →',
+                successTitle: 'Отлично! 🎉', successText: 'Мы перезвоним вам в течение 15 минут.',
+                testimonialsLabel: 'Отзывы', testimonialsTitle: 'Что говорят наши пациенты',
+                review1: '"Наконец-то стоматолог, которого я не боюсь! Др. Вебер терпеливо все объясняет и лечит без боли."',
+                review2: '"Моя новая улыбка благодаря винирам невероятна! Консультация была подробной, цена честной."',
+                review3: '"Быстрая запись, дружелюбный персонал, современная практика. Мои дети чувствуют себя здесь комфортно!"',
+                finalTitle: 'Готовы к приему?', finalText: 'Запишитесь на бесплатную консультацию прямо сейчас.',
+                finalCta: 'Записаться онлайн', footerDesc: 'Ваш стоматолог в Вене с душой и современными технологиями. Более 15 лет заботимся о здоровье ваших зубов.',
+                contact: 'Контакты', hours: 'Часы работы', legal: 'Правовая информация'
+            }
+        };
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (t[lang][key]) el.textContent = t[lang][key];
+            });
+            document.title = lang === 'ru' ? 'Др. Вебер — Стоматолог Вена' : lang === 'en' ? 'Dr. Weber — Dentist Vienna' : 'Dr. Weber — Zahnarzt Wien';
+        }
+
+        let currentStep = 1;
+        function nextStep(step) {
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.getElementById('step' + step).classList.add('active');
+            currentStep = step;
+            document.getElementById('progressFill').style.width = (step / 3 * 100) + '%';
+        }
+
+        function showSuccess() {
+            document.getElementById('step3').classList.remove('active');
+            document.getElementById('stepSuccess').classList.add('active');
+            document.getElementById('progressFill').style.width = '100%';
+        }
+    </script>
+</body>
+</html>

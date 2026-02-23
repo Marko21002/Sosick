@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanPro Wien — Professionelle Reinigung</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',-apple-system,sans-serif;background:#fff;color:#0f172a;line-height:1.6}
+        .lang-switcher{position:fixed;top:80px;right:20px;z-index:999;background:#fff;border-radius:50px;padding:6px;box-shadow:0 4px 20px rgba(0,0,0,0.15);display:flex;gap:4px}
+        .lang-btn{border:none;padding:10px 18px;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;background:transparent;color:#64748b}
+        .lang-btn.active{background:#0ea5e9;color:#fff}
+        header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0;z-index:100;padding:16px 20px}
+        .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-size:22px;font-weight:800;color:#0ea5e9}
+        .logo span{color:#0f172a}
+        .header-cta{background:#0ea5e9;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none}
+        .hero{padding:140px 20px 100px;background:linear-gradient(135deg,#f0f9ff 0%,#fff 50%,#ecfdf5 100%)}
+        .container{max-width:1200px;margin:0 auto}
+        .hero-container{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e2e8f0;padding:10px 20px;border-radius:50px;font-size:14px;font-weight:700;color:#0ea5e9;margin-bottom:24px}
+        .hero h1{font-size:52px;font-weight:800;line-height:1.1;margin-bottom:20px}
+        .hero h1 .highlight{color:#0ea5e9}
+        .hero-subtitle{font-size:20px;color:#64748b;margin-bottom:32px}
+        .hero-cta{display:inline-flex;align-items:center;gap:12px;background:#0ea5e9;color:#fff;padding:20px 36px;border-radius:14px;font-size:18px;font-weight:700;text-decoration:none;box-shadow:0 10px 30px rgba(14,165,233,0.3)}
+        .about{padding:100px 20px;background:#f8fafc}
+        .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+        .section-header{text-align:center;margin-bottom:60px}
+        .section-label{font-size:13px;font-weight:700;color:#0ea5e9;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+        h2{font-size:42px;font-weight:800;margin-bottom:16px}
+        .services{padding:100px 20px}
+        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .service-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:32px;transition:all .3s}
+        .service-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.08);border-color:#0ea5e9}
+        .service-icon{width:60px;height:60px;background:linear-gradient(135deg,#0ea5e9,#0284c7);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:20px}
+        .service-card h3{font-size:20px;font-weight:700;margin-bottom:12px}
+        .service-card p{color:#64748b;font-size:15px}
+        .calc-section{padding:100px 20px;background:linear-gradient(180deg,#f0f9ff 0%,#fff 100%)}
+        .calc-box{max-width:700px;margin:0 auto;background:#fff;border-radius:24px;padding:40px;box-shadow:0 10px 40px rgba(0,0,0,0.08)}
+        .calc-row{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #e2e8f0}
+        .calc-row.total{border-bottom:none;font-size:24px;font-weight:800;color:#0ea5e9}
+        .range-slider{width:100%;margin:24px 0;-webkit-appearance:none;height:8px;border-radius:4px;background:#e2e8f0}
+        .range-slider::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#0ea5e9;cursor:pointer;box-shadow:0 0 20px rgba(14,165,233,0.4)}
+        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+        .form-input{width:100%;padding:16px;border:2px solid #e2e8f0;border-radius:12px;font-size:16px}
+        .form-input:focus{outline:none;border-color:#0ea5e9}
+        .cta-btn{width:100%;background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;border:none;border-radius:14px;padding:20px;font-size:18px;font-weight:700;cursor:pointer}
+        .testimonials{padding:100px 20px;background:#f8fafc}
+        .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .testimonial-card{background:#fff;border-radius:20px;padding:32px;box-shadow:0 4px 20px rgba(0,0,0,0.05)}
+        .stars{color:#f59e0b;font-size:18px;margin-bottom:16px}
+        .testimonial-text{font-size:16px;margin-bottom:20px;line-height:1.7}
+        .testimonial-author{display:flex;align-items:center;gap:12px}
+        .author-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#0284c7);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+        .faq{padding:100px 20px}
+        .faq-list{max-width:800px;margin:0 auto}
+        .faq-item{background:#f8fafc;border-radius:16px;margin-bottom:12px;overflow:hidden}
+        .faq-question{padding:24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600}
+        .faq-answer{padding:0 24px 24px;color:#64748b;display:none}
+        .faq-item.active .faq-answer{display:block}
+        .final-cta{padding:100px 20px;text-align:center;background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff}
+        .final-cta h2{font-size:48px;margin-bottom:20px}
+        .final-cta p{font-size:20px;opacity:0.9;margin-bottom:40px}
+        .final-cta .cta-button{background:#fff;color:#0ea5e9;padding:20px 40px;border-radius:12px;font-size:18px;font-weight:700;text-decoration:none;display:inline-block}
+        footer{padding:60px 20px 30px;background:#0f172a;color:#fff}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+        .footer-brand{font-size:24px;font-weight:800;margin-bottom:16px}
+        .footer-desc{color:#94a3b8;font-size:15px;line-height:1.7}
+        .footer-column h4{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px;color:#94a3b8}
+        .footer-column a{display:block;color:#fff;text-decoration:none;padding:8px 0;font-size:15px}
+        .footer-bottom{padding-top:30px;border-top:1px solid #334155;text-align:center;color:#64748b;font-size:14px}
+        @media(max-width:968px){.hero-container,.about-grid{grid-template-columns:1fr}.hero h1{font-size:36px}.services-grid,.testimonials-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.lang-switcher{top:70px;right:10px}}
+    </style>
+</head>
+<body>
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('de')" data-lang="de">DE</button>
+        <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+        <button class="lang-btn" onclick="setLang('ru')" data-lang="ru">RU</button>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">CleanPro <span>Wien</span></div>
+            <a href="#calculator" class="header-cta" data-i18n="book">Preis berechnen</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        ⭐️ 4.9/5 <span data-i18n="reviews">von 500+ Kunden</span>
+                    </div>
+                    <h1>
+                        <span data-i18n="heroTitle1">Professionelle</span> 
+                        <span class="highlight" data-i18n="heroTitle2">Reinigung</span>
+                        <span data-i18n="heroTitle3">in Wien</span>
+                    </h1>
+                    <p class="hero-subtitle" data-i18n="heroSubtitle">Ihr zuverlässiger Partner für Wohnungs-, Büro- und Fensterreinigung. Gründlich, pünktlich und zu fairen Preisen.</p>
+                    
+                    <a href="#calculator" class="hero-cta" data-i18n="heroCta">Preis berechnen & buchen →</a>
+                </div>
+                
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=700&fit=crop" alt="Cleaning" style="border-radius:24px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.15)">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="aboutLabel">Über uns</div>
+                <h2 data-i18n="aboutTitle">Ihr vertrauensvoller Reinigungspartner</h2>
+            </div>
+            
+            <div class="about-grid">
+                <div style="background:linear-gradient(135deg,#0ea5e9,#0284c7);border-radius:20px;padding:40px;color:#fff;text-align:center">
+                    <div style="font-size:72px;font-weight:800">10+</div>
+                    <div style="font-size:18px" data-i18n="years">Jahre Erfahrung</div>
+                </div>
+                
+                <div>
+                    <p data-i18n="aboutText">Seit über 10 Jahren bieten wir erstklassige Reinigungsdienstleistungen für Privathaushalte und Unternehmen in Wien.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-i18n="servicesLabel">Leistungen</div>
+                <h2 data-i18n="servicesTitle">Was wir für Sie tun</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3 data-i18n="service1">Wohnungsreinigung</h3>
+                    <p data-i18n="service1Desc">Gründliche Reinigung Ihrer Wohnung – von der Küche bis zum Bad.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3 data-i18n="service2">Büroreinigung</h3>
+                    <p data-i18n="service2Desc">Professionelle Reinigung für Ihr Büro.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🪟</div>
+                    <h3 data-i18n="service3">Fensterreinigung</h3>
+                    <p data-i18n="service3Desc">Streifenfreie Fenster für perfekte Sicht.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="calc-section" id="calculator">
+        <div class="calc-box">
+            <div style="text-align:center;margin-bottom:32px">
+                <div class="section-label" data-i18n="calcLabel">Preisrechner</div>
+                <h2 data-i18n="calcTitle">Berechnen Sie Ihren Preis</h2>
+            </div>
+            
+            <select id="serviceType" onchange="calcPrice()" style="width:100%;padding:16px;margin-bottom:24px;border:2px solid #e2e8f0;border-radius:12px;font-size:16px">
+                <option value="home" data-i18n="optHome">🏠 Wohnungsreinigung</option>
+                <option value="office" data-i18n="optOffice">🏢 Büroreinigung</option>
+                <option value="windows" data-i18n="optWindows">🪟 Fensterreinigung</option>
+            </select>
+
+            <div style="margin-bottom:24px">
+                <label style="display:block;margin-bottom:8px;font-weight:600">Größe: <span id="sizeLabel">60</span> m²</label>
+                <input type="range" class="range-slider" id="sizeRange" min="20" max="200" value="60" oninput="calcPrice()">
+            </div>
+
+            <div class="calc-row">
+                <span data-i18n="basePrice">Basispreis</span>
+                <span id="basePrice">€120</span>
+            </div>
+            
+            <div class="calc-row">
+                <span data-i18n="sizePrice">Zusatz für Größe</span>
+                <span id="sizePrice">€0</span>
+            </div>
+            
+            <div class="calc-row">
+                <span style="color:#0ea5e9" data-i18n="discount">✓ Online-Buchung Rabatt</span>
+                <span style="color:#0ea5e9">-10%</span>
+            </div>
+            
+            <div class="calc-row total">
+                <span data-i18n="total">Geschätzter Preis</span>
+                <span id="totalPrice">€108</span>
+            </div>
+
+            <div class="form-grid">
+                <input type="text" class="form-input" placeholder="Name" data-i18n-placeholder="namePlaceholder">
+                <input type="tel" class="form-input" placeholder="Telefon" data-i18n-placeholder="phonePlaceholder">
+            </div>
+            
+            <button class="cta-btn" onclick="alert('Anfrage gesendet!')" data-i18n="submit">JETZT KOSTENLOS ANGEBOT ANFORDERN →</button>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <h2 data-i18n="finalTitle">Bereit für Ihre Reinigung?</h2>
+        
+        <p data-i18n="finalText">Vereinbaren Sie jetzt Ihren Termin und erhalten Sie 10% Rabatt!</p>
+        
+        <a href="#calculator" class="cta-button" data-i18n="finalCta">Preis berechnen & buchen</a>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">CleanPro Wien</div>
+                    
+                    <p class="footer-desc" data-i18n="footerDesc">Professionelle Reinigungsdienste für Privat- und Geschäftskunden in Wien.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-i18n="contact">Kontakt</h4>
+                    
+                    <a href="#">+43 1 234 56 78</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">© 2024 CleanPro Wien</div>
+        </div>
+    </footer>
+
+    <script>
+        const t = {
+            de: {
+                book: 'Preis berechnen', reviews: 'von 500+ Kunden',
+                heroTitle1: 'Professionelle', heroTitle2: 'Reinigung', heroTitle3: 'in Wien',
+                heroSubtitle: 'Ihr zuverlässiger Partner für Wohnungs-, Büro- und Fensterreinigung.',
+                heroCta: 'Preis berechnen & buchen →',
+                aboutLabel: 'Über uns', aboutTitle: 'Ihr vertrauensvoller Reinigungspartner',
+                aboutText: 'Seit über 10 Jahren bieten wir erstklassige Reinigungsdienstleistungen für Privathaushalte und Unternehmen in Wien.',
+                years: 'Jahre Erfahrung',
+                servicesLabel: 'Leistungen', servicesTitle: 'Was wir für Sie tun',
+                service1: 'Wohnungsreinigung', service1Desc: 'Gründliche Reinigung Ihrer Wohnung – von der Küche bis zum Bad.',
+                service2: 'Büroreinigung', service2Desc: 'Professionelle Reinigung für Ihr Büro.',
+                service3: 'Fensterreinigung', service3Desc: 'Streifenfreie Fenster für perfekte Sicht.',
+                calcLabel: 'Preisrechner', calcTitle: 'Berechnen Sie Ihren Preis',
+                basePrice: 'Basispreis', sizePrice: 'Zusatz für Größe', discount: '✓ Online-Buchung Rabatt',
+                total: 'Geschätzter Preis', submit: 'JETZT KOSTENLOS ANGEBOT ANFORDERN →',
+                finalTitle: 'Bereit für Ihre Reinigung?', finalText: 'Vereinbaren Sie jetzt Ihren Termin und erhalten Sie 10% Rabatt!',
+                finalCta: 'Preis berechnen & buchen', footerDesc: 'Professionelle Reinigungsdienste für Privat- und Geschäftskunden in Wien.',
+                contact: 'Kontakt'
+            },
+            en: {
+                book: 'Calculate price', reviews: 'from 500+ customers',
+                heroTitle1: 'Professional', heroTitle2: 'Cleaning', heroTitle3: 'in Vienna',
+                heroSubtitle: 'Your reliable partner for home, office and window cleaning.',
+                heroCta: 'Calculate price & book →',
+                aboutLabel: 'About us', aboutTitle: 'Your trusted cleaning partner',
+                aboutText: 'For over 10 years we have been providing first-class cleaning services for private households and businesses in Vienna.',
+                years: 'Years experience',
+                servicesLabel: 'Services', servicesTitle: 'What we do for you',
+                service1: 'Home Cleaning', service1Desc: 'Thorough cleaning of your apartment – from kitchen to bathroom.',
+                service2: 'Office Cleaning', service2Desc: 'Professional cleaning for your office.',
+                service3: 'Window Cleaning', service3Desc: 'Streak-free windows for perfect view.',
+                calcLabel: 'Price Calculator', calcTitle: 'Calculate your price',
+                basePrice: 'Base price', sizePrice: 'Extra for size', discount: '✓ Online booking discount',
+                total: 'Estimated price', submit: 'REQUEST FREE QUOTE NOW →',
+                finalTitle: 'Ready for your cleaning?', finalText: 'Book now and get 10% off your first booking!',
+                finalCta: 'Calculate price & book', footerDesc: 'Professional cleaning services for private and business customers in Vienna.',
+                contact: 'Contact'
+            },
+            ru: {
+                book: 'Рассчитать цену', reviews: 'от 500+ клиентов',
+                heroTitle1: 'Профессиональная', heroTitle2: 'уборка', heroTitle3: 'в Вене',
+                heroSubtitle: 'Ваш надежный партнер для уборки квартир, офисов и окон.',
+                heroCta: 'Рассчитать цену и записаться →',
+                aboutLabel: 'О нас', aboutTitle: 'Ваш надежный партнер по уборке',
+                aboutText: 'Более 10 лет мы предоставляем первоклассные услуги по уборке для частных домохозяйств и компаний в Вене.',
+                years: 'Лет опыта',
+                servicesLabel: 'Услуги', servicesTitle: 'Что мы делаем для вас',
+                service1: 'Уборка квартир', service1Desc: 'Тщательная уборка вашей квартиры – от кухни до ванной.',
+                service2: 'Уборка офисов', service2Desc: 'Профессиональная уборка для вашего офиса.',
+                service3: 'Мытье окон', service3Desc: 'Окна без разводов для идеального вида.',
+                calcLabel: 'Калькулятор цен', calcTitle: 'Рассчитайте свою цену',
+                basePrice: 'Базовая цена', sizePrice: 'Доплата за размер', discount: '✓ Скидка онлайн-бронирования',
+                total: 'Итоговая цена', submit: 'ПОЛУЧИТЬ БЕСПЛАТНУЮ СМЕТУ →',
+                finalTitle: 'Готовы к уборке?', finalText: 'Запишитесь сейчас и получите скидку 10% на первую уборку!',
+                finalCta: 'Рассчитать цену и записаться', footerDesc: 'Профессиональные услуги по уборке для частных и корпоративных клиентов в Вене.',
+                contact: 'Контакты'
+            }
+        };
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (t[lang][key]) el.textContent = t[lang][key];
+            });
+            document.title = lang === 'ru' ? 'CleanPro Вена — Уборка' : lang === 'en' ? 'CleanPro Vienna — Cleaning' : 'CleanPro Wien — Reinigung';
+        }
+
+        function calcPrice() {
+            const size = parseInt(document.getElementById('sizeRange').value);
+            const service = document.getElementById('serviceType').value;
+            let basePrice = service === 'office' ? 180 : service === 'windows' ? 80 : 120;
+            const extraSize = Math.max(0, (size - 60) * 1.5);
+            const total = Math.round((basePrice + extraSize) * 0.9);
+            document.getElementById('sizeLabel').textContent = size;
+            document.getElementById('basePrice').textContent = '€' + basePrice;
+            document.getElementById('sizePrice').textContent = '€' + Math.round(extraSize);
+            document.getElementById('totalPrice').textContent = '€' + total;
+        }
+    </script>
+</body>
+</html>
