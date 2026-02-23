@@ -2,306 +2,520 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#1c1917">
-    <meta name="description" content="Webdesign für Autowerkstätten in Wien. Online-Terminbuchung, Kfz-Service-Präsentation, mehr Kunden.">
-    <title>Autowerkstatt Webdesign Wien — Mehr Kunden durch Online-Präsenz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#7c2d12">
+    <meta name="description" content="Autowerkstatt Webdesign Wien. Online-Terminbuchung für Ölwechsel, Reifen, Inspektion.">
+    <title>Autowerkstatt Webdesign Wien — Online buchen, keine Warteschlange</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-primary: #1c1917;
-            --bg-secondary: #292524;
-            --accent-orange: #f97316;
-            --accent-orange-glow: rgba(249, 115, 22, 0.3);
-            --text-primary: #fafaf9;
-            --text-secondary: #a8a29e;
+            --bg: #7c2d12;
+            --surface: #9a3412;
+            --surface-2: #c2410c;
+            --accent: #f97316;
+            --accent-light: #fb923c;
+            --text: #fff7ed;
+            --text-secondary: #fdba74;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
 
-        .urgency-bar {
-            background: linear-gradient(90deg, #dc2626, #f97316);
+        .lang-bar {
+            background: rgba(0,0,0,0.2);
             padding: 12px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .hero {
-            padding: 100px 24px;
-            text-align: center;
-            background: linear-gradient(135deg, #1c1917 0%, #451a03 100%);
-        }
-
-        .hero h1 {
-            font-size: 52px;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            color: var(--accent-orange);
-            text-shadow: 0 0 40px var(--accent-orange-glow);
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--accent-orange);
-            color: white;
-            padding: 20px 40px;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            text-decoration: none;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); }
-            50% { box-shadow: 0 0 30px 10px rgba(249, 115, 22, 0.3); }
-        }
-
-        .features {
-            padding: 80px 24px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .feature {
-            background: var(--bg-secondary);
-            padding: 32px;
-            border-radius: 16px;
-            text-align: center;
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-
-        .feature h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        .feature p {
-            color: var(--text-secondary);
-            font-size: 15px;
-        }
-
-        .problem-solution {
-            padding: 80px 24px;
-            background: var(--bg-secondary);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 36px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-        }
-
-        .comparison-box {
-            background: var(--bg-primary);
-            padding: 32px;
-            border-radius: 16px;
-        }
-
-        .comparison-box.before {
-            border: 2px solid #dc2626;
-        }
-
-        .comparison-box.after {
-            border: 2px solid #22c55e;
-        }
-
-        .comparison-box h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
             display: flex;
-            align-items: center;
+            justify-content: center;
             gap: 8px;
         }
 
-        .comparison-box.before h3 { color: #dc2626; }
-        .comparison-box.after h3 { color: #22c55e; }
-
-        .comparison-box ul {
-            list-style: none;
-        }
-
-        .comparison-box li {
-            padding: 8px 0;
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
             color: var(--text-secondary);
-            border-bottom: 1px solid #444;
-        }
-
-        .comparison-box li:last-child {
-            border-bottom: none;
-        }
-
-        .testimonial {
-            padding: 80px 24px;
-            text-align: center;
-        }
-
-        .testimonial-card {
-            max-width: 700px;
-            margin: 0 auto;
-            background: var(--bg-secondary);
-            padding: 40px;
+            padding: 6px 14px;
             border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        .testimonial-text {
-            font-size: 22px;
-            font-style: italic;
-            margin-bottom: 20px;
+        .lang-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
         }
 
-        .testimonial-author {
-            font-weight: 700;
-            color: var(--accent-orange);
+        section {
+            padding: 80px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .cta-section {
-            padding: 100px 24px;
-            text-align: center;
-            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
         }
 
-        .cta-section h2 {
-            font-size: 42px;
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(249, 115, 22, 0.2);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 40px;
             font-weight: 900;
+            line-height: 1.1;
             margin-bottom: 16px;
         }
 
-        .cta-section p {
-            color: var(--text-secondary);
+        .subtitle {
             font-size: 18px;
-            margin-bottom: 32px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
         }
 
-        @media (max-width: 900px) {
-            .hero h1 { font-size: 36px; }
-            .features { grid-template-columns: 1fr; }
-            .comparison { grid-template-columns: 1fr; }
+        .service-grid { display: grid; gap: 12px; }
+        
+        .service-card {
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.2s;
+        }
+
+        .service-card:hover, .service-card.selected {
+            border-color: var(--accent);
+            background: var(--surface-2);
+            transform: translateY(-2px);
+        }
+
+        .service-icon {
+            font-size: 32px;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.2);
+            border-radius: 14px;
+        }
+
+        .service-info h3 { font-size: 17px; margin-bottom: 4px; }
+        .service-info p { font-size: 14px; color: var(--text-secondary); }
+
+        #step-2, #step-3, #step-4, #step-5 { display: none; }
+
+        .calc-box {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .car-select {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .car-option {
+            background: rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .car-option:hover, .car-option.selected {
+            border-color: var(--accent);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .car-option .icon { font-size: 32px; margin-bottom: 8px; }
+        .car-option .label { font-size: 14px; font-weight: 600; }
+
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .calc-row.total {
+            border-bottom: none;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent-light);
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .time-slot {
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .time-slot:hover, .time-slot.selected {
+            border-color: var(--accent);
+            background: var(--surface-2);
+        }
+
+        .time-slot .date { font-size: 14px; color: var(--text-secondary); margin-bottom: 4px; }
+        .time-slot .time { font-size: 18px; font-weight: 700; }
+
+        .form-group { margin-bottom: 16px; }
+        
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            background: rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 16px;
+            color: white;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .cta-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border: none;
+            border-radius: 14px;
+            padding: 20px;
+            font-size: 17px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: cta-glow 2s infinite;
+            font-family: inherit;
+        }
+
+        @keyframes cta-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); }
+            50% { box-shadow: 0 0 30px 10px rgba(249, 115, 22, 0.2); }
+        }
+
+        .urgency-banner {
+            background: #dc2626;
+            padding: 14px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            margin: -80px -20px 40px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 32px; }
+            .car-select { grid-template-columns: 1fr; }
+            .time-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="urgency-bar">
-        🔧 Nur 3 Projekte im Februar verfügbar — Jetzt anfragen!
+    <div class="lang-bar">
+        <button class="lang-btn active" onclick="setLang('de')">DE</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('uk')">UA</button>
     </div>
 
-    <section class="hero">
-        <h1>
-            Mehr Kunden für Ihre
-            <span>Autowerkstatt</span>
-        </h1>
-
-        <p>
-            Professionelle Website mit Online-Terminbuchung für Kfz-Betriebe in Wien. 
-            Ihre Kunden buchen rund um die Uhr — auch wenn Sie schlafen.
-        </p>
-
-        <a href="#kontakt" class="cta-btn">
-            Kostenloses Angebot anfordern →
-        </a>
-    </section>
-
-    <section class="features">
-        <div class="feature">
-            <div class="feature-icon">📅</div>
-            <h3>Online-Termine</h3>
-            <p>Kunden buken Ölwechsel, Reifenwechsel und Inspektionen online — 24/7 verfügbar.</p>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">🔍</div>
-            <h3>Google-Optimierung</h3>
-            <p>Bei "Autowerkstatt Wien" auf Seite 1. Mehr organische Anfragen, weniger Anzeigen.</p>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">📱</div>
-            <h3>Fahrzeug-Status</h3>
-            <p>Kunden sehen online, ob ihr Auto fertig ist. Weniger Anrufe, zufriedenere Kunden.</p>
-        </div>
-    </section>
-
-    <section class="problem-solution">
+    <!-- STEP 1 -->
+    <section id="step-1">
         <div class="container">
-            <h2 class="section-title">Vorher vs. Nachher</h2>
+            <div class="trust-badge">⚡ Schneller Service — Termin in 24h</div>
 
-            <div class="comparison">
-                <div class="comparison-box before">
-                    <h3>❌ Ohne Website</h3>
-                    <ul>
-                        <li>Nur telefonisch erreichbar</li>
-                        <li>Kunden gehen zur Konkurrenz</li>
-                        <li>Keine Online-Sichtbarkeit</li>
-                        <li>Chaos in der Werkstatt</li>
-                    </ul>
+            <h1>Was braucht Ihr Auto? 🔧</h1>
+            
+            <p class="subtitle">Wählen Sie die Serviceart und buchen Sie direkt online</p>
+
+            <div class="service-grid">
+                <div class="service-card" onclick="selectService('oil', 120)">
+                    <div class="service-icon">🛢️</div>
+                    <div class="service-info">
+                        <h3>Ölwechsel + Filter</h3>
+                        <p>Ab €120 • 30-45 Min</p>
+                    </div>
                 </div>
 
-                <div class="comparison-box after">
-                    <h3>✅ Mit unserer Website</h3>
-                    <ul>
-                        <li>24/7 Online-Terminbuchung</li>
-                        <li>Mehr neue Kunden jeden Monat</li>
-                        <li>Top-Platzierung bei Google</li>
-                        <li>Strukturierter Tagesablauf</li>
-                    </ul>
+                <div class="service-card" onclick="selectService('inspection', 250)">
+                    <div class="service-icon">🔍</div>
+                    <div class="service-info">
+                        <h3>Inspektion Service</h3>
+                        <p>Ab €250 • 2-3 Stunden</p>
+                    </div>
+                </div>
+
+                <div class="service-card" onclick="selectService('tires', 80)">
+                    <div class="service-icon">🛞</div>
+                    <div class="service-info">
+                        <h3>Reifenwechsel</h3>
+                        <p>Ab €80 • 30 Min</p>
+                    </div>
+                </div>
+
+                <div class="service-card" onclick="selectService('diagnosis', 60)">
+                    <div class="service-icon">🔌</div>
+                    <div class="service-info">
+                        <h3>Fehlerdiagnose</h3>
+                        <p>Ab €60 • 15 Min</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="testimonial">
-        <div class="testimonial-card">
-            <div class="testimonial-text">
-                "Seit wir die Website haben, bekommen wir täglich Online-Termine. 
-                Kunden buchen Ölwechsel um 23 Uhr — wir kommen morgens und alles ist geplant."
+    <!-- STEP 2: Calculator -->
+    <section id="step-2">
+        <div class="container">
+            <h1>Fahrzeug wählen 🚗</h1>
+            
+            <div class="car-select">
+                <div class="car-option" onclick="selectCar('small', 0)">
+                    <div class="icon">🚗</div>
+                    <div class="label">Kleinwagen</div>
+                </div>
+                
+                <div class="car-option" onclick="selectCar('medium', 20)">
+                    <div class="icon">🚙</div>
+                    <div class="label">Mittelklasse</div>
+                </div>
+                
+                <div class="car-option" onclick="selectCar('suv', 40)">
+                    <div class="icon">🚐</div>
+                    <div class="label">SUV/Gelände</div>
+                </div>
+                
+                <div class="car-option" onclick="selectCar('electric', 30)">
+                    <div class="icon">🔋</div>
+                    <div class="label">Elektro/Hybrid</div>
+                </div>
             </div>
-            <div class="testimonial-author">— Markus Huber, Huber Autoservice, 1100 Wien</div>
+
+            <div class="calc-box">
+                <div class="calc-row">
+                    <span>Basis-Service</span>
+                    <span id="basePrice">€120</span>
+                </div>
+                
+                <div class="calc-row">
+                    <span>Fahrzeug-Aufpreis</span>
+                    <span id="carExtra">€0</span>
+                </div>
+                
+                <div class="calc-row">
+                    <span style="color: var(--accent-light)">✓ Online-Buchung Rabatt</span>
+                    <span style="color: var(--accent-light)">-€10</span>
+                </div>
+                
+                <div class="calc-row total">
+                    <span>Geschätzter Preis</span>
+                    <span id="totalPrice">€110</span>
+                </div>
+            </div>
+
+            <button class="cta-btn" onclick="nextStep(3)">Termin wählen →</button>
         </div>
     </section>
 
-    <section class="cta-section" id="kontakt">
-        <h2>Bereit für den nächsten Schritt?</h2>
-        <p>Kostenloses Erstgespräch — wir analysieren Ihre aktuelle Situation.</p>
-        
-        <a href="mailto:hello@werkstatt-web.wien" class="cta-btn">
-            Jetzt anfragen →
-        </a>
+    <!-- STEP 3: Time -->
+    <section id="step-3">
+        <div class="container">
+            <h1>Wann bringen Sie das Auto? 📅</h1>
+            
+            <div class="time-grid">
+                <div class="time-slot" onclick="selectTime('tomorrow-9')">
+                    <div class="date">Morgen</div>
+                    <div class="time">09:00</div>
+                </div>
+                
+                <div class="time-slot" onclick="selectTime('tomorrow-11')">
+                    <div class="date">Morgen</div>
+                    <div class="time">11:00</div>
+                </div>
+                
+                <div class="time-slot" onclick="selectTime('tomorrow-14')">
+                    <div class="date">Morgen</div>
+                    <div class="time">14:00</div>
+                </div>
+                
+                <div class="time-slot" onclick="selectTime('tomorrow-16')">
+                    <div class="date">Morgen</div>
+                    <div class="time">16:00</div>
+                </div>
+            </div>
+
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 24px;">
+                Oder wählen Sie einen späteren Termin:
+            </p>
+
+            <input type="date" id="datePicker" style="margin-bottom: 24px;">
+            
+            <input type="time" id="timePicker" style="margin-bottom: 24px;">
+
+            <button class="cta-btn" onclick="nextStep(4)">Weiter →</button>
+        </div>
     </section>
+
+    <!-- STEP 4: Form -->
+    <section id="step-4">
+        <div class="urgency-banner">
+            🔧 Nur noch 2 freie Termine diese Woche!
+        </div>
+
+        <div class="container">
+            <h1>Termin sichern ✅</h1>
+            
+            <div class="form-group">
+                <label>Ihr Name</label>
+                <input type="text" id="name" placeholder="Max Mustermann">
+            </div>
+
+            <div class="form-group">
+                <label>Telefon</label>
+                <input type="tel" id="phone" placeholder="+43 664 123456">
+            </div>
+
+            <div class="form-group">
+                <label>Kennzeichen (optional)</label>
+                <input type="text" id="plate" placeholder="W-123-AB">
+            </div>
+
+            <button class="cta-btn" onclick="submitForm()">JETZT TERMIN BUCHEN →</button>
+        </div>
+    </section>
+
+    <!-- STEP 5: Success -->
+    <section id="step-5">
+        <div class="container" style="text-align: center;">
+            <div class="success-icon">✓</div>
+            
+            <h1>Termin bestätigt! 🎉</h1>
+            
+            <p class="subtitle">Wir erwarten Sie zur vereinbarten Zeit. Sie erhalten eine SMS-Erinnerung.</p>
+
+            <div style="background: var(--surface); padding: 24px; border-radius: 16px; margin-top: 32px;">
+                <div style="margin-bottom: 16px;">✓ Termin reserviert</div>
+                <div style="margin-bottom: 16px; opacity: 0.7;">📱 SMS-Erinnerung 24h vorher</div>
+                <div style="opacity: 0.7;">🔧 Auto wird pünktlich fertig</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentService = { type: '', price: 0 };
+        let carExtra = 0;
+
+        function selectService(type, price) {
+            currentService = { type, price };
+            updateCalc();
+            setTimeout(() => nextStep(2), 300);
+        }
+
+        function selectCar(size, extra) {
+            carExtra = extra;
+            document.querySelectorAll('.car-option').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            updateCalc();
+        }
+
+        function updateCalc() {
+            const total = currentService.price + carExtra - 10;
+            document.getElementById('basePrice').textContent = '€' + currentService.price;
+            document.getElementById('carExtra').textContent = '€' + carExtra;
+            document.getElementById('totalPrice').textContent = '€' + total;
+        }
+
+        function selectTime(slot) {
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+        }
+
+        function nextStep(step) {
+            document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+            document.getElementById('step-' + step).style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+
+        function submitForm() {
+            document.querySelector('#step-4 .cta-btn').textContent = '⏳ Wird gesendet...';
+            setTimeout(() => nextStep(5), 1000);
+        }
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Set tomorrow as min date
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('datePicker').min = tomorrow.toISOString().split('T')[0];
+    </script>
 </body>
 </html>

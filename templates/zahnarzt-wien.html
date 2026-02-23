@@ -2,127 +2,94 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0f172a">
-    <meta name="description" content="Professionelle Websites und Online-Terminbuchung für Zahnärzte in Wien. Mehr Patienten, weniger Telefonstress.">
-    <title>Zahnarzt Webdesign Wien — Mehr Patienten durch smarte Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#064e3b">
+    <meta name="description" content="Zahnarzt Webdesign Wien mit Online-Terminbuchung. Mehr Patienten, weniger Telefonstress.">
+    <title>Zahnarzt Webdesign Wien — Praxis-Website mit Online-Buchung</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #334155;
-            --accent-emerald: #10b981;
-            --accent-emerald-glow: rgba(16, 185, 129, 0.3);
-            --accent-amber: #f59e0b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --border-subtle: #334155;
+            --bg: #064e3b;
+            --surface: #065f46;
+            --surface-2: #047857;
+            --accent: #10b981;
+            --accent-light: #34d399;
+            --text: #ecfdf5;
+            --text-secondary: #a7f3d0;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* Trust Bar */
-        .trust-bar {
-            background: linear-gradient(90deg, #059669, #10b981);
-            padding: 10px 16px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        /* Navigation */
-        nav {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-subtle);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 16px 24px;
+        /* Lang Switcher */
+        .lang-bar {
+            background: rgba(0,0,0,0.2);
+            padding: 12px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--text-primary);
-        }
-
-        .logo span {
-            color: var(--accent-emerald);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-emerald);
-        }
-
-        /* Hero */
-        .hero {
-            padding: 80px 24px;
-            text-align: center;
-            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
+            justify-content: center;
             gap: 8px;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            padding: 8px 16px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-secondary);
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
-            color: var(--accent-emerald);
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Step 1: Hook */
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
             margin-bottom: 24px;
         }
 
-        .hero-badge::before {
+        .trust-badge::before {
             content: '';
             width: 8px;
             height: 8px;
-            background: var(--accent-emerald);
+            background: #34d399;
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -132,524 +99,451 @@
             50% { opacity: 0.5; }
         }
 
-        .hero h1 {
-            font-size: 48px;
+        h1 {
+            font-size: 40px;
             font-weight: 900;
             line-height: 1.1;
-            max-width: 800px;
-            margin: 0 auto 20px;
-            letter-spacing: -0.02em;
+            margin-bottom: 16px;
         }
 
-        .hero h1 .highlight {
-            color: var(--accent-emerald);
-            text-shadow: 0 0 40px var(--accent-emerald-glow);
-        }
-
-        .hero-subtitle {
-            font-size: 20px;
+        .subtitle {
+            font-size: 18px;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 32px;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 48px;
             margin-bottom: 40px;
         }
 
-        .hero-stat {
-            text-align: center;
+        /* Service Cards */
+        .service-grid {
+            display: grid;
+            gap: 12px;
         }
 
-        .hero-stat-number {
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--accent-emerald);
-        }
-
-        .hero-stat-label {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .cta-btn {
-            display: inline-flex;
+        .service-card {
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #059669, #10b981);
-            color: white;
-            padding: 18px 36px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            animation: glow 3s infinite;
+            gap: 16px;
+            transition: all 0.2s;
         }
 
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.5); }
-        }
-
-        .cta-btn:hover {
+        .service-card:hover, .service-card.selected {
+            border-color: var(--accent);
+            background: var(--surface-2);
             transform: translateY(-2px);
         }
 
-        /* Problem Section */
-        .problem {
-            padding: 80px 24px;
-            background: var(--bg-secondary);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .section-eyebrow {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-amber);
-            margin-bottom: 12px;
-        }
-
-        .section-title {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-
-        .problems-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .problem-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 32px;
-            text-align: center;
-        }
-
-        .problem-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-
-        .problem-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #ef4444;
-        }
-
-        .problem-card p {
-            color: var(--text-secondary);
-            font-size: 15px;
-        }
-
-        /* Solution */
-        .solution {
-            padding: 80px 24px;
-        }
-
-        .solution-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: center;
-        }
-
-        .solution-content h2 {
+        .service-icon {
             font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 24px;
-            line-height: 1.2;
-        }
-
-        .solution-list {
-            list-style: none;
-        }
-
-        .solution-list li {
+            width: 56px;
+            height: 56px;
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 16px;
-            font-size: 16px;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.2);
+            border-radius: 14px;
         }
 
-        .solution-list li::before {
-            content: '✓';
-            width: 24px;
-            height: 24px;
-            background: var(--accent-emerald);
+        .service-info h3 {
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+
+        .service-info p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Steps hidden by default */
+        #step-2, #step-3, #step-4, #step-5 {
+            display: none;
+        }
+
+        /* Calculator */
+        .calc-box {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .calc-row.total {
+            border-bottom: none;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent-light);
+        }
+
+        .range-wrap {
+            margin: 24px 0;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Time slots */
+        .time-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .time-slot {
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .time-slot:hover, .time-slot.selected {
+            border-color: var(--accent);
+            background: var(--surface-2);
+        }
+
+        .time-slot .icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .time-slot .label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 16px;
+            color: white;
+            font-family: inherit;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* CTA */
+        .cta-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border: none;
+            border-radius: 14px;
+            padding: 20px;
+            font-size: 17px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: cta-glow 2s infinite;
+            font-family: inherit;
+        }
+
+        @keyframes cta-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 0 30px 10px rgba(16, 185, 129, 0.2); }
+        }
+
+        /* Urgency */
+        .urgency-banner {
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+            padding: 14px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            margin: -80px -20px 40px;
+        }
+
+        .timer {
+            font-family: monospace;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-left: 8px;
+        }
+
+        /* Success */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .solution-visual {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 32px;
-        }
-
-        .mockup-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .mockup-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .mockup-dot.red { background: #ef4444; }
-        .mockup-dot.yellow { background: #f59e0b; }
-        .mockup-dot.green { background: #10b981; }
-
-        .booking-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .booking-form input,
-        .booking-form select {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-subtle);
-            padding: 14px;
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-
-        .booking-form button {
-            background: var(--accent-emerald);
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        /* Results */
-        .results {
-            padding: 80px 24px;
-            background: var(--bg-secondary);
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .result-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-        }
-
-        .result-number {
-            font-size: 32px;
-            font-weight: 900;
-            color: var(--accent-emerald);
-            margin-bottom: 8px;
-        }
-
-        .result-label {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        /* Testimonial */
-        .testimonial {
-            padding: 80px 24px;
-        }
-
-        .testimonial-card {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 24px;
-            padding: 48px;
-            text-align: center;
-        }
-
-        .testimonial-text {
-            font-size: 24px;
-            font-style: italic;
-            margin-bottom: 24px;
-            line-height: 1.5;
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-        }
-
-        .testimonial-role {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 100px 24px;
-            text-align: center;
-            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-        }
-
-        .cta-section h2 {
             font-size: 40px;
-            font-weight: 900;
-            margin-bottom: 16px;
+            margin: 0 auto 24px;
         }
 
-        .cta-section p {
-            color: var(--text-secondary);
-            font-size: 18px;
-            margin-bottom: 32px;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .problems-grid,
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .solution-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                display: none;
-            }
+        @media (max-width: 480px) {
+            h1 { font-size: 32px; }
+            .time-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Trust Bar -->
-    <div class="trust-bar">
-        🏆 Bereits 47 Zahnarztpraxen in Wien erfolgreich digitalisiert
+    <!-- Language Bar -->
+    <div class="lang-bar">
+        <button class="lang-btn active" onclick="setLang('de')">DE</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('uk')">UA</button>
     </div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-content">
-            <div class="logo">Dental<span>Web</span> Wien</div>
-            <div class="nav-links">
-                <a href="#problem">Problem</a>
-                <a href="#loesung">Lösung</a>
-                <a href="#ergebnisse">Ergebnisse</a>
-                <a href="#kontakt">Kontakt</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-badge">
-            Spezialisiert auf Zahnarztpraxen
-        </div>
-
-        <h1>
-            Mehr Patienten durch Ihre
-            <span class="highlight">smarte Website</span>
-        </h1>
-
-        <p class="hero-subtitle">
-            Professionelle Websites mit Online-Terminbuchung für Zahnärzte in Wien. 
-            Weniger Telefonstress, mehr gebuchte Termine, zufriedenere Patienten.
-        </p>
-
-        <div class="hero-stats">
-            <div class="hero-stat">
-                <div class="hero-stat-number">+156%</div>
-                <div class="hero-stat-label">Mehr Online-Termine</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-number">-70%</div>
-                <div class="hero-stat-label">Weniger Telefonate</div>
-            </div>
-            <div class="hero-stat">
-                <div class="hero-stat-number">4.9★</div>
-                <div class="hero-stat-label">Durchschnittsbewertung</div>
-            </div>
-        </div>
-
-        <a href="#kontakt" class="cta-btn">
-            Kostenloses Erstgespräch vereinbaren
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-        </a>
-    </section>
-
-    <!-- Problem -->
-    <section class="problem" id="problem">
+    <!-- STEP 1: Service Selection -->
+    <section id="step-1">
         <div class="container">
-            <div class="section-header">
-                <div class="section-eyebrow">Das Problem</div>
-                <h2 class="section-title">Warum Ihre Praxis Patienten verliert</h2>
-            </div>
+            <div class="trust-badge">Bereits 47 Zahnarztpraxen in Wien</div>
 
-            <div class="problems-grid">
-                <div class="problem-card">
-                    <div class="problem-icon">📞</div>
-                    <h3>Telefon ständig besetzt</h3>
-                    <p>60% der Anrufe gehen verloren. Patienten buchen bei der Konkurrenz.</p>
-                </div>
+            <h1>Was brauchen Sie? 🦷</h1>
+            
+            <p class="subtitle">Wählen Sie Ihre Behandlung und berechnen Sie den Preis in 60 Sekunden</p>
 
-                <div class="problem-card">
-                    <div class="problem-icon">😴</div>
-                    <h3>Website von 2008</h3>
-                    <p>Veraltetes Design, nicht mobil-optimiert, Google straf Sie ab.</p>
-                </div>
-
-                <div class="problem-card">
-                    <div class="problem-icon">⏰</div>
-                    <h3>Zeitverschwendung</h3>
-                    <p>Ihre MFA verbringt 4h täglich am Telefon statt Patienten zu betreuen.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Solution -->
-    <section class="solution" id="loesung">
-        <div class="container">
-            <div class="solution-grid">
-                <div class="solution-content">
-                    <div class="section-eyebrow">Die Lösung</div>
-                    <h2>Ihre neue Website arbeitet 24/7 für Sie</h2>
-
-                    <ul class="solution-list">
-                        <li>Online-Terminbuchung rund um die Uhr</li>
-                        <li>Automatische Erinnerungen per SMS/E-Mail</li>
-                        <li>Google-optimiert für "Zahnarzt Wien"</li>
-                        <li>Patienten können Behandlungen online sehen</li>
-                        <li>Integration mit Ihrem Praxissoftware</li>
-                    </ul>
-                </div>
-
-                <div class="solution-visual">
-                    <div class="mockup-header">
-                        <div class="mockup-dot red"></div>
-                        <div class="mockup-dot yellow"></div>
-                        <div class="mockup-dot green"></div>
-                        <span style="margin-left: auto; font-size: 12px; color: var(--text-muted);">Terminbuchung</span>
+            <div class="service-grid">
+                <div class="service-card" onclick="selectService('checkup', 80)">
+                    <div class="service-icon">🔍</div>
+                    <div class="service-info">
+                        <h3>Kontrolluntersuchung</h3>
+                        <p>Ab €80 • Dauer 30 Min</p>
                     </div>
+                </div>
 
-                    <form class="booking-form">
-                        <select>
-                            <option>Behandlung wählen...</option>
-                            <option>✓ Professionelle Zahnreinigung</option>
-                            <option>✓ Kontrolluntersuchung</option>
-                            <option>✓ Bleaching</option>
-                        </select>
+                <div class="service-card" onclick="selectService('cleaning', 120)">
+                    <div class="service-icon">✨</div>
+                    <div class="service-info">
+                        <h3>Professionelle Zahnreinigung</h3>
+                        <p>Ab €120 • Dauer 45 Min</p>
+                    </div>
+                </div>
 
-                        <input type="date" placeholder="Wunschtermin">
-                        <input type="text" placeholder="Ihr Name">
-                        <input type="tel" placeholder="Telefonnummer">
+                <div class="service-card" onclick="selectService('filling', 150)">
+                    <div class="service-icon">🦷</div>
+                    <div class="service-info">
+                        <h3>Füllung / Karies</h3>
+                        <p>Ab €150 • Dauer 60 Min</p>
+                    </div>
+                </div>
 
-                        <button type="button">Termin buchen →</button>
-                    </form>
+                <div class="service-card" onclick="selectService('implant', 2500)">
+                    <div class="service-icon">⭐</div>
+                    <div class="service-info">
+                        <h3>Implantat-Beratung</h3>
+                        <p>Ab €2.500 • Erstgespräch €80</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Results -->
-    <section class="results" id="ergebnisse">
+    <!-- STEP 2: Calculator -->
+    <section id="step-2">
         <div class="container">
-            <div class="section-header">
-                <div class="section-eyebrow">Ergebnisse</div>
-                <h2 class="section-title">Was unsere Kunden erreichen</h2>
+            <h1>Preis berechnen 💰</h1>
+            
+            <div class="calc-box">
+                <div class="range-wrap">
+                    <label>Anzahl Zähne: <span id="teethCount">1</span></label>
+                    <input type="range" id="teethRange" min="1" max="8" value="1" oninput="updateCalc()">
+                </div>
+
+                <div class="calc-row">
+                    <span>Basispreis</span>
+                    <span id="basePrice">€80</span>
+                </div>
+                
+                <div class="calc-row">
+                    <span>Zusätzliche Zähne</span>
+                    <span id="extraPrice">€0</span>
+                </div>
+                
+                <div class="calc-row">
+                    <span style="color: var(--accent-light)">✓ Online-Rabatt</span>
+                    <span style="color: var(--accent-light)">-10%</span>
+                </div>
+                
+                <div class="calc-row total">
+                    <span>Gesamtpreis</span>
+                    <span id="totalPrice">€72</span>
+                </div>
             </div>
 
-            <div class="results-grid">
-                <div class="result-card">
-                    <div class="result-number">+47</div>
-                    <div class="result-label">Neue Patienten/Monat</div>
-                </div>
-
-                <div class="result-card">
-                    <div class="result-number">68%</div>
-                    <div class="result-label">Online gebucht</div>
-                </div>
-
-                <div class="result-card">
-                    <div class="result-number">-40%</div>
-                    <div class="result-label">Terminausfälle</div>
-                </div>
-
-                <div class="result-card">
-                    <div class="result-number">4.9★</div>
-                    <div class="result-label">Bewertung</div>
-                </div>
-            </div>
+            <button class="cta-btn" onclick="nextStep(3)">Weiter →</button>
         </div>
     </section>
 
-    <!-- Testimonial -->
-    <section class="testimonial">
+    <!-- STEP 3: Time -->
+    <section id="step-3">
         <div class="container">
-            <div class="testimonial-card">
-                <div class="testimonial-text">
-                    "Seit wir die Online-Terminbuchung haben, ist unser Telefon nicht mehr ständig besetzt. 
-                    Wir haben 40% mehr neue Patienten und die MFA kann sich endlich auf die Betreuung konzentrieren."
+            <h1>Wann passt es? 📅</h1>
+            
+            <div class="time-grid">
+                <div class="time-slot" onclick="selectTime('morning')">
+                    <div class="icon">🌅</div>
+                    <div class="label">08:00-12:00</div>
                 </div>
 
-                <div class="testimonial-author">Dr. Sarah Müller</div>
-                <div class="testimonial-role">Zahnärztin, 1080 Wien</div>
+                <div class="time-slot" onclick="selectTime('afternoon')">
+                    <div class="icon">☀️</div>
+                    <div class="label">12:00-17:00</div>
+                </div>
+
+                <div class="time-slot" onclick="selectTime('evening')">
+                    <div class="icon">🌙</div>
+                    <div class="label">17:00-20:00</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta-section" id="kontakt">
-        <h2>Bereit für mehr Patienten?</h2>
-        <p>Kostenloses Erstgespräch. Keine Verpflichtung.</p>
+    <!-- STEP 4: Form -->
+    <section id="step-4">
+        <div class="urgency-banner">
+            🔥 Nur noch 2 Termine diese Woche verfügbar!
+            <span class="timer" id="countdown">04:59:59</span>
+        </div>
 
-        <a href="mailto:hello@dentalweb.wien" class="cta-btn">
-            Termin vereinbaren
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-        </a>
+        <div class="container">
+            <h1>Termin sichern ✅</h1>
+            
+            <div class="form-group">
+                <label>Ihr Name</label>
+                <input type="text" id="name" placeholder="Max Mustermann">
+            </div>
+
+            <div class="form-group">
+                <label>Telefon</label>
+                <input type="tel" id="phone" placeholder="+43 664 123456">
+            </div>
+
+            <div class="form-group">
+                <label>E-Mail (optional)</label>
+                <input type="email" id="email" placeholder="max@email.at">
+            </div>
+
+            <button class="cta-btn" onclick="submitForm()">JETZT TERMIN BUCHEN →</button>
+        </div>
     </section>
+
+    <!-- STEP 5: Success -->
+    <section id="step-5">
+        <div class="container" style="text-align: center;">
+            <div class="success-icon">✓</div>
+            
+            <h1>Perfekt! 🎉</h1>
+            
+            <p class="subtitle">Wir rufen Sie in den nächsten 15 Minuten an, um Ihren Termin zu bestätigen.</p>
+
+            <div style="background: var(--surface); padding: 24px; border-radius: 16px; margin-top: 32px;">
+                <div style="margin-bottom: 16px;">✓ Anfrage erhalten</div>
+                <div style="margin-bottom: 16px; opacity: 0.7;">⏳ Rückruf in 15 Min</div>
+                <div style="opacity: 0.7;">📋 Terminbestätigung</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentService = { type: '', basePrice: 0 };
+        
+        function selectService(type, price) {
+            currentService = { type, basePrice: price };
+            document.querySelectorAll('#step-1 .service-card').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            updateCalc();
+            setTimeout(() => nextStep(2), 300);
+        }
+
+        function updateCalc() {
+            const teeth = parseInt(document.getElementById('teethRange').value);
+            const extraPrice = (teeth - 1) * 40;
+            const total = Math.round((currentService.basePrice + extraPrice) * 0.9);
+            
+            document.getElementById('teethCount').textContent = teeth;
+            document.getElementById('basePrice').textContent = '€' + currentService.basePrice;
+            document.getElementById('extraPrice').textContent = '€' + extraPrice;
+            document.getElementById('totalPrice').textContent = '€' + total;
+        }
+
+        function selectTime(time) {
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            setTimeout(() => nextStep(4), 300);
+        }
+
+        function nextStep(step) {
+            document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+            document.getElementById('step-' + step).style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+
+        function submitForm() {
+            document.querySelector('#step-4 .cta-btn').textContent = '⏳ Wird gesendet...';
+            setTimeout(() => nextStep(5), 1000);
+        }
+
+        // Countdown
+        function updateTimer() {
+            const now = new Date();
+            const mid = new Date(now);
+            mid.setHours(24,0,0,0);
+            const diff = mid - now;
+            const h = Math.floor(diff/(1000*60*60));
+            const m = Math.floor((diff%(1000*60*60))/(1000*60));
+            const s = Math.floor((diff%(1000*60))/1000);
+            document.getElementById('countdown').textContent = 
+                String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
