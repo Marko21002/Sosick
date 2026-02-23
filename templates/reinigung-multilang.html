@@ -698,6 +698,13 @@
     </style>
 </head>
 <body>
+    <!-- Language Switcher -->
+    <div class="lang-switcher" style="position: fixed; top: 80px; right: 20px; z-index: 99; background: white; border-radius: 50px; padding: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: flex; gap: 4px;">
+        <button class="lang-btn" onclick="setLang('de')" data-lang="de" style="background: #0ea5e9; color: white; border: none; padding: 8px 14px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer;">DE</button>
+        <button class="lang-btn" onclick="setLang('en')" data-lang="en" style="background: transparent; border: none; padding: 8px 14px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; color: #64748b;">EN</button>
+        <button class="lang-btn" onclick="setLang('ru')" data-lang="ru" style="background: transparent; border: none; padding: 8px 14px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; color: #64748b;">RU</button>
+    </div>
+
     <!-- HEADER -->
     <header>
         <div class="header-content">
@@ -1117,6 +1124,77 @@
 
         function toggleFaq(element) {
             element.parentElement.classList.toggle('active');
+        }
+    </script>
+    <script>
+        const translations = {
+            de: {
+                title: 'CleanPro Wien — Professionelle Reinigungsdienste',
+                book: 'Preis berechnen',
+                badge: '⭐️ 4.9/5 von 500+ Kunden',
+                heroTitle: 'Professionelle Reinigung in Wien',
+                heroSubtitle: 'Ihr zuverlässiger Partner für Wohnungs-, Büro- und Fensterreinigung.',
+                years: 'Jahre Erfahrung',
+                cleanings: 'Reinigungen',
+                satisfaction: 'Zufriedenheit',
+                cta: 'Preis berechnen & buchen',
+                about: 'Über uns',
+                aboutTitle: 'Ihr vertrauensvoller Reinigungspartner in Wien',
+                services: 'Leistungen',
+                calcTitle: 'Berechnen Sie Ihren Preis',
+                testimonials: 'Was unsere Kunden sagen',
+                faq: 'Häufig gestellte Fragen',
+                finalCta: 'Bereit für Ihre Reinigung?'
+            },
+            en: {
+                title: 'CleanPro Vienna — Professional Cleaning Services',
+                book: 'Calculate price',
+                badge: '⭐️ 4.9/5 from 500+ customers',
+                heroTitle: 'Professional Cleaning in Vienna',
+                heroSubtitle: 'Your reliable partner for home, office and window cleaning.',
+                years: 'Years experience',
+                cleanings: 'Cleanings',
+                satisfaction: 'Satisfaction',
+                cta: 'Calculate price & book',
+                about: 'About us',
+                aboutTitle: 'Your trusted cleaning partner in Vienna',
+                services: 'Services',
+                calcTitle: 'Calculate your price',
+                testimonials: 'What our customers say',
+                faq: 'Frequently asked questions',
+                finalCta: 'Ready for your cleaning?'
+            },
+            ru: {
+                title: 'CleanPro Вена — Профессиональная уборка',
+                book: 'Рассчитать цену',
+                badge: '⭐️ 4.9/5 от 500+ клиентов',
+                heroTitle: 'Профессиональная уборка в Вене',
+                heroSubtitle: 'Ваш надежный партнер для уборки квартир, офисов и окон.',
+                years: 'Лет опыта',
+                cleanings: 'Уборок',
+                satisfaction: 'Довольных',
+                cta: 'Рассчитать цену и записаться',
+                about: 'О нас',
+                aboutTitle: 'Ваш надежный партнер по уборке в Вене',
+                services: 'Услуги',
+                calcTitle: 'Рассчитайте свою цену',
+                testimonials: 'Что говорят наши клиенты',
+                faq: 'Часто задаваемые вопросы',
+                finalCta: 'Готовы к уборке?'
+            }
+        };
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.style.background = btn.dataset.lang === lang ? '#0ea5e9' : 'transparent';
+                btn.style.color = btn.dataset.lang === lang ? 'white' : '#64748b';
+            });
+            
+            const t = translations[lang];
+            if (t) {
+                document.title = t.title;
+                document.querySelector('.logo').innerHTML = `CleanPro <span style="color: #0f172a;">${lang === 'ru' ? 'Вена' : lang === 'de' ? 'Wien' : 'Vienna'}</span>`;
+            }
         }
     </script>
 </body>
