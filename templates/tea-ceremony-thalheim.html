@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinesische Neujahrs-Teezeremonie — Schloss Thalheim</title>
+    <title data-i18n="page_title">Chinesische Neujahrs-Teezeremonie — Schloss Thalheim</title>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root{
@@ -177,7 +177,6 @@
         }
         .hero-cta:hover{background:var(--clay-dark)}
         
-        /* Hero Image */
         .hero-image{
             position:relative;
             max-width:700px;
@@ -258,13 +257,9 @@
         .section-header p{color:var(--ink-light);font-size:17px}
         
         /* Venue Section */
-        .venue{
-            background:var(--bg-cream);
-        }
-        .venue-content{
-            max-width:1000px;
-            margin:0 auto;
-        }
+        .venue{background:var(--bg-cream)}
+        .venue-content{max-width:1000px;margin:0 auto}
+        
         .venue-grid{
             display:grid;
             gap:40px;
@@ -272,9 +267,7 @@
         }
         @media(min-width:900px){.venue-grid{grid-template-columns:1fr 1fr;gap:60px}}
         
-        .venue-image{
-            position:relative;
-        }
+        .venue-image{position:relative}
         .venue-image img,.venue-image .placeholder{
             width:100%;
             aspect-ratio:4/5;
@@ -441,7 +434,7 @@
             gap:12px;
         }
         .ticket-features li::before{
-            content:'';
+            content:'✓';
             width:18px;
             height:18px;
             background:var(--bg-sage);
@@ -451,8 +444,8 @@
             align-items:center;
             justify-content:center;
             font-size:10px;
+            color:var(--forest);
         }
-        .ticket-features li::before{content:'✓';color:var(--forest)}
         
         .ticket-btn{
             width:100%;
@@ -468,13 +461,8 @@
         .ticket.featured .ticket-btn{background:var(--clay)}
         
         /* Location */
-        .location{
-            padding:0;
-            background:var(--bg);
-        }
-        .location-grid{
-            display:grid;
-        }
+        .location{padding:0;background:var(--bg)}
+        .location-grid{display:grid}
         @media(min-width:900px){.location-grid{grid-template-columns:1fr 1fr}}
         
         .location-image{
@@ -586,7 +574,7 @@
 <body>
     <nav>
         <div class="nav-content">
-            <a href="#" class="nav-logo">Schloss Thalheim</a>
+            <a href="#" class="nav-logo" data-i18n="nav_brand">Schloss Thalheim</a>
             
             <div class="nav-right">
                 <div class="lang-switch" id="langSwitch">
@@ -595,13 +583,13 @@
                         <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5"/></svg>
                     </button>
                     <div class="lang-dropdown">
-                        <div class="lang-option active" onclick="setLang('de')">Deutsch</div>
-                        <div class="lang-option" onclick="setLang('en')">English</div>
-                        <div class="lang-option" onclick="setLang('ru')">Русский</div>
+                        <div class="lang-option" data-lang="de" onclick="setLang('de')">Deutsch</div>
+                        <div class="lang-option" data-lang="en" onclick="setLang('en')">English</div>
+                        <div class="lang-option" data-lang="ru" onclick="setLang('ru')">Русский</div>
                     </div>
                 </div>
                 
-                <a href="#tickets" class="nav-cta">Tickets</a>
+                <a href="#tickets" class="nav-cta" data-i18n="nav_cta">Tickets</a>
                 
                 <button class="mobile-toggle">
                     <span></span>
@@ -615,25 +603,25 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">
-                <span>28. Februar 2025</span>
-                <span class="highlight">Einmaliges Event</span>
+                <span data-i18n="hero_date">28. Februar 2025</span>
+                <span class="highlight" data-i18n="hero_badge">Einmaliges Event</span>
             </div>
             
             <h1 class="hero-title">
-                Chinesische<br>Neujahrs-Teezeremonie
+                <span data-i18n="hero_title">Chinesische Neujahrs-Teezeremonie</span>
                 <span class="chinese">迎春茶道</span>
             </h1>
             
-            <p class="hero-subtitle">Ein Abend der Harmonie und Tradition im historischen Renaissance-Schloss.</p>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">Ein Abend der Harmonie und Tradition im historischen Renaissance-Schloss.</p>
             
-            <a href="#tickets" class="hero-cta">Platz reservieren →</a>
+            <a href="#tickets" class="hero-cta" data-i18n="hero_cta">Platz reservieren →</a>
             
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1200&q=80" alt="Schloss Thalheim" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1200&q=80" alt="Schloss" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                 <div class="placeholder" style="display:none">🏰</div>
                 
                 <div class="hero-caption">
-                    <span class="handwritten">Schloss Thalheim</span>
+                    <span class="handwritten" data-i18n="hero_caption">Schloss Thalheim</span>
                 </div>
             </div>
         </div>
@@ -641,39 +629,55 @@
 
     <div class="info-bar">
         <div class="info-bar-content">
-            <div class="info-item"><h4>18:00</h4><p>Beginn</p></div>
-            <div class="info-item"><h4>4h</h4><p>Dauer</p></div>
-            <div class="info-item"><h4>50</h4><p>Gäste</p></div>
-            <div class="info-item"><h4>1564</h4><p>Seit</p></div>
+            <div class="info-item">
+                <h4>18:00</h4>
+                <p data-i18n="info_start">Beginn</p>
+            </div>
+            
+            <div class="info-item">
+                <h4>4h</h4>
+                <p data-i18n="info_duration">Dauer</p>
+            </div>
+            
+            <div class="info-item">
+                <h4>50</h4>
+                <p data-i18n="info_guests">Gäste</p>
+            </div>
+            
+            <div class="info-item">
+                <h4>1564</h4>
+                <p data-i18n="info_since">Seit</p>
+            </div>
         </div>
     </div>
 
     <section class="venue" id="venue">
         <div class="venue-content">
             <div class="section-header">
-                <span class="label">Der Ort</span>
-                <h2>Ein Schloss mit Geschichte</h2>
-                <p>Seit über 450 Jahren begeistert Schloss Thalheim mit seiner einzigartigen Atmosphäre.</p>
+                <span class="label" data-i18n="venue_label">Der Ort</span>
+                <h2 data-i18n="venue_title">Ein Schloss mit Geschichte</h2>
+                <p data-i18n="venue_subtitle">Seit über 450 Jahren begeistert Schloss Thalheim mit seiner einzigartigen Atmosphäre.</p>
             </div>
             
             <div class="venue-grid">
                 <div class="venue-image">
                     <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" alt="Schloss Interieur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    
                     <div class="placeholder" style="display:none">✨</div>
                     
                     <div class="venue-sticker">
-                        <span>1564<br>Eröffnet</span>
+                        <span data-i18n="venue_sticker">1564<br>Eröffnet</span>
                     </div>
                 </div>
                 
                 <div class="venue-text">
-                    <h3>Wo österreichische Tradition auf fernöstliche Weisheit trifft</h3>
+                    <h3 data-i18n="venue_heading">Wo österreichische Tradition auf fernöstliche Weisheit trifft</h3>
                     
-                    <p>Die prächtigen Säle des Schlosses bieten den perfekten Rahmen für unsere Teezeremonie. Der Rittersaal mit seinen historischen Gemälden, der elegante Rokoko-Saal für den Ausklang – jeder Raum erzählt seine eigene Geschichte.</p>
+                    <p data-i18n="venue_p1">Die prächtigen Säle des Schlosses bieten den perfekten Rahmen für unsere Teezeremonie. Der Rittersaal mit seinen historischen Gemälden, der elegante Rokoko-Saal für den Ausklang – jeder Raum erzählt seine eigene Geschichte.</p>
                     
-                    <p>Nur 30 Minuten von Wien entfernt, fühlen Sie sich hier wie in einer anderen Welt – einer Welt der Ruhe, des Genusses und der Zeitlosigkeit.</p>
+                    <p data-i18n="venue_p2">Nur 30 Minuten von Wien entfernt, fühlen Sie sich hier wie in einer anderen Welt – einer Welt der Ruhe, des Genusses und der Zeitlosigkeit.</p>
                     
-                    <span class="handwritten">"Zeitlos elegant"</span>
+                    <span class="handwritten" data-i18n="venue_quote">"Zeitlos elegant"</span>
                 </div>
             </div>
         </div>
@@ -682,44 +686,48 @@
     <section class="experience" id="experience">
         <div class="experience-content">
             <div class="section-header">
-                <span class="label">Das Erlebnis</span>
-                <h2>Für alle Sinne</h2>
-                <p>Ein sorgfältig kuratiertes Programm, das Sie verzaubern wird.</p>
+                <span class="label" data-i18n="exp_label">Das Erlebnis</span>
+                <h2 data-i18n="exp_title">Für alle Sinne</h2>
+                <p data-i18n="exp_subtitle">Ein sorgfältig kuratiertes Programm, das Sie verzaubern wird.</p>
             </div>
             
             <div class="cards-grid">
                 <div class="exp-card">
                     <div class="exp-card-image">
-                        <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&q=80" alt="Teezeremonie" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&q=80" alt="Tee" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        
                         <div class="placeholder" style="display:none">🫖</div>
                     </div>
+                    
                     <div class="exp-card-content">
-                        <h3>Die Zeremonie</h3>
-                        <p>Gongfu Cha – die Kunst des Tee mit großer Sorgfalt. Seltene chinesische Tees, traditionelle Gefäße, meditativer Fluss.</p>
+                        <h3 data-i18n="card1_title">Die Zeremonie</h3>
+                        <p data-i18n="card1_desc">Gongfu Cha – die Kunst des Tee mit großer Sorgfalt. Seltene chinesische Tees, traditionelle Gefäße, meditativer Fluss.</p>
                     </div>
                 </div>
                 
                 <div class="exp-card">
                     <div class="exp-card-image">
-                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80" alt="Kulinarik" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80" alt="Essen" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        
                         <div class="placeholder" style="display:none">🍽️</div>
                     </div>
                     
                     <div class="exp-card-content">
-                        <h3>Das Menü</h3>
-                        <p>Vier-Gang-Dinner mit asiatisch-österreichischer Fusion. Lokale Zutaten treffen auf fernöstliche Aromen.</p>
+                        <h3 data-i18n="card2_title">Das Menü</h3>
+                        <p data-i18n="card2_desc">Vier-Gang-Dinner mit asiatisch-österreichischer Fusion. Lokale Zutaten treffen auf fernöstliche Aromen.</p>
                     </div>
                 </div>
                 
                 <div class="exp-card">
                     <div class="exp-card-image">
                         <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=600&q=80" alt="Ambiente" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        
                         <div class="placeholder" style="display:none">🏛️</div>
                     </div>
                     
                     <div class="exp-card-content">
-                        <h3>Das Ambiente</h3>
-                        <p>Historische Säle, Kerzenlicht, frische Blumen. Ein Abend wie im Märchen – nur 30 Minuten von Wien.</p>
+                        <h3 data-i18n="card3_title">Das Ambiente</h3>
+                        <p data-i18n="card3_desc">Historische Säle, Kerzenlicht, frische Blumen. Ein Abend wie im Märchen – nur 30 Minuten von Wien.</p>
                     </div>
                 </div>
             </div>
@@ -729,40 +737,44 @@
     <section class="program" id="program">
         <div class="program-content">
             <div class="section-header">
-                <span class="label">Programm</span>
-                <h2>Der Abend im Detail</h2>
+                <span class="label" data-i18n="program_label">Programm</span>
+                <h2 data-i18n="program_title">Der Abend im Detail</h2>
             </div>
             
             <div class="program-list">
                 <div class="program-item">
                     <div class="program-time">18:00</div>
+                    
                     <div class="program-content-text">
-                        <h3>Empfang</h3>
-                        <p>Hausgemachter Prosecco und asiatische Amuse-Bouches in der prächtigen Eingangshalle des Schlosses.</p>
+                        <h3 data-i18n="prog1_title">Empfang</h3>
+                        <p data-i18n="prog1_desc">Hausgemachter Prosecco und asiatische Amuse-Bouches in der prächtigen Eingangshalle des Schlosses.</p>
                     </div>
                 </div>
                 
                 <div class="program-item">
                     <div class="program-time">18:45</div>
+                    
                     <div class="program-content-text">
-                        <h3>Die Teezeremonie</h3>
-                        <p>Gongfu-Cha-Zeremonie mit seltenen chinesischen Tees. Unsere Teemeisterin führt Sie durch die Tradition.</p>
+                        <h3 data-i18n="prog2_title">Die Teezeremonie</h3>
+                        <p data-i18n="prog2_desc">Gongfu-Cha-Zeremonie mit seltenen chinesischen Tees. Unsere Teemeisterin führt Sie durch die Tradition.</p>
                     </div>
                 </div>
                 
                 <div class="program-item">
                     <div class="program-time">20:00</div>
+                    
                     <div class="program-content-text">
-                        <h3>Festliches Dinner</h3>
-                        <p>Vier-Gang-Menü im festlich geschmückten Rittersaal. Asiatisch-österreichische Fusion-Küche.</p>
+                        <h3 data-i18n="prog3_title">Festliches Dinner</h3>
+                        <p data-i18n="prog3_desc">Vier-Gang-Menü im festlich geschmückten Rittersaal. Asiatisch-österreichische Fusion-Küche.</p>
                     </div>
                 </div>
                 
                 <div class="program-item">
                     <div class="program-time">22:00</div>
+                    
                     <div class="program-content-text">
-                        <h3>Ausklang</h3>
-                        <p>Verdauungstee und Musik im Rokoko-Saal. Zeit zum Genießen und Plaudern.</p>
+                        <h3 data-i18n="prog4_title">Ausklang</h3>
+                        <p data-i18n="prog4_desc">Verdauungstee und Musik im Rokoko-Saal. Zeit zum Genießen und Plaudern.</p>
                     </div>
                 </div>
             </div>
@@ -772,59 +784,59 @@
     <section class="tickets" id="tickets">
         <div class="tickets-content">
             <div class="section-header">
-                <span class="label">Reservierung</span>
-                <h2>Wählen Sie Ihr Erlebnis</h2>
-                <p>Begrenzte Plätze – nur 50 Gäste.</p>
+                <span class="label" data-i18n="tickets_label">Reservierung</span>
+                <h2 data-i18n="tickets_title">Wählen Sie Ihr Erlebnis</h2>
+                <p data-i18n="tickets_subtitle">Begrenzte Plätze – nur 50 Gäste.</p>
             </div>
             
             <div class="tickets-grid">
                 <div class="ticket">
-                    <div class="ticket-name">Klassik</div>
+                    <div class="ticket-name" data-i18n="ticket1_name">Klassik</div>
                     <div class="ticket-price">€89<span>/ Person</span></div>
-                    <div class="ticket-desc">Für Genießer</div>
+                    <div class="ticket-desc" data-i18n="ticket1_desc">Für Genießer</div>
                     
                     <ul class="ticket-features">
-                        <li>Teezeremonie</li>
-                        <li>4-Gang-Menü</li>
-                        <li>Begrüßungsgetränk</li>
-                        <li>Teegebäck</li>
+                        <li data-i18n="ticket1_f1">Teezeremonie</li>
+                        <li data-i18n="ticket1_f2">4-Gang-Menü</li>
+                        <li data-i18n="ticket1_f3">Begrüßungsgetränk</li>
+                        <li data-i18n="ticket1_f4">Teegebäck</li>
                     </ul>
                     
-                    <button class="ticket-btn">Auswählen</button>
+                    <button class="ticket-btn" data-i18n="ticket_select">Auswählen</button>
                 </div>
                 
                 <div class="ticket featured">
-                    <div class="ticket-badge">Empfohlen</div>
+                    <div class="ticket-badge" data-i18n="ticket_badge">Empfohlen</div>
                     
-                    <div class="ticket-name">Premium</div>
+                    <div class="ticket-name" data-i18n="ticket2_name">Premium</div>
                     <div class="ticket-price">€149<span>/ Person</span></div>
-                    <div class="ticket-desc">Volles Erlebnis</div>
+                    <div class="ticket-desc" data-i18n="ticket2_desc">Volles Erlebnis</div>
                     
                     <ul class="ticket-features">
-                        <li>Alles aus Klassik</li>
-                        <li>Premium-Tees</li>
-                        <li>Goodie Bag</li>
-                        <li>Schlossführung</li>
-                        <li>Beste Plätze</li>
+                        <li data-i18n="ticket2_f1">Alles aus Klassik</li>
+                        <li data-i18n="ticket2_f2">Premium-Tees</li>
+                        <li data-i18n="ticket2_f3">Goodie Bag</li>
+                        <li data-i18n="ticket2_f4">Schlossführung</li>
+                        <li data-i18n="ticket2_f5">Beste Plätze</li>
                     </ul>
                     
-                    <button class="ticket-btn">Auswählen</button>
+                    <button class="ticket-btn" data-i18n="ticket_select">Auswählen</button>
                 </div>
                 
                 <div class="ticket">
-                    <div class="ticket-name">VIP</div>
+                    <div class="ticket-name" data-i18n="ticket3_name">VIP</div>
                     <div class="ticket-price">€249<span>/ Person</span></div>
-                    <div class="ticket-desc">Besonderer Anlass</div>
+                    <div class="ticket-desc" data-i18n="ticket3_desc">Besonderer Anlass</div>
                     
                     <ul class="ticket-features">
-                        <li>Alles aus Premium</li>
-                        <li>Private Führung</li>
-                        <li>Tee zum Mitnehmen</li>
-                        <li>Champagner-Empfang</li>
-                        <li>Persönlicher Service</li>
+                        <li data-i18n="ticket3_f1">Alles aus Premium</li>
+                        <li data-i18n="ticket3_f2">Private Führung</li>
+                        <li data-i18n="ticket3_f3">Tee zum Mitnehmen</li>
+                        <li data-i18n="ticket3_f4">Champagner-Empfang</li>
+                        <li data-i18n="ticket3_f5">Persönlicher Service</li>
                     </ul>
                     
-                    <button class="ticket-btn">Auswählen</button>
+                    <button class="ticket-btn" data-i18n="ticket_select">Auswählen</button>
                 </div>
             </div>
         </div>
@@ -833,18 +845,20 @@
     <section class="location">
         <div class="location-grid">
             <div class="location-image">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=80" alt="Schloss Thalheim" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=80" alt="Schloss" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                
                 <div class="placeholder" style="display:none">🏰</div>
             </div>
             
             <div class="location-info">
-                <span class="label">Anfahrt</span>
-                <h2>Schloss Thalheim</h2>
+                <span class="label" data-i18n="location_label">Anfahrt</span>
                 
-                <p>Nur 30 Minuten von Wien entfernt, direkt an der A1. Kostenlose Parkplätze vorhanden.</p>
+                <h2 data-i18n="location_title">Schloss Thalheim</h2>
+                
+                <p data-i18n="location_desc">Nur 30 Minuten von Wien entfernt, direkt an der A1. Kostenlose Parkplätze vorhanden.</p>
                 
                 <div class="location-address">
-                    <strong>Adresse</strong>
+                    <strong data-i18n="address_label">Adresse</strong>
                     <p>Schloss Thalheim 1<br>2230 Thalheim bei Wels<br>Österreich</p>
                 </div>
             </div>
@@ -853,11 +867,11 @@
 
     <section class="cta">
         <div class="cta-content">
-            <h2>Sichern Sie sich Ihren Platz</h2>
+            <h2 data-i18n="cta_title">Sichern Sie sich Ihren Platz</h2>
             
-            <p>Nur 50 Plätze verfügbar. Erleben Sie einen Abend, der in Erinnerung bleibt.</p>
+            <p data-i18n="cta_desc">Nur 50 Plätze verfügbar. Erleben Sie einen Abend, der in Erinnerung bleibt.</p>
             
-            <a href="#tickets" class="cta-btn">Jetzt reservieren →</a>
+            <a href="#tickets" class="cta-btn" data-i18n="cta_btn">Jetzt reservieren →</a>
         </div>
     </section>
 
@@ -866,24 +880,178 @@
             <div class="footer-logo">Schloss Thalheim</div>
             
             <div class="footer-links">
-                <a href="#">Impressum</a>
-                <a href="#">Datenschutz</a>
-                <a href="#">Kontakt</a>
+                <a href="#" data-i18n="footer_imprint">Impressum</a>
+                <a href="#" data-i18n="footer_privacy">Datenschutz</a>
+                <a href="#" data-i18n="footer_contact">Kontakt</a>
             </div>
             
-            <div class="footer-copy">© 2025 Schloss Thalheim · Mit Liebe zum Detail</div>
+            <div class="footer-copy">© 2025 Schloss Thalheim · <span data-i18n="footer_tagline">Mit Liebe zum Detail</span></div>
         </div>
     </footer>
 
     <script>
-        function toggleLang(){
+        const translations = {
+            de: {
+                page_title: 'Chinesische Neujahrs-Teezeremonie — Schloss Thalheim',
+                nav_brand: 'Schloss Thalheim', nav_cta: 'Tickets',
+                hero_date: '28. Februar 2025', hero_badge: 'Einmaliges Event',
+                hero_title: 'Chinesische Neujahrs-Teezeremonie',
+                hero_subtitle: 'Ein Abend der Harmonie und Tradition im historischen Renaissance-Schloss.',
+                hero_cta: 'Platz reservieren →', hero_caption: 'Schloss Thalheim',
+                info_start: 'Beginn', info_duration: 'Dauer', info_guests: 'Gäste', info_since: 'Seit',
+                venue_label: 'Der Ort', venue_title: 'Ein Schloss mit Geschichte',
+                venue_subtitle: 'Seit über 450 Jahren begeistert Schloss Thalheim mit seiner einzigartigen Atmosphäre.',
+                venue_sticker: '1564\u003cbr\u003eEröffnet',
+                venue_heading: 'Wo österreichische Tradition auf fernöstliche Weisheit trifft',
+                venue_p1: 'Die prächtigen Säle des Schlosses bieten den perfekten Rahmen für unsere Teezeremonie. Der Rittersaal mit seinen historischen Gemälden, der elegante Rokoko-Saal für den Ausklang – jeder Raum erzählt seine eigene Geschichte.',
+                venue_p2: 'Nur 30 Minuten von Wien entfernt, fühlen Sie sich hier wie in einer anderen Welt – einer Welt der Ruhe, des Genusses und der Zeitlosigkeit.',
+                venue_quote: '"Zeitlos elegant"',
+                exp_label: 'Das Erlebnis', exp_title: 'Für alle Sinne', exp_subtitle: 'Ein sorgfältig kuratiertes Programm, das Sie verzaubern wird.',
+                card1_title: 'Die Zeremonie', card1_desc: 'Gongfu Cha – die Kunst des Tee mit großer Sorgfalt. Seltene chinesische Tees, traditionelle Gefäße, meditativer Fluss.',
+                card2_title: 'Das Menü', card2_desc: 'Vier-Gang-Dinner mit asiatisch-österreichischer Fusion. Lokale Zutaten treffen auf fernöstliche Aromen.',
+                card3_title: 'Das Ambiente', card3_desc: 'Historische Säle, Kerzenlicht, frische Blumen. Ein Abend wie im Märchen – nur 30 Minuten von Wien.',
+                program_label: 'Programm', program_title: 'Der Abend im Detail',
+                prog1_title: 'Empfang', prog1_desc: 'Hausgemachter Prosecco und asiatische Amuse-Bouches in der prächtigen Eingangshalle des Schlosses.',
+                prog2_title: 'Die Teezeremonie', prog2_desc: 'Gongfu-Cha-Zeremonie mit seltenen chinesischen Tees. Unsere Teemeisterin führt Sie durch die Tradition.',
+                prog3_title: 'Festliches Dinner', prog3_desc: 'Vier-Gang-Menü im festlich geschmückten Rittersaal. Asiatisch-österreichische Fusion-Küche.',
+                prog4_title: 'Ausklang', prog4_desc: 'Verdauungstee und Musik im Rokoko-Saal. Zeit zum Genießen und Plaudern.',
+                tickets_label: 'Reservierung', tickets_title: 'Wählen Sie Ihr Erlebnis', tickets_subtitle: 'Begrenzte Plätze – nur 50 Gäste.',
+                ticket1_name: 'Klassik', ticket1_desc: 'Für Genießer',
+                ticket1_f1: 'Teezeremonie', ticket1_f2: '4-Gang-Menü', ticket1_f3: 'Begrüßungsgetränk', ticket1_f4: 'Teegebäck',
+                ticket2_name: 'Premium', ticket2_desc: 'Volles Erlebnis',
+                ticket2_f1: 'Alles aus Klassik', ticket2_f2: 'Premium-Tees', ticket2_f3: 'Goodie Bag', ticket2_f4: 'Schlossführung', ticket2_f5: 'Beste Plätze',
+                ticket3_name: 'VIP', ticket3_desc: 'Besonderer Anlass',
+                ticket3_f1: 'Alles aus Premium', ticket3_f2: 'Private Führung', ticket3_f3: 'Tee zum Mitnehmen', ticket3_f4: 'Champagner-Empfang', ticket3_f5: 'Persönlicher Service',
+                ticket_badge: 'Empfohlen', ticket_select: 'Auswählen',
+                location_label: 'Anfahrt', location_title: 'Schloss Thalheim',
+                location_desc: 'Nur 30 Minuten von Wien entfernt, direkt an der A1. Kostenlose Parkplätze vorhanden.',
+                address_label: 'Adresse',
+                cta_title: 'Sichern Sie sich Ihren Platz', cta_desc: 'Nur 50 Plätze verfügbar. Erleben Sie einen Abend, der in Erinnerung bleibt.', cta_btn: 'Jetzt reservieren →',
+                footer_imprint: 'Impressum', footer_privacy: 'Datenschutz', footer_contact: 'Kontakt', footer_tagline: 'Mit Liebe zum Detail'
+            },
+            en: {
+                page_title: 'Chinese New Year Tea Ceremony — Schloss Thalheim',
+                nav_brand: 'Schloss Thalheim', nav_cta: 'Tickets',
+                hero_date: 'February 28, 2025', hero_badge: 'One-time Event',
+                hero_title: 'Chinese New Year Tea Ceremony',
+                hero_subtitle: 'An evening of harmony and tradition at the historic Renaissance castle.',
+                hero_cta: 'Reserve your seat →', hero_caption: 'Schloss Thalheim',
+                info_start: 'Start', info_duration: 'Duration', info_guests: 'Guests', info_since: 'Since',
+                venue_label: 'The Venue', venue_title: 'A Castle with History',
+                venue_subtitle: 'For over 450 years, Schloss Thalheim has enchanted visitors with its unique atmosphere.',
+                venue_sticker: '1564\u003cbr\u003eOpened',
+                venue_heading: 'Where Austrian tradition meets Eastern wisdom',
+                venue_p1: 'The magnificent halls of the castle provide the perfect setting for our tea ceremony. The Knights\' Hall with its historic paintings, the elegant Rococo salon for the finale – each room tells its own story.',
+                venue_p2: 'Just 30 minutes from Vienna, you\'ll feel like you\'re in another world – a world of tranquility, indulgence, and timelessness.',
+                venue_quote: '"Timelessly elegant"',
+                exp_label: 'The Experience', exp_title: 'For All Senses', exp_subtitle: 'A carefully curated program that will enchant you.',
+                card1_title: 'The Ceremony', card1_desc: 'Gongfu Cha – the art of tea with great care. Rare Chinese teas, traditional vessels, meditative flow.',
+                card2_title: 'The Menu', card2_desc: 'Four-course dinner with Asian-Austrian fusion. Local ingredients meet Eastern flavors.',
+                card3_title: 'The Ambiance', card3_desc: 'Historic halls, candlelight, fresh flowers. An evening like a fairy tale – just 30 minutes from Vienna.',
+                program_label: 'Program', program_title: 'The Evening in Detail',
+                prog1_title: 'Welcome', prog1_desc: 'Homemade prosecco and Asian amuse-bouches in the magnificent entrance hall.',
+                prog2_title: 'The Tea Ceremony', prog2_desc: 'Gongfu-Cha ceremony with rare Chinese teas. Our tea master guides you through the tradition.',
+                prog3_title: 'Festive Dinner', prog3_desc: 'Four-course menu in the festively decorated Knights\' Hall. Asian-Austrian fusion cuisine.',
+                prog4_title: 'Finale', prog4_desc: 'Digestif tea and music in the Rococo salon. Time to enjoy and chat.',
+                tickets_label: 'Reservation', tickets_title: 'Choose Your Experience', tickets_subtitle: 'Limited seats – only 50 guests.',
+                ticket1_name: 'Classic', ticket1_desc: 'For connoisseurs',
+                ticket1_f1: 'Tea ceremony', ticket1_f2: '4-course menu', ticket1_f3: 'Welcome drink', ticket1_f4: 'Tea pastries',
+                ticket2_name: 'Premium', ticket2_desc: 'Full experience',
+                ticket2_f1: 'Everything from Classic', ticket2_f2: 'Premium teas', ticket2_f3: 'Goodie bag', ticket2_f4: 'Castle tour', ticket2_f5: 'Best seats',
+                ticket3_name: 'VIP', ticket3_desc: 'Special occasion',
+                ticket3_f1: 'Everything from Premium', ticket3_f2: 'Private tour', ticket3_f3: 'Tea to take home', ticket3_f4: 'Champagne reception', ticket3_f5: 'Personal service',
+                ticket_badge: 'Recommended', ticket_select: 'Select',
+                location_label: 'Directions', location_title: 'Schloss Thalheim',
+                location_desc: 'Just 30 minutes from Vienna, right off the A1. Free parking available.',
+                address_label: 'Address',
+                cta_title: 'Secure Your Seat', cta_desc: 'Only 50 seats available. Experience an evening to remember.', cta_btn: 'Reserve now →',
+                footer_imprint: 'Imprint', footer_privacy: 'Privacy', footer_contact: 'Contact', footer_tagline: 'With attention to detail'
+            },
+            ru: {
+                page_title: 'Китайская чайная церемония Нового года — Замок Тальхайм',
+                nav_brand: 'Schloss Thalheim', nav_cta: 'Билеты',
+                hero_date: '28 февраля 2025', hero_badge: 'Единственный показ',
+                hero_title: 'Китайская чайная церемония Нового года',
+                hero_subtitle: 'Вечер гармонии и традиций в историческом замке эпохи Возрождения.',
+                hero_cta: 'Забронировать место →', hero_caption: 'Замок Тальхайм',
+                info_start: 'Начало', info_duration: 'Длительность', info_guests: 'Гостей', info_since: 'С',
+                venue_label: 'Место проведения', venue_title: 'Замок с историей',
+                venue_subtitle: 'Более 450 лет замок Тальхайм восхищает посетителей своей уникальной атмосферой.',
+                venue_sticker: '1564\u003cbr\u003eОснован',
+                venue_heading: 'Где австрийская традиция встречается с восточной мудростью',
+                venue_p1: 'Великолепные залы замка создают идеальную обстановку для нашей чайной церемонии. Рыцарский зал с историческими картинами, элегантный салон в стиле рококо для финала – каждая комната рассказывает свою историю.',
+                venue_p2: 'Всего в 30 минутах от Вены вы почувствуете себя в другом мире – мире спокойствия, наслаждения и вневременности.',
+                venue_quote: '"Вне времени и элегантно"',
+                exp_label: 'Впечатления', exp_title: 'Для всех чувств', exp_subtitle: 'Тщательно продуманная программа, которая очарует вас.',
+                card1_title: 'Церемония', card1_desc: 'Гунфу Ча – искусство чая с большой тщательностью. Редкие китайские чаи, традиционная посуда, медитативный поток.',
+                card2_title: 'Меню', card2_desc: 'Ужин из четырёх блюд в стиле фьюжн азиатской и австрийской кухни. Местные ингредиенты встречаются с восточными ароматами.',
+                card3_title: 'Атмосфера', card3_desc: 'Исторические залы, свечи, свежие цветы. Вечер как в сказке – всего в 30 минутах от Вены.',
+                program_label: 'Программа', program_title: 'Вечер подробно',
+                prog1_title: 'Приём', prog1_desc: 'Домашнее просекко и азиатские закуски в великолепном вестибюле замка.',
+                prog2_title: 'Чайная церемония', prog2_desc: 'Церемония Гунфу Ча с редкими китайскими чаями. Наша чайная мастерица проведёт вас через традицию.',
+                prog3_title: 'Праздничный ужин', prog3_desc: 'Меню из четырёх блюд в празднично украшенном Рыцарском зале. Кухня фьюжн азиатской и австрийской традиций.',
+                prog4_title: 'Завершение', prog4_desc: 'Чай для пищеварения и музыка в салоне рококо. Время для наслаждения и беседы.',
+                tickets_label: 'Бронирование', tickets_title: 'Выберите свой опыт', tickets_subtitle: 'Ограниченное количество мест – только 50 гостей.',
+                ticket1_name: 'Классик', ticket1_desc: 'Для ценителей',
+                ticket1_f1: 'Чайная церемония', ticket1_f2: 'Меню из 4 блюд', ticket1_f3: 'Приветственный напиток', ticket1_f4: 'Чайные сладости',
+                ticket2_name: 'Премиум', ticket2_desc: 'Полный опыт',
+                ticket2_f1: 'Всё из Классик', ticket2_f2: 'Премиум чаи', ticket2_f3: 'Подарочный набор', ticket2_f4: 'Экскурсия по замку', ticket2_f5: 'Лучшие места',
+                ticket3_name: 'VIP', ticket3_desc: 'Особый случай',
+                ticket3_f1: 'Всё из Премиум', ticket3_f2: 'Индивидуальная экскурсия', ticket3_f3: 'Чай с собой', ticket3_f4: 'Шампанское', ticket3_f5: 'Персональный сервис',
+                ticket_badge: 'Рекомендуем', ticket_select: 'Выбрать',
+                location_label: 'Как добраться', location_title: 'Замок Тальхайм',
+                location_desc: 'Всего в 30 минутах от Вены, прямо у автострады А1. Бесплатная парковка.',
+                address_label: 'Адрес',
+                cta_title: 'Забронируйте своё место', cta_desc: 'Всего 50 мест. Переживите вечер, который запомнится навсегда.', cta_btn: 'Забронировать →',
+                footer_imprint: 'Импрессум', footer_privacy: 'Конфиденциальность', footer_contact: 'Контакт', footer_tagline: 'С вниманием к деталям'
+            }
+        };
+
+        let currentLang = localStorage.getItem('tea-ceremony-lang') || 'de';
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('tea-ceremony-lang', lang);
+            updateContent();
+            updateLangSwitcher();
+            document.getElementById('langSwitch').classList.remove('open');
+        }
+
+        function updateContent() {
+            const t = translations[currentLang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    if (key === 'page_title') {
+                        document.title = t[key];
+                    } else {
+                        el.innerHTML = t[key];
+                    }
+                }
+            });
+            document.documentElement.lang = currentLang;
+        }
+
+        function updateLangSwitcher() {
+            document.getElementById('currentLang').textContent = currentLang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.toggle('active', opt.getAttribute('data-lang') === currentLang);
+            });
+        }
+
+        function toggleLang() {
             document.getElementById('langSwitch').classList.toggle('open');
         }
-        document.addEventListener('click',function(e){
-            if(!e.target.closest('.lang-switch')){
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.lang-switch')) {
                 document.getElementById('langSwitch').classList.remove('open');
             }
         });
+
+        // Init
+        updateContent();
+        updateLangSwitcher();
     </script>
 </body>
 </html>
