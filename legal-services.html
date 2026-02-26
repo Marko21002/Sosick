@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalPro — Professional Legal Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --primary-light: #2d5a8f;
+            --accent: #c9a962;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --white: #ffffff;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--white);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .header-contact {
+            display: none;
+        }
+        
+        .phone-btn {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 60px 24px;
+            text-align: center;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        
+        .hero-desc {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 28px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        /* Trust Badges */
+        .trust {
+            background: var(--light);
+            padding: 40px 24px;
+        }
+        
+        .trust-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            text-align: center;
+        }
+        
+        .trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .trust-icon {
+            font-size: 32px;
+        }
+        
+        .trust-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .trust-label {
+            font-size: 13px;
+            color: var(--gray);
+        }
+        
+        /* Services */
+        .services {
+            padding: 60px 24px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary);
+        }
+        
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .service-card {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 28px;
+            border: 1px solid rgba(30, 58, 95, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(30, 58, 95, 0.1);
+        }
+        
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+        
+        .service-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .service-desc {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* Why Us */
+        .why-us {
+            background: var(--primary);
+            color: var(--white);
+            padding: 60px 24px;
+        }
+        
+        .why-title {
+            font-size: 28px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .why-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        
+        .why-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        
+        .why-check {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            flex-shrink: 0;
+            font-size: 14px;
+        }
+        
+        .why-text h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        
+        .why-text p {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        /* Contact */
+        .contact {
+            padding: 60px 24px;
+            background: var(--light);
+        }
+        
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-form {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        
+        .form-subtitle {
+            color: var(--gray);
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid rgba(30, 58, 95, 0.1);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            width: 100%;
+            background: var(--primary);
+            color: var(--white);
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .form-submit:hover {
+            background: var(--primary-light);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 40px 24px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .footer-text {
+            opacity: 0.7;
+            font-size: 14px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        /* Desktop */
+        @media (min-width: 768px) {
+            .header-contact { display: block; }
+            .hero { padding: 100px 24px; }
+            .hero h1 { font-size: 52px; }
+            .hero-cta { flex-direction: row; max-width: none; justify-content: center; }
+            .trust-container { grid-template-columns: repeat(4, 1fr); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (min-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">⚖️</div>
+                LegalPro
+            </div>
+            <div class="header-contact">
+                <a href="tel:+1234567890" class="phone-btn">📞 Free Consultation</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">⭐ 15+ Years Experience</div>
+        <h1>Expert Legal Services You Can Trust</h1>
+        <p class="hero-desc">Professional attorneys dedicated to protecting your rights and securing the best outcomes for your case.</p>
+        <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary">📅 Book Free Consultation</a>
+            <a href="#services" class="btn btn-secondary">⚖️ Our Services</a>
+        </div>
+    </section>
+
+    <section class="trust">
+        <div class="trust-container">
+            <div class="trust-item">
+                <div class="trust-icon">🏆</div>
+                <div class="trust-number">500+</div>
+                <div class="trust-label">Cases Won</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">⭐</div>
+                <div class="trust-number">98%</div>
+                <div class="trust-label">Success Rate</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">👥</div>
+                <div class="trust-number">1000+</div>
+                <div class="trust-label">Happy Clients</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">⚡</div>
+                <div class="trust-number">24/7</div>
+                <div class="trust-label">Support</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <h2 class="section-title">Our Legal Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3 class="service-title">Corporate Law</h3>
+                <p class="service-desc">Business formation, contracts, mergers & acquisitions, and corporate governance.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">👨‍👩‍👧</div>
+                <h3 class="service-title">Family Law</h3>
+                <p class="service-desc">Divorce, child custody, adoption, and family dispute resolution with compassion.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3 class="service-title">Employment Law</h3>
+                <p class="service-desc">Workplace disputes, wrongful termination, discrimination cases, and HR compliance.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3 class="service-title">Real Estate</h3>
+                <p class="service-desc">Property transactions, lease agreements, zoning issues, and title disputes.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">⚖️</div>
+                <h3 class="service-title">Criminal Defense</h3>
+                <p class="service-desc">Aggressive defense for all criminal charges, from misdemeanors to serious felonies.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">✍️</div>
+                <h3 class="service-title">Contract Law</h3>
+                <p class="service-desc">Drafting, reviewing, and negotiating contracts to protect your interests.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-us">
+        <h2 class="why-title">Why Choose LegalPro?</h2>
+        <div class="why-grid">
+            <div class="why-item">
+                <div class="why-check">✓</div>
+                <div class="why-text">
+                    <h3>Experienced Attorneys</h3>
+                    <p>Our lawyers have 15+ years of experience in their respective fields.</p>
+                </div>
+            </div>
+            
+            <div class="why-item">
+                <div class="why-check">✓</div>
+                <div class="why-text">
+                    <h3>Transparent Pricing</h3>
+                    <p>No hidden fees. Clear, upfront pricing with flexible payment options.</p>
+                </div>
+            </div>
+            
+            <div class="why-item">
+                <div class="why-check">✓</div>
+                <div class="why-text">
+                    <h3>Personalized Attention</h3>
+                    <p>Every case gets dedicated attention from senior attorneys, not paralegals.</p>
+                </div>
+            </div>
+            
+            <div class="why-item">
+                <div class="why-check">✓</div>
+                <div class="why-text">
+                    <h3>Proven Track Record</h3>
+                    <p>98% success rate with hundreds of satisfied clients across all practice areas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-form">
+                <h2 class="form-title">Get Your Free Consultation</h2>
+                <p class="form-subtitle">Fill out the form below and we'll get back to you within 24 hours.</p>
+                
+                <form onsubmit="event.preventDefault(); alert('Thank you! We will contact you soon.');">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" placeholder="John Smith" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input" placeholder="+1 (555) 000-0000" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" placeholder="john@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Legal Issue</label>
+                        <select class="form-input" required>
+                            <option value="">Select a practice area</option>
+                            <option>Corporate Law</option>
+                            <option>Family Law</option>
+                            <option>Employment Law</option>
+                            <option>Real Estate</option>
+                            <option>Criminal Defense</option>
+                            <option>Contract Law</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Brief Description</label>
+                        <textarea class="form-input" placeholder="Tell us about your case..." rows="4"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Request Consultation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">
+            <span>⚖️</span> LegalPro
+        </div>
+        <p class="footer-text">Professional legal services with integrity, experience, and dedication to your success.</p>
+    </footer>
+</body>
+</html>
