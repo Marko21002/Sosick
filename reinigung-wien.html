@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c4a6e">
+    <meta name="description" content="Webdesign für Reinigungsdienste in Wien. Online-Angebote, Buchungssystem, mehr Kunden.">
+    <title>Reinigung Webdesign Wien — Professionelle Websites für Reinigungsdienste</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0c4a6e;
+            --bg-secondary: #075985;
+            --bg-light: #e0f2fe;
+            --accent-sky: #0ea5e9;
+            --accent-cyan: #06b6d4;
+            --text-primary: #f0f9ff;
+            --text-secondary: #bae6fd;
+            --text-dark: #0c4a6e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+
+        .clean-bar {
+            background: linear-gradient(90deg, #0284c7, #0ea5e9);
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .hero {
+            padding: 80px 24px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(14, 165, 233, 0.2);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #7dd3fc;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero h1 span {
+            color: #22d3ee;
+            text-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-visual {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+
+        .price-calc {
+            text-align: left;
+        }
+
+        .calc-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .calc-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 18px;
+            color: #22d3ee;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .services {
+            padding: 80px 24px;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .how-it-works {
+            padding: 80px 24px;
+            background: var(--bg-secondary);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 30px;
+            font-size: 24px;
+            color: var(--accent-cyan);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-sky), var(--accent-cyan));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 auto 16px;
+        }
+
+        .step h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .testimonial {
+            padding: 80px 24px;
+            background: var(--bg-primary);
+        }
+
+        .testimonial-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: #22d3ee;
+        }
+
+        .cta-section {
+            padding: 100px 24px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+
+        .cta-section h2 {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 32px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+            .step:not(:last-child)::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="clean-bar">
+        🧹 Bereits 23 Reinigungsunternehmen in Wien erfolgreich online gestellt
+    </div>
+
+    <section class="hero">
+        <div class="hero-badge">
+            ✨ Spezialisiert auf Reinigungsdienste
+        </div>
+
+        <h1>
+            Mehr Kunden für Ihren
+            <span>Reinigungsdienst</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            Professionelle Website mit Preisrechner und Online-Buchung für Reinigungsunternehmen in Wien.
+        </p>
+
+        <div class="hero-visual">
+            <div class="price-calc">
+                <div class="calc-title">📱 Sofortpreis-Rechner auf Ihrer Website</div>
+                
+                <div class="calc-row">
+                    <span>Wohnungsreinigung (60m²)</span>
+                    <span>ab €120</span>
+                </div>
+                
+                <div class="calc-row">
+                    <span>Büroreinigung (pro Stunde)</span>
+                    <span>€35</span>
+                </div>
+                
+                <div class="calc-row">
+                    <span>Fensterreinigung</span>
+                    <span>ab €80</span>
+                </div>
+                
+                <div class="calc-row">
+                    <span>🎁 Ihr Rabatt (-10%)</span>
+                    <span>-10%</span>
+                </div>
+            </div>
+        </div>
+
+        <a href="#kontakt" class="cta-btn">
+            Kostenloses Angebot anfordern →
+        </a>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Was wir für Sie entwickeln</h2>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🧮</div>
+                    <h3>Preisrechner</h3>
+                    <p>Kunden sehen sofort den Preis — weniger Anfragen, mehr Buchungen</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📅</div>
+                    <h3>Online-Termine</h3>
+                    <p>24/7 Buchung für Privat- und Geschäftskunden</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">⭐</div>
+                    <h3>Bewertungen</h3>
+                    <p>Automatische Nachfrage nach Feedback — bessere Google-Ratings</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">So funktioniert's</h2>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Anfrage</h3>
+                    <p>Kunde wählt Leistung</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Preis</h3>
+                    <p>Automatische Kalkulation</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Termin</h3>
+                    <p>Direkt online buchen</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Zahlung</h3>
+                    <p>Optional online bezahlen</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial">
+        <div class="testimonial-card">
+            <div class="testimonial-text">
+                "Der Preisrechner auf unserer Website ist Gold wert. Kunden wissen sofort, was sie erwartet, 
+                und buchen direkt. Wir haben 40% mehr Anfragen und die Qualität hat sich auch verbessert, 
+                weil niemand mehr überrascht ist vom Preis."
+            </div>
+            
+            <div class="testimonial-author">— Maria Schmidt, Schmidt Gebäudereinigung, 1200 Wien</div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="kontakt">
+        <h2>Bereit für mehr Aufträge?</h2>
+        
+        <p>Kostenloses Erstgespräch. Wir zeigen Ihnen, was möglich ist.</p>
+        
+        <a href="mailto:hello@reinigung-web.wien" class="cta-btn">
+            Jetzt anfragen →
+        </a>
+    </section>
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ffffff">
+    <title>Finde den besten Zahnarzt in Wien – Kostenloser Vergleich</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #fafafa;
+            color: #111;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e5e5e5;
+            z-index: 100;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #10b981;
+            width: 16%;
+            transition: width 0.4s ease;
+        }
+
+        .step-counter {
+            position: fixed;
+            bottom: 12px;
+            right: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            background: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Trust Header */
+        .trust-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .trust-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: white;
+            border-radius: 24px;
+            padding: 32px 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .question-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 20px;
+        }
+
+        .step-label {
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            text-align: center;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        /* Options Grid */
+        .options-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .options-grid.grid-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .option-card {
+            background: #f5f5f5;
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .option-card:hover {
+            background: #e8f5e9;
+            border-color: #10b981;
+            transform: translateY(-2px);
+        }
+
+        .option-card.selected {
+            background: #10b981;
+            border-color: #10b981;
+            color: white;
+        }
+
+        .option-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .option-label {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .option-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .option-card.selected .option-desc {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Text Option */
+        .text-option {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+
+        .text-option:hover {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .text-option.selected {
+            border-color: #10b981;
+            background: #10b981;
+            color: white;
+        }
+
+        .radio-circle {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .text-option.selected .radio-circle {
+            border-color: white;
+            background: white;
+        }
+
+        .text-option.selected .radio-circle::after {
+            content: '✓';
+            color: #10b981;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* Input */
+        .input-field {
+            width: 100%;
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 18px 20px;
+            font-size: 17px;
+            font-family: inherit;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 20px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+        }
+
+        .cta-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Trust Logos */
+        .trust-logos {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .trust-logos p {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            opacity: 0.6;
+        }
+
+        .logo-item {
+            font-weight: 700;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Hide steps */
+        .step { display: none; }
+        .step.active { display: block; }
+
+        /* Summary */
+        .summary-box {
+            background: #f0fdf4;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #bbf7d0;
+            font-size: 14px;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 18px;
+            color: #059669;
+        }
+
+        /* Success */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 24px 16px 80px; }
+            h1 { font-size: 22px; }
+            .options-grid.grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress -->
+    <div class="progress-container">
+        <div class="progress-fill" id="progressBar"></div>
+    </div>
+    <div class="step-counter"><span id="currentStep">1</span> / 6</div>
+
+    <!-- STEP 1: Problem -->
+    <div class="step active" id="step1">
+        <div class="container">
+            <div class="trust-header">
+                <div class="stars">★★★★★</div>
+                <div class="trust-text">4.9 von 200+ Bewertungen</div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-icon">🦷</div>
+                
+                <div class="step-label">Schritt 1 von 6</div>
+                
+                <h1>Was beschreibt Ihre Situation am besten?</h1>
+                
+                <p class="subtitle">Wir finden den passenden Zahnarzt für Ihren Fall</p>
+
+                <div class="options-grid">
+                    <div class="text-option" onclick="nextStep(2, 'problem', 'pain')">
+                        <div class="radio-circle"></div>
+                        <div>Ich habe Zahnschmerzen und brauche schnelle Hilfe</div>
+                    </div>
+
+                    <div class="text-option" onclick="nextStep(2, 'problem', 'checkup')">
+                        <div class="radio-circle"></div>
+                        <div>Ich brauche eine Routineuntersuchung</div>
+                    </div>
+
+                    <div class="text-option" onclick="nextStep(2, 'problem', 'aesthetic')">
+                        <div class="radio-circle"></div>
+                        <div>Ich möchte mein Lächeln verschönern (Bleaching, Veneers)</div>
+                    </div>
+
+                    <div class="text-option" onclick="nextStep(2, 'problem', 'missing')">
+                        <div class="radio-circle"></div>
+                        <div>Ich habe fehlende Zähne und brauche Implantate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trust-logos">
+                <p>Bekannt aus und berichtet von:</p>
+                <div class="logos">
+                    <span class="logo-item">KURIER</span>
+                    <span class="logo-item">STANDARD</span>
+                    <span class="logo-item">PRESSE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 2: Timing -->
+    <div class="step" id="step2">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-icon">⏰</div>
+                
+                <div class="step-label">Schritt 2 von 6</div>
+                
+                <h1>Wie dringend ist Ihr Termin?</h1>
+                
+                <p class="subtitle">Je früher, desto besser können wir helfen</p>
+
+                <div class="options-grid">
+                    <div class="option-card" onclick="nextStep(3, 'urgency', 'emergency')">
+                        <div class="option-icon">🚨</div>
+                        <div class="option-label">Dringend</div>
+                        <div class="option-desc">Heute oder morgen</div>
+                    </div>
+
+                    <div class="option-card" onclick="nextStep(3, 'urgency', 'week')">
+                        <div class="option-icon">📅</div>
+                        <div class="option-label">Diese Woche</div>
+                        <div class="option-desc">In den nächsten 7 Tagen</div>
+                    </div>
+
+                    <div class="option-card" onclick="nextStep(3, 'urgency', 'month')">
+                        <div class="option-icon">🗓️</div>
+                        <div class="option-label">Diesen Monat</div>
+                        <div class="option-desc">Ich plane voraus</div>
+                    </div>
+
+                    <div class="option-card" onclick="nextStep(3, 'urgency', 'flexible')">
+                        <div class="option-icon">😊</div>
+                        <div class="option-label">Flexibel</div>
+                        <div class="option-desc">Wann es passt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 3: Insurance -->
+    <div class="step" id="step3">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-icon">💳</div>
+                
+                <div class="step-label">Schritt 3 von 6</div>
+                
+                <h1>Wie möchten Sie bezahlen?</h1>
+                
+                <p class="subtitle">Wir zeigen Ihnen passende Zahnärzte</p>
+
+                <div class="options-grid">
+                    <div class="option-card" onclick="nextStep(4, 'payment', 'insurance')">
+                        <div class="option-icon">🏥</div>
+                        <div class="option-label">Krankenkasse</div>
+                        <div class="option-desc">ÖGK, SVA, BVA etc.</div>
+                    </div>
+
+                    <div class="option-card" onclick="nextStep(4, 'payment', 'private')">
+                        <div class="option-icon">⭐</div>
+                        <div class="option-label">Privat versichert</div>
+                        <div class="option-desc">Mehr Leistungen</div>
+                    </div>
+
+                    <div class="option-card" onclick="nextStep(4, 'payment', 'selfpay')">
+                        <div class="option-icon">💶</div>
+                        <div class="option-label">Selbstzahler</div>
+                        <div class="option-desc">Preisgünstige Optionen</div>
+                    </div>
+
+                    <div class="option-card" onclick="nextStep(4, 'payment', 'unknown')">
+                        <div class="option-icon">❓</div>
+                        <div class="option-label">Unsicher</div>
+                        <div class="option-desc">Wir beraten Sie</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 4: District -->
+    <div class="step" id="step4">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-icon">📍</div>
+                
+                <div class="step-label">Schritt 4 von 6</div>
+                
+                <h1>In welchem Bezirk suchen Sie?</h1>
+                
+                <p class="subtitle">Wir finden Zahnärzte in Ihrer Nähe</p>
+
+                <div class="options-grid grid-2">
+                    <div class="option-card" onclick="nextStep(5, 'district', '1010-1030')">
+                        <div class="option-label">Innere Stadt</div>
+                        <div class="option-desc">1010-1030</div>
+                    </div>
+
+                    <div class="option-card" onclick="nextStep(5, 'district', '1040-1060')">
+                        <div class="option-label">West</div>
+                        <div class="option-desc">1040-1060</div>
+                    </div>
+
+                    <div class="option-card" onclick="nextStep(5, 'district', '1070-1090')">
+                        <div class="option-label">Süd/West</div>
+                        <div class="option-desc">1070-1090</div>
+                    </div>
+
+                    <div class="option-card" onclick="nextStep(5, 'district', '1100-1230')">
+                        <div class="option-label">Andere</div>
+                        <div class="option-desc">1100+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 5: Summary -->
+    <div class="step" id="step5">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-icon">🎯</div>
+                
+                <div class="step-label">Schritt 5 von 6</div>
+                
+                <h1>Ihre Anfrage</h1>
+                
+                <p class="subtitle">Überprüfen Sie Ihre Angaben</p>
+
+                <div class="summary-box">
+                    <div class="summary-row">
+                        <span>Problem</span>
+                        <span id="sumProblem">-</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Dringlichkeit</span>
+                        <span id="sumUrgency">-</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Zahlung</span>
+                        <span id="sumPayment">-</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Bezirk</span>
+                        <span id="sumDistrict">-</span>
+                    </div>
+                </div>
+
+                <button class="cta-btn" onclick="nextStep(6)">Weiter zur Kontaktaufnahme →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 6: Contact -->
+    <div class="step" id="step6">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-icon">📱</div>
+                
+                <div class="step-label">Letzter Schritt</div>
+                
+                <h1>Wo dürfen wir Sie erreichen?</h1>
+                
+                <p class="subtitle">Wir finden den besten Zahnarzt für Sie und melden uns umgehend</p>
+
+                <input type="text" class="input-field" id="name" placeholder="Ihr Name">
+                
+                <input type="tel" class="input-field" id="phone" placeholder="Telefonnummer">
+                
+                <input type="email" class="input-field" id="email" placeholder="E-Mail (optional)">
+
+                <button class="cta-btn" onclick="submitForm()">KOSTENLOSE BERATUNG ANFORDERN →</button>
+
+                <p style="text-align: center; font-size: 12px; color: #999; margin-top: 16px;">
+                    ✓ 100% kostenlos und unverbindlich
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 7: Success -->
+    <div class="step" id="step7">
+        <div class="container">
+            <div class="question-card" style="text-align: center;">
+                <div class="success-icon">✓</div>
+                
+                <h1>Anfrage gesendet! 🎉</h1>
+                
+                <p class="subtitle">Wir prüfen jetzt die Verfügbarkeit und melden uns innerhalb von 15 Minuten bei Ihnen.</p>
+
+                <div style="background: #f0fdf4; border-radius: 16px; padding: 20px; margin-top: 24px;">
+                    <div style="margin-bottom: 12px;">✓ Anfrage erhalten</div>
+                    <div style="margin-bottom: 12px; opacity: 0.7;">⏳ Prüfung läuft</div>
+                    <div style="opacity: 0.7;">📞 Rückruf in 15 Min</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let answers = {};
+        let currentStepNum = 1;
+
+        function nextStep(step, question, answer) {
+            if (question && answer) {
+                answers[question] = answer;
+            }
+
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            
+            currentStepNum = step;
+            document.getElementById('currentStep').textContent = step;
+            document.getElementById('progressBar').style.width = (step / 6 * 100) + '%';
+
+            // Update summary
+            if (step === 5) {
+                document.getElementById('sumProblem').textContent = getLabel('problem', answers.problem);
+                document.getElementById('sumUrgency').textContent = getLabel('urgency', answers.urgency);
+                document.getElementById('sumPayment').textContent = getLabel('payment', answers.payment);
+                document.getElementById('sumDistrict').textContent = answers.district;
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        function getLabel(type, value) {
+            const labels = {
+                problem: { pain: 'Zahnschmerzen', checkup: 'Routine', aesthetic: 'Ästhetik', missing: 'Implantate' },
+                urgency: { emergency: 'Dringend', week: 'Diese Woche', month: 'Diesen Monat', flexible: 'Flexibel' },
+                payment: { insurance: 'Kasse', private: 'Privat', selfpay: 'Selbstzahler', unknown: 'Unsicher' }
+            };
+            return labels[type][value] || value;
+        }
+
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            
+            if (!name || !phone) {
+                alert('Bitte Name und Telefon eingeben');
+                return;
+            }
+
+            answers.name = name;
+            answers.phone = phone;
+            answers.email = document.getElementById('email').value;
+
+            console.log('Lead:', answers);
+            
+            document.querySelector('.cta-btn').textContent = '⏳ Wird gesendet...';
+            
+            setTimeout(() => {
+                nextStep(7);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

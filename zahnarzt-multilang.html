@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title data-i18n="meta.title">Dr. Markus Weber — Zahnarzt Wien</title>
+    
+    <style>
+        /* Language Switcher */
+        .lang-switcher {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 99;
+            background: white;
+            border-radius: 50px;
+            padding: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 4px;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: #0891b2;
+            color: white;
+        }
+    </style>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --accent: #f59e0b;
+            --bg: #ffffff;
+            --surface: #f8fafc;
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        img { max-width: 100%; height: auto; }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 16px 20px;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .logo span { color: var(--text); }
+
+        .header-cta {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 140px 20px 80px;
+            background: linear-gradient(135deg, #ecfeff 0%, #fff 50%, #f0f9ff 100%);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary);
+            color: white;
+            padding: 18px 32px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(8, 145, 178, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        }
+
+        .floating-card {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .floating-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .floating-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: 100px 20px;
+            background: var(--surface);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            border-radius: 20px;
+        }
+
+        .experience-badge {
+            position: absolute;
+            top: 20px;
+            right: -20px;
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .experience-number {
+            font-size: 36px;
+            font-weight: 800;
+        }
+
+        .experience-text {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .about-content h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 17px;
+        }
+
+        .credentials {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .credential {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .credential-icon {
+            width: 40px;
+            height: 40px;
+            background: #f0f9ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .credential-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: 100px 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .service-price {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .service-price strong {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        /* ===== QUIZ SECTION ===== */
+        .quiz-section {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, #f0f9ff 0%, #fff 100%);
+        }
+
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .quiz-box {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-bottom: 32px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 20%;
+            transition: width 0.4s ease;
+        }
+
+        .quiz-step {
+            display: none;
+        }
+
+        .quiz-step.active {
+            display: block;
+        }
+
+        .quiz-step h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .quiz-option {
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.2s;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .quiz-option-icon {
+            font-size: 24px;
+        }
+
+        .quiz-option-text {
+            flex: 1;
+        }
+
+        .quiz-option-text strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .quiz-option-text span {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 100px 20px;
+            background: var(--surface);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            color: var(--text);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info strong {
+            display: block;
+            font-size: 15px;
+        }
+
+        .author-info span {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            padding: 100px 20px;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--surface);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 0 24px 24px;
+            color: var(--text-secondary);
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .final-cta p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .final-cta .cta-button {
+            background: white;
+            color: var(--primary);
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 60px 20px 30px;
+            background: var(--text);
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            color: #94a3b8;
+        }
+
+        .footer-column a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 8px 0;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 968px) {
+            .hero-container,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-content">
+            <div class="logo">Dr. Weber <span>Zahnarzt</span></div>
+            <a href="#quiz" class="header-cta">Termin buchen</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">⭐️ 4.9/5 von 200+ Patienten</div>
+                
+                <h1>
+                    Ihr <span class="highlight">Zahnarzt in Wien</span> mit Herz und moderner Technik
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Seit über 15 Jahren sorgen wir für gesunde, schöne Zähne. 
+                    Angstfreie Behandlung, modernste Technik, fairer Preis.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Jahre Erfahrung</div>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-number">5.000+</div>
+                        <div class="stat-label">Zufriedene Patienten</div>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Weiterempfehlung</div>
+                    </div>
+                </div>
+                
+                <a href="#quiz" class="hero-cta">
+                    Kostenlosen Termin vereinbaren
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&h=700&fit=crop" alt="Dr. Weber">
+                
+                <div class="floating-card">
+                    <div class="floating-card-header">
+                        <div class="floating-avatar">👨‍⚕️</div>
+                        <div>
+                            <strong>Dr. Markus Weber</strong>
+                            <div style="font-size: 13px; color: #64748b;">Fachzahnarzt</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 14px; color: #059669; font-weight: 600;">✓ Jetzt verfügbar</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&h=500&fit=crop" alt="Praxis">
+                    
+                    <div class="experience-badge">
+                        <div class="experience-number">15+</div>
+                        <div class="experience-text">Jahre<br>Erfahrung</div>
+                    </div>
+                </div>
+                
+                <div class="about-content">
+                    <div class="section-label">Über uns</div>
+                    
+                    <h3>Ihre Zahnarztpraxis im Herzen von Wien</h3>
+                    
+                    <p>
+                        Willkommen in der Praxis von Dr. Markus Weber. Wir kombinieren 
+                        jahrelange Erfahrung mit modernster Technik und einem herzlichen, 
+                        persönlichen Service.
+                    </p>
+                    
+                    <p>
+                        Unser Ziel: Ihre Zähne gesund und schön zu erhalten – ohne Angst 
+                        vor dem Zahnarzt. Dafür sorgen wir mit sanften Behandlungsmethoden, 
+                        ausführlicher Beratung und transparenten Preisen.
+                    </p>
+                    
+                    <div class="credentials">
+                        <div class="credential">
+                            <div class="credential-icon">🎓</div>
+                            <div class="credential-text">Uni Wien & Harvard</div>
+                        </div>
+                        
+                        <div class="credential">
+                            <div class="credential-icon">🏆</div>
+                            <div class="credential-text">Beste Praxis 2023</div>
+                        </div>
+                        
+                        <div class="credential">
+                            <div class="credential-icon">📋</div>
+                            <div class="credential-text">Alle Kassen</div>
+                        </div>
+                        
+                        <div class="credential">
+                            <div class="credential-icon">🌍</div>
+                            <div class="credential-text">DE/EN/UA/RU</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Leistungen</div>
+                <h2>Was wir für Sie tun</h2>
+                <p class="section-subtitle">Von der Routineuntersuchung bis zum Implantat – alles aus einer Hand</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Vorsorge & Kontrolle</h3>
+                    <p>Professionelle Zahnreinigung, Karies-Früherkennung, Parodontose-Behandlung</p>
+                    
+                    <div class="service-price">Ab <strong>€80</strong> / Termin</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Ästhetische Zahnheilkunde</h3>
+                    <p>Bleaching, Veneers, Zahnkorrektur – für Ihr perfektes Lächeln</p>
+                    
+                    <div class="service-price">Ab <strong>€299</strong> / Behandlung</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🦷</div>
+                    <h3>Implantate & Zahnersatz</h3>
+                    <p>Hochwertige Implantate, Kronen, Brücken – natürlich und haltbar</p>
+                    
+                    <div class="service-price">Ab <strong>€1.200</strong> / Implantat</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ SECTION -->
+    <section class="quiz-section" id="quiz">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <div class="section-label">Termin buchen</div>
+                <h2>Finden Sie den perfekten Termin</h2>
+                <p class="section-subtitle">Beantworten Sie 3 kurze Fragen und wir zeigen Ihnen die besten Termine</p>
+            </div>
+            
+            <div class="quiz-box">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quizProgress"></div>
+                </div>
+                
+                <!-- Step 1 -->
+                <div class="quiz-step active" id="q1">
+                    <h3>Was möchten Sie behandeln lassen?</h3>
+                    
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="quizNext(2, 'Kontrolle')">
+                            <span class="quiz-option-icon">🔍</span>
+                            <div class="quiz-option-text">
+                                <strong>Vorsorge-Untersuchung</strong>
+                                <span>Routine-Kontrolle oder Zahnreinigung</span>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-option" onclick="quizNext(2, 'Schmerzen')">
+                            <span class="quiz-option-icon">⚡</span>
+                            <div class="quiz-option-text">
+                                <strong>Schmerzen oder Notfall</strong>
+                                <span>Ich brauche schnelle Hilfe</span>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-option" onclick="quizNext(2, 'Ästhetik')">
+                            <span class="quiz-option-icon">✨</span>
+                            <div class="quiz-option-text">
+                                <strong>Schönere Zähne</strong>
+                                <span>Bleaching, Veneers oder Korrektur</span>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-option" onclick="quizNext(2, 'Implantat')">
+                            <span class="quiz-option-icon">🦷</span>
+                            <div class="quiz-option-text">
+                                <strong>Zahnersatz</strong>
+                                <span>Implantate, Kronen oder Brücken</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="quiz-step" id="q2">
+                    <h3>Wie dringend ist es?</h3>
+                    
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="quizNext(3, 'Sofort')">
+                            <span class="quiz-option-icon">🚨</span>
+                            <div class="quiz-option-text">
+                                <strong>Sehr dringend</strong>
+                                <span>Heute oder morgen</span>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-option" onclick="quizNext(3, 'Diese Woche')">
+                            <span class="quiz-option-icon">📅</span>
+                            <div class="quiz-option-text">
+                                <strong>Diese Woche</strong>
+                                <span>In den nächsten 7 Tagen</span>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-option" onclick="quizNext(3, 'Flexibel')">
+                            <span class="quiz-option-icon">😊</span>
+                            <div class="quiz-option-text">
+                                <strong>Flexibel</strong>
+                                <span>Passt sich mir an</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="quiz-step" id="q3">
+                    <h3>Wie dürfen wir Sie erreichen?</h3>
+                    
+                    <input type="text" class="form-control" placeholder="Ihr Name" style="width: 100%; padding: 16px; margin-bottom: 12px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px;">
+                    
+                    <input type="tel" class="form-control" placeholder="Telefonnummer" style="width: 100%; padding: 16px; margin-bottom: 12px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px;">
+                    
+                    <input type="email" class="form-control" placeholder="E-Mail (optional)" style="width: 100%; padding: 16px; margin-bottom: 24px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px;">
+                    
+                    <button onclick="quizSubmit()" style="width: 100%; background: #0891b2; color: white; border: none; padding: 18px; border-radius: 12px; font-size: 17px; font-weight: 700; cursor: pointer;">
+                        JETZT TERMIN ANFRAGEN →
+                    </button>
+                </div>
+                
+                <!-- Success -->
+                <div class="quiz-step" id="qSuccess">
+                    <div style="text-align: center; padding: 40px 0;">
+                        <div style="width: 80px; height: 80px; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 24px;">
+                            ✓
+                        </div>
+                        
+                        <h3>Perfekt! 🎉</h3>
+                        
+                        <p style="color: #64748b;">Wir rufen Sie in den nächsten 15 Minuten an.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Testimonials</div>
+                <h2>Was unsere Patienten sagen</h2>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    
+                    <p class="testimonial-text">"Endlich ein Zahnarzt, bei dem ich keine Angst habe! Dr. Weber erklärt alles geduldig und behandelt schmerzfrei. Absolute Empfehlung!"</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <strong>Sarah M.</strong>
+                            <span>Patientin seit 2019</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    
+                    <p class="testimonial-text">"Mein neues Lächeln durch Veneers ist unglaublich! Die Beratung war ausführlich, der Preis fair. Danke an das ganze Team!"</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div class="author-info">
+                            <strong>Michael K.</strong>
+                            <span>Ästhetische Behandlung</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    
+                    <p class="testimonial-text">"Schnelle Termine, freundliches Personal, moderne Praxis. Meine Kinder fühlen sich hier wohl – das sagt alles!"</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EB</div>
+                        <div class="author-info">
+                            <strong>Elena B.</strong>
+                            <span>Mutter von 2 Kindern</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">FAQ</div>
+                <h2>Häufig gestellte Fragen</h2>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Wie schnell bekomme ich einen Termin?</span>
+                        <span>+</span>
+                    </div>
+                    
+                    <div class="faq-answer">
+                        Bei akuten Schmerzen am selben oder nächsten Tag. Für Routineuntersuchungen 
+                        in der Regel innerhalb einer Woche. Nutzen Sie unser Online-Buchungstool 
+                        für die schnellste Terminfindung.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Welche Zahlungsmöglichkeiten gibt es?</span>
+                        <span>+</span>
+                    </div>
+                    
+                    <div class="faq-answer">
+                        Wir akzeptieren alle österreichischen Krankenkassen (ÖGK, SVA, BVA etc.), 
+                        private Versicherungen, sowie Bar- und Kartenzahlung. Ratenzahlung ist 
+                        für größere Behandlungen möglich.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Ist die Behandlung schmerzhaft?</span>
+                        <span>+</span>
+                    </div>
+                    
+                    <div class="faq-answer">
+                        Nein! Wir legen großen Wert auf schmerzfreie Behandlung. Mit moderner 
+                        Anästhesie und sanften Techniken spüren Sie kaum etwas. Bei Angstpatienten 
+                        bieten wir auch Beruhigungsmethoden an.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Wie lange dauert ein Implantat?</span>
+                        <span>+</span>
+                    </div>
+                    
+                    <div class="faq-answer">
+                        Die komplette Behandlung dauert 3-6 Monate. Das Implantat selbst wird in 
+                        einer Sitzung gesetzt, dann muss es mit dem Kieferknochen verwachsen. 
+                        Die Krone wird danach aufgesetzt.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <h2>Bereit für Ihren Termin?</h2>
+        
+        <p>Vereinbaren Sie jetzt Ihren kostenlosen Beratungstermin. Wir freuen uns auf Sie!</p>
+        
+        <a href="#quiz" class="cta-button">Termin online buchen</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">Dr. Weber Zahnarzt</div>
+                    
+                    <p class="footer-desc">
+                        Ihr Zahnarzt in Wien mit Herz und moderner Technik. 
+                        Seit über 15 Jahren für Ihre Zahngesundheit da.
+                    </p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    
+                    <a href="#">Praterstraße 45</a>
+                    
+                    <a href="#">1020 Wien</a>
+                    
+                    <a href="#">+43 1 234 56 78</a>
+                    
+                    <a href="#">info@drweber.at</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Öffnungszeiten</h4>
+                    
+                    <a href="#">Mo-Fr: 08:00 - 18:00</a>
+                    
+                    <a href="#">Sa: 09:00 - 14:00</a>
+                    
+                    <a href="#">So: Geschlossen</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Rechtliches</h4>
+                    
+                    <a href="#">Impressum</a>
+                    
+                    <a href="#">Datenschutz</a>
+                    
+                    <a href="#">AGB</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © 2024 Dr. Markus Weber Zahnarzt. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function quizNext(step, answer) {
+            document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('q' + step).classList.add('active');
+            document.getElementById('quizProgress').style.width = (step / 3 * 100) + '%';
+        }
+
+        function quizSubmit() {
+            document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('qSuccess').classList.add('active');
+        }
+
+        function toggleFaq(element) {
+            element.parentElement.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

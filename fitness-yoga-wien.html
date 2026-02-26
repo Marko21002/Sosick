@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2e1065">
+    <meta name="description" content="Webdesign für Fitnessstudios und Yoga-Studios in Wien. Online-Mitgliedschaften, Kursbuchung, mehr Mitglieder.">
+    <title>Fitness & Yoga Webdesign Wien — Mehr Mitglieder durch smarte Website</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #2e1065;
+            --bg-secondary: #4c1d95;
+            --bg-card: #5b21b6;
+            --accent-pink: #ec4899;
+            --accent-purple: #a855f7;
+            --accent-glow: rgba(236, 72, 153, 0.4);
+            --text-primary: #fafafa;
+            --text-secondary: #d8b4fe;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+
+        .energy-bar {
+            background: linear-gradient(90deg, #9333ea, #ec4899, #9333ea);
+            background-size: 200% 100%;
+            animation: gradient 3s ease infinite;
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero {
+            padding: 80px 24px;
+            text-align: center;
+            background: radial-gradient(ellipse at top, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff, #f0abfc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .class-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 20px 24px;
+            text-align: left;
+            min-width: 160px;
+        }
+
+        .class-card .time {
+            font-size: 12px;
+            color: #f0abfc;
+            margin-bottom: 4px;
+        }
+
+        .class-card .name {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .class-card .spots {
+            font-size: 12px;
+            color: #86efac;
+            margin-top: 8px;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #ec4899, #a855f7);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(236, 72, 153, 0.6); }
+        }
+
+        .benefits {
+            padding: 80px 24px;
+            background: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .benefit {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .benefit h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .benefit p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .schedule-demo {
+            padding: 80px 24px;
+        }
+
+        .phone-mockup {
+            max-width: 320px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 40px;
+            padding: 20px;
+            border: 8px solid #333;
+        }
+
+        .phone-screen {
+            background: var(--bg-primary);
+            border-radius: 24px;
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .phone-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .phone-header h4 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .phone-header span {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .class-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .class-info .time {
+            font-size: 12px;
+            color: #f0abfc;
+        }
+
+        .class-info .title {
+            font-weight: 600;
+        }
+
+        .book-btn {
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .testimonial {
+            padding: 80px 24px;
+            background: var(--bg-secondary);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 20px;
+        }
+
+        .testimonial-card p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ec4899, #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+        }
+
+        .author-info span {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .cta-section {
+            padding: 100px 24px;
+            text-align: center;
+            background: radial-gradient(ellipse at bottom, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 36px; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="energy-bar">
+        ⚡️ Bringen Sie Ihr Studio auf das nächste Level — Jetzt anfragen!
+    </div>
+
+    <section class="hero">
+        <h1>Mehr Mitglieder für Ihr Fitnessstudio</h1>
+        
+        <p>
+            Professionelle Website mit Online-Kursbuchung für Fitness- und Yoga-Studios in Wien. 
+            Ihre Mitglieder buchen einfach — Sie fokussieren sich aufs Training.
+        </p>
+
+        <div class="hero-visual">
+            <div class="class-card">
+                <div class="time">HEUTE 18:00</div>
+                <div class="name">Power Yoga</div>
+                <div class="spots">✓ 3 Plätze frei</div>
+            </div>
+
+            <div class="class-card">
+                <div class="time">MORGEN 09:00</div>
+                <div class="name">HIIT Training</div>
+                <div class="spots">✓ 5 Plätze frei</div>
+            </div>
+
+            <div class="class-card">
+                <div class="time">MORGEN 19:00</div>
+                <div class="name">Pilates Flow</div>
+                <div class="spots">✓ Warteliste</div>
+            </div>
+        </div>
+
+        <a href="#kontakt" class="cta-btn">
+            Kostenlose Beratung vereinbaren →
+        </a>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Was Sie erhalten</h2>
+
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <div class="benefit-icon">📱</div>
+                    <h3>Online-Kursbuchung</h3>
+                    <p>Mitglieder buchen 24/7 — Sie haben weniger Verwaltungsaufwand</p>
+                </div>
+
+                <div class="benefit">
+                    <div class="benefit-icon">💳</div>
+                    <h3>Mitgliedschaften online</h3>
+                    <p>Automatische Abrechnung, keine manuelle Verfolgung mehr</p>
+                </div>
+
+                <div class="benefit">
+                    <div class="benefit-icon">📊</div>
+                    <h3>Auslastung optimieren</h3>
+                    <p>Smarte Wartelisten, automatische Erinnerungen, weniger Ausfälle</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="schedule-demo">
+        <div class="container">
+            <h2 class="section-title">So buchen Ihre Mitglieder</h2>
+
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="phone-header">
+                        <h4>FitStudio Wien</h4>
+                        <span>Diese Woche</span>
+                    </div>
+
+                    <div class="class-item">
+                        <div class="class-info">
+                            <div class="time">Mo, 18:00</div>
+                            <div class="title">Vinyasa Yoga</div>
+                        </div>
+                        <button class="book-btn">Buchen</button>
+                    </div>
+
+                    <div class="class-item">
+                        <div class="class-info">
+                            <div class="time">Di, 19:00</div>
+                            <div class="title">Krafttraining</div>
+                        </div>
+                        <button class="book-btn">Buchen</button>
+                    </div>
+
+                    <div class="class-item">
+                        <div class="class-info">
+                            <div class="time">Mi, 08:00</div>
+                            <div class="title">Morning Flow</div>
+                        </div>
+                        <button class="book-btn">Buchen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial">
+        <div class="container">
+            <h2 class="section-title">Erfolgsgeschichten</h2>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"Seit wir die Online-Buchung haben, sind unsere Kurse zu 95% ausgebucht. Die Warteliste funktioniert perfekt — wenn jemand absagt, rückt automatisch der Nächste nach."</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">🧘</div>
+                        <div class="author-info">
+                            <h4>Lisa Mayer</h4>
+                            <span>Yoga Studio Balance, 1070 Wien</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p>"Unsere Mitglieder lieben die App. Sie können einfach schauen, wann was los ist, und direkt buchen. Wir sparen täglich 2 Stunden Verwaltungsarbeit."</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">💪</div>
+                        <div class="author-info">
+                            <h4>Thomas Berger</h4>
+                            <span>FitZone Studio, 1020 Wien</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="kontakt">
+        <h2>Bereit für mehr aktive Mitglieder?</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 32px;">Kostenloses Erstgespräch. Wir zeigen Ihnen, was möglich ist.</p>
+        
+        <a href="mailto:hello@fitness-web.wien" class="cta-btn">
+            Jetzt Termin vereinbaren →
+        </a>
+    </section>
+</body>
+</html>

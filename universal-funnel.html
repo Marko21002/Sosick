@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f0f0f">
+    <title data-i18n="meta.title">Professionelle Dienstleistungen Wien</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #16161d;
+            --surface-elevated: #1e1e28;
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --text: #fafafa;
+            --text-secondary: #a1a1aa;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Language Switcher */
+        .lang-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 8px 16px;
+        }
+
+        .lang-bar-content {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: var(--gradient);
+            border-color: transparent;
+            color: white;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 45px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: rgba(255,255,255,0.05);
+            height: 3px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* STEP 1: Hook */
+        #step-1 {
+            background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+        }
+
+        .trust-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #34d399;
+            margin-bottom: 24px;
+        }
+
+        .trust-pill::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #34d399;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        h1 .gradient {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        /* Quiz Cards */
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quiz-option {
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .quiz-icon {
+            font-size: 28px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface-elevated);
+            border-radius: 12px;
+        }
+
+        .quiz-text {
+            flex: 1;
+        }
+
+        .quiz-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .quiz-text p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .quiz-arrow {
+            color: var(--text-secondary);
+            transition: transform 0.2s;
+        }
+
+        .quiz-option:hover .quiz-arrow {
+            transform: translateX(4px);
+            color: var(--primary-light);
+        }
+
+        /* STEP 2: Calculator */
+        #step-2, #step-3, #step-4, #step-5 {
+            display: none;
+        }
+
+        .step-header {
+            margin-bottom: 32px;
+        }
+
+        .step-number {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .calculator {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .calc-row:last-child {
+            border-bottom: none;
+            padding-top: 20px;
+            margin-top: 4px;
+        }
+
+        .calc-label {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .calc-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .calc-total {
+            font-size: 28px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .range-slider {
+            width: 100%;
+            margin: 24px 0;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.1);
+            outline: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--gradient);
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* STEP 3: Lead Form */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 16px;
+            color: var(--text);
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        /* CTA Button */
+        .cta-button {
+            width: 100%;
+            background: var(--gradient);
+            border: none;
+            border-radius: 16px;
+            padding: 20px;
+            font-size: 17px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: ctaPulse 2s infinite;
+            font-family: inherit;
+        }
+
+        @keyframes ctaPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+            50% { box-shadow: 0 0 30px 10px rgba(99, 102, 241, 0.2); }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .cta-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            animation: none;
+        }
+
+        /* Urgency Elements */
+        .urgency-bar {
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            margin: -80px -20px 40px;
+        }
+
+        .countdown {
+            display: inline-flex;
+            gap: 8px;
+            margin-left: 8px;
+        }
+
+        .countdown-item {
+            background: rgba(0,0,0,0.3);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .avatars {
+            display: flex;
+        }
+
+        .avatars img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--bg);
+            margin-left: -8px;
+            object-fit: cover;
+        }
+
+        /* Success Step */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .success-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .success-text {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .next-steps {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .next-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .next-step:last-child {
+            border-bottom: none;
+        }
+
+        .step-check {
+            width: 24px;
+            height: 24px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .step-pending {
+            background: var(--surface-elevated);
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 480px) {
+            h1 { font-size: 28px; }
+            h2 { font-size: 22px; }
+            .quiz-option { padding: 16px; }
+            .quiz-icon { width: 40px; height: 40px; font-size: 22px; }
+        }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar { width: 0; }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="lang-bar">
+        <div class="lang-bar-content">
+            <button class="lang-btn" onclick="setLang('de')" data-lang="de">DE 🇩🇪</button>
+            <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN 🇬🇧</button>
+            <button class="lang-btn" onclick="setLang('uk')" data-lang="uk">UA 🇺🇦</button>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progress"></div>
+    </div>
+
+    <!-- STEP 1: Qualification Quiz -->
+    <section id="step-1">
+        <div class="container">
+            <div class="trust-pill" data-i18n="step1.trust">
+                Bereits 2.847+ zufriedene Kunden
+            </div>
+
+            <h1 data-i18n="step1.headline">
+                Was brauchen Sie?
+            </h1>
+
+            <p class="subtitle" data-i18n="step1.subtitle">
+                Wählen Sie Ihren Service und erhalten Sie Ihr individuelles Angebot in 60 Sekunden
+            </p>
+
+            <div class="quiz-container">
+                <div class="quiz-option" onclick="selectService('cleaning')">
+                    <div class="quiz-icon">🧹</div>
+                    <div class="quiz-text">
+                        <h3 data-i18n="services.cleaning.title">Reinigung</h3>
+                        <p data-i18n="services.cleaning.desc">Wohnung, Büro, Fenster</p>
+                    </div>
+                    <span class="quiz-arrow">→</span>
+                </div>
+
+                <div class="quiz-option" onclick="selectService('repair')">
+                    <div class="quiz-icon">🔧</div>
+                    <div class="quiz-text">
+                        <h3 data-i18n="services.repair.title">Reparatur</h3>
+                        <p data-i18n="services.repair.desc">Elektro, Sanitär, Handwerk</p>
+                    </div>
+                    <span class="quiz-arrow">→</span>
+                </div>
+
+                <div class="quiz-option" onclick="selectService('beauty')">
+                    <div class="quiz-icon">💇</div>
+                    <div class="quiz-text">
+                        <h3 data-i18n="services.beauty.title">Beauty</h3>
+                        <p data-i18n="services.beauty.desc">Friseur, Kosmetik, Nägel</p>
+                    </div>
+                    <span class="quiz-arrow">→</span>
+                </div>
+
+                <div class="quiz-option" onclick="selectService('fitness')">
+                    <div class="quiz-icon">💪</div>
+                    <div class="quiz-text">
+                        <h3 data-i18n="services.fitness.title">Fitness</h3>
+                        <p data-i18n="services.fitness.desc">Training, Yoga, Wellness</p>
+                    </div>
+                    <span class="quiz-arrow">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 2: Calculator -->
+    <section id="step-2">
+        <div class="container">
+            <div class="step-header">
+                <div class="step-number">Schritt 2 von 4</div>
+                <h2 data-i18n="step2.headline">Berechnen Sie Ihren Preis</h2>
+            </div>
+
+            <div class="calculator">
+                <label class="form-label" data-i18n="step2.size">Größe (m²)</label>
+                <input type="range" class="range-slider" id="sizeRange" min="20" max="200" value="60" oninput="updateCalc()">
+                <div class="range-labels">
+                    <span>20m²</span>
+                    <span id="sizeValue">60m²</span>
+                    <span>200m²</span>
+                </div>
+
+                <div class="calc-row">
+                    <span class="calc-label" data-i18n="step2.base">Basispreis</span>
+                    <span class="calc-value" id="basePrice">€120</span>
+                </div>
+                
+                <div class="calc-row">
+                    <span class="calc-label" data-i18n="step2.materials">Materialien</span>
+                    <span class="calc-value">€0</span>
+                </div>
+                
+                <div class="calc-row">
+                    <span class="calc-label" style="color: var(--success);">✓ Online-Rabatt</span>
+                    <span class="calc-value" style="color: var(--success);">-15%</span>
+                </div>
+                
+                <div class="calc-row">
+                    <span class="calc-label">Gesamtpries</span>
+                    <span class="calc-total" id="totalPrice">€102</span>
+                </div>
+            </div>
+
+            <button class="cta-button" onclick="nextStep(3)">
+                <span data-i18n="buttons.continue">Weiter</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- STEP 3: Time Selection -->
+    <section id="step-3">
+        <div class="container">
+            <div class="step-header">
+                <div class="step-number">Schritt 3 von 4</div>
+                <h2 data-i18n="step3.headline">Wann passt es Ihnen?</h2>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-option" onclick="selectTime('morning')">
+                    <div class="quiz-icon">🌅</div>
+                    <div class="quiz-text">
+                        <h3 data-i18n="times.morning.title">Morgens (8-12)</h3>
+                        <p data-i18n="times.morning.desc">Am beliebtesten</p>
+                    </div>
+                </div>
+
+                <div class="quiz-option" onclick="selectTime('afternoon')">
+                    <div class="quiz-icon">☀️</div>
+                    <div class="quiz-text">
+                        <h3 data-i18n="times.afternoon.title">Nachmittag (12-17)</h3>
+                        <p data-i18n="times.afternoon.desc">Gute Verfügbarkeit</p>
+                    </div>
+                </div>
+
+                <div class="quiz-option" onclick="selectTime('evening')">
+                    <div class="quiz-icon">🌙</div>
+                    <div class="quiz-text">
+                        <h3 data-i18n="times.evening.title">Abend (17-21)</h3>
+                        <p data-i18n="times.evening.desc">Nach der Arbeit</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 4: Lead Form -->
+    <section id="step-4">
+        <div class="urgency-bar">
+            🔥 <span data-i18n="urgency.text">Nur noch 3 Termine diese Woche verfügbar</span>
+            <div class="countdown">
+                <span class="countdown-item" id="timer">23:59:59</span>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="step-header">
+                <div class="step-number">Letzter Schritt</div>
+                <h2 data-i18n="step4.headline">Wo dürfen wir Sie erreichen?</h2>
+            </div>
+
+            <form id="leadForm" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.name">Ihr Name</label>
+                    <input type="text" class="form-input" id="name" required placeholder="Max Mustermann">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.phone">Telefon</label>
+                    <input type="tel" class="form-input" id="phone" required placeholder="+43 664 123456">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.email">E-Mail (optional)</label>
+                    <input type="email" class="form-input" id="email" placeholder="max@beispiel.at">
+                </div>
+
+                <button type="submit" class="cta-button" id="submitBtn">
+                    <span data-i18n="buttons.submit">JETZT ANGEBOT SICHERN →</span>
+                </button>
+            </form>
+
+            <div class="social-proof">
+                <div class="avatars">
+                    <img src="https://i.pravatar.cc/100?img=1" alt="">
+                    <img src="https://i.pravatar.cc/100?img=2" alt="">
+                    <img src="https://i.pravatar.cc/100?img=3" alt="">
+                    <img src="https://i.pravatar.cc/100?img=4" alt="">
+                </div>
+                <span data-i18n="socialProof">2.847+ Kunden vertrauen uns</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 5: Success -->
+    <section id="step-5">
+        <div class="container">
+            <div class="success-icon">✓</div>
+
+            <h2 class="success-title" data-i18n="success.title">Perfekt!</h2>
+
+            <p class="success-text" data-i18n="success.text">Wir rufen Sie in den nächsten 15 Minuten an, um alles zu besprechen.</p>
+
+            <div class="next-steps">
+                <div class="next-step">
+                    <div class="step-check">✓</div>
+                    <div data-i18n="success.step1">Anfrage erhalten</div>
+                </div>
+
+                <div class="next-step">
+                    <div class="step-check step-pending">⏳</div>
+                    <div data-i18n="success.step2">Rückruf in 15 Minuten</div>
+                </div>
+
+                <div class="next-step">
+                    <div class="step-check step-pending">📋</div>
+                    <div data-i18n="success.step3">Individuelles Angebot</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Translations
+        const translations = {
+            de: {
+                'meta.title': 'Professionelle Dienstleistungen Wien',
+                'step1.trust': 'Bereits 2.847+ zufriedene Kunden',
+                'step1.headline': 'Was brauchen Sie?',
+                'step1.subtitle': 'Wählen Sie Ihren Service und erhalten Sie Ihr individuelles Angebot in 60 Sekunden',
+                'services.cleaning.title': 'Reinigung',
+                'services.cleaning.desc': 'Wohnung, Büro, Fenster',
+                'services.repair.title': 'Reparatur',
+                'services.repair.desc': 'Elektro, Sanitär, Handwerk',
+                'services.beauty.title': 'Beauty',
+                'services.beauty.desc': 'Friseur, Kosmetik, Nägel',
+                'services.fitness.title': 'Fitness',
+                'services.fitness.desc': 'Training, Yoga, Wellness',
+                'step2.headline': 'Berechnen Sie Ihren Preis',
+                'step2.size': 'Größe (m²)',
+                'step2.base': 'Basispreis',
+                'step2.materials': 'Materialien',
+                'buttons.continue': 'Weiter',
+                'step3.headline': 'Wann passt es Ihnen?',
+                'times.morning.title': 'Morgens (8-12)',
+                'times.morning.desc': 'Am beliebtesten',
+                'times.afternoon.title': 'Nachmittag (12-17)',
+                'times.afternoon.desc': 'Gute Verfügbarkeit',
+                'times.evening.title': 'Abend (17-21)',
+                'times.evening.desc': 'Nach der Arbeit',
+                'urgency.text': 'Nur noch 3 Termine diese Woche verfügbar',
+                'step4.headline': 'Wo dürfen wir Sie erreichen?',
+                'form.name': 'Ihr Name',
+                'form.phone': 'Telefon',
+                'form.email': 'E-Mail (optional)',
+                'buttons.submit': 'JETZT ANGEBOT SICHERN →',
+                'socialProof': '2.847+ Kunden vertrauen uns',
+                'success.title': 'Perfekt!',
+                'success.text': 'Wir rufen Sie in den nächsten 15 Minuten an, um alles zu besprechen.',
+                'success.step1': 'Anfrage erhalten',
+                'success.step2': 'Rückruf in 15 Minuten',
+                'success.step3': 'Individuelles Angebot'
+            },
+            en: {
+                'meta.title': 'Professional Services Vienna',
+                'step1.trust': 'Already 2,847+ satisfied customers',
+                'step1.headline': 'What do you need?',
+                'step1.subtitle': 'Choose your service and get your personalized quote in 60 seconds',
+                'services.cleaning.title': 'Cleaning',
+                'services.cleaning.desc': 'Apartment, office, windows',
+                'services.repair.title': 'Repair',
+                'services.repair.desc': 'Electrical, plumbing, crafts',
+                'services.beauty.title': 'Beauty',
+                'services.beauty.desc': 'Hair, cosmetics, nails',
+                'services.fitness.title': 'Fitness',
+                'services.fitness.desc': 'Training, yoga, wellness',
+                'step2.headline': 'Calculate your price',
+                'step2.size': 'Size (m²)',
+                'step2.base': 'Base price',
+                'step2.materials': 'Materials',
+                'buttons.continue': 'Continue',
+                'step3.headline': 'When works for you?',
+                'times.morning.title': 'Morning (8-12)',
+                'times.morning.desc': 'Most popular',
+                'times.afternoon.title': 'Afternoon (12-17)',
+                'times.afternoon.desc': 'Good availability',
+                'times.evening.title': 'Evening (17-21)',
+                'times.evening.desc': 'After work',
+                'urgency.text': 'Only 3 slots left this week',
+                'step4.headline': 'How can we reach you?',
+                'form.name': 'Your name',
+                'form.phone': 'Phone',
+                'form.email': 'Email (optional)',
+                'buttons.submit': 'SECURE YOUR QUOTE NOW →',
+                'socialProof': '2,847+ customers trust us',
+                'success.title': 'Perfect!',
+                'success.text': 'We will call you within the next 15 minutes to discuss everything.',
+                'success.step1': 'Request received',
+                'success.step2': 'Callback in 15 minutes',
+                'success.step3': 'Personalized quote'
+            },
+            uk: {
+                'meta.title': 'Професійні послуги Відень',
+                'step1.trust': 'Вже 2.847+ задоволених клієнтів',
+                'step1.headline': 'Що вам потрібно?',
+                'step1.subtitle': 'Оберіть послугу та отримайте індивідуальну пропозицію за 60 секунд',
+                'services.cleaning.title': 'Прибирання',
+                'services.cleaning.desc': 'Квартира, офіс, вікна',
+                'services.repair.title': 'Ремонт',
+                'services.repair.desc': 'Електрика, сантехніка',
+                'services.beauty.title': 'Краса',
+                'services.beauty.desc': 'Перукарня, косметика',
+                'services.fitness.title': 'Фітнес',
+                'services.fitness.desc': 'Тренування, йога, велнес',
+                'step2.headline': 'Розрахуйте ціну',
+                'step2.size': 'Площа (м²)',
+                'step2.base': 'Базова ціна',
+                'step2.materials': 'Матеріали',
+                'buttons.continue': 'Далі',
+                'step3.headline': 'Коли вам зручно?',
+                'times.morning.title': 'Ранок (8-12)',
+                'times.morning.desc': 'Найпопулярніше',
+                'times.afternoon.title': 'День (12-17)',
+                'times.afternoon.desc': 'Хороша доступність',
+                'times.evening.title': 'Вечір (17-21)',
+                'times.evening.desc': 'Після роботи',
+                'urgency.text': 'Лише 3 місця на цьому тижні',
+                'step4.headline': 'Як з вами зв\'язатися?',
+                'form.name': 'Ваше ім\'я',
+                'form.phone': 'Телефон',
+                'form.email': 'Email (необов\'язково)',
+                'buttons.submit': 'ЗАБРОНЮВАТИ ПРОПОЗИЦІЮ →',
+                'socialProof': 'Нам довіряють 2.847+ клієнтів',
+                'success.title': 'Ідеально!',
+                'success.text': 'Ми зателефонуємо вам протягом наступних 15 хвилин.',
+                'success.step1': 'Запит отримано',
+                'success.step2': 'Дзвінок за 15 хвилин',
+                'success.step3': 'Індивідуальна пропозиція'
+            }
+        };
+
+        let currentLang = 'de';
+        let formData = {
+            service: '',
+            size: 60,
+            time: '',
+            name: '',
+            phone: '',
+            email: ''
+        };
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        function selectService(service) {
+            formData.service = service;
+            document.querySelectorAll('#step-1 .quiz-option').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            setTimeout(() => nextStep(2), 300);
+        }
+
+        function selectTime(time) {
+            formData.time = time;
+            document.querySelectorAll('#step-3 .quiz-option').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            setTimeout(() => nextStep(4), 300);
+        }
+
+        function updateCalc() {
+            const size = document.getElementById('sizeRange').value;
+            formData.size = size;
+            document.getElementById('sizeValue').textContent = size + 'm²';
+            
+            const basePrice = Math.round(size * 2.5);
+            const discount = Math.round(basePrice * 0.15);
+            const total = basePrice - discount;
+            
+            document.getElementById('basePrice').textContent = '€' + basePrice;
+            document.getElementById('totalPrice').textContent = '€' + total;
+        }
+
+        function nextStep(step) {
+            document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+            document.getElementById('step-' + step).style.display = 'flex';
+            document.getElementById('progress').style.width = ((step - 1) / 4 * 100) + '%';
+            window.scrollTo(0, 0);
+        }
+
+        function submitForm(e) {
+            e.preventDefault();
+            formData.name = document.getElementById('name').value;
+            formData.phone = document.getElementById('phone').value;
+            formData.email = document.getElementById('email').value;
+            
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('submitBtn').innerHTML = '⏳ ' + (translations[currentLang]['buttons.submit'] || 'Processing...');
+            
+            // Here you would send data to your backend
+            console.log('Lead captured:', formData);
+            
+            setTimeout(() => {
+                nextStep(5);
+            }, 1000);
+        }
+
+        // Countdown timer
+        function updateTimer() {
+            const now = new Date();
+            const midnight = new Date(now);
+            midnight.setHours(24, 0, 0, 0);
+            const diff = midnight - now;
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('timer').textContent = 
+                String(hours).padStart(2, '0') + ':' +
+                String(mins).padStart(2, '0') + ':' +
+                String(secs).padStart(2, '0');
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+        setLang('de');
+    </script>
+</body>
+</html>

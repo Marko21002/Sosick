@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>CleanPro Wien — Professionelle Reinigungsdienste</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --accent: #f97316;
+            --bg: #ffffff;
+            --surface: #f8fafc;
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        img { max-width: 100%; height: auto; }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 16px 20px;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .logo span { color: var(--text); }
+
+        .header-cta {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 140px 20px 80px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #fff 50%, #ecfdf5 100%);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary);
+            color: white;
+            padding: 18px 32px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        }
+
+        .floating-card {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .check-item::before {
+            content: '✓';
+            color: #22c55e;
+            font-weight: 700;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: 100px 20px;
+            background: var(--surface);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            border-radius: 20px;
+        }
+
+        .experience-badge {
+            position: absolute;
+            top: 20px;
+            right: -20px;
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .experience-number {
+            font-size: 36px;
+            font-weight: 800;
+        }
+
+        .experience-text {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .about-content h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 17px;
+        }
+
+        .credentials {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .credential {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .credential-icon {
+            width: 40px;
+            height: 40px;
+            background: #f0f9ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .credential-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: 100px 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .service-price {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .service-price strong {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        /* ===== CALCULATOR SECTION ===== */
+        .calc-section {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, #f0f9ff 0%, #fff 100%);
+        }
+
+        .calc-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .calc-box {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .calc-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .calc-row.total {
+            border-bottom: none;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .calc-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .calc-icon {
+            width: 40px;
+            height: 40px;
+            background: #f0f9ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .range-slider {
+            width: 100%;
+            margin: 24px 0;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .cta-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 20px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 100px 20px;
+            background: var(--surface);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            color: var(--text);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info strong {
+            display: block;
+            font-size: 15px;
+        }
+
+        .author-info span {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            padding: 100px 20px;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--surface);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 0 24px 24px;
+            color: var(--text-secondary);
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .final-cta p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .final-cta .cta-button {
+            background: white;
+            color: var(--primary);
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 60px 20px 30px;
+            background: var(--text);
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            color: #94a3b8;
+        }
+
+        .footer-column a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 8px 0;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 968px) {
+            .hero-container,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="lang-switcher" style="position: fixed; top: 80px; right: 20px; z-index: 99; background: white; border-radius: 50px; padding: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: flex; gap: 4px;">
+        <button class="lang-btn" onclick="setLang('de')" data-lang="de" style="background: #0ea5e9; color: white; border: none; padding: 8px 14px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer;">DE</button>
+        <button class="lang-btn" onclick="setLang('en')" data-lang="en" style="background: transparent; border: none; padding: 8px 14px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; color: #64748b;">EN</button>
+        <button class="lang-btn" onclick="setLang('ru')" data-lang="ru" style="background: transparent; border: none; padding: 8px 14px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; color: #64748b;">RU</button>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-content">
+            <div class="logo">CleanPro <span>Wien</span></div>
+            <a href="#calculator" class="header-cta">Preis berechnen</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">⭐️ 4.9/5 von 500+ Kunden</div>
+                
+                <h1>
+                    Professionelle <span class="highlight">Reinigung</span> in Wien
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Ihr zuverlässiger Partner für Wohnungs-, Büro- und Fensterreinigung. 
+                    Gründlich, pünktlich und zu fairen Preisen.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Jahre Erfahrung</div>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-number">5.000+</div>
+                        <div class="stat-label">Reinigungen</div>
+                    </div>
+                    
+                    <div class="stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Zufriedenheit</div>
+                    </div>
+                </div>
+                
+                <a href="#calculator" class="hero-cta">
+                    Preis berechnen & buchen
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=700&fit=crop" alt="Reinigung">
+                
+                <div class="floating-card">
+                    <div class="check-item">Gründliche Reinigung</div>
+                    <div class="check-item">Eco-freundliche Mittel</div>
+                    <div class="check-item">Versichert & geprüft</div>
+                    <div class="check-item">Pünktliche Termine</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600&h=500&fit=crop" alt="Team">
+                    
+                    <div class="experience-badge">
+                        <div class="experience-number">10+</div>
+                        <div class="experience-text">Jahre<br>Erfahrung</div>
+                    </div>
+                </div>
+                
+                <div class="about-content">
+                    <div class="section-label">Über uns</div>
+                    
+                    <h3>Ihr vertrauensvoller Reinigungspartner in Wien</h3>
+                    
+                    <p>
+                        Seit über 10 Jahren bieten wir erstklassige Reinigungsdienstleistungen 
+                        für Privathaushalte und Unternehmen in Wien. Unser geschultes Team 
+                        arbeitet gründlich, zuverlässig und mit umweltfreundlichen Produkten.
+                    </p>
+                    
+                    <p>
+                        Wir verstehen, dass jedes Zuhause und jedes Büro einzigartig ist. 
+                        Deshalb passen wir unsere Leistungen individuell an Ihre Bedürfnisse an.
+                    </p>
+                    
+                    <div class="credentials">
+                        <div class="credential">
+                            <div class="credential-icon">🌿</div>
+                            <div class="credential-text">Eco-zertifiziert</div>
+                        </div>
+                        
+                        <div class="credential">
+                            <div class="credential-icon">🛡️</div>
+                            <div class="credential-text">Versichert</div>
+                        </div>
+                        
+                        <div class="credential">
+                            <div class="credential-icon">⭐</div>
+                            <div class="credential-text">Beste Bewertungen</div>
+                        </div>
+                        
+                        <div class="credential">
+                            <div class="credential-icon">🕐</div>
+                            <div class="credential-text">Pünktlich</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Leistungen</div>
+                <h2>Was wir für Sie tun</h2>
+                <p class="section-subtitle">Von der Wohnungsreinigung bis zum Büro-Service – wir machen alles sauber</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Wohnungsreinigung</h3>
+                    <p>Gründliche Reinigung Ihrer Wohnung – von der Küche bis zum Bad, alles blitzblank.</p>
+                    <div class="service-price">Ab <strong>€120</strong> / Besuch</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Büroreinigung</h3>
+                    <p>Professionelle Reinigung für Ihr Büro – täglich, wöchentlich oder nach Bedarf.</p>
+                    <div class="service-price">Ab <strong>€180</strong> / Monat</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🪟</div>
+                    <h3>Fensterreinigung</h3>
+                    <p>Streifenfreie Fenster für perfekte Sicht – innen und außen, auch in der Höhe.</p>
+                    <div class="service-price">Ab <strong>€80</strong> / Termin</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULATOR -->
+    <section class="calc-section" id="calculator">
+        <div class="calc-container">
+            <div class="section-header">
+                <div class="section-label">Preisrechner</div>
+                <h2>Berechnen Sie Ihren Preis</h2>
+                <p class="section-subtitle">Ehrliche Preise, keine versteckten Kosten</p>
+            </div>
+            
+            <div class="calc-box">
+                <div class="calc-header">
+                    <select id="serviceType" onchange="calculatePrice()" style="width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 12px; font-size: 16px; margin-bottom: 24px;">
+                        <option value="home">🏠 Wohnungsreinigung</option>
+                        <option value="office">🏢 Büroreinigung</option>
+                        <option value="windows">🪟 Fensterreinigung</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 24px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">Größe: <span id="sizeLabel">60</span> m²</label>
+                    <input type="range" class="range-slider" id="sizeRange" min="20" max="200" value="60" oninput="calculatePrice()">
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-secondary); margin-top: 8px;">
+                        <span>20m²</span>
+                        <span>200m²</span>
+                    </div>
+                </div>
+
+                <div class="calc-row">
+                    <div class="calc-label">
+                        <div class="calc-icon">🧹</div>
+                        <span>Basispreis</span>
+                    </div>
+                    <span id="basePrice">€120</span>
+                </div>
+                
+                <div class="calc-row">
+                    <div class="calc-label">
+                        <div class="calc-icon">📏</div>
+                        <span>Zusatz für Größe</span>
+                    </div>
+                    <span id="sizePrice">€0</span>
+                </div>
+                
+                <div class="calc-row">
+                    <div class="calc-label">
+                        <div class="calc-icon">✨</div>
+                        <span style="color: var(--primary);">✓ Online-Buchung Rabatt</span>
+                    </div>
+                    <span style="color: var(--primary);">-10%</span>
+                </div>
+                
+                <div class="calc-row total">
+                    <span>Geschätzter Preis</span>
+                    <span id="totalPrice">€108</span>
+                </div>
+
+                <div class="form-grid">
+                    <input type="text" class="form-input" placeholder="Ihr Name">
+                    <input type="tel" class="form-input" placeholder="Telefonnummer">
+                </div>
+                
+                <input type="email" class="form-input" placeholder="E-Mail (optional)" style="margin-bottom: 24px;">
+
+                <button class="cta-btn" onclick="alert('Anfrage gesendet! Wir melden uns in 15 Minuten.')">
+                    JETZT KOSTENLOS ANGEBOT ANFORDERN →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Testimonials</div>
+                <h2>Was unsere Kunden sagen</h2>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    
+                    <p class="testimonial-text">"Endlich eine Reinigungsfirma, die pünktlich ist und gründlich arbeitet! Meine Wohnung hat noch nie so gut ausgesehen. Absolute Empfehlung!"</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <strong>Sarah M.</strong>
+                            <span>Wien 1010</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    
+                    <p class="testimonial-text">"Unser Büro wird seit 2 Jahren von CleanPro betreut. Zuverlässig, professionell und die Mitarbeiter sind super freundlich."</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TK</div>
+                        <div class="author-info">
+                            <strong>Thomas K.</strong>
+                            <span>Geschäftsführer</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    
+                    <p class="testimonial-text">"Fensterreinigung im 4. Stock ohne Aufpreis – und perfekt sauber! Werde CleanPro definitiv weiterempfehlen."</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EB</div>
+                        <div class="author-info">
+                            <strong>Elena B.</strong>
+                            <span>Wien 1040</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">FAQ</div>
+                <h2>Häufig gestellte Fragen</h2>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Wie schnell kann ich einen Termin bekommen?</span>
+                        <span>+</span>
+                    </div>
+                    
+                    <div class="faq-answer">
+                        In der Regel können wir innerhalb von 24-48 Stunden einen Termin anbieten. 
+                        Bei dringenden Anfragen (z.B. vor einem Umzug) bemühen wir uns um eine 
+                        schnellere Terminierung.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Welche Zahlungsmöglichkeiten gibt es?</span>
+                        <span>+</span>
+                    </div>
+                    
+                    <div class="faq-answer">
+                        Wir akzeptieren Barzahlung, Überweisung und Kartenzahlung vor Ort. 
+                        Für Geschäftskunden bieten wir auch monatliche Rechnungsstellung an.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Sind Sie versichert?</span>
+                        <span>+</span>
+                    </div>
+                    
+                    <div class="faq-answer">
+                        Ja, wir sind vollständig versichert (Betriebshaftpflicht und 
+                        Sachschadenversicherung). Ihr Eigentum ist bei uns in sicheren Händen.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Welche Reinigungsmittel verwenden Sie?</span>
+                        <span>+</span>
+                    </div>
+                    
+                    <div class="faq-answer">
+                        Wir verwenden ausschließlich umweltfreundliche, biologisch abbaubare 
+                        Reinigungsmittel. Auf Wunsch reinigen wir auch komplett ohne Chemie 
+                        (nur mit Wasser und Mikrofaser).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <h2>Bereit für Ihre Reinigung?</h2>
+        
+        <p>Vereinbaren Sie jetzt Ihren Termin und erhalten Sie 10% Rabatt auf Ihre erste Buchung!</p>
+        
+        <a href="#calculator" class="cta-button">Preis berechnen & buchen</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">CleanPro Wien</div>
+                    
+                    <p class="footer-desc">
+                        Professionelle Reinigungsdienste für Privat- und Geschäftskunden 
+                        in Wien. Gründlich, zuverlässig, eco-freundlich.
+                    </p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Kontakt</h4>
+                    
+                    <a href="#">Mariahilfer Straße 123</a>
+                    
+                    <a href="#">1060 Wien</a>
+                    
+                    <a href="#">+43 1 234 56 78</a>
+                    
+                    <a href="#">info@cleanpro.at</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Leistungen</h4>
+                    
+                    <a href="#">Wohnungsreinigung</a>
+                    
+                    <a href="#">Büroreinigung</a>
+                    
+                    <a href="#">Fensterreinigung</a>
+                    
+                    <a href="#">Umzugsreinigung</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Rechtliches</h4>
+                    
+                    <a href="#">Impressum</a>
+                    
+                    <a href="#">Datenschutz</a>
+                    
+                    <a href="#">AGB</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © 2024 CleanPro Wien. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function calculatePrice() {
+            const size = parseInt(document.getElementById('sizeRange').value);
+            const service = document.getElementById('serviceType').value;
+            
+            let basePrice = 120;
+            if (service === 'office') basePrice = 180;
+            if (service === 'windows') basePrice = 80;
+            
+            const extraSize = Math.max(0, (size - 60) * 1.5);
+            const total = Math.round((basePrice + extraSize) * 0.9);
+            
+            document.getElementById('sizeLabel').textContent = size;
+            document.getElementById('basePrice').textContent = '€' + basePrice;
+            document.getElementById('sizePrice').textContent = '€' + Math.round(extraSize);
+            document.getElementById('totalPrice').textContent = '€' + total;
+        }
+
+        function toggleFaq(element) {
+            element.parentElement.classList.toggle('active');
+        }
+    </script>
+    <script>
+        const translations = {
+            de: {
+                title: 'CleanPro Wien — Professionelle Reinigungsdienste',
+                book: 'Preis berechnen',
+                badge: '⭐️ 4.9/5 von 500+ Kunden',
+                heroTitle: 'Professionelle Reinigung in Wien',
+                heroSubtitle: 'Ihr zuverlässiger Partner für Wohnungs-, Büro- und Fensterreinigung.',
+                years: 'Jahre Erfahrung',
+                cleanings: 'Reinigungen',
+                satisfaction: 'Zufriedenheit',
+                cta: 'Preis berechnen & buchen',
+                about: 'Über uns',
+                aboutTitle: 'Ihr vertrauensvoller Reinigungspartner in Wien',
+                services: 'Leistungen',
+                calcTitle: 'Berechnen Sie Ihren Preis',
+                testimonials: 'Was unsere Kunden sagen',
+                faq: 'Häufig gestellte Fragen',
+                finalCta: 'Bereit für Ihre Reinigung?'
+            },
+            en: {
+                title: 'CleanPro Vienna — Professional Cleaning Services',
+                book: 'Calculate price',
+                badge: '⭐️ 4.9/5 from 500+ customers',
+                heroTitle: 'Professional Cleaning in Vienna',
+                heroSubtitle: 'Your reliable partner for home, office and window cleaning.',
+                years: 'Years experience',
+                cleanings: 'Cleanings',
+                satisfaction: 'Satisfaction',
+                cta: 'Calculate price & book',
+                about: 'About us',
+                aboutTitle: 'Your trusted cleaning partner in Vienna',
+                services: 'Services',
+                calcTitle: 'Calculate your price',
+                testimonials: 'What our customers say',
+                faq: 'Frequently asked questions',
+                finalCta: 'Ready for your cleaning?'
+            },
+            ru: {
+                title: 'CleanPro Вена — Профессиональная уборка',
+                book: 'Рассчитать цену',
+                badge: '⭐️ 4.9/5 от 500+ клиентов',
+                heroTitle: 'Профессиональная уборка в Вене',
+                heroSubtitle: 'Ваш надежный партнер для уборки квартир, офисов и окон.',
+                years: 'Лет опыта',
+                cleanings: 'Уборок',
+                satisfaction: 'Довольных',
+                cta: 'Рассчитать цену и записаться',
+                about: 'О нас',
+                aboutTitle: 'Ваш надежный партнер по уборке в Вене',
+                services: 'Услуги',
+                calcTitle: 'Рассчитайте свою цену',
+                testimonials: 'Что говорят наши клиенты',
+                faq: 'Часто задаваемые вопросы',
+                finalCta: 'Готовы к уборке?'
+            }
+        };
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.style.background = btn.dataset.lang === lang ? '#0ea5e9' : 'transparent';
+                btn.style.color = btn.dataset.lang === lang ? 'white' : '#64748b';
+            });
+            
+            const t = translations[lang];
+            if (t) {
+                document.title = t.title;
+                document.querySelector('.logo').innerHTML = `CleanPro <span style="color: #0f172a;">${lang === 'ru' ? 'Вена' : lang === 'de' ? 'Wien' : 'Vienna'}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>
