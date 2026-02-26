@@ -2,223 +2,1046 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LegalPro — Free Case Evaluation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalPro - Free Case Evaluation</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        html,body{overflow-x:hidden;-webkit-overflow-scrolling:touch}
-        body{font-family:'Inter',-apple-system,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6;padding-bottom:80px}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; }
         
         /* Urgency Banner */
-        .urgency-banner{background:linear-gradient(90deg,#dc2626,#ef4444);color:#fff;padding:8px 16px;text-align:center;font-size:12px;font-weight:600;position:relative;z-index:100}
+        .urgency-banner {
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+            color: #fff;
+            padding: 10px 16px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .urgency-banner span { font-weight: 800; }
         
         /* Header */
-        .header{background:#fff;padding:12px 16px;border-bottom:1px solid #e2e8f0;position:relative;z-index:99}
-        .header-content{max-width:600px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-        .logo{font-size:20px;font-weight:800;color:#1e3a5f;display:flex;align-items:center;gap:8px}
-        .logo-icon{width:36px;height:36px;background:#1e3a5f;color:#c9a962;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px}
+        .header {
+            background: #fff;
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .header-content {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1e3a5f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #1e3a5f;
+            color: #c9a962;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .header-cta {
+            background: #c9a962;
+            color: #1e3a5f;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+        }
         
         /* Hero */
-        .hero{padding:20px 16px 32px;background:linear-gradient(180deg,#1e3a5f 0%,#0f172a 100%);color:#fff;text-align:center}
-        .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,169,98,0.2);border:1px solid rgba(201,169,98,0.4);padding:8px 16px;border-radius:50px;font-size:12px;font-weight:700;color:#c9a962;margin-bottom:16px}
-        .hero h1{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:12px}
-        .hero h1 span{color:#c9a962}
-        .hero-subtitle{font-size:15px;color:rgba(255,255,255,0.8);margin-bottom:20px}
+        .hero {
+            background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%);
+            color: #fff;
+            padding: 40px 16px;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(201, 169, 98, 0.2);
+            border: 1px solid rgba(201, 169, 98, 0.4);
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #c9a962;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .hero h1 span { color: #c9a962; }
+        .hero-subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 32px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #c9a962;
+        }
+        .hero-stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+        }
         
-        /* Social Toast */
-        .social-toast{position:fixed;top:90px;left:16px;right:16px;background:#fff;padding:10px 14px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);z-index:50;display:flex;align-items:center;gap:10px;max-width:400px;margin:0 auto}
-        .toast-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#1e3a5f,#2d5a8f);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0}
-        .toast-text{font-size:12px;color:#334155;line-height:1.4}
-        .toast-text strong{color:#0f172a;font-size:13px}
-        .toast-time{font-size:11px;color:#64748b}
+        /* Social Proof - В ПОТОКЕ, не fixed */
+        .social-proof {
+            background: #fff;
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .social-proof-content {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f0fdf4;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid #bbf7d0;
+        }
+        .social-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a8f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .social-text { flex: 1; }
+        .social-text strong {
+            display: block;
+            color: #0f172a;
+            font-size: 14px;
+        }
+        .social-text span {
+            font-size: 13px;
+            color: #64748b;
+        }
+        .social-time {
+            font-size: 12px;
+            color: #10b981;
+            font-weight: 600;
+        }
         
-        /* Video */
-        .video-section{padding:20px 16px;background:#fff}
-        .video-container{max-width:600px;margin:0 auto}
-        .video-title{text-align:center;font-size:17px;font-weight:700;color:#1e3a5f;margin-bottom:14px}
-        .video-wrapper{position:relative;background:linear-gradient(135deg,#1e3a5f,#0f172a);border-radius:12px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;cursor:pointer}
-        .video-wrapper::before{content:'▶';width:50px;height:50px;background:rgba(201,169,98,0.95);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:#1e3a5f;padding-left:3px}
-        .video-label{position:absolute;bottom:10px;left:10px;right:10px;color:#fff;font-size:12px;font-weight:600}
+        /* Video Section */
+        .video-section {
+            background: #fff;
+            padding: 40px 16px;
+        }
+        .video-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .video-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 20px;
+        }
+        .video-box {
+            position: relative;
+            background: linear-gradient(135deg, #1e3a5f, #0f172a);
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .video-box::before {
+            content: '▶';
+            width: 70px;
+            height: 70px;
+            background: rgba(201, 169, 98, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #1e3a5f;
+            padding-left: 5px;
+        }
+        .video-caption {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+        }
         
-        /* Quiz */
-        .quiz-section{padding:0 16px 40px;background:#f8fafc}
-        .quiz-container{max-width:600px;margin:0 auto}
-        .quiz-box{background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+        /* Quiz Section */
+        .quiz-section {
+            padding: 40px 16px;
+            background: #f8fafc;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
         
-        .progress-container{margin-bottom:18px}
-        .progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12px;font-weight:600;color:#64748b}
-        .progress-bar{height:4px;background:#e2e8f0;border-radius:2px;overflow:hidden}
-        .progress-fill{height:100%;background:linear-gradient(90deg,#c9a962,#e0c989);transition:width 0.4s ease;border-radius:2px}
+        /* Progress */
+        .progress-bar-container {
+            margin-bottom: 24px;
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+        }
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #c9a962, #e0c989);
+            border-radius: 3px;
+            transition: width 0.4s ease;
+        }
         
-        .quiz-step{display:none}
-        .quiz-step.active{display:block;animation:fadeIn 0.3s ease}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        /* Quiz Steps */
+        .quiz-step {
+            display: none;
+        }
+        .quiz-step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         
-        .quiz-question{font-size:18px;font-weight:700;margin-bottom:6px;color:#1e3a5f;line-height:1.3}
-        .quiz-subtitle{font-size:13px;color:#64748b;margin-bottom:18px}
+        .quiz-question {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 8px;
+        }
+        .quiz-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
         
-        .quiz-options{display:flex;flex-direction:column;gap:10px}
-        .quiz-option{background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all 0.2s}
-        .quiz-option:hover{border-color:#c9a962;background:#fff}
-        .quiz-option.selected{border-color:#c9a962;background:rgba(201,169,98,0.1)}
-        .option-icon{width:40px;height:40px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);flex-shrink:0}
-        .option-content{flex:1;min-width:0}
-        .option-title{font-weight:700;font-size:14px;margin-bottom:2px}
-        .option-desc{font-size:12px;color:#64748b}
-        .option-check{width:20px;height:20px;border:2px solid #cbd5e1;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;font-size:11px}
-        .quiz-option.selected .option-check{background:#c9a962;border-color:#c9a962;color:#1e3a5f}
+        /* Options */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.2s;
+        }
+        .option-card:hover {
+            border-color: #c9a962;
+            background: #fff;
+        }
+        .option-card.selected {
+            border-color: #c9a962;
+            background: rgba(201, 169, 98, 0.1);
+        }
+        .option-icon {
+            width: 48px;
+            height: 48px;
+            background: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+        }
+        .option-info {
+            flex: 1;
+        }
+        .option-title {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+        .option-desc {
+            font-size: 13px;
+            color: #64748b;
+        }
+        .option-check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 12px;
+        }
+        .option-card.selected .option-check {
+            background: #c9a962;
+            border-color: #c9a962;
+            color: #1e3a5f;
+        }
         
-        .quiz-nav{display:flex;gap:10px;margin-top:18px}
-        .btn-back{flex:1;background:#f1f5f9;color:#64748b;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:600;cursor:pointer}
-        .btn-next{flex:2;background:#c9a962;color:#1e3a5f;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(201,169,98,0.3)}
-        .btn-next:disabled{background:#cbd5e1;color:#94a3b8;cursor:not-allowed;box-shadow:none}
-        .btn-next.full{width:100%}
+        /* Buttons */
+        .quiz-nav {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .btn {
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-back {
+            flex: 1;
+            background: #f1f5f9;
+            color: #64748b;
+        }
+        .btn-next {
+            flex: 2;
+            background: #c9a962;
+            color: #1e3a5f;
+            box-shadow: 0 4px 12px rgba(201, 169, 98, 0.3);
+        }
+        .btn-next:disabled {
+            background: #cbd5e1;
+            color: #94a3b8;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .btn-next:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(201, 169, 98, 0.4);
+        }
+        .btn-full {
+            width: 100%;
+        }
         
-        .form-group{margin-bottom:12px}
-        .form-label{display:block;font-size:11px;font-weight:700;color:#1e3a5f;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
-        .form-input{width:100%;padding:13px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px}
-        .form-input:focus{outline:none;border-color:#c9a962}
-        textarea.form-input{min-height:70px}
-        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        /* Form */
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #c9a962;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
         
-        .success-icon{width:60px;height:60px;background:linear-gradient(135deg,#c9a962,#e0c989);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;box-shadow:0 8px 24px rgba(201,169,98,0.3)}
-        .success-title{font-size:20px;font-weight:700;text-align:center;color:#1e3a5f;margin-bottom:8px}
-        .success-text{text-align:center;color:#64748b;margin-bottom:16px;font-size:14px}
+        /* Success */
+        .success-state {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #c9a962, #e0c989);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 24px rgba(201, 169, 98, 0.3);
+        }
+        .success-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 12px;
+        }
+        .success-text {
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+        .success-features {
+            background: #f0fdf4;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .success-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .success-feature:last-child {
+            margin-bottom: 0;
+        }
+        .feature-check {
+            width: 24px;
+            height: 24px;
+            background: #10b981;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        
+        /* Phone CTA */
+        .phone-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1e3a5f;
+            color: #c9a962;
+            padding: 18px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        /* Trust Section */
+        .trust-section {
+            padding: 40px 16px;
+            background: #fff;
+        }
+        .trust-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .trust-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 24px;
+        }
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .trust-card {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 24px 16px;
+            text-align: center;
+        }
+        .trust-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        .trust-card-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: #1e3a5f;
+            margin-bottom: 4px;
+        }
+        .trust-card-desc {
+            font-size: 13px;
+            color: #64748b;
+        }
+        
+        /* Testimonials */
+        .testimonials-section {
+            padding: 40px 16px;
+            background: #f8fafc;
+        }
+        .testimonials-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .testimonials-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 24px;
+        }
+        .testimonial-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+        .testimonial-stars {
+            color: #f59e0b;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        .testimonial-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #334155;
+            margin-bottom: 16px;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a8f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9a962;
+            font-weight: 700;
+        }
+        .author-name {
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .author-title {
+            font-size: 13px;
+            color: #64748b;
+        }
         
         /* Sticky Bottom */
-        .sticky-bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:10px 16px;box-shadow:0 -4px 20px rgba(0,0,0,0.1);z-index:100;display:flex;gap:12px;align-items:center}
-        .sticky-info{flex:1}
-        .sticky-label{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:0.5px}
-        .sticky-phone{font-size:15px;font-weight:800;color:#1e3a5f}
-        .sticky-btn{flex:1;background:#c9a962;color:#1e3a5f;padding:12px 16px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px}
+        .sticky-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            padding: 12px 16px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .sticky-info {
+            flex: 1;
+        }
+        .sticky-label {
+            font-size: 11px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .sticky-phone {
+            font-size: 16px;
+            font-weight: 800;
+            color: #1e3a5f;
+        }
+        .sticky-btn {
+            flex: 1;
+            background: #c9a962;
+            color: #1e3a5f;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
         
         /* Chat Widget */
-        .chat-widget{position:fixed;bottom:76px;right:12px;z-index:99}
-        .chat-button{width:44px;height:44px;background:#10b981;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(16,185,129,0.4)}
-        .chat-badge{position:absolute;top:-3px;right:-3px;width:16px;height:16px;background:#ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff}
+        .chat-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 16px;
+            z-index: 99;
+        }
+        .chat-button {
+            width: 52px;
+            height: 52px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+            border: none;
+        }
+        .chat-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            background: #ef4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 32px 16px 100px;
+            background: #0f172a;
+            color: #fff;
+            text-align: center;
+        }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .footer-text {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.6;
+        }
         
         /* Exit Popup */
-        .exit-popup{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
-        .exit-popup.active{display:flex}
-        .exit-content{background:#fff;border-radius:16px;padding:24px;max-width:340px;text-align:center;position:relative;width:100%}
-        .exit-close{position:absolute;top:12px;right:12px;width:28px;height:28px;background:#f1f5f9;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px}
-        .exit-icon{font-size:40px;margin-bottom:12px}
-        .exit-title{font-size:20px;font-weight:700;color:#1e3a5f;margin-bottom:10px}
-        .exit-text{color:#64748b;margin-bottom:20px;font-size:14px;line-height:1.5}
-        .exit-text strong{color:#dc2626}
-        .exit-btn{background:#dc2626;color:#fff;padding:14px 24px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;width:100%}
+        .exit-popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .exit-popup.active {
+            display: flex;
+        }
+        .exit-content {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px 24px;
+            max-width: 360px;
+            text-align: center;
+            position: relative;
+            width: 100%;
+        }
+        .exit-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            border: none;
+        }
+        .exit-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .exit-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 12px;
+        }
+        .exit-text {
+            color: #64748b;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        .exit-text strong {
+            color: #dc2626;
+        }
+        .exit-btn {
+            background: #dc2626;
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
         
-        footer{padding:24px 16px 100px;background:#0f172a;color:#fff;text-align:center}
-        .footer-logo{font-size:20px;font-weight:800;margin-bottom:8px}
-        .footer-text{color:#94a3b8;font-size:13px;line-height:1.5}
-        
-        @media(min-width:768px){
-            .hero{padding:32px 24px}
-            .hero h1{font-size:34px}
-            .quiz-box{padding:28px}
-            .social-toast{left:auto;right:24px;top:100px;width:auto;min-width:280px}
+        @media (min-width: 768px) {
+            .hero { padding: 60px 24px; }
+            .hero h1 { font-size: 42px; }
+            .quiz-card { padding: 32px; }
+            .trust-grid { grid-template-columns: repeat(4, 1fr); }
         }
     </style>
 </head>
 <body>
+    <!-- Exit Popup -->
     <div class="exit-popup" id="exitPopup">
         <div class="exit-content">
-            <div class="exit-close" onclick="document.getElementById('exitPopup').classList.remove('active')">×</div>
+            <button class="exit-close" onclick="closeExitPopup()">×</button>
             <div class="exit-icon">🎁</div>
             <div class="exit-title">Wait! Special Offer</div>
-            <div class="exit-text">Get <strong>10% OFF</strong> your first consultation!</div>
-            <button class="exit-btn" onclick="document.getElementById('exitPopup').classList.remove('active')">Claim My Discount →</button>
+            <div class="exit-text">Get <strong>10% OFF</strong> your first consultation if you book now!</div>
+            <button class="exit-btn" onclick="closeExitPopup()">Claim My Discount →</button>
         </div>
     </div>
 
+    <!-- Urgency Banner -->
     <div class="urgency-banner">
         ⏰ Only <span id="countdown">3</span> free consultation slots left today!
     </div>
 
-    <div class="header">
+    <!-- Header -->
+    <header class="header">
         <div class="header-content">
-            <div class="logo"><div class="logo-icon">⚖️</div>LegalPro</div>
+            <div class="logo">
+                <div class="logo-icon">⚖️</div>
+                LegalPro
+            </div>
+            <a href="tel:+15551234567" class="header-cta">📞 Call Now</a>
         </div>
-    </div>
+    </header>
 
-    <div class="social-toast" id="socialToast">
-        <div class="toast-avatar">J</div>
-        <div class="toast-text">
-            <strong>John from Miami</strong>
-            <div class="toast-time">just booked • 2 min ago</div>
-        </div>
-    </div>
-
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-badge">⚡ Free Case Evaluation</div>
         <h1>Get <span>Expert Legal Help</span> in 2 Minutes</h1>
-        <p class="hero-subtitle">Answer a few questions and get matched with the right attorney.</p>
+        <p class="hero-subtitle">Answer a few simple questions and get matched with the right attorney for your case.</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-number">500+</div>
+                <div class="hero-stat-label">Cases Won</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">98%</div>
+                <div class="hero-stat-label">Success Rate</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">24/7</div>
+                <div class="hero-stat-label">Available</div>
+            </div>
+        </div>
     </section>
 
+    <!-- Social Proof - В ПОТОКЕ -->
+    <div class="social-proof">
+        <div class="social-proof-content">
+            <div class="social-avatar" id="socialAvatar">J</div>
+            <div class="social-text">
+                <strong id="socialName">John from Miami</strong>
+                <span>just booked a consultation</span>
+            </div>
+            <div class="social-time">2m ago</div>
+        </div>
+    </div>
+
+    <!-- Video Section -->
     <section class="video-section">
         <div class="video-container">
             <div class="video-title">🎥 See How We Help Our Clients</div>
-            <div class="video-wrapper" onclick="alert('Video player')">
-                <div class="video-label">Watch: "How We Won $2M for Our Client" →</div>
+            <div class="video-box" onclick="alert('Video would play here')">
+                <div class="video-caption">Watch: "How We Won $2M for Our Client"</div>
             </div>
         </div>
     </section>
 
+    <!-- Quiz Section -->
     <section class="quiz-section">
         <div class="quiz-container">
-            <div class="quiz-box">
-                <div class="progress-container">
-                    <div class="progress-header"><span>Step <span id="currentStep">1</span> of 4</span><span id="progressPercent">25%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:25%"></div></div>
+            <div class="quiz-card">
+                <!-- Progress -->
+                <div class="progress-bar-container">
+                    <div class="progress-header">
+                        <span>Step <span id="currentStep">1</span> of 4</span>
+                        <span id="progressPercent">25%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+                    </div>
                 </div>
 
+                <!-- Step 1 -->
                 <div class="quiz-step active" data-step="1">
                     <div class="quiz-question">What type of legal help do you need?</div>
                     <div class="quiz-subtitle">Select the area that best describes your case</div>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="selectOption(this)"><div class="option-icon">👨‍👩‍👧</div><div class="option-content"><div class="option-title">Family Law</div><div class="option-desc">Divorce, custody, adoption</div></div><div class="option-check">✓</div></div>
-                        <div class="quiz-option" onclick="selectOption(this)"><div class="option-icon">⚖️</div><div class="option-content"><div class="option-title">Criminal Defense</div><div class="option-desc">DUI, charges, violations</div></div><div class="option-check">✓</div></div>
-                        <div class="quiz-option" onclick="selectOption(this)"><div class="option-icon">💼</div><div class="option-content"><div class="option-title">Personal Injury</div><div class="option-desc">Accidents, malpractice</div></div><div class="option-check">✓</div></div>
-                        <div class="quiz-option" onclick="selectOption(this)"><div class="option-icon">🏢</div><div class="option-content"><div class="option-title">Business Law</div><div class="option-desc">Contracts, disputes</div></div><div class="option-check">✓</div></div>
+                    <div class="options-list">
+                        <div class="option-card" onclick="selectOption(this, 1)">
+                            <div class="option-icon">👨‍👩‍👧</div>
+                            <div class="option-info">
+                                <div class="option-title">Family Law</div>
+                                <div class="option-desc">Divorce, custody, adoption</div>
+                            </div>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 1)">
+                            <div class="option-icon">⚖️</div>
+                            <div class="option-info">
+                                <div class="option-title">Criminal Defense</div>
+                                <div class="option-desc">DUI, charges, violations</div>
+                            </div>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 1)">
+                            <div class="option-icon">💼</div>
+                            <div class="option-info">
+                                <div class="option-title">Personal Injury</div>
+                                <div class="option-desc">Accidents, malpractice</div>
+                            </div>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 1)">
+                            <div class="option-icon">🏢</div>
+                            <div class="option-info">
+                                <div class="option-title">Business Law</div>
+                                <div class="option-desc">Contracts, disputes</div>
+                            </div>
+                            <div class="option-check">✓</div>
+                        </div>
                     </div>
-                    <div class="quiz-nav"><button class="btn-next full" onclick="nextStep()" id="nextBtn" disabled>Continue →</button></div>
+                    <div class="quiz-nav">
+                        <button class="btn btn-next btn-full" id="btn1" onclick="nextStep()" disabled>Continue →</button>
+                    </div>
                 </div>
 
+                <!-- Step 2 -->
                 <div class="quiz-step" data-step="2">
                     <div class="quiz-question">How urgent is your situation?</div>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="selectOption(this)"><div class="option-icon">🔥</div><div class="option-content"><div class="option-title">Very Urgent</div><div class="option-desc">Court date within 7 days</div></div><div class="option-check">✓</div></div>
-                        <div class="quiz-option" onclick="selectOption(this)"><div class="option-icon">⚡</div><div class="option-content"><div class="option-title">Within 30 days</div><div class="option-desc">Need help this month</div></div><div class="option-check">✓</div></div>
-                        <div class="quiz-option" onclick="selectOption(this)"><div class="option-icon">📅</div><div class="option-content"><div class="option-title">Planning Ahead</div><div class="option-desc">No immediate deadline</div></div><div class="option-check">✓</div></div>
+                    <div class="quiz-subtitle">This helps us prioritize your case</div>
+                    <div class="options-list">
+                        <div class="option-card" onclick="selectOption(this, 2)">
+                            <div class="option-icon">🔥</div>
+                            <div class="option-info">
+                                <div class="option-title">Very Urgent</div>
+                                <div class="option-desc">Court date within 7 days</div>
+                            </div>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 2)">
+                            <div class="option-icon">⚡</div>
+                            <div class="option-info">
+                                <div class="option-title">Within 30 days</div>
+                                <div class="option-desc">Need help this month</div>
+                            </div>
+                            <div class="option-check">✓</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 2)">
+                            <div class="option-icon">📅</div>
+                            <div class="option-info">
+                                <div class="option-title">Planning Ahead</div>
+                                <div class="option-desc">No immediate deadline</div>
+                            </div>
+                            <div class="option-check">✓</div>
+                        </div>
                     </div>
-                    <div class="quiz-nav"><button class="btn-back" onclick="prevStep()">← Back</button><button class="btn-next" onclick="nextStep()" id="nextBtn2" disabled>Continue →</button></div>
+                    <div class="quiz-nav">
+                        <button class="btn btn-back" onclick="prevStep()">← Back</button>
+                        <button class="btn btn-next" id="btn2" onclick="nextStep()" disabled>Continue →</button>
+                    </div>
                 </div>
 
+                <!-- Step 3 -->
                 <div class="quiz-step" data-step="3">
                     <div class="quiz-question">Tell us about yourself</div>
-                    <div class="form-grid">
-                        <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="John"></div>
-                        <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Smith"></div>
+                    <div class="quiz-subtitle">We'll match you with the best attorney</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-input" placeholder="John">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-input" placeholder="Smith">
+                        </div>
                     </div>
-                    <div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" placeholder="(555) 123-4567"></div>
-                    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="john@example.com"></div>
-                    
-                    <div class="quiz-nav"><button class="btn-back" onclick="prevStep()">← Back</button><button class="btn-next" onclick="submitForm()">Get Free Consultation ✓</button></div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input" placeholder="(555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" placeholder="john@example.com">
+                    </div>
+                    <div class="quiz-nav">
+                        <button class="btn btn-back" onclick="prevStep()">← Back</button>
+                        <button class="btn btn-next" onclick="submitForm()">Get Free Consultation ✓</button>
+                    </div>
                 </div>
 
+                <!-- Step 4 Success -->
                 <div class="quiz-step" data-step="4">
-                    <div style="text-align:center;padding:20px 0">
+                    <div class="success-state">
                         <div class="success-icon">✓</div>
                         <div class="success-title">You're All Set!</div>
                         <div class="success-text">An attorney will contact you within 15 minutes.</div>
-                        <a href="tel:+15551234567" style="display:inline-flex;align-items:center;gap:10px;background:#1e3a5f;color:#c9a962;padding:14px 22px;border-radius:10px;text-decoration:none;font-size:17px;font-weight:700">📞 (555) 123-4567</a>
+                        <div class="success-features">
+                            <div class="success-feature">
+                                <div class="feature-check">✓</div>
+                                <span>Free case evaluation</span>
+                            </div>
+                            <div class="success-feature">
+                                <div class="feature-check">✓</div>
+                                <span>No upfront fees</span>
+                            </div>
+                            <div class="success-feature">
+                                <div class="feature-check">✓</div>
+                                <span>24/7 availability</span>
+                            </div>
+                        </div>
+                        <a href="tel:+15551234567" class="phone-cta">📞 (555) 123-4567</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="trust-container">
+            <div class="trust-title">Why Choose LegalPro</div>
+            <div class="trust-grid">
+                <div class="trust-card">
+                    <div class="trust-icon">🏆</div>
+                    <div class="trust-card-title">Award Winning</div>
+                    <div class="trust-card-desc">Top-rated 2024</div>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">💰</div>
+                    <div class="trust-card-title">No Win, No Fee</div>
+                    <div class="trust-card-desc">Pay only if we win</div>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">🔒</div>
+                    <div class="trust-card-title">Confidential</div>
+                    <div class="trust-card-desc">100% private</div>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">⚡</div>
+                    <div class="trust-card-title">Fast Response</div>
+                    <div class="trust-card-desc">15 min callback</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <div class="testimonials-title">What Our Clients Say</div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"LegalPro handled my divorce with such professionalism. They made a difficult time much easier and got me the custody arrangement I wanted."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div>
+                        <div class="author-name">Sarah M.</div>
+                        <div class="author-title">Family Law Client</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"After my car accident, they fought for my rights and got me 3x more than the insurance initially offered. Highly recommend!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div>
+                        <div class="author-name">Michael T.</div>
+                        <div class="author-title">Personal Injury Client</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Bottom Bar -->
     <div class="sticky-bottom">
         <div class="sticky-info">
             <div class="sticky-label">Free Consultation</div>
@@ -227,65 +1050,94 @@
         <a href="tel:+15551234567" class="sticky-btn">📞 Call Now</a>
     </div>
 
+    <!-- Chat Widget -->
     <div class="chat-widget">
-        <div class="chat-button" onclick="alert('Chat opens')">💬</div>
+        <button class="chat-button" onclick="alert('Chat would open here')">💬</button>
         <div class="chat-badge">1</div>
     </div>
 
-    <footer>
+    <!-- Footer -->
+    <footer class="footer">
         <div class="footer-logo">⚖️ LegalPro</div>
-        <div class="footer-text">Professional legal services with integrity. Free consultations 24/7.</div>
+        <div class="footer-text">Professional legal services with integrity. Free consultations available 24/7.</div>
     </footer>
 
     <script>
         let currentStep = 1;
-        function selectOption(el) {
-            el.parentElement.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
-            el.classList.add('selected');
-            document.getElementById('nextBtn').disabled = false;
-            if(document.getElementById('nextBtn2')) document.getElementById('nextBtn2').disabled = false;
+        const totalSteps = 4;
+
+        function selectOption(element, stepNum) {
+            // Remove selected from all options in this step
+            const step = element.closest('.quiz-step');
+            step.querySelectorAll('.option-card').forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selected to clicked option
+            element.classList.add('selected');
+            
+            // Enable button
+            document.getElementById('btn' + stepNum).disabled = false;
         }
+
         function updateProgress() {
-            const pct = (currentStep/4)*100;
-            document.getElementById('progressFill').style.width = pct+'%';
-            document.getElementById('progressPercent').textContent = Math.round(pct)+'%';
+            const percent = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('progressPercent').textContent = Math.round(percent) + '%';
             document.getElementById('currentStep').textContent = currentStep;
         }
+
         function nextStep() {
-            document.querySelector('.quiz-step.active').classList.remove('active');
-            currentStep++;
-            document.querySelector('.quiz-step[data-step="'+currentStep+'"]').classList.add('active');
-            updateProgress();
+            if (currentStep < totalSteps) {
+                document.querySelector('.quiz-step.active').classList.remove('active');
+                currentStep++;
+                document.querySelector('.quiz-step[data-step="' + currentStep + '"]').classList.add('active');
+                updateProgress();
+            }
         }
+
         function prevStep() {
-            document.querySelector('.quiz-step.active').classList.remove('active');
-            currentStep--;
-            document.querySelector('.quiz-step[data-step="'+currentStep+'"]').classList.add('active');
-            updateProgress();
+            if (currentStep > 1) {
+                document.querySelector('.quiz-step.active').classList.remove('active');
+                currentStep--;
+                document.querySelector('.quiz-step[data-step="' + currentStep + '"]').classList.add('active');
+                updateProgress();
+            }
         }
-        function submitForm() { nextStep(); }
-        
+
+        function submitForm() {
+            nextStep();
+        }
+
+        function closeExitPopup() {
+            document.getElementById('exitPopup').classList.remove('active');
+        }
+
+        // Countdown timer
         let slots = 3;
         setInterval(() => {
-            if(slots > 1 && Math.random() > 0.7) slots--;
-            document.getElementById('countdown').textContent = slots;
+            if (slots > 1 && Math.random() > 0.7) {
+                slots--;
+                document.getElementById('countdown').textContent = slots;
+            }
         }, 15000);
-        
+
+        // Exit intent
         let exitShown = false;
         document.addEventListener('mouseout', (e) => {
-            if(!exitShown && e.clientY < 0) {
+            if (!exitShown && e.clientY < 0) {
                 document.getElementById('exitPopup').classList.add('active');
                 exitShown = true;
             }
         });
-        
-        const names = ['John from Miami','Sarah from NY','Mike from LA','Emma from Chicago'];
-        let toastIndex = 0;
+
+        // Social proof rotation
+        const names = ['John from Miami', 'Sarah from NY', 'Mike from LA', 'Emma from Chicago'];
+        let nameIndex = 0;
         setInterval(() => {
-            toastIndex = (toastIndex + 1) % names.length;
-            document.querySelector('.toast-avatar').textContent = names[toastIndex][0];
-            document.querySelector('.toast-text strong').textContent = names[toastIndex];
-        }, 8000);
+            nameIndex = (nameIndex + 1) % names.length;
+            const name = names[nameIndex];
+            document.getElementById('socialName').textContent = name;
+            document.getElementById('socialAvatar').textContent = name[0];
+        }, 6000);
     </script>
 </body>
 </html>
