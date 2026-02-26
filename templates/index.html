@@ -1,239 +1,477 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketing Funnel Templates — Production Ready</title>
+    <title>Sosick Templates — High-converting Landing Pages</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0f;
-            color: white;
-            padding: 40px 20px;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+            color: #1a1a2e;
+            min-height: 100vh;
         }
-        .container {
-            max-width: 900px;
+        
+        /* Header */
+        .header {
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
             margin: 0 auto;
         }
-        .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #10b981, #059669);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            font-size: 42px;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #fff, #a78bfa);
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .subtitle {
-            color: #a1a1aa;
-            font-size: 18px;
-            margin-bottom: 40px;
-            max-width: 600px;
+        .nav {
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
-        .highlight {
-            background: rgba(139, 92, 246, 0.2);
-            border-left: 3px solid #8b5cf6;
-            padding: 20px;
-            border-radius: 0 12px 12px 0;
-            margin-bottom: 40px;
+        .lang-switch {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
         }
-        .highlight h3 {
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: #c4b5fd;
-        }
-        .highlight p {
-            color: #a78bfa;
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
             font-size: 14px;
         }
-        .funnel-showcase {
-            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
-            border: 2px solid #6366f1;
-            border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
+        
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 24px;
+            max-width: 800px;
+            margin: 0 auto;
         }
-        .funnel-showcase::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
-        }
-        .funnel-content {
-            position: relative;
-            z-index: 1;
-        }
-        .funnel-tag {
-            display: inline-block;
-            background: #ef4444;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-        .funnel-showcase h2 {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-        .funnel-showcase p {
-            color: #a5b4fc;
-            margin-bottom: 24px;
-        }
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        .feature-tag {
-            background: rgba(255,255,255,0.1);
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-        }
-        .cta-button {
+        .badge {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: transform 0.2s;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-        }
-        .legacy {
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .legacy h3 {
+            gap: 6px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 50px;
             font-size: 14px;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.1;
             margin-bottom: 20px;
+            color: #1a1a2e;
         }
-        .legacy-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            opacity: 0.5;
-        }
-        .legacy-item {
-            background: rgba(255,255,255,0.05);
-            padding: 20px;
-            border-radius: 12px;
-            font-size: 14px;
-        }
-        .legacy-item h4 {
-            font-size: 13px;
-            margin-bottom: 4px;
-        }
-        .legacy-item span {
-            font-size: 11px;
+        .hero p {
+            font-size: 18px;
             color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
         }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+        
+        /* Filters */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+            padding: 0 24px;
+        }
+        .filter {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter:hover, .filter.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+        }
+        
+        /* Templates Grid */
+        .templates {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #f3f4f6;
+        }
+        .template-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+        
+        .template-preview {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .template-preview.dark {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0c29 100%);
+        }
+        .template-preview.health {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        }
+        .template-preview.clean {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .template-preview.fitness {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .template-preview.auto {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        }
+        .template-preview.event {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        }
+        .template-preview.tea {
+            background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
+        }
+        
+        .template-icon {
+            font-size: 64px;
+        }
+        
+        .template-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(255,255,255,0.95);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1a1a2e;
+            text-transform: uppercase;
+        }
+        
+        .template-content {
+            padding: 24px;
+        }
+        
+        .template-category {
+            font-size: 12px;
+            font-weight: 600;
+            color: #667eea;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .template-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+        }
+        
+        .template-desc {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        
+        .template-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .template-feature {
+            background: #f3f4f6;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
         @media (max-width: 768px) {
-            h1 { font-size: 32px; }
-            .legacy-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 32px; }
+            .stats { gap: 24px; }
+            .stat-value { font-size: 28px; }
+            .templates { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="badge">🚀 Production Ready</div>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">Sosick Templates</div>
+        <nav class="nav">
+            <button class="lang-switch">EN ▼</button>
+            <a href="#templates" class="btn-primary">All Templates</a>
+        </nav>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="badge">✨ 8+ Ready Templates</div>
+        <h1>High-converting landing pages for every business</h1>
+        <p>Professionally designed, responsive templates with integrated lead generation, quiz functionality and multilingual support.</p>
         
-        <h1>Universal Marketing Funnel</h1>
-        
-        <p class="subtitle">
-            Multi-step conversion funnel with real calculator, quiz system, and 3-language support. 
-            Mobile-first. Conversion-optimized. Ready for paid traffic.
-        </p>
-
-        <div class="highlight">
-            <h3>⚡ Why funnels beat websites</h3>
-            <p>Traditional websites: 2-5% conversion. This funnel: 15-25% conversion. 
-            One clear path. No distractions. Maximum leads.</p>
-        </div>
-
-        <div class="funnel-showcase">
-            <div class="funnel-content">
-                <div class="funnel-tag">NEW — Universal Template</div>
-                
-                <h2>4-Step Conversion Funnel</h2>
-                
-                <p>Quiz → Calculator → Time Select → Lead Form. 
-                With DE/EN/UA language switcher, real-time pricing, urgency timers.</p>
-                
-                <div class="features">
-                    <span class="feature-tag">📱 Mobile First</span>
-                    <span class="feature-tag">🌍 3 Languages</span>
-                    <span class="feature-tag">🧮 Live Calculator</span>
-                    <span class="feature-tag">⏰ Urgency Timer</span>
-                    <span class="feature-tag">⚡ 15-25% Conversion</span>
-                    <span class="feature-tag">🎨 Dark Mode</span>
-                </div>
-                
-                <a href="universal-funnel.html" class="cta-button">
-                    View Funnel Template →
-                </a>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">8+</div>
+                <div class="stat-label">Templates</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Languages</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Responsive</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">0€</div>
+                <div class="stat-label">Free</div>
             </div>
         </div>
-
-        <div class="legacy">
-            <h3>Legacy Templates (Basic)</h3>            
-            <div class="legacy-grid">
-                <a href="zahnarzt-wien.html" class="legacy-item" style="text-decoration: none; color: inherit;">
-                    <h4>🦷 Zahnarzt</h4>
-                    <span>Basic landing</span>
-                </a>
-                
-                <a href="autowerkstatt-wien.html" class="legacy-item" style="text-decoration: none; color: inherit;">
-                    <h4>🔧 Autowerkstatt</h4>
-                    <span>Basic landing</span>
-                </a>
-                
-                <a href="fitness-yoga-wien.html" class="legacy-item" style="text-decoration: none; color: inherit;">
-                    <h4>🧘 Fitness/Yoga</h4>
-                    <span>Basic landing</span>
-                </a>
-                
-                <a href="reinigung-wien.html" class="legacy-item" style="text-decoration: none; color: inherit;">
-                    <h4>🧹 Reinigung</h4>
-                    <span>Basic landing</span>
-                </a>
-            </div>
-        </div>
+    </section>
+    
+    <!-- Filters -->
+    <div class="filters">
+        <button class="filter active">All</button>
+        <button class="filter">Local Business</button>
+        <button class="filter">Services</button>
+        <button class="filter">Agencies</button>
+        <button class="filter">Events</button>
     </div>
+    
+    <!-- Templates Grid -->
+    <section class="templates" id="templates">
+        
+        <!-- 1. Zahnarzt -->
+        <a href="zahnarzt-final.html" class="template-card">
+            <div class="template-preview health">
+                <span class="template-tag">Local</span>
+                <span class="template-icon">🦷</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Health</div>
+                <h3 class="template-title">Zahnarzt Praxis</h3>
+                <p class="template-desc">Perfect for dentists with appointment quiz, services and patient reviews.</p>
+                <div class="template-features">
+                    <span class="template-feature">Quiz-Funnel</span>
+                    <span class="template-feature">Appointment</span>
+                    <span class="template-feature">3 Languages</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 2. Reinigung -->
+        <a href="reinigung-final.html" class="template-card">
+            <div class="template-preview clean">
+                <span class="template-tag">Local</span>
+                <span class="template-icon">🧽</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Cleaning</div>
+                <h3 class="template-title">CleanPro Wien</h3>
+                <p class="template-desc">For cleaning services with live price calculator, service selection and customer form.</p>
+                <div class="template-features">
+                    <span class="template-feature">Price Calculator</span>
+                    <span class="template-feature">Calculator</span>
+                    <span class="template-feature">3 Languages</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 3. Fitness/Yoga -->
+        <a href="fitness-yoga-wien.html" class="template-card">
+            <div class="template-preview fitness">
+                <span class="template-tag">Local</span>
+                <span class="template-icon">🧘</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Fitness</div>
+                <h3 class="template-title">Yoga & Fitness Studio</h3>
+                <p class="template-desc">For fitness studios with class schedule, membership quiz and trial registration.</p>
+                <div class="template-features">
+                    <span class="template-feature">Schedule</span>
+                    <span class="template-feature">Membership</span>
+                    <span class="template-feature">Trial</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 4. Autowerkstatt -->
+        <a href="autowerkstatt-wien.html" class="template-card">
+            <div class="template-preview auto">
+                <span class="template-tag">Local</span>
+                <span class="template-icon">🚗</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Auto</div>
+                <h3 class="template-title">Autowerkstatt</h3>
+                <p class="template-desc">For car workshops with service quiz, appointment booking and vehicle diagnosis form.</p>
+                <div class="template-features">
+                    <span class="template-feature">Service-Quiz</span>
+                    <span class="template-feature">Appointment</span>
+                    <span class="template-feature">Diagnosis</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 5. Agency Nexa v4 -->
+        <a href="agency-nexa-v4.html" class="template-card">
+            <div class="template-preview">
+                <span class="template-tag">Agency</span>
+                <span class="template-icon">💜</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Digital Agency</div>
+                <h3 class="template-title">Nexa Digital</h3>
+                <p class="template-desc">For web agencies and marketing agencies with project quiz, portfolio and service overview.</p>
+                <div class="template-features">
+                    <span class="template-feature">Project-Quiz</span>
+                    <span class="template-feature">Portfolio</span>
+                    <span class="template-feature">3 Languages</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 6. Event Festival -->
+        <a href="event-festival.html" class="template-card">
+            <div class="template-preview event">
+                <span class="template-tag">Event</span>
+                <span class="template-icon">🎵</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Festival</div>
+                <h3 class="template-title">Summer Beats Festival</h3>
+                <p class="template-desc">For events and festivals with ticket sales, line-up, countdown and multilingual checkout.</p>
+                <div class="template-features">
+                    <span class="template-feature">Ticket Sales</span>
+                    <span class="template-feature">Countdown</span>
+                    <span class="template-feature">3 Languages</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 7. Universal Funnel -->
+        <a href="universal-funnel.html" class="template-card">
+            <div class="template-preview dark">
+                <span class="template-tag">Dark Mode</span>
+                <span class="template-icon">🌙</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Universal</div>
+                <h3 class="template-title">Universal Funnel</h3>
+                <p class="template-desc">Dark-mode Multi-Step Funnel for any business. Quiz structure, lead generation, mobile-first.</p>
+                <div class="template-features">
+                    <span class="template-feature">Dark Mode</span>
+                    <span class="template-feature">Multi-Step</span>
+                    <span class="template-feature">Mobile-First</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 8. Tea Ceremony -->
+        <a href="tea-ceremony-thalheim.html" class="template-card">
+            <div class="template-preview tea">
+                <span class="template-tag">Wellness</span>
+                <span class="template-icon">🍵</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Tea House</div>
+                <h3 class="template-title">Tea Ceremony Thalheim</h3>
+                <p class="template-desc">For tea houses and wellness centers with ceremony booking, pricing and ambiance gallery.</p>
+                <div class="template-features">
+                    <span class="template-feature">Booking</span>
+                    <span class="template-feature">Gallery</span>
+                    <span class="template-feature">Pricing</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 9. PixelForge Agency -->
+        <a href="agency-pixelforge.html" class="template-card">
+            <div class="template-preview" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">
+                <span class="template-tag">Agency</span>
+                <span class="template-icon">🎨</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Creative Agency</div>
+                <h3 class="template-title">PixelForge</h3>
+                <p class="template-desc">Creative agency template with bold design, portfolio showcase and contact forms.</p>
+                <div class="template-features">
+                    <span class="template-feature">Bold Design</span>
+                    <span class="template-feature">Portfolio</span>
+                    <span class="template-feature">Contact</span>
+                </div>
+            </div>
+        </a>
+        
+    </section>
+    
 </body>
 </html>
