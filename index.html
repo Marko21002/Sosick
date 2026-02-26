@@ -3,212 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sosick Templates — High-converting Landing Pages</title>
+    <title>Sosick Templates — AI-Powered Website Builder & Template Marketplace</title>
+    <meta name="description" content="Create stunning websites in minutes with AI. Professional templates, smart content generation, and drag-and-drop editor.">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
-            color: #1a1a2e;
-            min-height: 100vh;
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --gray: #64748b;
+            --gray-light: #f1f5f9;
+            --white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            --gradient-2: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            --gradient-3: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
         
-        /* Header */
-        .header {
-            padding: 20px 24px;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--dark);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 24px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
         }
+        
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             font-size: 24px;
             font-weight: 800;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--gradient-1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            cursor: pointer;
         }
-        .nav {
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-text-fill-color: white;
+            font-size: 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover { color: var(--white); }
+        
+        .nav-cta {
             display: flex;
             gap: 12px;
             align-items: center;
         }
-        .lang-switch {
-            background: white;
-            border: 1px solid #e5e7eb;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
             font-weight: 600;
             font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-primary {
+            background: var(--gradient-1);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+        }
+        
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 16px;
+            border-radius: 12px;
         }
         
         /* Hero */
         .hero {
-            text-align: center;
-            padding: 60px 24px;
-            max-width: 800px;
-            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            overflow: hidden;
         }
-        .badge {
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+            animation: pulse 10s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
             padding: 8px 16px;
             border-radius: 50px;
             font-size: 14px;
             font-weight: 600;
+            color: var(--primary-light);
             margin-bottom: 24px;
         }
+        
         .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
+            font-size: 64px;
+            font-weight: 900;
             line-height: 1.1;
-            margin-bottom: 20px;
-            color: #1a1a2e;
-        }
-        .hero p {
-            font-size: 18px;
-            color: #6b7280;
-            max-width: 600px;
-            margin: 0 auto 32px;
-            line-height: 1.6;
+            margin-bottom: 24px;
         }
         
-        /* Stats */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 48px;
-        }
-        .stat {
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 36px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .hero h1 span {
+            background: var(--gradient-1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .stat-label {
-            font-size: 14px;
-            color: #6b7280;
-            margin-top: 4px;
+        
+        .hero-description {
+            font-size: 20px;
+            color: var(--gray);
+            margin-bottom: 40px;
+            line-height: 1.7;
         }
         
-        /* Filters */
-        .filters {
+        .hero-cta {
             display: flex;
-            justify-content: center;
-            gap: 12px;
+            gap: 16px;
             margin-bottom: 48px;
-            flex-wrap: wrap;
-            padding: 0 24px;
         }
-        .filter {
-            background: white;
-            border: 1px solid #e5e7eb;
-            padding: 10px 20px;
+        
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+        }
+        
+        .hero-stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-stat-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        /* Templates Section */
+        .templates-section {
+            padding: 120px 24px;
+            background: var(--dark);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 8px 20px;
             border-radius: 50px;
             font-size: 14px;
-            font-weight: 500;
-            color: #374151;
-            cursor: pointer;
-            transition: all 0.2s;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 20px;
         }
-        .filter:hover, .filter.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+        
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .section-title span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .templates-filter {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: var(--gray);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gradient-1);
+            color: var(--white);
             border-color: transparent;
         }
         
-        /* Templates Grid */
-        .templates {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px 80px;
+        .templates-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
         }
         
         .template-card {
-            background: white;
-            border-radius: 20px;
+            background: var(--dark-light);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
-            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
             text-decoration: none;
             color: inherit;
-            border: 1px solid #f3f4f6;
         }
+        
         .template-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-color: rgba(99, 102, 241, 0.3);
         }
         
         .template-preview {
             height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .template-preview.dark {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f0c29 100%);
-        }
-        .template-preview.health {
-            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-        }
-        .template-preview.clean {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        }
-        .template-preview.fitness {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        }
-        .template-preview.auto {
-            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-        }
-        .template-preview.event {
-            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
-        }
-        .template-preview.tea {
-            background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
-        }
-        
-        .template-icon {
-            font-size: 64px;
+            position: relative;
         }
         
         .template-tag {
             position: absolute;
             top: 16px;
             left: 16px;
-            background: rgba(255,255,255,0.95);
-            padding: 6px 12px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
-            color: #1a1a2e;
             text-transform: uppercase;
+        }
+        
+        .template-icon {
+            font-size: 64px;
         }
         
         .template-content {
@@ -216,11 +356,10 @@
         }
         
         .template-category {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
-            color: #667eea;
+            color: var(--primary-light);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             margin-bottom: 8px;
         }
         
@@ -228,304 +367,512 @@
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 8px;
-            color: #1a1a2e;
         }
         
         .template-desc {
             font-size: 14px;
-            color: #6b7280;
+            color: var(--gray);
             margin-bottom: 16px;
-            line-height: 1.5;
         }
         
         .template-features {
             display: flex;
-            flex-wrap: wrap;
             gap: 8px;
+            flex-wrap: wrap;
         }
         
         .template-feature {
-            background: #f3f4f6;
-            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
             border-radius: 6px;
             font-size: 12px;
-            font-weight: 500;
-            color: #374151;
+        }
+        
+        .template-preview.health { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); }
+        .template-preview.clean { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .template-preview.fitness { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .template-preview.auto { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
+        .template-preview.dark { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .template-preview.event { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+        .template-preview.tea { background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%); }
+        .template-preview.green { background: linear-gradient(135deg, #050508 0%, #1a1a2e 100%); }
+        .template-preview.orange { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); }
+        .template-preview.blue { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
+        .template-preview.white { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); color: #1a1a2e; }
+        .template-preview.purple { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); color: #1a1a2e; }
+        
+        /* AI Builder Section */
+        .ai-builder {
+            padding: 120px 24px;
+            background: linear-gradient(180deg, var(--dark-light) 0%, var(--dark) 100%);
+        }
+        
+        .ai-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .ai-visual {
+            background: var(--dark-light);
+            border-radius: 24px;
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chat-name { font-weight: 600; }
+        .chat-status { font-size: 13px; color: var(--secondary); }
+        
+        .chat-message {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 16px 20px;
+            border-radius: 16px 16px 16px 4px;
+            margin-bottom: 16px;
+        }
+        
+        .chat-message.ai {
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 16px 16px 4px 16px;
+            margin-left: 20%;
+        }
+        
+        .ai-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .ai-check {
+            width: 24px;
+            height: 24px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 40px 24px;
+            background: var(--dark-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container, .ai-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            .templates-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 48px; }
         }
         
         @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
-            .stats { gap: 24px; }
-            .stat-value { font-size: 28px; }
-            .templates { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 36px; }
+            .templates-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 32px; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">Sosick Templates</div>
-        <nav class="nav">
-            <button class="lang-switch">EN ▼</button>
-            <a href="#templates" class="btn-primary">All Templates</a>
-        </nav>
-    </header>
-    
-    <!-- Hero -->
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+                Sosick Templates
+            </div>
+            <div class="nav-links">
+                <a href="#templates" class="nav-link">Templates</a>
+                <a href="#ai-builder" class="nav-link">AI Builder</a>
+                <a href="#" class="nav-link">Pricing</a>
+            </div>
+            <div class="nav-cta">
+                <a href="#" class="btn btn-secondary">Sign In</a>
+                <a href="#templates" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="badge">✨ 12+ Ready Templates</div>
-        <h1>High-converting landing pages for every business</h1>
-        <p>Professionally designed, responsive templates with integrated lead generation, quiz functionality and multilingual support.</p>
-        
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-value">12+</div>
-                <div class="stat-label">Templates</div>
+        <div class="hero-container">
+            <div>
+                <div class="hero-badge">✨ Now with AI-Powered Builder</div>
+                <h1>Build websites with <span>AI</span> in minutes</h1>
+                <p class="hero-description">Professional templates meet intelligent automation. Describe your business, and our AI generates a complete, conversion-optimized website instantly.</p>
+                <div class="hero-cta">
+                    <a href="#templates" class="btn btn-primary btn-large">🚀 Start Building Free</a>
+                    <a href="#ai-builder" class="btn btn-secondary btn-large">▶ See How It Works</a>
+                </div>
+                <div class="hero-stats">
+                    <div>
+                        <div class="hero-stat-value">12+</div>
+                        <div class="hero-stat-label">Templates</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-value">3</div>
+                        <div class="hero-stat-label">Languages</div>
+                    </div>
+                    <div>
+                        <div class="hero-stat-value">15-25%</div>
+                        <div class="hero-stat-label">Conversion</div>
+                    </div>
+                </div>
             </div>
-            <div class="stat">
-                <div class="stat-value">3</div>
-                <div class="stat-label">Languages</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">100%</div>
-                <div class="stat-label">Responsive</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">0€</div>
-                <div class="stat-label">Free</div>
+            <div>
+                <!-- Visual mockup would go here -->
+                <div style="background: var(--dark-light); border-radius: 24px; padding: 40px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; gap: 8px; margin-bottom: 24px;">
+                        <div style="width: 12px; height: 12px; background: #ef4444; border-radius: 50%;"></div>
+                        <div style="width: 12px; height: 12px; background: #f59e0b; border-radius: 50%;"></div>
+                        <div style="width: 12px; height: 12px; background: #10b981; border-radius: 50%;"></div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 32px; text-align: center;">
+                        <div style="width: 60px; height: 60px; background: var(--gradient-1); border-radius: 16px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 28px;">⚡</div>
+                        <div style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">Your Website</div>
+                        <div style="color: var(--gray); margin-bottom: 24px;">Generated by AI in 30 seconds</div>
+                        <div style="background: var(--gradient-1); padding: 12px 32px; border-radius: 10px; display: inline-block; font-weight: 600;">Launch Site →</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    
-    <!-- Filters -->
-    <div class="filters">
-        <button class="filter active">All</button>
-        <button class="filter">Local Business</button>
-        <button class="filter">Services</button>
-        <button class="filter">Agencies</button>
-        <button class="filter">Events</button>
-    </div>
-    
-    <!-- Templates Grid -->
-    <section class="templates" id="templates">
-        
-        <!-- 1. Zahnarzt -->
-        <a href="zahnarzt-final.html" class="template-card">
-            <div class="template-preview health">
-                <span class="template-tag">Local</span>
-                <span class="template-icon">🦷</span>
+
+    <!-- Templates Section -->
+    <section class="templates-section" id="templates">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">🎨 Template Marketplace</div>
+                <h2 class="section-title">Choose from <span>12+ professional templates</span></h2>
             </div>
-            <div class="template-content">
-                <div class="template-category">Health</div>
-                <h3 class="template-title">Zahnarzt Praxis</h3>
-                <p class="template-desc">Perfect for dentists with appointment quiz, services and patient reviews.</p>
-                <div class="template-features">
-                    <span class="template-feature">Quiz-Funnel</span>
-                    <span class="template-feature">Appointment</span>
-                    <span class="template-feature">3 Languages</span>
-                </div>
+            
+            <div class="templates-filter">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Local Business</button>
+                <button class="filter-btn">Services</button>
+                <button class="filter-btn">Agencies</button>
+                <button class="filter-btn">Events</button>
             </div>
-        </a>
-        
-        <!-- 2. Reinigung -->
-        <a href="reinigung-final.html" class="template-card">
-            <div class="template-preview clean">
-                <span class="template-tag">Local</span>
-                <span class="template-icon">🧽</span>
+            
+            <div class="templates-grid">
+                <!-- Template 1: Zahnarzt -->
+                <a href="zahnarzt-final.html" class="template-card">
+                    <div class="template-preview health">
+                        <span class="template-tag">Local</span>
+                        <span class="template-icon">🦷</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Health</div>
+                        <h3 class="template-title">Zahnarzt Praxis</h3>
+                        <p class="template-desc">Dental clinic template with appointment quiz and patient reviews.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Quiz-Funnel</span>
+                            <span class="template-feature">3 Languages</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 2: Reinigung -->
+                <a href="reinigung-final.html" class="template-card">
+                    <div class="template-preview clean">
+                        <span class="template-tag">Local</span>
+                        <span class="template-icon">🧽</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Cleaning</div>
+                        <h3 class="template-title">CleanPro Wien</h3>
+                        <p class="template-desc">Cleaning services with live price calculator and booking.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Calculator</span>
+                            <span class="template-feature">3 Languages</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 3: Fitness -->
+                <a href="fitness-yoga-wien.html" class="template-card">
+                    <div class="template-preview fitness">
+                        <span class="template-tag">Local</span>
+                        <span class="template-icon">🧘</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Fitness</div>
+                        <h3 class="template-title">Yoga & Fitness</h3>
+                        <p class="template-desc">Gym and yoga studio with class schedule and memberships.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Schedule</span>
+                            <span class="template-feature">Membership</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 4: Autowerkstatt -->
+                <a href="autowerkstatt-wien.html" class="template-card">
+                    <div class="template-preview auto">
+                        <span class="template-tag">Local</span>
+                        <span class="template-icon">🚗</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Auto</div>
+                        <h3 class="template-title">Autowerkstatt</h3>
+                        <p class="template-desc">Car repair shop with service quiz and diagnosis form.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Service-Quiz</span>
+                            <span class="template-feature">Booking</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 5: Nexa Digital v4 -->
+                <a href="agency-nexa-v4.html" class="template-card">
+                    <div class="template-preview green">
+                        <span class="template-tag" style="background: #a3e635; color: #000;">Agency</span>
+                        <span class="template-icon">⚡</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category" style="color: #a3e635;">Digital Agency</div>
+                        <h3 class="template-title">Nexa Digital</h3>
+                        <p class="template-desc">Dark theme with green accents. Portfolio and quiz.</p>
+                        <div class="template-features">
+                            <span class="template-feature" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Dark/Green</span>
+                            <span class="template-feature">3 Languages</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 6: PixelForge -->
+                <a href="agency-pixelforge.html" class="template-card">
+                    <div class="template-preview orange">
+                        <span class="template-tag">Agency</span>
+                        <span class="template-icon">🎨</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Creative Agency</div>
+                        <h3 class="template-title">PixelForge</h3>
+                        <p class="template-desc">Bold orange design for creative agencies.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Bold Design</span>
+                            <span class="template-feature">Portfolio</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 7: Nexa v2 -->
+                <a href="agency-nexa-v2.html" class="template-card">
+                    <div class="template-preview blue">
+                        <span class="template-tag" style="background: #60a5fa;">Agency</span>
+                        <span class="template-icon">🚀</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Tech Agency</div>
+                        <h3 class="template-title">Nexa Tech</h3>
+                        <p class="template-desc">Dark blue tech agency with modern design.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Dark Blue</span>
+                            <span class="template-feature">Modern</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 8: Nexa Classic -->
+                <a href="agency-nexa.html" class="template-card">
+                    <div class="template-preview purple">
+                        <span class="template-tag" style="background: #7c3aed; color: white;">Agency</span>
+                        <span class="template-icon">💜</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Classic Agency</div>
+                        <h3 class="template-title">Nexa Classic</h3>
+                        <p class="template-desc">Light purple classic business template.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Classic</span>
+                            <span class="template-feature">Professional</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 9: Event Festival -->
+                <a href="event-festival.html" class="template-card">
+                    <div class="template-preview event">
+                        <span class="template-tag">Event</span>
+                        <span class="template-icon">🎵</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Festival</div>
+                        <h3 class="template-title">Summer Beats</h3>
+                        <p class="template-desc">Events and festivals with ticket sales.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Tickets</span>
+                            <span class="template-feature">Countdown</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 10: Tea Ceremony -->
+                <a href="tea-ceremony-thalheim.html" class="template-card">
+                    <div class="template-preview tea">
+                        <span class="template-tag">Wellness</span>
+                        <span class="template-icon">🍵</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Tea House</div>
+                        <h3 class="template-title">Tea Ceremony</h3>
+                        <p class="template-desc">Tea houses and wellness centers.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Booking</span>
+                            <span class="template-feature">Gallery</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 11: Universal Funnel -->
+                <a href="universal-funnel.html" class="template-card">
+                    <div class="template-preview dark">
+                        <span class="template-tag">Dark Mode</span>
+                        <span class="template-icon">🌙</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Universal</div>
+                        <h3 class="template-title">Universal Funnel</h3>
+                        <p class="template-desc">Multi-step dark funnel for any business.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Dark Mode</span>
+                            <span class="template-feature">Multi-Step</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Template 12: Nexa v3 -->
+                <a href="agency-nexa-v3.html" class="template-card">
+                    <div class="template-preview white">
+                        <span class="template-tag" style="background: #0f172a; color: white;">Agency</span>
+                        <span class="template-icon" style="filter: grayscale(100%);">💼</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">Minimal Agency</div>
+                        <h3 class="template-title">Nexa Minimal</h3>
+                        <p class="template-desc">Clean white minimal design.</p>
+                        <div class="template-features">
+                            <span class="template-feature">Minimal</span>
+                            <span class="template-feature">Clean</span>
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div class="template-content">
-                <div class="template-category">Cleaning</div>
-                <h3 class="template-title">CleanPro Wien</h3>
-                <p class="template-desc">For cleaning services with live price calculator, service selection and customer form.</p>
-                <div class="template-features">
-                    <span class="template-feature">Price Calculator</span>
-                    <span class="template-feature">Calculator</span>
-                    <span class="template-feature">3 Languages</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- 3. Fitness/Yoga -->
-        <a href="fitness-yoga-wien.html" class="template-card">
-            <div class="template-preview fitness">
-                <span class="template-tag">Local</span>
-                <span class="template-icon">🧘</span>
-            </div>
-            <div class="template-content">
-                <div class="template-category">Fitness</div>
-                <h3 class="template-title">Yoga & Fitness Studio</h3>
-                <p class="template-desc">For fitness studios with class schedule, membership quiz and trial registration.</p>
-                <div class="template-features">
-                    <span class="template-feature">Schedule</span>
-                    <span class="template-feature">Membership</span>
-                    <span class="template-feature">Trial</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- 4. Autowerkstatt -->
-        <a href="autowerkstatt-wien.html" class="template-card">
-            <div class="template-preview auto">
-                <span class="template-tag">Local</span>
-                <span class="template-icon">🚗</span>
-            </div>
-            <div class="template-content">
-                <div class="template-category">Auto</div>
-                <h3 class="template-title">Autowerkstatt</h3>
-                <p class="template-desc">For car workshops with service quiz, appointment booking and vehicle diagnosis form.</p>
-                <div class="template-features">
-                    <span class="template-feature">Service-Quiz</span>
-                    <span class="template-feature">Appointment</span>
-                    <span class="template-feature">Diagnosis</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- 5. Agency Nexa v4 (Green/Dark) -->
-        <a href="agency-nexa-v4.html" class="template-card">
-            <div class="template-preview" style="background: linear-gradient(135deg, #050508 0%, #1a1a2e 100%);">
-                <span class="template-tag" style="background: #a3e635; color: #000;">Agency</span>
-                <span class="template-icon">⚡</span>
-            </div>
-            <div class="template-content">
-                <div class="template-category" style="color: #84cc16;">Digital Agency</div>
-                <h3 class="template-title">Nexa Digital</h3>
-                <p class="template-desc">Dark theme with green accents. Project quiz, portfolio and service overview.</p>
-                <div class="template-features">
-                    <span class="template-feature" style="background: #dcfce7; color: #166534;">Dark/Green</span>
-                    <span class="template-feature">Project-Quiz</span>
-                    <span class="template-feature">3 Languages</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- 6. Event Festival -->
-        <a href="event-festival.html" class="template-card">
-            <div class="template-preview event">
-                <span class="template-tag">Event</span>
-                <span class="template-icon">🎵</span>
-            </div>
-            <div class="template-content">
-                <div class="template-category">Festival</div>
-                <h3 class="template-title">Summer Beats Festival</h3>
-                <p class="template-desc">For events and festivals with ticket sales, line-up, countdown and multilingual checkout.</p>
-                <div class="template-features">
-                    <span class="template-feature">Ticket Sales</span>
-                    <span class="template-feature">Countdown</span>
-                    <span class="template-feature">3 Languages</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- 7. Universal Funnel -->
-        <a href="universal-funnel.html" class="template-card">
-            <div class="template-preview dark">
-                <span class="template-tag">Dark Mode</span>
-                <span class="template-icon">🌙</span>
-            </div>
-            <div class="template-content">
-                <div class="template-category">Universal</div>
-                <h3 class="template-title">Universal Funnel</h3>
-                <p class="template-desc">Dark-mode Multi-Step Funnel for any business. Quiz structure, lead generation, mobile-first.</p>
-                <div class="template-features">
-                    <span class="template-feature">Dark Mode</span>
-                    <span class="template-feature">Multi-Step</span>
-                    <span class="template-feature">Mobile-First</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- 8. Tea Ceremony -->
-        <a href="tea-ceremony-thalheim.html" class="template-card">
-            <div class="template-preview tea">
-                <span class="template-tag">Wellness</span>
-                <span class="template-icon">🍵</span>
-            </div>
-            <div class="template-content">
-                <div class="template-category">Tea House</div>
-                <h3 class="template-title">Tea Ceremony Thalheim</h3>
-                <p class="template-desc">For tea houses and wellness centers with ceremony booking, pricing and ambiance gallery.</p>
-                <div class="template-features">
-                    <span class="template-feature">Booking</span>
-                    <span class="template-feature">Gallery</span>
-                    <span class="template-feature">Pricing</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- 9. PixelForge Agency -->
-        <a href="agency-pixelforge.html" class="template-card">
-            <div class="template-preview" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">
-                <span class="template-tag">Agency</span>
-                <span class="template-icon">🎨</span>
-            </div>
-            <div class="template-content">
-                <div class="template-category">Creative Agency</div>
-                <h3 class="template-title">PixelForge</h3>
-                <p class="template-desc">Creative agency template with bold orange design, portfolio showcase and contact forms.</p>
-                <div class="template-features">
-                    <span class="template-feature">Bold Design</span>
-                    <span class="template-feature">Portfolio</span>
-                    <span class="template-feature">Contact</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- 10. Nexa Agency v2 -->
-        <a href="agency-nexa-v2.html" class="template-card">
-            <div class="template-preview" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
-                <span class="template-tag" style="background: #60a5fa;">Agency</span>
-                <span class="template-icon">🚀</span>
-            </div>
-            <div class="template-content">
-                <div class="template-category">Tech Agency</div>
-                <h3 class="template-title">Nexa v2</h3>
-                <p class="template-desc">Dark blue tech agency with modern design and interactive elements.</p>
-                <div class="template-features">
-                    <span class="template-feature">Dark Blue</span>
-                    <span class="template-feature">Modern</span>
-                    <span class="template-feature">Interactive</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- 11. Nexa Agency v3 -->
-        <a href="agency-nexa-v3.html" class="template-card">
-            <div class="template-preview" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 2px solid #e2e8f0;">
-                <span class="template-tag" style="background: #0f172a; color: white;">Agency</span>
-                <span class="template-icon" style="filter: grayscale(100%);">💼</span>
-            </div>
-            <div class="template-content">
-                <div class="template-category">Minimal Agency</div>
-                <h3 class="template-title">Nexa v3</h3>
-                <p class="template-desc">Clean minimal white design with subtle animations and elegant typography.</p>
-                <div class="template-features">
-                    <span class="template-feature">Minimal</span>
-                    <span class="template-feature">White</span>
-                    <span class="template-feature">Clean</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- 12. Nexa Agency Classic -->
-        <a href="agency-nexa.html" class="template-card">
-            <div class="template-preview" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);">
-                <span class="template-tag" style="background: #7c3aed;">Agency</span>
-                <span class="template-icon">💜</span>
-            </div>
-            <div class="template-content">
-                <div class="template-category">Classic Agency</div>
-                <h3 class="template-title">Nexa Classic</h3>
-                <p class="template-desc">Light purple classic agency template with professional business look.</p>
-                <div class="template-features">
-                    <span class="template-feature">Classic</span>
-                    <span class="template-feature">Purple</span>
-                    <span class="template-feature">Professional</span>
-                </div>
-            </div>
-        </a>
-        
+        </div>
     </section>
-    
+
+    <!-- AI Builder Section -->
+    <section class="ai-builder" id="ai-builder">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">🤖 AI Builder</div>
+                <h2 class="section-title">Describe your business, <span>we build the rest</span></h2>
+            </div>
+            
+            <div class="ai-grid">
+                <div class="ai-visual">
+                    <div class="chat-header">
+                        <div class="chat-avatar">🤖</div>
+                        <div>
+                            <div class="chat-name">AI Builder</div>
+                            <div class="chat-status">● Online</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-message">
+                        I need a website for my dental clinic in Vienna. Should have appointment booking and patient reviews.
+                    </div>
+                    
+                    <div class="chat-message ai">
+                        ✓ Generated "Zahnarzt Praxis" template
+                        ✓ Added appointment quiz
+                        ✓ Configured 3 languages (DE/EN/UA)
+                        ✓ Set up patient review section
+                        <br><br>
+                        🚀 Your website is ready! Preview: <a href="#" style="color: #818cf8;">View</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="ai-feature">
+                        <div class="ai-check">✓</div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 4px;">Smart Content Generation</div>
+                            <div style="color: var(--gray); font-size: 14px;">AI writes professional copy tailored to your industry</div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-feature">
+                        <div class="ai-check">✓</div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 4px;">Auto Template Matching</div>
+                            <div style="color: var(--gray); font-size: 14px;">Picks the perfect template based on your business type</div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-feature">
+                        <div class="ai-check">✓</div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 4px;">Brand Adaptation</div>
+                            <div style="color: var(--gray); font-size: 14px;">Colors, fonts, and styling matched to your brand</div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-feature">
+                        <div class="ai-check">✓</div>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 4px;">One-Click Deploy</div>
+                            <div style="color: var(--gray); font-size: 14px;">Live website in seconds, not weeks</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div>© 2024 Sosick Templates. AI-Powered Website Builder.</div>
+    </footer>
+
+    <script>
+        // Simple filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
