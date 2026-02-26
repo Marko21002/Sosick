@@ -2,38 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sosick Templates — AI-Powered Website Builder & Template Marketplace</title>
-    <meta name="description" content="Create stunning websites in minutes with AI. Professional templates, smart content generation, and drag-and-drop editor.">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sosick Templates — AI Website Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6366f1;
-            --primary-dark: #4f46e5;
             --primary-light: #818cf8;
             --secondary: #10b981;
-            --accent: #f59e0b;
             --dark: #0f172a;
             --dark-light: #1e293b;
             --gray: #64748b;
-            --gray-light: #f1f5f9;
             --white: #ffffff;
-            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             --gradient-2: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-            --gradient-3: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { font-size: 16px; }
         
         body {
             font-family: 'Inter', -apple-system, sans-serif;
             background: var(--dark);
             color: var(--white);
-            line-height: 1.6;
+            line-height: 1.5;
             overflow-x: hidden;
         }
         
@@ -44,8 +37,8 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 16px 24px;
-            background: rgba(15, 23, 42, 0.8);
+            padding: 12px 16px;
+            background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -61,61 +54,115 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 24px;
+            gap: 8px;
+            font-size: 18px;
             font-weight: 800;
             background: var(--gradient-1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            cursor: pointer;
         }
         
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             background: var(--gradient-1);
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 16px;
             -webkit-text-fill-color: white;
-            font-size: 20px;
         }
         
-        .nav-links {
+        .nav-right {
             display: flex;
-            gap: 32px;
             align-items: center;
+            gap: 12px;
         }
         
-        .nav-link {
-            color: var(--gray);
-            text-decoration: none;
+        /* Language Switcher */
+        .lang-switch {
+            position: relative;
+        }
+        
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 14px;
             font-weight: 500;
-            font-size: 15px;
-            transition: color 0.3s;
+            cursor: pointer;
+            transition: all 0.2s;
         }
         
-        .nav-link:hover { color: var(--white); }
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--dark-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 120px;
+            display: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .lang-switch.active .lang-dropdown {
+            display: block;
+        }
+        
+        .lang-option {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .lang-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .lang-option.active {
+            background: var(--gradient-1);
+        }
         
         .nav-cta {
-            display: flex;
-            gap: 12px;
-            align-items: center;
+            display: none;
         }
         
         .btn {
-            padding: 12px 24px;
-            border-radius: 10px;
+            padding: 10px 18px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 14px;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.2s;
             border: none;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-1);
+            color: var(--white);
         }
         
         .btn-secondary {
@@ -124,83 +171,32 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .btn-primary {
-            background: var(--gradient-1);
-            color: var(--white);
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
-        }
-        
-        .btn-large {
-            padding: 16px 32px;
-            font-size: 16px;
-            border-radius: 12px;
-        }
-        
         /* Hero */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 24px 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
-            animation: pulse 10s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-        
-        .hero-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
+            padding: 100px 16px 60px;
+            text-align: center;
         }
         
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(99, 102, 241, 0.1);
+            gap: 6px;
+            background: rgba(99, 102, 241, 0.15);
             border: 1px solid rgba(99, 102, 241, 0.3);
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--primary-light);
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
         
         .hero h1 {
-            font-size: 64px;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 24px;
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
         }
         
         .hero h1 span {
@@ -209,69 +205,73 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .hero-description {
-            font-size: 20px;
+        .hero-desc {
+            font-size: 16px;
             color: var(--gray);
-            margin-bottom: 40px;
-            line-height: 1.7;
+            margin-bottom: 28px;
+            line-height: 1.6;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        .hero-cta {
+        .hero-buttons {
             display: flex;
-            gap: 16px;
-            margin-bottom: 48px;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-btn {
+            padding: 14px 24px;
+            font-size: 15px;
+            width: 100%;
         }
         
         .hero-stats {
             display: flex;
-            gap: 48px;
+            justify-content: center;
+            gap: 32px;
         }
         
-        .hero-stat-value {
-            font-size: 36px;
+        .stat-value {
+            font-size: 28px;
             font-weight: 800;
             background: var(--gradient-1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
-        .hero-stat-label {
-            font-size: 14px;
+        .stat-label {
+            font-size: 13px;
             color: var(--gray);
         }
         
-        /* Templates Section */
-        .templates-section {
-            padding: 120px 24px;
-            background: var(--dark);
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
+        /* Sections */
+        .section {
+            padding: 60px 16px;
         }
         
         .section-tag {
             display: inline-block;
             background: rgba(99, 102, 241, 0.1);
             border: 1px solid rgba(99, 102, 241, 0.3);
-            padding: 8px 20px;
+            padding: 6px 14px;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--primary-light);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         
         .section-title {
-            font-size: 48px;
+            font-size: 26px;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            line-height: 1.2;
         }
         
         .section-title span {
@@ -280,55 +280,30 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .templates-filter {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 60px;
-            flex-wrap: wrap;
+        .section-header {
+            text-align: center;
+            margin-bottom: 32px;
         }
         
-        .filter-btn {
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            color: var(--gray);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--gradient-1);
-            color: var(--white);
-            border-color: transparent;
-        }
-        
+        /* Templates */
         .templates-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
+            grid-template-columns: 1fr;
+            gap: 16px;
         }
         
         .template-card {
             background: var(--dark-light);
-            border-radius: 24px;
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
             text-decoration: none;
             color: inherit;
-        }
-        
-        .template-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow);
-            border-color: rgba(99, 102, 241, 0.3);
+            display: block;
         }
         
         .template-preview {
-            height: 200px;
+            height: 160px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -337,47 +312,48 @@
         
         .template-tag {
             position: absolute;
-            top: 16px;
-            left: 16px;
+            top: 12px;
+            left: 12px;
             background: rgba(0, 0, 0, 0.6);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
         }
         
         .template-icon {
-            font-size: 64px;
+            font-size: 48px;
         }
         
         .template-content {
-            padding: 24px;
+            padding: 16px;
         }
         
         .template-category {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--primary-light);
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .template-title {
-            font-size: 20px;
+            font-size: 17px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .template-desc {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--gray);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+            line-height: 1.5;
         }
         
         .template-features {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
         }
         
@@ -385,494 +361,396 @@
             background: rgba(255, 255, 255, 0.05);
             padding: 4px 10px;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 11px;
         }
         
-        .template-preview.health { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); }
-        .template-preview.clean { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
-        .template-preview.fitness { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .template-preview.auto { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
-        .template-preview.dark { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-        .template-preview.event { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
-        .template-preview.tea { background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%); }
-        .template-preview.green { background: linear-gradient(135deg, #050508 0%, #1a1a2e 100%); }
-        .template-preview.orange { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); }
-        .template-preview.blue { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
-        .template-preview.white { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); color: #1a1a2e; }
-        .template-preview.purple { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); color: #1a1a2e; }
+        /* Template preview colors */
+        .health { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); }
+        .clean { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .fitness { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .auto { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
+        .green { background: linear-gradient(135deg, #050508 0%, #1a1a2e 100%); }
+        .orange { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); }
+        .blue { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
+        .purple { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); color: #1a1a2e; }
+        .event { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+        .tea { background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%); }
+        .dark { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .white { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); color: #1a1a2e; }
         
-        /* AI Builder Section */
-        .ai-builder {
-            padding: 120px 24px;
-            background: linear-gradient(180deg, var(--dark-light) 0%, var(--dark) 100%);
-        }
-        
-        .ai-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-        
-        .ai-visual {
+        /* AI Builder */
+        .ai-section {
             background: var(--dark-light);
-            border-radius: 24px;
-            padding: 32px;
+        }
+        
+        .chat-demo {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 24px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .chat-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .chat-avatar {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             background: var(--gradient-1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 14px;
         }
         
-        .chat-name { font-weight: 600; }
-        .chat-status { font-size: 13px; color: var(--secondary); }
+        .chat-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .chat-status {
+            font-size: 12px;
+            color: var(--secondary);
+        }
         
         .chat-message {
-            background: rgba(99, 102, 241, 0.1);
-            padding: 16px 20px;
-            border-radius: 16px 16px 16px 4px;
-            margin-bottom: 16px;
+            background: rgba(99, 102, 241, 0.15);
+            padding: 12px 14px;
+            border-radius: 12px 12px 12px 4px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.5;
         }
         
         .chat-message.ai {
-            background: rgba(16, 185, 129, 0.1);
-            border-radius: 16px 16px 4px 16px;
-            margin-left: 20%;
+            background: rgba(16, 185, 129, 0.15);
+            border-radius: 12px 12px 4px 12px;
+            margin-left: 20px;
         }
         
         .ai-feature {
             display: flex;
             align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
         
         .ai-check {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             background: var(--gradient-2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 11px;
             flex-shrink: 0;
+        }
+        
+        .ai-feature-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+        
+        .ai-feature-desc {
+            color: var(--gray);
+            font-size: 13px;
         }
         
         /* Footer */
         .footer {
-            padding: 40px 24px;
-            background: var(--dark-light);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 24px 16px;
             text-align: center;
             color: var(--gray);
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-container, .ai-grid {
-                grid-template-columns: 1fr;
-                gap: 60px;
-            }
-            .templates-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero h1 { font-size: 48px; }
+        /* Desktop */
+        @media (min-width: 768px) {
+            .nav { padding: 16px 24px; }
+            .logo { font-size: 22px; }
+            .logo-icon { width: 40px; height: 40px; font-size: 20px; }
+            .nav-cta { display: flex; gap: 12px; }
+            .nav-right { gap: 20px; }
+            
+            .hero { padding: 140px 24px 80px; }
+            .hero h1 { font-size: 56px; }
+            .hero-desc { font-size: 20px; }
+            .hero-buttons { flex-direction: row; max-width: none; }
+            .hero-btn { width: auto; padding: 16px 32px; }
+            
+            .section { padding: 100px 24px; }
+            .section-title { font-size: 40px; }
+            
+            .templates-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
         }
         
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 36px; }
-            .templates-grid { grid-template-columns: 1fr; }
-            .section-title { font-size: 32px; }
+        @media (min-width: 1024px) {
+            .hero h1 { font-size: 64px; }
+            .templates-grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
             <div class="logo">
                 <div class="logo-icon">⚡</div>
-                Sosick Templates
+                <span data-i18n="brand">Sosick</span>
             </div>
-            <div class="nav-links">
-                <a href="#templates" class="nav-link">Templates</a>
-                <a href="#ai-builder" class="nav-link">AI Builder</a>
-                <a href="#" class="nav-link">Pricing</a>
-            </div>
-            <div class="nav-cta">
-                <a href="#" class="btn btn-secondary">Sign In</a>
-                <a href="#templates" class="btn btn-primary">Get Started</a>
+            <div class="nav-right">
+                <div class="lang-switch" onclick="toggleLang()">
+                    <button class="lang-btn">
+                        <span id="current-lang">EN</span>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option active" onclick="setLang('en')">🇬🇧 English</div>
+                        <div class="lang-option" onclick="setLang('ru')">🇷🇺 Русский</div>
+                        <div class="lang-option" onclick="setLang('de')">🇩🇪 Deutsch</div>
+                    </div>
+                </div>
+                <div class="nav-cta">
+                    <a href="#" class="btn btn-secondary" data-i18n="signin">Sign In</a>
+                    <a href="#templates" class="btn btn-primary" data-i18n="getstarted">Get Started</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-container">
-            <div>
-                <div class="hero-badge">✨ Now with AI-Powered Builder</div>
-                <h1>Build websites with <span>AI</span> in minutes</h1>
-                <p class="hero-description">Professional templates meet intelligent automation. Describe your business, and our AI generates a complete, conversion-optimized website instantly.</p>
-                <div class="hero-cta">
-                    <a href="#templates" class="btn btn-primary btn-large">🚀 Start Building Free</a>
-                    <a href="#ai-builder" class="btn btn-secondary btn-large">▶ See How It Works</a>
-                </div>
-                <div class="hero-stats">
-                    <div>
-                        <div class="hero-stat-value">12+</div>
-                        <div class="hero-stat-label">Templates</div>
-                    </div>
-                    <div>
-                        <div class="hero-stat-value">3</div>
-                        <div class="hero-stat-label">Languages</div>
-                    </div>
-                    <div>
-                        <div class="hero-stat-value">15-25%</div>
-                        <div class="hero-stat-label">Conversion</div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <!-- Visual mockup would go here -->
-                <div style="background: var(--dark-light); border-radius: 24px; padding: 40px; border: 1px solid rgba(255,255,255,0.1);">
-                    <div style="display: flex; gap: 8px; margin-bottom: 24px;">
-                        <div style="width: 12px; height: 12px; background: #ef4444; border-radius: 50%;"></div>
-                        <div style="width: 12px; height: 12px; background: #f59e0b; border-radius: 50%;"></div>
-                        <div style="width: 12px; height: 12px; background: #10b981; border-radius: 50%;"></div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 32px; text-align: center;">
-                        <div style="width: 60px; height: 60px; background: var(--gradient-1); border-radius: 16px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 28px;">⚡</div>
-                        <div style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">Your Website</div>
-                        <div style="color: var(--gray); margin-bottom: 24px;">Generated by AI in 30 seconds</div>
-                        <div style="background: var(--gradient-1); padding: 12px 32px; border-radius: 10px; display: inline-block; font-weight: 600;">Launch Site →</div>
-                    </div>
-                </div>
-            </div>
+        <div class="hero-badge">✨ <span data-i18n="badge">AI-Powered Builder</span></div>
+        <h1 data-i18n="hero-title">Build websites with <span>AI</span> in minutes</h1>
+        <p class="hero-desc" data-i18n="hero-desc">Describe your business, and our AI generates a complete, conversion-optimized website instantly.</p>
+        <div class="hero-buttons">
+            <a href="#templates" class="btn btn-primary hero-btn">🚀 <span data-i18n="btn-primary">Start Free</span></a>
+            <a href="#ai-builder" class="btn btn-secondary hero-btn">▶ <span data-i18n="btn-secondary">How It Works</span></a>
+        </div>
+        <div class="hero-stats">
+            <div><div class="stat-value">12+</div><div class="stat-label" data-i18n="stat-templates">Templates</div></div>
+            <div><div class="stat-value">3</div><div class="stat-label" data-i18n="stat-langs">Languages</div></div>
+            <div><div class="stat-value">15-25%</div><div class="stat-label" data-i18n="stat-conversion">Conversion</div></div>
         </div>
     </section>
 
-    <!-- Templates Section -->
-    <section class="templates-section" id="templates">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-tag">🎨 Template Marketplace</div>
-                <h2 class="section-title">Choose from <span>12+ professional templates</span></h2>
-            </div>
-            
-            <div class="templates-filter">
-                <button class="filter-btn active">All</button>
-                <button class="filter-btn">Local Business</button>
-                <button class="filter-btn">Services</button>
-                <button class="filter-btn">Agencies</button>
-                <button class="filter-btn">Events</button>
-            </div>
-            
-            <div class="templates-grid">
-                <!-- Template 1: Zahnarzt -->
-                <a href="zahnarzt-final.html" class="template-card">
-                    <div class="template-preview health">
-                        <span class="template-tag">Local</span>
-                        <span class="template-icon">🦷</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Health</div>
-                        <h3 class="template-title">Zahnarzt Praxis</h3>
-                        <p class="template-desc">Dental clinic template with appointment quiz and patient reviews.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Quiz-Funnel</span>
-                            <span class="template-feature">3 Languages</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 2: Reinigung -->
-                <a href="reinigung-final.html" class="template-card">
-                    <div class="template-preview clean">
-                        <span class="template-tag">Local</span>
-                        <span class="template-icon">🧽</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Cleaning</div>
-                        <h3 class="template-title">CleanPro Wien</h3>
-                        <p class="template-desc">Cleaning services with live price calculator and booking.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Calculator</span>
-                            <span class="template-feature">3 Languages</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 3: Fitness -->
-                <a href="fitness-yoga-wien.html" class="template-card">
-                    <div class="template-preview fitness">
-                        <span class="template-tag">Local</span>
-                        <span class="template-icon">🧘</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Fitness</div>
-                        <h3 class="template-title">Yoga & Fitness</h3>
-                        <p class="template-desc">Gym and yoga studio with class schedule and memberships.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Schedule</span>
-                            <span class="template-feature">Membership</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 4: Autowerkstatt -->
-                <a href="autowerkstatt-wien.html" class="template-card">
-                    <div class="template-preview auto">
-                        <span class="template-tag">Local</span>
-                        <span class="template-icon">🚗</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Auto</div>
-                        <h3 class="template-title">Autowerkstatt</h3>
-                        <p class="template-desc">Car repair shop with service quiz and diagnosis form.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Service-Quiz</span>
-                            <span class="template-feature">Booking</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 5: Nexa Digital v4 -->
-                <a href="agency-nexa-v4.html" class="template-card">
-                    <div class="template-preview green">
-                        <span class="template-tag" style="background: #a3e635; color: #000;">Agency</span>
-                        <span class="template-icon">⚡</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category" style="color: #a3e635;">Digital Agency</div>
-                        <h3 class="template-title">Nexa Digital</h3>
-                        <p class="template-desc">Dark theme with green accents. Portfolio and quiz.</p>
-                        <div class="template-features">
-                            <span class="template-feature" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Dark/Green</span>
-                            <span class="template-feature">3 Languages</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 6: PixelForge -->
-                <a href="agency-pixelforge.html" class="template-card">
-                    <div class="template-preview orange">
-                        <span class="template-tag">Agency</span>
-                        <span class="template-icon">🎨</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Creative Agency</div>
-                        <h3 class="template-title">PixelForge</h3>
-                        <p class="template-desc">Bold orange design for creative agencies.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Bold Design</span>
-                            <span class="template-feature">Portfolio</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 7: Nexa v2 -->
-                <a href="agency-nexa-v2.html" class="template-card">
-                    <div class="template-preview blue">
-                        <span class="template-tag" style="background: #60a5fa;">Agency</span>
-                        <span class="template-icon">🚀</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Tech Agency</div>
-                        <h3 class="template-title">Nexa Tech</h3>
-                        <p class="template-desc">Dark blue tech agency with modern design.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Dark Blue</span>
-                            <span class="template-feature">Modern</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 8: Nexa Classic -->
-                <a href="agency-nexa.html" class="template-card">
-                    <div class="template-preview purple">
-                        <span class="template-tag" style="background: #7c3aed; color: white;">Agency</span>
-                        <span class="template-icon">💜</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Classic Agency</div>
-                        <h3 class="template-title">Nexa Classic</h3>
-                        <p class="template-desc">Light purple classic business template.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Classic</span>
-                            <span class="template-feature">Professional</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 9: Event Festival -->
-                <a href="event-festival.html" class="template-card">
-                    <div class="template-preview event">
-                        <span class="template-tag">Event</span>
-                        <span class="template-icon">🎵</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Festival</div>
-                        <h3 class="template-title">Summer Beats</h3>
-                        <p class="template-desc">Events and festivals with ticket sales.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Tickets</span>
-                            <span class="template-feature">Countdown</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 10: Tea Ceremony -->
-                <a href="tea-ceremony-thalheim.html" class="template-card">
-                    <div class="template-preview tea">
-                        <span class="template-tag">Wellness</span>
-                        <span class="template-icon">🍵</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Tea House</div>
-                        <h3 class="template-title">Tea Ceremony</h3>
-                        <p class="template-desc">Tea houses and wellness centers.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Booking</span>
-                            <span class="template-feature">Gallery</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 11: Universal Funnel -->
-                <a href="universal-funnel.html" class="template-card">
-                    <div class="template-preview dark">
-                        <span class="template-tag">Dark Mode</span>
-                        <span class="template-icon">🌙</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Universal</div>
-                        <h3 class="template-title">Universal Funnel</h3>
-                        <p class="template-desc">Multi-step dark funnel for any business.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Dark Mode</span>
-                            <span class="template-feature">Multi-Step</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <!-- Template 12: Nexa v3 -->
-                <a href="agency-nexa-v3.html" class="template-card">
-                    <div class="template-preview white">
-                        <span class="template-tag" style="background: #0f172a; color: white;">Agency</span>
-                        <span class="template-icon" style="filter: grayscale(100%);">💼</span>
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Minimal Agency</div>
-                        <h3 class="template-title">Nexa Minimal</h3>
-                        <p class="template-desc">Clean white minimal design.</p>
-                        <div class="template-features">
-                            <span class="template-feature">Minimal</span>
-                            <span class="template-feature">Clean</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
+    <section class="section" id="templates">
+        <div class="section-header">
+            <div class="section-tag" data-i18n="templates-tag">Template Marketplace</div>
+            <h2 class="section-title" data-i18n="templates-title">Choose from <span>12+ templates</span></h2>
+        </div>
+        <div class="templates-grid" id="templates-grid">
+            <!-- Templates will be rendered by JS -->
         </div>
     </section>
 
-    <!-- AI Builder Section -->
-    <section class="ai-builder" id="ai-builder">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-tag">🤖 AI Builder</div>
-                <h2 class="section-title">Describe your business, <span>we build the rest</span></h2>
-            </div>
-            
-            <div class="ai-grid">
-                <div class="ai-visual">
-                    <div class="chat-header">
-                        <div class="chat-avatar">🤖</div>
-                        <div>
-                            <div class="chat-name">AI Builder</div>
-                            <div class="chat-status">● Online</div>
-                        </div>
-                    </div>
-                    
-                    <div class="chat-message">
-                        I need a website for my dental clinic in Vienna. Should have appointment booking and patient reviews.
-                    </div>
-                    
-                    <div class="chat-message ai">
-                        ✓ Generated "Zahnarzt Praxis" template
-                        ✓ Added appointment quiz
-                        ✓ Configured 3 languages (DE/EN/UA)
-                        ✓ Set up patient review section
-                        <br><br>
-                        🚀 Your website is ready! Preview: <a href="#" style="color: #818cf8;">View</a>
-                    </div>
-                </div>
-                
+    <section class="section ai-section" id="ai-builder">
+        <div class="section-header">
+            <div class="section-tag">🤖 AI Builder</div>
+            <h2 class="section-title" data-i18n="ai-title">Describe your business, <span>we build the rest</span></h2>
+        </div>
+        <div class="chat-demo">
+            <div class="chat-header">
+                <div class="chat-avatar">🤖</div>
                 <div>
-                    <div class="ai-feature">
-                        <div class="ai-check">✓</div>
-                        <div>
-                            <div style="font-weight: 600; margin-bottom: 4px;">Smart Content Generation</div>
-                            <div style="color: var(--gray); font-size: 14px;">AI writes professional copy tailored to your industry</div>
-                        </div>
-                    </div>
-                    
-                    <div class="ai-feature">
-                        <div class="ai-check">✓</div>
-                        <div>
-                            <div style="font-weight: 600; margin-bottom: 4px;">Auto Template Matching</div>
-                            <div style="color: var(--gray); font-size: 14px;">Picks the perfect template based on your business type</div>
-                        </div>
-                    </div>
-                    
-                    <div class="ai-feature">
-                        <div class="ai-check">✓</div>
-                        <div>
-                            <div style="font-weight: 600; margin-bottom: 4px;">Brand Adaptation</div>
-                            <div style="color: var(--gray); font-size: 14px;">Colors, fonts, and styling matched to your brand</div>
-                        </div>
-                    </div>
-                    
-                    <div class="ai-feature">
-                        <div class="ai-check">✓</div>
-                        <div>
-                            <div style="font-weight: 600; margin-bottom: 4px;">One-Click Deploy</div>
-                            <div style="color: var(--gray); font-size: 14px;">Live website in seconds, not weeks</div>
-                        </div>
-                    </div>
+                    <div class="chat-name">AI Builder</div>
+                    <div class="chat-status">● Online</div>
+                </div>
+            </div>
+            <div class="chat-message" data-i18n="chat-user">I need a website for my dental clinic in Vienna.</div>
+            <div class="chat-message ai" data-i18n="chat-ai">✓ Generated "Zahnarzt" template<br>✓ Added appointment quiz<br>✓ 3 languages configured<br><br>🚀 Your website is ready!</div>
+        </div>
+        <div class="ai-features">
+            <div class="ai-feature">
+                <div class="ai-check">✓</div>
+                <div>
+                    <div class="ai-feature-title" data-i18n="feature-1-title">Smart Content Generation</div>
+                    <div class="ai-feature-desc" data-i18n="feature-1-desc">AI writes professional copy for your industry</div>
+                </div>
+            </div>
+            <div class="ai-feature">
+                <div class="ai-check">✓</div>
+                <div>
+                    <div class="ai-feature-title" data-i18n="feature-2-title">Auto Template Matching</div>
+                    <div class="ai-feature-desc" data-i18n="feature-2-desc">Picks the perfect template for your business</div>
+                </div>
+            </div>
+            <div class="ai-feature">
+                <div class="ai-check">✓</div>
+                <div>
+                    <div class="ai-feature-title" data-i18n="feature-3-title">One-Click Deploy</div>
+                    <div class="ai-feature-desc" data-i18n="feature-3-desc">Live website in seconds, not weeks</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
-        <div>© 2024 Sosick Templates. AI-Powered Website Builder.</div>
+        © 2024 Sosick Templates. <span data-i18n="footer">AI-Powered Website Builder</span>.
     </footer>
 
     <script>
-        // Simple filter functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
+        const translations = {
+            en: {
+                'brand': 'Sosick',
+                'signin': 'Sign In',
+                'getstarted': 'Get Started',
+                'badge': 'AI-Powered Builder',
+                'hero-title': 'Build websites with <span>AI</span> in minutes',
+                'hero-desc': 'Describe your business, and our AI generates a complete, conversion-optimized website instantly.',
+                'btn-primary': 'Start Free',
+                'btn-secondary': 'How It Works',
+                'stat-templates': 'Templates',
+                'stat-langs': 'Languages',
+                'stat-conversion': 'Conversion',
+                'templates-tag': 'Template Marketplace',
+                'templates-title': 'Choose from <span>12+ templates</span>',
+                'ai-title': 'Describe your business, <span>we build the rest</span>',
+                'chat-user': 'I need a website for my dental clinic in Vienna.',
+                'chat-ai': '✓ Generated "Zahnarzt" template\n✓ Added appointment quiz\n✓ 3 languages configured\n\n🚀 Your website is ready!',
+                'feature-1-title': 'Smart Content Generation',
+                'feature-1-desc': 'AI writes professional copy for your industry',
+                'feature-2-title': 'Auto Template Matching',
+                'feature-2-desc': 'Picks the perfect template for your business',
+                'feature-3-title': 'One-Click Deploy',
+                'feature-3-desc': 'Live website in seconds, not weeks',
+                'footer': 'AI-Powered Website Builder'
+            },
+            ru: {
+                'brand': 'Sosick',
+                'signin': 'Войти',
+                'getstarted': 'Начать',
+                'badge': 'AI-конструктор',
+                'hero-title': 'Создавайте сайты с <span>AI</span> за минуты',
+                'hero-desc': 'Опишите свой бизнес, и наш AI мгновенно создаст полноценный, оптимизированный сайт.',
+                'btn-primary': 'Начать бесплатно',
+                'btn-secondary': 'Как это работает',
+                'stat-templates': 'Шаблоны',
+                'stat-langs': 'Языки',
+                'stat-conversion': 'Конверсия',
+                'templates-tag': 'Маркетплейс шаблонов',
+                'templates-title': 'Выберите из <span>12+ шаблонов</span>',
+                'ai-title': 'Опишите бизнес, <span>а мы сделаем сайт</span>',
+                'chat-user': 'Мне нужен сайт для стоматологии в Вене.',
+                'chat-ai': '✓ Создан шаблон "Zahnarzt"\n✓ Добавлена запись на приём\n✓ Настроено 3 языка\n\n🚀 Ваш сайт готов!',
+                'feature-1-title': 'Умная генерация контента',
+                'feature-1-desc': 'AI пишет профессиональный текст для вашей отрасли',
+                'feature-2-title': 'Автоподбор шаблона',
+                'feature-2-desc': 'Выбирает идеальный шаблон для вашего бизнеса',
+                'feature-3-title': 'Запуск в один клик',
+                'feature-3-desc': 'Рабочий сайт за секунды, а не недели',
+                'footer': 'Конструктор сайтов с AI'
+            },
+            de: {
+                'brand': 'Sosick',
+                'signin': 'Anmelden',
+                'getstarted': 'Starten',
+                'badge': 'AI-Website-Builder',
+                'hero-title': 'Websites mit <span>AI</span> in Minuten erstellen',
+                'hero-desc': 'Beschreiben Sie Ihr Unternehmen, und unsere AI erstellt sofort eine optimierte Website.',
+                'btn-primary': 'Kostenlos starten',
+                'btn-secondary': 'So funktioniert es',
+                'stat-templates': 'Templates',
+                'stat-langs': 'Sprachen',
+                'stat-conversion': 'Conversion',
+                'templates-tag': 'Template-Marktplatz',
+                'templates-title': 'Wähle aus <span>12+ Templates</span>',
+                'ai-title': 'Beschreiben Sie Ihr Unternehmen, <span>wir bauen den Rest</span>',
+                'chat-user': 'Ich brauche eine Website für meine Zahnarztpraxis in Wien.',
+                'chat-ai': '✓ "Zahnarzt" Template erstellt\n✓ Terminbuchung hinzugefügt\n✓ 3 Sprachen konfiguriert\n\n🚀 Ihre Website ist bereit!',
+                'feature-1-title': 'Smarte Content-Generierung',
+                'feature-1-desc': 'AI schreibt professionelle Texte für Ihre Branche',
+                'feature-2-title': 'Auto Template-Matching',
+                'feature-2-desc': 'Wählt das perfekte Template für Ihr Unternehmen',
+                'feature-3-title': 'One-Click Deploy',
+                'feature-3-desc': 'Live-Website in Sekunden, nicht Wochen',
+                'footer': 'AI-Powered Website Builder'
+            }
+        };
+
+        const templates = [
+            { id: 'zahnarzt', href: 'zahnarzt-final.html', class: 'health', tag: 'Local', icon: '🦷', category: { en: 'Health', ru: 'Здоровье', de: 'Gesundheit' }, title: 'Zahnarzt', desc: { en: 'Dental clinic with appointment booking', ru: 'Стоматология с записью на приём', de: 'Zahnarzt mit Terminbuchung' }, features: ['Quiz', '3 Sprachen'] },
+            { id: 'reinigung', href: 'reinigung-final.html', class: 'clean', tag: 'Local', icon: '🧽', category: { en: 'Cleaning', ru: 'Клининг', de: 'Reinigung' }, title: 'CleanPro', desc: { en: 'Cleaning services with price calculator', ru: 'Клининг с калькулятором цен', de: 'Reinigung mit Preisrechner' }, features: ['Calculator', '3 Sprachen'] },
+            { id: 'fitness', href: 'fitness-yoga-wien.html', class: 'fitness', tag: 'Local', icon: '🧘', category: { en: 'Fitness', ru: 'Фитнес', de: 'Fitness' }, title: 'Yoga & Fitness', desc: { en: 'Gym with class schedule', ru: 'Студия с расписанием', de: 'Studio mit Kursplan' }, features: ['Schedule', 'Membership'] },
+            { id: 'auto', href: 'autowerkstatt-wien.html', class: 'auto', tag: 'Local', icon: '🚗', category: { en: 'Auto', ru: 'Авто', de: 'Auto' }, title: 'Autowerkstatt', desc: { en: 'Car repair with service quiz', ru: 'Автосервис с квизом', de: 'Autowerkstatt mit Quiz' }, features: ['Quiz', 'Booking'] },
+            { id: 'nexa', href: 'agency-nexa-v4.html', class: 'green', tag: 'Agency', icon: '⚡', category: { en: 'Digital Agency', ru: 'Digital-агентство', de: 'Digital Agentur' }, title: 'Nexa Digital', desc: { en: 'Dark theme with green accents', ru: 'Тёмная тема с зелёным', de: 'Dark Theme mit Grün' }, features: ['Dark/Green', 'Portfolio'] },
+            { id: 'pixelforge', href: 'agency-pixelforge.html', class: 'orange', tag: 'Agency', icon: '🎨', category: { en: 'Creative Agency', ru: 'Креативное агентство', de: 'Kreativ Agentur' }, title: 'PixelForge', desc: { en: 'Bold orange design', ru: 'Яркий оранжевый дизайн', de: 'Oranges Design' }, features: ['Bold', 'Portfolio'] },
+            { id: 'nexa2', href: 'agency-nexa-v2.html', class: 'blue', tag: 'Agency', icon: '🚀', category: { en: 'Tech Agency', ru: 'Tech-агентство', de: 'Tech Agentur' }, title: 'Nexa Tech', desc: { en: 'Dark blue tech style', ru: 'Тёмно-синий стиль', de: 'Dunkelblau Tech' }, features: ['Modern', 'Tech'] },
+            { id: 'event', href: 'event-festival.html', class: 'event', tag: 'Event', icon: '🎵', category: { en: 'Festival', ru: 'Фестиваль', de: 'Festival' }, title: 'Summer Beats', desc: { en: 'Events with ticket sales', ru: 'События с продажей билетов', de: 'Events mit Tickets' }, features: ['Tickets', 'Countdown'] },
+            { id: 'tea', href: 'tea-ceremony-thalheim.html', class: 'tea', tag: 'Wellness', icon: '🍵', category: { en: 'Tea House', ru: 'Чайный дом', de: 'Teehaus' }, title: 'Tea Ceremony', desc: { en: 'Tea houses and wellness', ru: 'Чайные и велнес', de: 'Teehaus & Wellness' }, features: ['Booking', 'Gallery'] },
+            { id: 'universal', href: 'universal-funnel.html', class: 'dark', tag: 'Universal', icon: '🌙', category: { en: 'Universal', ru: 'Универсальный', de: 'Universal' }, title: 'Universal Funnel', desc: { en: 'Dark multi-step funnel', ru: 'Тёмный многошаговый фуннель', de: 'Dark Multi-Step Funnel' }, features: ['Dark', 'Multi-Step'] },
+            { id: 'classic', href: 'agency-nexa.html', class: 'purple', tag: 'Agency', icon: '💜', category: { en: 'Classic Agency', ru: 'Классическое агентство', de: 'Klassisch Agentur' }, title: 'Nexa Classic', desc: { en: 'Light purple classic', ru: 'Светло-фиолетовый классика', de: 'Hell Lila Klassisch' }, features: ['Classic', 'Clean'] },
+            { id: 'minimal', href: 'agency-nexa-v3.html', class: 'white', tag: 'Agency', icon: '💼', category: { en: 'Minimal', ru: 'Минимализм', de: 'Minimal' }, title: 'Nexa Minimal', desc: { en: 'Clean white minimal', ru: 'Чистый белый минимализм', de: 'Weiß Minimal' }, features: ['Minimal', 'Clean'] }
+        ];
+
+        let currentLang = 'en';
+
+        function toggleLang() {
+            document.querySelector('.lang-switch').classList.toggle('active');
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('current-lang').textContent = lang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelector('.lang-switch').classList.remove('active');
+            updateTranslations();
+            renderTemplates();
+        }
+
+        function updateTranslations() {
+            const t = translations[currentLang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    if (key === 'hero-title' || key === 'templates-title' || key === 'ai-title') {
+                        el.innerHTML = t[key];
+                    } else {
+                        el.textContent = t[key];
+                    }
+                }
             });
+        }
+
+        function renderTemplates() {
+            const grid = document.getElementById('templates-grid');
+            grid.innerHTML = templates.map(t => `
+                <a href="${t.href}" class="template-card">
+                    <div class="template-preview ${t.class}">
+                        <span class="template-tag">${t.tag}</span>
+                        <span class="template-icon">${t.icon}</span>
+                    </div>
+                    <div class="template-content">
+                        <div class="template-category">${t.category[currentLang]}</div>
+                        <h3 class="template-title">${t.title}</h3>
+                        <p class="template-desc">${t.desc[currentLang]}</p>
+                        <div class="template-features">
+                            ${t.features.map(f => `<span class="template-feature">${f}</span>`).join('')}
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // Close lang dropdown on outside click
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-switch')) {
+                document.querySelector('.lang-switch').classList.remove('active');
+            }
         });
+
+        // Init
+        renderTemplates();
     </script>
 </body>
 </html>
