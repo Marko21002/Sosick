@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "remotion": {
+      "version": "1.0.1",
+      "installedAt": 1772079568704
+    },
+    "remotion-video-toolkit": {
+      "version": "1.4.0",
+      "installedAt": 1772079590176
+    }
+  }
+}
