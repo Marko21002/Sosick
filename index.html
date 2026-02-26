@@ -1,504 +1,531 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sosick Templates — Hochkonvertierende Landing Pages</title>
+    <title>Sosick Templates — High-converting Landing Pages</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        html,body{overflow-x:hidden}
-        body{font-family:'Inter',sans-serif;background:#fff;color:#0f172a;line-height:1.6}
-        header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0;z-index:100;padding:16px 20px}
-        .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
-        .logo{font-size:24px;font-weight:800;background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .nav-links{display:flex;gap:24px;align-items:center}
-        .nav-links a{color:#64748b;text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
-        .nav-links a:hover{color:#0f172a}
-        .header-actions{display:flex;align-items:center;gap:12px}
-        .lang-dropdown{position:relative}
-        .lang-trigger{display:flex;align-items:center;gap:4px;padding:8px 12px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer;white-space:nowrap}
-        .lang-trigger svg{width:14px;height:14px;transition:transform .2s}
-        .lang-dropdown.open .lang-trigger svg{transform:rotate(180deg)}
-        .lang-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.15);padding:6px;min-width:100px;display:none;z-index:1000}
-        .lang-dropdown.open .lang-menu{display:block}
-        .lang-option{padding:8px 12px;border-radius:6px;font-size:13px;cursor:pointer;white-space:nowrap}
-        .lang-option:hover{background:#f1f5f9}
-        .lang-option.active{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff}
-        .header-cta{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+            color: #1a1a2e;
+            min-height: 100vh;
+        }
         
-        .hero{padding:140px 20px 80px;background:linear-gradient(135deg,#f5f3ff 0%,#fff 30%,#fdf2f8 70%,#fff 100%);text-align:center}
-        .container{max-width:1200px;margin:0 auto}
-        .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e2e8f0;padding:10px 20px;border-radius:50px;font-size:14px;font-weight:700;color:#7c3aed;margin-bottom:24px}
-        h1{font-size:clamp(36px,6vw,56px);font-weight:800;line-height:1.1;margin-bottom:20px}
-        h1 .gradient{background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .hero-subtitle{font-size:18px;color:#64748b;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
+        /* Header */
+        .header {
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .lang-switch {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
         
-        .stats{display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap}
-        .stat{text-align:center}
-        .stat-value{font-size:32px;font-weight:800;background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .stat-label{font-size:14px;color:#64748b}
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #1a1a2e;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
+        }
         
-        .filters{padding:40px 20px;background:#f8fafc;border-bottom:1px solid #e2e8f0;position:sticky;top:73px;z-index:90}
-        .filter-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-        .filter-btn{padding:10px 20px;background:#fff;border:1px solid #e2e8f0;border-radius:50px;font-size:14px;font-weight:600;color:#64748b;cursor:pointer;transition:all .2s}
-        .filter-btn:hover,.filter-btn.active{border-color:#7c3aed;color:#7c3aed;background:#f5f3ff}
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
         
-        .templates-section{padding:60px 20px}
-        .section-header{text-align:center;margin-bottom:48px}
-        .section-label{font-size:13px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
-        h2{font-size:32px;font-weight:800}
+        /* Filters */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+            padding: 0 24px;
+        }
+        .filter {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter:hover, .filter.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+        }
         
-        .templates-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
-        .template-card{background:#fff;border:1px solid #e2e8f0;border-radius:20px;overflow:hidden;transition:all .3s;position:relative}
-        .template-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.1);border-color:#ddd6fe}
-        .template-preview{aspect-ratio:16/10;background:linear-gradient(135deg,#f8fafc 0%,#f1f5f9 100%);display:flex;align-items:center;justify-content:center;font-size:64px;position:relative;overflow:hidden}
-        .template-preview::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 0%,rgba(124,58,237,0.05) 100%)}
-        .template-badge{position:absolute;top:12px;left:12px;padding:6px 12px;background:rgba(255,255,255,0.95);border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
-        .template-badge.local{background:#10b981;color:#fff}
-        .template-badge.service{background:#0ea5e9;color:#fff}
-        .template-badge.agency{background:#7c3aed;color:#fff}
-        .template-badge.event{background:#db2777;color:#fff}
-        .template-content{padding:24px}
-        .template-category{font-size:12px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
-        .template-name{font-size:20px;font-weight:700;margin-bottom:8px}
-        .template-desc{font-size:14px;color:#64748b;margin-bottom:16px;line-height:1.6}
-        .template-features{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-        .feature-tag{padding:4px 10px;background:#f1f5f9;border-radius:12px;font-size:12px;color:#64748b}
-        .template-actions{display:flex;gap:12px}
-        .btn-primary{flex:1;padding:12px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center;transition:opacity .2s}
-        .btn-primary:hover{opacity:.9}
-        .btn-secondary{padding:12px 16px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;font-weight:600;color:#0f172a;cursor:pointer;text-decoration:none;transition:all .2s}
-        .btn-secondary:hover{border-color:#cbd5e1;background:#f8fafc}
+        /* Templates Grid */
+        .templates {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
         
-        .cta-section{padding:100px 20px;text-align:center;background:linear-gradient(135deg,#0f172a,#1e1b4b);color:#fff;position:relative;overflow:hidden}
-        .cta-section::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(124,58,237,0.1) 0%,transparent 70%);pointer-events:none}
-        .cta-section h2{font-size:36px;margin-bottom:16px;position:relative;z-index:1}
-        .cta-section p{font-size:18px;color:#94a3b8;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
+        .template-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #f3f4f6;
+        }
+        .template-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
         
-        footer{padding:60px 20px 30px;background:#0f172a;color:#fff}
-        .footer-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
-        .footer-brand{font-size:20px;font-weight:800}
-        .footer-links{display:flex;gap:24px}
-        .footer-links a{color:#94a3b8;text-decoration:none;font-size:14px;transition:color .2s}
-        .footer-links a:hover{color:#fff}
-        .footer-copy{color:#64748b;font-size:14px}
+        .template-preview {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .template-preview.dark {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0c29 100%);
+        }
+        .template-preview.health {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        }
+        .template-preview.clean {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .template-preview.fitness {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .template-preview.auto {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        }
+        .template-preview.event {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        }
+        .template-preview.tea {
+            background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);
+        }
         
-        @media(max-width:768px){
-            .nav-links{display:none}
-            .hero{padding:120px 20px 60px}
-            .stats{gap:24px}
-            .templates-grid{grid-template-columns:1fr}
-            .footer-content{flex-direction:column;text-align:center}
+        .template-icon {
+            font-size: 64px;
+        }
+        
+        .template-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(255,255,255,0.95);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1a1a2e;
+            text-transform: uppercase;
+        }
+        
+        .template-content {
+            padding: 24px;
+        }
+        
+        .template-category {
+            font-size: 12px;
+            font-weight: 600;
+            color: #667eea;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .template-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+        }
+        
+        .template-desc {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        
+        .template-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .template-feature {
+            background: #f3f4f6;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .stats { gap: 24px; }
+            .stat-value { font-size: 28px; }
+            .templates { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logo">Sosick Templates</div>
-            <nav class="nav-links">
-                <a href="#templates" data-i18n="navTemplates">Templates</a>
-                <a href="#features" data-i18n="navFeatures">Features</a>
-                <a href="https://github.com/Marko21002/Sosick" target="_blank">GitHub</a>
-            </nav>
-            <div class="header-actions">
-                <div class="lang-dropdown" id="langDropdown">
-                    <button class="lang-trigger" onclick="toggleLang()">
-                        <span id="currentLang">DE</span>
-                        <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l5 5 5-5"/></svg>
-                    </button>
-                    <div class="lang-menu">
-                        <div class="lang-option active" onclick="setLang('de')" data-lang="de">Deutsch</div>
-                        <div class="lang-option" onclick="setLang('en')" data-lang="en">English</div>
-                        <div class="lang-option" onclick="setLang('ru')" data-lang="ru">Русский</div>
-                    </div>
-                </div>
-                <a href="#templates" class="header-cta" data-i18n="navCta">Alle Templates</a>
-            </div>
-        </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">Sosick Templates</div>
+        <nav class="nav">
+            <button class="lang-switch">EN ▼</button>
+            <a href="#templates" class="btn-primary">All Templates</a>
+        </nav>
     </header>
-
+    
+    <!-- Hero -->
     <section class="hero">
-        <div class="container">
-            <div class="hero-badge" data-i18n="heroBadge">✨ 8+ fertige Templates</div>
-            
-            <h1 data-i18n="heroTitle">Hochkonvertierende <span class="gradient">Landing Pages</span> für jedes Business</h1>
-            
-            <p class="hero-subtitle" data-i18n="heroSubtitle">
-                Professionell designte, responsive Templates mit integriertem Lead-Gen, Quiz-Funktionalität und mehrsprachiger Unterstützung.
-            </p>
-            
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-value">8+</div>
-                    <div class="stat-label" data-i18n="statTemplates">Templates</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">3</div>
-                    <div class="stat-label" data-i18n="statLanguages">Sprachen</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">100%</div>
-                    <div class="stat-label" data-i18n="statResponsive">Responsive</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">0€</div>
-                    <div class="stat-label" data-i18n="statFree">Kostenlos</div>
-                </div>
+        <div class="badge">✨ 12+ Ready Templates</div>
+        <h1>High-converting landing pages for every business</h1>
+        <p>Professionally designed, responsive templates with integrated lead generation, quiz functionality and multilingual support.</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">12+</div>
+                <div class="stat-label">Templates</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Languages</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Responsive</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">0€</div>
+                <div class="stat-label">Free</div>
             </div>
         </div>
     </section>
-
-    <div class="filters" id="templates">
-        <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filterTemplates('all')" data-i18n="filterAll">Alle</button>
-            <button class="filter-btn" onclick="filterTemplates('local')" data-i18n="filterLocal">Lokale Business</button>
-            <button class="filter-btn" onclick="filterTemplates('service')" data-i18n="filterService">Dienstleistungen</button>
-            <button class="filter-btn" onclick="filterTemplates('agency')" data-i18n="filterAgency">Agenturen</button>
-            <button class="filter-btn" onclick="filterTemplates('event')" data-i18n="filterEvent">Events</button>
-        </div>
+    
+    <!-- Filters -->
+    <div class="filters">
+        <button class="filter active">All</button>
+        <button class="filter">Local Business</button>
+        <button class="filter">Services</button>
+        <button class="filter">Agencies</button>
+        <button class="filter">Events</button>
     </div>
-
-    <section class="templates-section">
-        <div class="container">
-            <div class="templates-grid">
-                <!-- Zahnarzt -->
-                <div class="template-card" data-category="local">
-                    <div class="template-preview">
-                        <span class="template-badge local">Lokal</span>
-                        🦷
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category">Gesundheit</div>
-                        <div class="template-name">Zahnarzt Praxis</div>
-                        <div class="template-desc">Perfekt für Zahnärzte mit Terminbuchungs-Quiz, Leistungen und Patientenbewertungen.</div>
-                        <div class="template-features">
-                            <span class="feature-tag">Quiz-Funnel</span>
-                            <span class="feature-tag">Terminbuchung</span>
-                            <span class="feature-tag">3 Sprachen</span>
-                        </div>
-                        <div class="template-actions">
-                            <a href="templates/zahnarzt-final.html" class="btn-primary">Vorschau</a>
-                            <a href="https://github.com/Marko21002/Sosick/blob/main/templates/zahnarzt-final.html" class="btn-secondary" target="_blank">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Reinigung -->
-                <div class="template-card" data-category="local">
-                    <div class="template-preview" style="background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%)">
-                        <span class="template-badge local">Lokal</span>
-                        🧽
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category" style="color:#0ea5e9">Reinigung</div>
-                        <div class="template-name">CleanPro Wien</div>
-                        <div class="template-desc">Für Reinigungsdienste mit Live-Preisrechner, Service-Auswahl und Kunden-Formular.</div>
-                        <div class="template-features">
-                            <span class="feature-tag">Preisrechner</span>
-                            <span class="feature-tag">Kalkulator</span>
-                            <span class="feature-tag">3 Sprachen</span>
-                        </div>
-                        <div class="template-actions">
-                            <a href="templates/reinigung-final.html" class="btn-primary" style="background:linear-gradient(135deg,#0ea5e9,#0284c7)">Vorschau</a>
-                            <a href="https://github.com/Marko21002/Sosick/blob/main/templates/reinigung-final.html" class="btn-secondary" target="_blank">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fitness -->
-                <div class="template-card" data-category="local">
-                    <div class="template-preview" style="background:linear-gradient(135deg,#f0fdf4 0%,#dcfce7 100%)">
-                        <span class="template-badge local">Lokal</span>
-                        🧘
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category" style="color:#22c55e">Fitness</div>
-                        <div class="template-name">Yoga & Fitness Studio</div>
-                        <div class="template-desc">Für Fitnessstudios und Yoga-Studios mit Kursplan, Mitgliedschafts-Quiz und Probetraining-Anmeldung.</div>
-                        <div class="template-features">
-                            <span class="feature-tag">Kursplan</span>
-                            <span class="feature-tag">Mitgliedschaft</span>
-                            <span class="feature-tag">Probetraining</span>
-                        </div>
-                        <div class="template-actions">
-                            <a href="templates/fitness-yoga-wien.html" class="btn-primary" style="background:linear-gradient(135deg,#22c55e,#16a34a)">Vorschau</a>
-                            <a href="https://github.com/Marko21002/Sosick/blob/main/templates/fitness-yoga-wien.html" class="btn-secondary" target="_blank">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Autowerkstatt -->
-                <div class="template-card" data-category="local">
-                    <div class="template-preview" style="background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%)">
-                        <span class="template-badge local">Lokal</span>
-                        🚗
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category" style="color:#f59e0b">Auto</div>
-                        <div class="template-name">Autowerkstatt</div>
-                        <div class="template-desc">Für Kfz-Werkstätten mit Service-Quiz, Terminbuchung und Fahrzeug-Diagnose-Formular.</div>
-                        <div class="template-features">
-                            <span class="feature-tag">Service-Quiz</span>
-                            <span class="feature-tag">Terminbuchung</span>
-                            <span class="feature-tag">Diagnose</span>
-                        </div>
-                        <div class="template-actions">
-                            <a href="templates/autowerkstatt-wien.html" class="btn-primary" style="background:linear-gradient(135deg,#f59e0b,#d97706)">Vorschau</a>
-                            <a href="https://github.com/Marko21002/Sosick/blob/main/templates/autowerkstatt-wien.html" class="btn-secondary" target="_blank">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Agency Nexa -->
-                <div class="template-card" data-category="agency">
-                    <div class="template-preview" style="background:linear-gradient(135deg,#f5f3ff 0%,#ede9fe 100%)">
-                        <span class="template-badge agency">Agentur</span>
-                        💜
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category" style="color:#7c3aed">Digital Agency</div>
-                        <div class="template-name">Nexa Digital</div>
-                        <div class="template-desc">Für Web-Agenturen und Marketing-Agenturen mit Projekt-Quiz, Portfolio und Service-Übersicht.</div>
-                        <div class="template-features">
-                            <span class="feature-tag">Projekt-Quiz</span>
-                            <span class="feature-tag">Portfolio</span>
-                            <span class="feature-tag">3 Sprachen</span>
-                        </div>
-                        <div class="template-actions">
-                            <a href="templates/agency-nexa.html" class="btn-primary" style="background:linear-gradient(135deg,#7c3aed,#a855f7)">Vorschau</a>
-                            <a href="https://github.com/Marko21002/Sosick/blob/main/templates/agency-nexa.html" class="btn-secondary" target="_blank">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Event Festival -->
-                <div class="template-card" data-category="event">
-                    <div class="template-preview" style="background:linear-gradient(135deg,#fdf2f8 0%,#fce7f3 100%)">
-                        <span class="template-badge event">Event</span>
-                        🎵
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category" style="color:#db2777">Festival</div>
-                        <div class="template-name">Summer Beats Festival</div>
-                        <div class="template-desc">Für Events und Festivals mit Ticket-Verkauf, Line-up, Countdown und mehrsprachiger Checkout.</div>
-                        <div class="template-features">
-                            <span class="feature-tag">Ticket-Verkauf</span>
-                            <span class="feature-tag">Countdown</span>
-                            <span class="feature-tag">3 Sprachen</span>
-                        </div>
-                        <div class="template-actions">
-                            <a href="templates/event-festival.html" class="btn-primary" style="background:linear-gradient(135deg,#db2777,#ec4899)">Vorschau</a>
-                            <a href="https://github.com/Marko21002/Sosick/blob/main/templates/event-festival.html" class="btn-secondary" target="_blank">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Universal Funnel -->
-                <div class="template-card" data-category="service">
-                    <div class="template-preview" style="background:linear-gradient(135deg,#1e1b4b 0%,#312e81 100%);color:#fff">
-                        <span class="template-badge" style="background:#6366f1">Dark Mode</span>
-                        🌙
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category" style="color:#6366f1">Universal</div>
-                        <div class="template-name">Universal Funnel</div>
-                        <div class="template-desc">Dark-mode Multi-Step Funnel für jedes Business. Quiz-Struktur, Lead-Generierung, Mobile-first.</div>
-                        <div class="template-features">
-                            <span class="feature-tag">Dark Mode</span>
-                            <span class="feature-tag">Multi-Step</span>
-                            <span class="feature-tag">Mobile-First</span>
-                        </div>
-                        <div class="template-actions">
-                            <a href="templates/universal-funnel.html" class="btn-primary" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">Vorschau</a>
-                            <a href="https://github.com/Marko21002/Sosick/blob/main/templates/universal-funnel.html" class="btn-secondary" target="_blank">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- LoveCode -->
-                <div class="template-card" data-category="service">
-                    <div class="template-preview" style="background:linear-gradient(135deg,#1e1b4b 0%,#0f172a 100%);color:#fff">
-                        <span class="template-badge" style="background:#ec4899">Dark Mode</span>
-                        💕
-                    </div>
-                    <div class="template-content">
-                        <div class="template-category" style="color:#ec4899">Online-Kurs</div>
-                        <div class="template-name">LoveCode</div>
-                        <div class="template-desc">Für Online-Kurse und Coaching-Programme. Dark aesthetic, Countdown, Preise, Module, Testimonials.</div>
-                        <div class="template-features">
-                            <span class="feature-tag">Dark Aesthetic</span>
-                            <span class="feature-tag">Countdown</span>
-                            <span class="feature-tag">Kurs-Struktur</span>
-                        </div>
-                        <div class="template-actions">
-                            <a href="lovecode/index.html" class="btn-primary" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">Vorschau</a>
-                            <a href="https://github.com/Marko21002/Sosick/tree/main/lovecode" class="btn-secondary" target="_blank">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section" id="features">
-        <h2 data-i18n="ctaTitle">Bereit für deine Landing Page?</h2>
-        <p data-i18n="ctaSubtitle">Alle Templates sind Open Source und kostenlos nutzbar. Fork auf GitHub, passe an, deploy auf Vercel.</p>
+    
+    <!-- Templates Grid -->
+    <section class="templates" id="templates">
         
-        <a href="https://github.com/Marko21002/Sosick" class="btn-primary" style="display:inline-block;padding:16px 32px;font-size:16px" target="_blank" data-i18n="ctaButton">
-            ⭐ Auf GitHub sterne
+        <!-- 1. Zahnarzt -->
+        <a href="zahnarzt-final.html" class="template-card">
+            <div class="template-preview health">
+                <span class="template-tag">Local</span>
+                <span class="template-icon">🦷</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Health</div>
+                <h3 class="template-title">Zahnarzt Praxis</h3>
+                <p class="template-desc">Perfect for dentists with appointment quiz, services and patient reviews.</p>
+                <div class="template-features">
+                    <span class="template-feature">Quiz-Funnel</span>
+                    <span class="template-feature">Appointment</span>
+                    <span class="template-feature">3 Languages</span>
+                </div>
+            </div>
         </a>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">Sosick Templates</div>
-            
-            <div class="footer-links">
-                <a href="https://github.com/Marko21002/Sosick" target="_blank">GitHub</a>
-                <a href="#templates" data-i18n="navTemplates">Templates</a>
-                <a href="mailto:hello@sosick.vercel.app">Kontakt</a>
-            </div>
-            
-            <div class="footer-copy" data-i18n="footerCopy">© 2024 — Open Source unter MIT License</div>
-        </div>
-    </footer>
-
-    <script>
-        const t = {
-            de: {
-                navTemplates: 'Templates', navFeatures: 'Features', navCta: 'Alle Templates',
-                heroBadge: '✨ 8+ fertige Templates',
-                heroTitle: 'Hochkonvertierende Landing Pages für jedes Business',
-                heroSubtitle: 'Professionell designte, responsive Templates mit integriertem Lead-Gen, Quiz-Funktionalität und mehrsprachiger Unterstützung.',
-                statTemplates: 'Templates', statLanguages: 'Sprachen', statResponsive: 'Responsive', statFree: 'Kostenlos',
-                filterAll: 'Alle', filterLocal: 'Lokale Business', filterService: 'Dienstleistungen', filterAgency: 'Agenturen', filterEvent: 'Events',
-                badgeLocal: 'Lokal', badgeService: 'Service', badgeAgency: 'Agentur', badgeEvent: 'Event',
-                btnPreview: 'Vorschau', btnCode: 'Code',
-                ctaTitle: 'Bereit für deine Landing Page?',
-                ctaSubtitle: 'Alle Templates sind Open Source und kostenlos nutzbar. Fork auf GitHub, passe an, deploy auf Vercel.',
-                ctaButton: '⭐ Auf GitHub sterne',
-                footerCopy: '© 2024 — Open Source unter MIT License'
-            },
-            en: {
-                navTemplates: 'Templates', navFeatures: 'Features', navCta: 'All Templates',
-                heroBadge: '✨ 8+ ready templates',
-                heroTitle: 'High-converting landing pages for every business',
-                heroSubtitle: 'Professionally designed, responsive templates with integrated lead generation, quiz functionality and multilingual support.',
-                statTemplates: 'Templates', statLanguages: 'Languages', statResponsive: 'Responsive', statFree: 'Free',
-                filterAll: 'All', filterLocal: 'Local Business', filterService: 'Services', filterAgency: 'Agencies', filterEvent: 'Events',
-                badgeLocal: 'Local', badgeService: 'Service', badgeAgency: 'Agency', badgeEvent: 'Event',
-                btnPreview: 'Preview', btnCode: 'Code',
-                ctaTitle: 'Ready for your landing page?',
-                ctaSubtitle: 'All templates are open source and free to use. Fork on GitHub, customize, deploy on Vercel.',
-                ctaButton: '⭐ Star on GitHub',
-                footerCopy: '© 2024 — Open Source under MIT License'
-            },
-            ru: {
-                navTemplates: 'Шаблоны', navFeatures: 'Фичи', navCta: 'Все шаблоны',
-                heroBadge: '✨ 8+ готовых шаблонов',
-                heroTitle: 'Лендинги с высокой конверсией для любого бизнеса',
-                heroSubtitle: 'Профессионально разработанные адаптивные шаблоны с интегрированным lead-gen, квизами и мультиязычностью.',
-                statTemplates: 'Шаблонов', statLanguages: 'Языка', statResponsive: 'Адаптивно', statFree: 'Бесплатно',
-                filterAll: 'Все', filterLocal: 'Локальный бизнес', filterService: 'Услуги', filterAgency: 'Агентства', filterEvent: 'Ивенты',
-                badgeLocal: 'Локальный', badgeService: 'Сервис', badgeAgency: 'Агентство', badgeEvent: 'Ивент',
-                btnPreview: 'Превью', btnCode: 'Код',
-                ctaTitle: 'Готовы к лендингу?',
-                ctaSubtitle: 'Все шаблоны open source и бесплатны. Форкай на GitHub, кастомизируй, деплой на Vercel.',
-                ctaButton: '⭐ Звезда на GitHub',
-                footerCopy: '© 2024 — Open Source под MIT License'
-            }
-        };
-
-        let currentLang = 'de';
-
-        function toggleLang() {
-            document.getElementById('langDropdown').classList.toggle('open');
-        }
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.querySelectorAll('.lang-option').forEach(opt => opt.classList.toggle('active', opt.dataset.lang === lang));
-            document.getElementById('currentLang').textContent = lang.toUpperCase();
-            document.getElementById('langDropdown').classList.remove('open');
-            
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.dataset.i18n;
-                if (t[lang][key]) {
-                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                        el.placeholder = t[lang][key];
-                    } else {
-                        el.textContent = t[lang][key];
-                    }
-                }
-            });
-            
-            // Update filter button active state
-            updateFilterButtons();
-            
-            document.documentElement.lang = lang;
-            localStorage.setItem('sosick-lang', lang);
-        }
-
-        function updateFilterButtons() {
-            const activeBtn = document.querySelector('.filter-btn.active');
-            if (activeBtn) {
-                const currentFilter = activeBtn.dataset.filter || 'all';
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    const filterKey = btn.getAttribute('onclick').match(/filterTemplates\('(\w+)'\)/)?.[1];
-                    if (filterKey) {
-                        btn.dataset.filter = filterKey;
-                        btn.textContent = t[currentLang]['filter' + filterKey.charAt(0).toUpperCase() + filterKey.slice(1)];
-                        btn.classList.toggle('active', filterKey === currentFilter);
-                    }
-                });
-            }
-        }
-
-        function filterTemplates(category) {
-            // Update buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                const filterKey = btn.getAttribute('onclick').match(/filterTemplates\('(\w+)'\)/)?.[1];
-                btn.dataset.filter = filterKey;
-                btn.classList.toggle('active', filterKey === category);
-                // Update text based on current language
-                const langKey = 'filter' + filterKey.charAt(0).toUpperCase() + filterKey.slice(1);
-                if (t[currentLang][langKey]) {
-                    btn.textContent = t[currentLang][langKey];
-                }
-            });
-            
-            // Filter cards
-            document.querySelectorAll('.template-card').forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                    setTimeout(() => card.style.opacity = '1', 10);
-                } else {
-                    card.style.opacity = '0';
-                    setTimeout(() => card.style.display = 'none', 300);
-                }
-            });
-        }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.lang-dropdown')) {
-                document.getElementById('langDropdown').classList.remove('open');
-            }
-        });
-
-        // Load saved language or default to 'de'
-        const savedLang = localStorage.getItem('sosick-lang') || 'de';
-        if (savedLang !== 'de') {
-            setLang(savedLang);
-        }
         
-        // Store initial filter values
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            const filterKey = btn.getAttribute('onclick').match(/filterTemplates\('(\w+)'\)/)?.[1];
-            if (filterKey) btn.dataset.filter = filterKey;
-        });
-    </script>
+        <!-- 2. Reinigung -->
+        <a href="reinigung-final.html" class="template-card">
+            <div class="template-preview clean">
+                <span class="template-tag">Local</span>
+                <span class="template-icon">🧽</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Cleaning</div>
+                <h3 class="template-title">CleanPro Wien</h3>
+                <p class="template-desc">For cleaning services with live price calculator, service selection and customer form.</p>
+                <div class="template-features">
+                    <span class="template-feature">Price Calculator</span>
+                    <span class="template-feature">Calculator</span>
+                    <span class="template-feature">3 Languages</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 3. Fitness/Yoga -->
+        <a href="fitness-yoga-wien.html" class="template-card">
+            <div class="template-preview fitness">
+                <span class="template-tag">Local</span>
+                <span class="template-icon">🧘</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Fitness</div>
+                <h3 class="template-title">Yoga & Fitness Studio</h3>
+                <p class="template-desc">For fitness studios with class schedule, membership quiz and trial registration.</p>
+                <div class="template-features">
+                    <span class="template-feature">Schedule</span>
+                    <span class="template-feature">Membership</span>
+                    <span class="template-feature">Trial</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 4. Autowerkstatt -->
+        <a href="autowerkstatt-wien.html" class="template-card">
+            <div class="template-preview auto">
+                <span class="template-tag">Local</span>
+                <span class="template-icon">🚗</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Auto</div>
+                <h3 class="template-title">Autowerkstatt</h3>
+                <p class="template-desc">For car workshops with service quiz, appointment booking and vehicle diagnosis form.</p>
+                <div class="template-features">
+                    <span class="template-feature">Service-Quiz</span>
+                    <span class="template-feature">Appointment</span>
+                    <span class="template-feature">Diagnosis</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 5. Agency Nexa v4 (Green/Dark) -->
+        <a href="agency-nexa-v4.html" class="template-card">
+            <div class="template-preview" style="background: linear-gradient(135deg, #050508 0%, #1a1a2e 100%);">
+                <span class="template-tag" style="background: #a3e635; color: #000;">Agency</span>
+                <span class="template-icon">⚡</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category" style="color: #84cc16;">Digital Agency</div>
+                <h3 class="template-title">Nexa Digital</h3>
+                <p class="template-desc">Dark theme with green accents. Project quiz, portfolio and service overview.</p>
+                <div class="template-features">
+                    <span class="template-feature" style="background: #dcfce7; color: #166534;">Dark/Green</span>
+                    <span class="template-feature">Project-Quiz</span>
+                    <span class="template-feature">3 Languages</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 6. Event Festival -->
+        <a href="event-festival.html" class="template-card">
+            <div class="template-preview event">
+                <span class="template-tag">Event</span>
+                <span class="template-icon">🎵</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Festival</div>
+                <h3 class="template-title">Summer Beats Festival</h3>
+                <p class="template-desc">For events and festivals with ticket sales, line-up, countdown and multilingual checkout.</p>
+                <div class="template-features">
+                    <span class="template-feature">Ticket Sales</span>
+                    <span class="template-feature">Countdown</span>
+                    <span class="template-feature">3 Languages</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 7. Universal Funnel -->
+        <a href="universal-funnel.html" class="template-card">
+            <div class="template-preview dark">
+                <span class="template-tag">Dark Mode</span>
+                <span class="template-icon">🌙</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Universal</div>
+                <h3 class="template-title">Universal Funnel</h3>
+                <p class="template-desc">Dark-mode Multi-Step Funnel for any business. Quiz structure, lead generation, mobile-first.</p>
+                <div class="template-features">
+                    <span class="template-feature">Dark Mode</span>
+                    <span class="template-feature">Multi-Step</span>
+                    <span class="template-feature">Mobile-First</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 8. Tea Ceremony -->
+        <a href="tea-ceremony-thalheim.html" class="template-card">
+            <div class="template-preview tea">
+                <span class="template-tag">Wellness</span>
+                <span class="template-icon">🍵</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Tea House</div>
+                <h3 class="template-title">Tea Ceremony Thalheim</h3>
+                <p class="template-desc">For tea houses and wellness centers with ceremony booking, pricing and ambiance gallery.</p>
+                <div class="template-features">
+                    <span class="template-feature">Booking</span>
+                    <span class="template-feature">Gallery</span>
+                    <span class="template-feature">Pricing</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 9. PixelForge Agency -->
+        <a href="agency-pixelforge.html" class="template-card">
+            <div class="template-preview" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">
+                <span class="template-tag">Agency</span>
+                <span class="template-icon">🎨</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Creative Agency</div>
+                <h3 class="template-title">PixelForge</h3>
+                <p class="template-desc">Creative agency template with bold orange design, portfolio showcase and contact forms.</p>
+                <div class="template-features">
+                    <span class="template-feature">Bold Design</span>
+                    <span class="template-feature">Portfolio</span>
+                    <span class="template-feature">Contact</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 10. Nexa Agency v2 -->
+        <a href="agency-nexa-v2.html" class="template-card">
+            <div class="template-preview" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+                <span class="template-tag" style="background: #60a5fa;">Agency</span>
+                <span class="template-icon">🚀</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Tech Agency</div>
+                <h3 class="template-title">Nexa v2</h3>
+                <p class="template-desc">Dark blue tech agency with modern design and interactive elements.</p>
+                <div class="template-features">
+                    <span class="template-feature">Dark Blue</span>
+                    <span class="template-feature">Modern</span>
+                    <span class="template-feature">Interactive</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 11. Nexa Agency v3 -->
+        <a href="agency-nexa-v3.html" class="template-card">
+            <div class="template-preview" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 2px solid #e2e8f0;">
+                <span class="template-tag" style="background: #0f172a; color: white;">Agency</span>
+                <span class="template-icon" style="filter: grayscale(100%);">💼</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Minimal Agency</div>
+                <h3 class="template-title">Nexa v3</h3>
+                <p class="template-desc">Clean minimal white design with subtle animations and elegant typography.</p>
+                <div class="template-features">
+                    <span class="template-feature">Minimal</span>
+                    <span class="template-feature">White</span>
+                    <span class="template-feature">Clean</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- 12. Nexa Agency Classic -->
+        <a href="agency-nexa.html" class="template-card">
+            <div class="template-preview" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);">
+                <span class="template-tag" style="background: #7c3aed;">Agency</span>
+                <span class="template-icon">💜</span>
+            </div>
+            <div class="template-content">
+                <div class="template-category">Classic Agency</div>
+                <h3 class="template-title">Nexa Classic</h3>
+                <p class="template-desc">Light purple classic agency template with professional business look.</p>
+                <div class="template-features">
+                    <span class="template-feature">Classic</span>
+                    <span class="template-feature">Purple</span>
+                    <span class="template-feature">Professional</span>
+                </div>
+            </div>
+        </a>
+        
+    </section>
+    
 </body>
 </html>
